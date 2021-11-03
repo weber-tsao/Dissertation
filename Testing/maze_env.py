@@ -24,13 +24,13 @@ else:
 
 UNIT = 40   # pixels
 MAZE_H = 2  # grid height
-MAZE_W = 4  # grid width
+MAZE_W = 3  # grid width
 
 
 class Maze(tk.Tk, object):
     def __init__(self):
         super(Maze, self).__init__()
-        self.action_space = ['cross', 'straight']
+        self.action_space = ['cross_up', 'cross_down', 'straight']
         self.n_actions = len(self.action_space)
         self.title('maze')
         self.geometry('{0}x{1}'.format(MAZE_H * UNIT, MAZE_H * UNIT))
@@ -42,12 +42,12 @@ class Maze(tk.Tk, object):
                            width=MAZE_W * UNIT)
 
         # create grids
-        for c in range(0, MAZE_W * UNIT, UNIT):
+        '''for c in range(0, MAZE_W * UNIT, UNIT):
             x0, y0, x1, y1 = c, 0, c, MAZE_H * UNIT
             self.canvas.create_line(x0, y0, x1, y1)
         for r in range(0, MAZE_H * UNIT, UNIT):
             x0, y0, x1, y1 = 0, r, MAZE_W * UNIT, r
-            self.canvas.create_line(x0, y0, x1, y1)
+            self.canvas.create_line(x0, y0, x1, y1)'''
             
         # create origin
         origin = np.array([20, 20])
@@ -76,6 +76,12 @@ class Maze(tk.Tk, object):
             node4_center[0] - 15, node4_center[1] - 15,
             node4_center[0] + 15, node4_center[1] + 15,
             fill='black')
+        
+        node5_center = origin + np.array([UNIT+UNIT, UNIT])
+        self.node5 = self.canvas.create_oval(
+            node5_center[0] - 15, node5_center[1] - 15,
+            node5_center[0] + 15, node5_center[1] + 15,
+            fill='orange')
        
         # create oval
         oval_center = origin + np.array([UNIT+UNIT, 0])
@@ -97,24 +103,38 @@ class Maze(tk.Tk, object):
         self.update()
         time.sleep(0.5)
         self.canvas.delete(self.rect)
+        
         origin = np.array([20, 20])
-        self.rect = self.canvas.create_oval(
-            origin[0] - 15, origin[1] - 15,
-            origin[0] + 15, origin[1] + 15,
-            fill='red')
+        if np.random.rand() <= 0.5:
+            node1_center = origin + np.array([0, 0])
+            self.rect = self.canvas.create_oval(
+                node1_center[0] - 15, node1_center[1] - 15,
+                node1_center[0] + 15, node1_center[1] + 15,
+                fill='red')
+        else:
+            node2_center = origin + np.array([0, UNIT])
+            self.rect = self.canvas.create_oval(
+                node2_center[0] - 15, node2_center[1] - 15,
+                node2_center[0] + 15, node2_center[1] + 15,
+                fill='red')
         # return observation
         return self.canvas.coords(self.rect)
 
     def step(self, action):
         s = self.canvas.coords(self.rect)
-        print(s)
+        #print(s)
         base_action = np.array([0, 0])
-        if action == 0:   # cross
-            if s[1] > UNIT:
+        if action == 0:   # cross up
+            if s[1] > UNIT and s[0] < (MAZE_W - 1) * UNIT:
+                base_action[0] += UNIT
                 base_action[1] -= UNIT
-        elif action == 1:   # straight
-            if s[1] < (MAZE_H - 1) * UNIT:
+        elif action == 1:   # cross down
+            if s[1] < (MAZE_H - 1) * UNIT and s[0] < (MAZE_W - 1) * UNIT:
+                base_action[0] += UNIT
                 base_action[1] += UNIT
+        elif action == 2:   # straight
+            if s[0] < (MAZE_W - 1) * UNIT:
+                base_action[0] += UNIT
 
         self.canvas.move(self.rect, base_action[0], base_action[1])  # move agent
 
@@ -122,12 +142,15 @@ class Maze(tk.Tk, object):
 
         # reward function
         if s_ == self.canvas.coords(self.oval):
-            reward = 10
+            reward = 2
             done = True
             s_ = 'terminal'
         elif s_ in [self.canvas.coords(self.node1), self.canvas.coords(self.node2), self.canvas.coords(self.node3), self.canvas.coords(self.node4)]:
-            reward = 1
+            reward = 0.5
             done = False
+        elif s_ in [self.canvas.coords(self.node5)]:
+            reward = -1
+            done = True
         else:
             reward = -1
             done = False

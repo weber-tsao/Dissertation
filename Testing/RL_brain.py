@@ -18,6 +18,9 @@ class RL(object):
 
         self.q_table = pd.DataFrame(columns=self.actions, dtype=np.float64)
         #print(self.q_table)
+        self.state_num = 5
+        #row = [[], [], [], [], [], []]
+        self.state_action_permit = pd.DataFrame()
 
     def check_state_exist(self, state):
         if state not in self.q_table.index:
@@ -40,10 +43,10 @@ class RL(object):
             # choose best action
             state_action = self.q_table.loc[observation, :]
             #print(self.q_table)
-            print(state_action)
+            #print(state_action)
             # some actions may have the same value, randomly choose on in these actions
             action = np.random.choice(state_action[state_action == np.max(state_action)].index)
-            print(action)
+            #print(action)
         else:
             # choose random action
             action = np.random.choice(self.actions)
