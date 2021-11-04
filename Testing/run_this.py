@@ -12,25 +12,30 @@ from RL_brain import SarsaTable
 
 
 def update():
-    for episode in range(100):
+    for episode in range(2):
         # initial observation
         observation = env.reset()
         #print(str(observation))
         # RL choose action based on observation
         action = RL.choose_action(str(observation))
         #print(str(observation))
-        #print(action)
-
+        print("Episode start")
+        print("Current episode node {}".format(observation))
+        print("Episode next action {}".format(action))
+        
         while True:
             # fresh env
+            print("Loop since not reach terminal")
             env.render()
 
             # RL take action and get next observation and reward
             observation_, reward, done = env.step(action)
+            print("Update to episode node to {}".format(observation_))
+
             #print(env.step(action))
             # RL choose action based on next observation
             action_ = RL.choose_action(str(observation_))
-
+            print("The new node next behaviour {}".format(action_))
             # RL learn from this transition (s, a, r, s, a) ==> Sarsa
             RL.learn(str(observation), action, reward, str(observation_), action_)
 
@@ -50,5 +55,5 @@ if __name__ == "__main__":
     env = Maze()
     RL = SarsaTable(actions=list(range(env.n_actions)))
 
-    env.after(100, update)
+    env.after(2, update)
     env.mainloop()

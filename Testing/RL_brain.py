@@ -50,6 +50,7 @@ class RL(object):
         else:
             # choose random action
             action = np.random.choice(self.actions)
+            #print(action)
         return action
 
     def learn(self, *args):
@@ -58,7 +59,7 @@ class RL(object):
 
 # off-policy
 class QLearningTable(RL):
-    def __init__(self, actions, learning_rate=0.01, reward_decay=0.9, e_greedy=0.9):
+    def __init__(self, actions, learning_rate=0.01, reward_decay=0.9, e_greedy=0.5):
         super(QLearningTable, self).__init__(actions, learning_rate, reward_decay, e_greedy)
 
     def learn(self, s, a, r, s_):
@@ -86,4 +87,5 @@ class SarsaTable(RL):
         else:
             q_target = r  # next state is terminal
         self.q_table.loc[s, a] += self.lr * (q_target - q_predict)  # update
-        ###print(self.q_table)
+        #print(self.q_table)
+        #print("---------------------------------")

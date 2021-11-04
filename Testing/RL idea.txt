@@ -1,0 +1,10 @@
+goal state is the d flipflop
+
+node1 = [5, 5, 35, 35]
+node2 = [45, 5, 75, 35]
+node3 = [5, 45, 35, 75]
+node4 = [45, 45, 75,75]
+node5 = [85, 5, 115, 35]
+
+--------need begin with two state, not just start
+13

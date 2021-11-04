@@ -24,7 +24,7 @@ else:
 
 UNIT = 40   # pixels
 MAZE_H = 2  # grid height
-MAZE_W = 4  # grid width
+MAZE_W = 5  # grid width
 
 
 class Maze(tk.Tk, object):
@@ -151,18 +151,22 @@ class Maze(tk.Tk, object):
             if s[1] > UNIT and s[0] < (MAZE_W - 1) * UNIT:
                 base_action[0] += UNIT
                 base_action[1] -= UNIT
+                print("cross up")
         elif action == 1:   # cross down
             if s[1] < (MAZE_H - 1) * UNIT and s[0] < (MAZE_W - 1) * UNIT:
                 base_action[0] += UNIT
                 base_action[1] += UNIT
+                print("cross down")
         elif action == 2:   # straight
             if s[0] < (MAZE_W - 1) * UNIT:
                 base_action[0] += UNIT
+                print("straight")
+        ###或這裡給else
 
         self.canvas.move(self.rect, base_action[0], base_action[1])  # move agent
 
         s_ = self.canvas.coords(self.rect)  # next state
-        #print(s_)
+        print("Next state {}".format(s_))
 
         # reward function
         if s_ == self.canvas.coords(self.oval):
