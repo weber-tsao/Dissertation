@@ -24,7 +24,7 @@ else:
 
 UNIT = 40   # pixels
 MAZE_H = 2  # grid height
-MAZE_W = 3  # grid width
+MAZE_W = 4  # grid width
 
 
 class Maze(tk.Tk, object):
@@ -33,7 +33,7 @@ class Maze(tk.Tk, object):
         self.action_space = ['cross_up', 'cross_down', 'straight']
         self.n_actions = len(self.action_space)
         self.title('maze')
-        self.geometry('{0}x{1}'.format(MAZE_H * UNIT, MAZE_H * UNIT))
+        #self.geometry('{0}x{1}'.format(MAZE_H * UNIT, MAZE_H * UNIT))
         self._build_maze()
 
     def _build_maze(self):
@@ -52,44 +52,62 @@ class Maze(tk.Tk, object):
         # create origin
         origin = np.array([20, 20])
 
-        # node
+        # top left[5, 5, 35, 35]
         node1_center = origin + np.array([0, 0])
         self.node1 = self.canvas.create_oval(
             node1_center[0] - 15, node1_center[1] - 15,
             node1_center[0] + 15, node1_center[1] + 15,
             fill='black')
         
+        # bottom left[5, 45, 35, 75]
         node2_center = origin + np.array([0, UNIT])
         self.node2 = self.canvas.create_oval(
             node2_center[0] - 15, node2_center[1] - 15,
             node2_center[0] + 15, node2_center[1] + 15,
             fill='black')
         
+        # top 2[45, 5, 75, 35]
         node3_center = origin + np.array([UNIT, 0])
         self.node3 = self.canvas.create_oval(
             node3_center[0] - 15, node3_center[1] - 15,
             node3_center[0] + 15, node3_center[1] + 15,
             fill='black')
         
+        # bottom 2[45, 45, 75, 75]
         node4_center = origin + np.array([UNIT, UNIT])
         self.node4 = self.canvas.create_oval(
             node4_center[0] - 15, node4_center[1] - 15,
             node4_center[0] + 15, node4_center[1] + 15,
             fill='black')
         
-        node5_center = origin + np.array([UNIT+UNIT, UNIT])
+        # top 3[85, 5, 115, 35]
+        node5_center = origin + np.array([UNIT*2, 0])
         self.node5 = self.canvas.create_oval(
             node5_center[0] - 15, node5_center[1] - 15,
             node5_center[0] + 15, node5_center[1] + 15,
-            fill='orange')
-       
-        # create oval
-        oval_center = origin + np.array([UNIT+UNIT, 0])
+            fill='black')
+        
+        # bottom 3[85, 45, 115, 35]
+        node6_center = origin + np.array([UNIT*2, UNIT])
+        self.node6 = self.canvas.create_oval(
+            node6_center[0] - 15, node6_center[1] - 15,
+            node6_center[0] + 15, node6_center[1] + 15,
+            fill='black')
+        
+        # Goal
+        oval_center = origin + np.array([UNIT*3, 0])
         self.oval = self.canvas.create_oval(
             oval_center[0] - 15, oval_center[1] - 15,
             oval_center[0] + 15, oval_center[1] + 15,
             fill='yellow')
-
+        
+        # bottom right[125, 45, 155, 75]
+        node7_center = origin + np.array([UNIT*3, UNIT])
+        self.node7 = self.canvas.create_oval(
+            node7_center[0] - 15, node7_center[1] - 15,
+            node7_center[0] + 15, node7_center[1] + 15,
+            fill='orange')
+       
         # create red rect
         self.rect = self.canvas.create_oval(
             origin[0] - 15, origin[1] - 15,
@@ -105,7 +123,12 @@ class Maze(tk.Tk, object):
         self.canvas.delete(self.rect)
         
         origin = np.array([20, 20])
-        if np.random.rand() <= 0.5:
+        node1_center = origin + np.array([0, 0])
+        self.rect = self.canvas.create_oval(
+            node1_center[0] - 15, node1_center[1] - 15,
+            node1_center[0] + 15, node1_center[1] + 15,
+            fill='red')
+        '''if np.random.rand() <= 0.5:
             node1_center = origin + np.array([0, 0])
             self.rect = self.canvas.create_oval(
                 node1_center[0] - 15, node1_center[1] - 15,
@@ -116,7 +139,7 @@ class Maze(tk.Tk, object):
             self.rect = self.canvas.create_oval(
                 node2_center[0] - 15, node2_center[1] - 15,
                 node2_center[0] + 15, node2_center[1] + 15,
-                fill='red')
+                fill='red')'''
         # return observation
         return self.canvas.coords(self.rect)
 
@@ -139,17 +162,21 @@ class Maze(tk.Tk, object):
         self.canvas.move(self.rect, base_action[0], base_action[1])  # move agent
 
         s_ = self.canvas.coords(self.rect)  # next state
+        #print(s_)
 
         # reward function
         if s_ == self.canvas.coords(self.oval):
-            reward = 2
+            reward = 10
             done = True
             s_ = 'terminal'
-        elif s_ in [self.canvas.coords(self.node1), self.canvas.coords(self.node2), self.canvas.coords(self.node3), self.canvas.coords(self.node4)]:
-            reward = 0.5
+        elif s_ in [self.canvas.coords(self.node1) , self.canvas.coords(self.node3), self.canvas.coords(self.node5)]:
+            reward = 2
             done = False
-        elif s_ in [self.canvas.coords(self.node5)]:
+        elif s_ in [self.canvas.coords(self.node2) , self.canvas.coords(self.node4), self.canvas.coords(self.node6)]:
             reward = -1
+            done = False
+        elif s_ in [self.canvas.coords(self.node7)]:
+            reward = -100
             done = True
         else:
             reward = -1

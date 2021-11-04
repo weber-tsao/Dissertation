@@ -69,6 +69,7 @@ class QLearningTable(RL):
         else:
             q_target = r  # next state is terminal
         self.q_table.loc[s, a] += self.lr * (q_target - q_predict)  # update
+        #print(self.q_table)
 
 
 # on-policy
@@ -85,3 +86,4 @@ class SarsaTable(RL):
         else:
             q_target = r  # next state is terminal
         self.q_table.loc[s, a] += self.lr * (q_target - q_predict)  # update
+        ###print(self.q_table)
