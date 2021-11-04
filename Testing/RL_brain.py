@@ -10,7 +10,7 @@ import pandas as pd
 
 UNIT = 40   # pixels
 MAZE_H = 2  # grid height
-MAZE_W = 5  # grid width
+MAZE_W = 10  # grid width
 
 class RL(object):
     def __init__(self, action_space, learning_rate=0.01, reward_decay=0.9, e_greedy=0.3):
@@ -21,7 +21,7 @@ class RL(object):
 
         self.q_table = pd.DataFrame(columns=self.actions, dtype=np.float64)
         #print(self.q_table)
-        self.state_num = 5
+        self.state_num = MAZE_W
         #row = [[], [], [], [], [], []]
         self.state_action_permit = pd.DataFrame()
 
@@ -48,10 +48,10 @@ class RL(object):
         action_choose = []
         #print(observation_ == 'terminal')
         if observation_ != 'terminal':
-            if (observation_[0] + UNIT) == 165 and (observation_[1] + UNIT) == 45:
+            if (observation_[0] + UNIT) == (5+UNIT*(self.state_num-1)) and (observation_[1] + UNIT) == 45:
                 action_choose.append(2)
                 print("straight")
-            elif (observation_[0] + UNIT) == 165 and observation_[1] == 45:
+            elif (observation_[0] + UNIT) == (5+UNIT*(self.state_num-1)) and observation_[1] == 45:
                 action_choose.append(0)
                 print("cross up")
             else:

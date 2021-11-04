@@ -24,7 +24,7 @@ else:
 
 UNIT = 40   # pixels
 MAZE_H = 2  # grid height
-MAZE_W = 5  # grid width
+MAZE_W = 10  # grid width
 
 
 class Maze(tk.Tk, object):
@@ -215,7 +215,6 @@ class Maze(tk.Tk, object):
                 print("straight")
 
         self.canvas.move(self.rect, base_action[0], base_action[1])  # move agent
-
         s_ = self.canvas.coords(self.rect)  # next state
         print("Next state {}".format(s_))
         print(self.all_nodes[4])
@@ -225,11 +224,11 @@ class Maze(tk.Tk, object):
             done = True
             s_ = 'terminal'
         #elif s_ in [self.canvas.coords(self.node3), self.canvas.coords(self.node5), self.canvas.coords(self.node7)]:
-        elif s_ in [self.canvas.coords(self.all_nodes[2]), self.canvas.coords(self.all_nodes[4]), self.canvas.coords(self.all_nodes[6])]:
+        elif s_ in [self.canvas.coords(self.all_nodes[x]) for x in range(2, (len(self.all_nodes)-1), 2)]:
             reward = 1
             done = False
         #elif s_ in [self.canvas.coords(self.node4), self.canvas.coords(self.node6), self.canvas.coords(self.node8)]:
-        elif s_ in [self.canvas.coords(self.all_nodes[3]), self.canvas.coords(self.all_nodes[5]), self.canvas.coords(self.all_nodes[7])]:
+        elif s_ in [self.canvas.coords(self.all_nodes[x]) for x in range(3, len(self.all_nodes), 2)]:
             reward = -1
             done = False
         
