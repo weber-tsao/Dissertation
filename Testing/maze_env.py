@@ -24,7 +24,7 @@ else:
 
 UNIT = 40   # pixels
 MAZE_H = 2  # grid height
-MAZE_W = 5  # grid width
+MAZE_W = 10  # grid width
 
 
 class Maze(tk.Tk, object):
@@ -95,7 +95,7 @@ class Maze(tk.Tk, object):
                 self.all_nodes.append(self.node_down)
             
 
-        # top left[5, 5, 35, 35]
+        '''# top left[5, 5, 35, 35]
         node1_center = origin + np.array([0, 0])
         self.node1 = self.canvas.create_oval(
             node1_center[0] - 15, node1_center[1] - 15,
@@ -156,7 +156,7 @@ class Maze(tk.Tk, object):
         self.oval = self.canvas.create_oval(
             oval_center[0] - 15, oval_center[1] - 15,
             oval_center[0] + 15, oval_center[1] + 15,
-            fill='yellow')
+            fill='yellow')'''
         
         # create red oval
         self.rect = self.canvas.create_oval(
@@ -219,7 +219,7 @@ class Maze(tk.Tk, object):
         print("Next state {}".format(s_))
         print(self.all_nodes[4])
         # reward function
-        '''if s_ == self.canvas.coords(self.all_nodes[-1]):
+        if s_ == self.canvas.coords(self.all_nodes[-1]):
             reward = 0
             done = True
             s_ = 'terminal'
@@ -228,9 +228,9 @@ class Maze(tk.Tk, object):
             done = False
         elif s_ in [self.canvas.coords(self.all_nodes[x]) for x in range(3, len(self.all_nodes), 2)]:
             reward = -1
-            done = False'''
+            done = False
             
-        if s_ == self.canvas.coords(self.oval):
+        '''if s_ == self.canvas.coords(self.oval):
             reward = 0
             done = True
             s_ = 'terminal'
@@ -251,7 +251,7 @@ class Maze(tk.Tk, object):
             done = False
         elif s_ in [self.canvas.coords(self.node8)]:
             reward = -0.7
-            done = False
+            done = False'''
         
         
         return s_, reward, done
