@@ -24,7 +24,7 @@ else:
 
 UNIT = 40   # pixels
 MAZE_H = 2  # grid height
-MAZE_W = 10  # grid width
+MAZE_W = 5  # grid width
 
 
 class Maze(tk.Tk, object):
@@ -223,11 +223,9 @@ class Maze(tk.Tk, object):
             reward = 0
             done = True
             s_ = 'terminal'
-        #elif s_ in [self.canvas.coords(self.node3), self.canvas.coords(self.node5), self.canvas.coords(self.node7)]:
         elif s_ in [self.canvas.coords(self.all_nodes[x]) for x in range(2, (len(self.all_nodes)-1), 2)]:
             reward = 1
             done = False
-        #elif s_ in [self.canvas.coords(self.node4), self.canvas.coords(self.node6), self.canvas.coords(self.node8)]:
         elif s_ in [self.canvas.coords(self.all_nodes[x]) for x in range(3, len(self.all_nodes), 2)]:
             reward = -1
             done = False
