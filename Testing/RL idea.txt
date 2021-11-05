@@ -1,6 +1,8 @@
 goal state is the d flipflop
 
---Multi agent to compete each other
---Find a RL method to predict traffic,will look atit and see if any thing useful
---Still updating the file to put real PUF  data
---Will nedd to implement method to show prediction rate
+1. Multi agent to compete each other
+2. Find a RL method to predict traffic,will look atit and see if any thing useful,
+   https://ieeexplore-ieee-org.sheffield.idm.oclc.org/stamp/stamp.jsp?tp=&arnumber=9123922&tag=1
+3. Still updating the file to put real PUF data,  ex. delay for each node and how to convert delay to reward in RL 
+4. Will nedd to implement method to show prediction rate
+5. Big table, will need to implement nerual network so no need to use table to store info
