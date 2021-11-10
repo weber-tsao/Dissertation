@@ -11,7 +11,7 @@ from numpy import array, ones
 
 class Puf:
     def __init__(self):
-        self.puf = pypuf.simulation.ArbiterPUF(n=3, seed=2)
+        self.puf = pypuf.simulation.ArbiterPUF(n=10, seed=2)
         self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=5, seed=2)
         self.crp.save('crps.npz')
         self.crp_loaded = pypuf.io.ChallengeResponseSet.load('crps.npz')
@@ -67,7 +67,7 @@ class Puf:
     def cal_each_mux_delay(self):
         # look at challenge bits
         top_path, bottom_path = self.puf_path()
-        print(top_path)
+        #print(top_path)
         delay_diff, stage_delay_diff = self.each_stage_delay()
             
         for i in range((len(self.challenge[0])-1), -1, -1):
@@ -95,11 +95,23 @@ class Puf:
         
         return self.dict
     
+    def reward_related_to_delay(self):
+        
+        delay_dict = self.cal_each_mux_delay()
+        for i in range(len(delay_dict)):
+            if delay_dict[(str(i))] == 0:
+                delay_dict[(str(i))] = 1
+            else:
+                pass
+        print(delay_dict)
+        return delay_dict
+    
 
 if __name__ == "__main__":
     x = Puf()
     y = x.each_stage_delay()
-    print(y)
+    #print(y)
     z = x.cal_each_mux_delay()
-    print(z)
+    #print(z)
     #x.puf_path()
+    x.reward_related_to_delay()
