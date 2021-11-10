@@ -16,7 +16,7 @@ class Puf:
         self.crp.save('crps.npz')
         self.crp_loaded = pypuf.io.ChallengeResponseSet.load('crps.npz')
         #print(self.crp_loaded[2])
-        self.challenge = array([self.crp_loaded[2][0]])
+        self.challenge = array([self.crp_loaded[0][0]])
         self.delay_diff = []
         self.stage_delay_diff = []
         self.mux_node = []
@@ -92,19 +92,22 @@ class Puf:
             else:
                 self.dict[str(count)] = 0
                 self.dict[str(count-1)] = 0        
-        
+        #print(self.dict)
         return self.dict
     
     def reward_related_to_delay(self):
         
         delay_dict = self.cal_each_mux_delay()
-        for i in range(len(delay_dict)):
+        for i in range(0, len(delay_dict), 2):
             if delay_dict[(str(i))] == 0:
-                delay_dict[(str(i))] = 1
+                delay_dict[(str(i))] = delay_dict[(str(i+1))] + 1
+                delay_dict[(str(i+1))] = 1
             else:
-                delay_dict[(str(i))] = delay_dict[(str(i))] + 1
+                delay_dict[(str(i+1))] =  delay_dict[(str(i))] + 1
+                delay_dict[(str(i))] = 1
         
-        #print(type(delay_dict['1'].tolist()))
+        #print(len(delay_dict))
+        print(delay_dict)
         #print(type(0.0))
         #print(type(self.temp))
         #print(np.ones((1,1)))
