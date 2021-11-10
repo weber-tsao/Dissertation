@@ -13,7 +13,7 @@ from RL_brain import SarsaLambdaTable
 from Puf_delay_model import*
 
 def update():
-    for episode in range(500):
+    for episode in range(100):
         # initial observation
         observation = env.reset()
         #print(str(observation))
@@ -60,5 +60,5 @@ if __name__ == "__main__":
     RL1 = SarsaTable(actions=list(range(env.n_actions)))
     RL = SarsaLambdaTable(actions=list(range(env.n_actions)))
 
-    env.after(500, update)
+    env.after(100, update)
     env.mainloop()

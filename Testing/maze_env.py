@@ -148,7 +148,7 @@ class Maze(tk.Tk, object):
         self.canvas.move(self.rect, base_action[0], base_action[1])  # move agent
         s_ = self.canvas.coords(self.rect)  # next state
         print("Next state {}".format(s_))
-        print(self.all_nodes[4])
+        #print(self.all_nodes[4])
         # reward function
         if s_ == self.canvas.coords(self.all_nodes[-1]):
             reward = 0.0
