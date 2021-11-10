@@ -275,7 +275,7 @@ def cal_PUF_path(v, loop):
                 walk.append(v[x-2])
             else:
                 walk.append(v[x-3])
-    #print(walk)
+    print(walk)
     return walk
 
 def cal_puf_data():

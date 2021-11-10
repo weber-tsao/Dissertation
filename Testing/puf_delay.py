@@ -15,6 +15,7 @@ crp.save('crps.npz')
 crp_loaded = pypuf.io.ChallengeResponseSet.load('crps.npz')
 print(crp_loaded[0])
 challenge = array([crp_loaded[0][0]])
+print(len(challenge[0]))
 #print(puf.val(challenge))
 
 #----------------------------------------------------
