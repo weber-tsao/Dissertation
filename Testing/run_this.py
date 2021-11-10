@@ -12,7 +12,6 @@ from RL_brain import SarsaTable
 from RL_brain import SarsaLambdaTable
 from Puf_delay_model import*
 
-
 def update():
     for episode in range(100):
         # initial observation

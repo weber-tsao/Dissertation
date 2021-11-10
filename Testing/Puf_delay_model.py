@@ -11,11 +11,11 @@ from numpy import array, ones
 
 class Puf:
     def __init__(self):
-        self.puf = pypuf.simulation.ArbiterPUF(n=10, seed=2)
+        self.puf = pypuf.simulation.ArbiterPUF(n=5, seed=2)
         self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=5, seed=2)
         self.crp.save('crps.npz')
         self.crp_loaded = pypuf.io.ChallengeResponseSet.load('crps.npz')
-        print(self.crp_loaded[2])
+        #print(self.crp_loaded[2])
         self.challenge = array([self.crp_loaded[2][0]])
         self.delay_diff = []
         self.stage_delay_diff = []
@@ -102,8 +102,8 @@ class Puf:
             if delay_dict[(str(i))] == 0:
                 delay_dict[(str(i))] = 1
             else:
-                pass
-        print(delay_dict)
+                delay_dict[(str(i))] = delay_dict[(str(i))] + 1
+        #print(len(delay_dict))
         return delay_dict
     
 

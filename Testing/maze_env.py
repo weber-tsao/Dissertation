@@ -20,7 +20,7 @@ if sys.version_info.major == 2:
     import Tkinter as tk
 else:
     import tkinter as tk
-
+from Puf_delay_model import Puf
 
 UNIT = 40   # pixels
 MAZE_H = 2  # grid height
@@ -30,6 +30,9 @@ MAZE_W = 10  # grid width
 class Maze(tk.Tk, object):
     def __init__(self):
         super(Maze, self).__init__()
+        self.puf = Puf()
+        self.reward_dict = self.puf.reward_related_to_delay()
+        self.maze_w = int(len(self.reward_dict)/2)+2
         self.action_space = ['cross_up', 'cross_down', 'straight']
         self.n_actions = len(self.action_space)
         self.title('maze')
@@ -40,21 +43,13 @@ class Maze(tk.Tk, object):
     def _build_maze(self):
         self.canvas = tk.Canvas(self, bg='white',
                            height=MAZE_H * UNIT,
-                           width=MAZE_W * UNIT)
-
-        # create grids
-        '''for c in range(0, MAZE_W * UNIT, UNIT):
-            x0, y0, x1, y1 = c, 0, c, MAZE_H * UNIT
-            self.canvas.create_line(x0, y0, x1, y1)
-        for r in range(0, MAZE_H * UNIT, UNIT):
-            x0, y0, x1, y1 = 0, r, MAZE_W * UNIT, r
-            self.canvas.create_line(x0, y0, x1, y1)'''
+                           width=self.maze_w * UNIT)
             
         # create origin
         origin = np.array([20, 20])
         self.all_nodes = []
         
-        for i in range(MAZE_W):
+        for i in range(self.maze_w):
             
             if i == 0:
                 node_center = origin + np.array([i, i])
@@ -71,7 +66,7 @@ class Maze(tk.Tk, object):
                 
                 self.all_nodes.append(self.node)
                 self.all_nodes.append(self.node_down)
-            elif i == (MAZE_W-1):
+            elif i == (self.maze_w-1):
                 oval_center = origin + np.array([UNIT*i, 0])
                 self.oval = self.canvas.create_oval(
                     oval_center[0] - 15, oval_center[1] - 15,
@@ -200,17 +195,17 @@ class Maze(tk.Tk, object):
         #print("ddd {}".format(s))
         base_action = np.array([0, 0])
         if action == 0:   # cross up
-            if s[1] > UNIT and s[0] < (MAZE_W - 1) * UNIT:
+            if s[1] > UNIT and s[0] < (self.maze_w - 1) * UNIT:
                 base_action[0] += UNIT
                 base_action[1] -= UNIT
                 print("cross up")
         elif action == 1:   # cross down
-            if s[1] < (MAZE_H - 1) * UNIT and s[0] < (MAZE_W - 1) * UNIT:
+            if s[1] < (MAZE_H - 1) * UNIT and s[0] < (self.maze_w - 1) * UNIT:
                 base_action[0] += UNIT
                 base_action[1] += UNIT
                 print("cross down")
         elif action == 2:   # straight
-            if s[0] < (MAZE_W - 1) * UNIT:
+            if s[0] < (self.maze_w - 1) * UNIT:
                 base_action[0] += UNIT
                 print("straight")
 

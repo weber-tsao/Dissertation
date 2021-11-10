@@ -6,3 +6,11 @@ goal state is the d flipflop
 3. Still updating the file to put real PUF data,  ex. delay for each node and how to convert delay to reward in RL 
 4. Will nedd to implement method to show prediction rate
 5. Big table, will need to implement nerual network so no need to use table to store info
+
+
+Problem to consider:
+1. Is the method ok? There are no need to consider training Crps siz since we only need one pair and useit to get the 
+   delay of each mux
+   --Possible solution: maybe try all the crps and get the average delay????
+
+   

@@ -7,6 +7,7 @@ View more on my tutorial page: https://morvanzhou.github.io/tutorials/
 
 import numpy as np
 import pandas as pd
+from Puf_delay_model import Puf
 
 UNIT = 40   # pixels
 MAZE_H = 2  # grid height
@@ -15,13 +16,16 @@ MAZE_W = 10  # grid width
 class RL(object):
     def __init__(self, action_space, learning_rate=0.01, reward_decay=0.9, e_greedy=0.3):
         self.actions = action_space  # a list
+        self.puf = Puf()
+        self.reward_dict = self.puf.reward_related_to_delay()
+        self.maze_w = int(len(self.reward_dict)/2)+2
         self.lr = learning_rate
         self.gamma = reward_decay
         self.epsilon = e_greedy
 
         self.q_table = pd.DataFrame(columns=self.actions, dtype=np.float64)
         #print(self.q_table)
-        self.state_num = MAZE_W
+        self.state_num = self.maze_w
         #row = [[], [], [], [], [], []]
         self.state_action_permit = pd.DataFrame()
 
@@ -56,15 +60,15 @@ class RL(object):
                 print("cross up")
             else:
                 # cross up
-                if observation_[1] > UNIT and observation_[0] < (MAZE_W - 1) * UNIT:
+                if observation_[1] > UNIT and observation_[0] < (self.maze_w - 1) * UNIT:
                     action_choose.append(0)
                     print("cross up")
                 # cross down
-                if observation_[1] < (MAZE_H - 1) * UNIT and observation_[0] < (MAZE_W - 1) * UNIT:
+                if observation_[1] < (MAZE_H - 1) * UNIT and observation_[0] < (self.maze_w - 1) * UNIT:
                     action_choose.append(1)
                     print("cross down")
                 # straight
-                if observation_[0] < (MAZE_W - 1) * UNIT:
+                if observation_[0] < (self.maze_w - 1) * UNIT:
                     action_choose.append(2)
                     print("straight")
         else:
