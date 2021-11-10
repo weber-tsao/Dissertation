@@ -12,6 +12,9 @@ from RL_brain import SarsaTable
 from RL_brain import SarsaLambdaTable
 from Puf_delay_model import*
 
+puf = Puf()
+testing_crps = puf.testing_crps_for_RL()
+
 def update():
     for episode in range(100):
         # initial observation
@@ -55,6 +58,12 @@ def update():
     print('game over')
     env.destroy()
 
+def prediction_rate():
+    # method to calculate RL model accuracy
+    # input path and calculate the sum of reward and compare that to label
+    # run many times and see how many times we got it right
+    print("prediction rate =" )
+
 if __name__ == "__main__":
     env = Maze()
     RL1 = SarsaTable(actions=list(range(env.n_actions)))
@@ -62,3 +71,4 @@ if __name__ == "__main__":
 
     env.after(100, update)
     env.mainloop()
+    prediction_rate()
