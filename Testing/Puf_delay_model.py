@@ -6,7 +6,7 @@ Created on Thu Nov  4 23:40:37 2021
 """
 import pypuf.simulation
 import pypuf.io
-import numpy
+import numpy as np
 from numpy import array, ones
 
 class Puf:
@@ -77,17 +77,17 @@ class Puf:
             
             if delay_different > 0:
                 if current_top%2 == 0: #top is top
-                     self.dict[str(count)] = abs(delay_different)
+                     self.dict[str(count)] = abs(delay_different).tolist()[0]
                      self.dict[str(count+1)] = 0
                 else:
                     self.dict[str(count)] = 0
-                    self.dict[str(count+1)] = abs(delay_different)
+                    self.dict[str(count+1)] = abs(delay_different).tolist()[0]
             elif delay_different < 0:
                 if current_top%2 == 0:
                     self.dict[str(count)] = 0
-                    self.dict[str(count+1)] = abs(delay_different)
+                    self.dict[str(count+1)] = abs(delay_different).tolist()[0]
                 else:
-                    self.dict[str(count)] = abs(delay_different)
+                    self.dict[str(count)] = abs(delay_different).tolist()[0]
                     self.dict[str(count+1)] = 0
             else:
                 self.dict[str(count)] = 0
@@ -103,7 +103,12 @@ class Puf:
                 delay_dict[(str(i))] = 1
             else:
                 delay_dict[(str(i))] = delay_dict[(str(i))] + 1
-        #print(len(delay_dict))
+        
+        #print(type(delay_dict['1'].tolist()))
+        #print(type(0.0))
+        #print(type(self.temp))
+        #print(np.ones((1,1)))
+        #print(type(delay_dict['8']))
         return delay_dict
     
 

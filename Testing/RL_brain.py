@@ -11,7 +11,7 @@ from Puf_delay_model import Puf
 
 UNIT = 40   # pixels
 MAZE_H = 2  # grid height
-MAZE_W = 10  # grid width
+#MAZE_W = 10  # grid width
 
 class RL(object):
     def __init__(self, action_space, learning_rate=0.01, reward_decay=0.9, e_greedy=0.3):

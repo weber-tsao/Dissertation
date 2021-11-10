@@ -24,7 +24,7 @@ from Puf_delay_model import Puf
 
 UNIT = 40   # pixels
 MAZE_H = 2  # grid height
-MAZE_W = 10  # grid width
+#MAZE_W = 10  # grid width
 
 
 class Maze(tk.Tk, object):
@@ -88,70 +88,6 @@ class Maze(tk.Tk, object):
                 
                 self.all_nodes.append(self.node)
                 self.all_nodes.append(self.node_down)
-            
-
-        '''# top left[5, 5, 35, 35]
-        node1_center = origin + np.array([0, 0])
-        self.node1 = self.canvas.create_oval(
-            node1_center[0] - 15, node1_center[1] - 15,
-            node1_center[0] + 15, node1_center[1] + 15,
-            fill='black')
-        
-        # bottom left[5, 45, 35, 75]
-        node2_center = origin + np.array([0, UNIT])
-        self.node2 = self.canvas.create_oval(
-            node2_center[0] - 15, node2_center[1] - 15,
-            node2_center[0] + 15, node2_center[1] + 15,
-            fill='black')
-        
-        # top 2[45, 5, 75, 35]
-        node3_center = origin + np.array([UNIT, 0])
-        self.node3 = self.canvas.create_rectangle(
-            node3_center[0] - 15, node3_center[1] - 15,
-            node3_center[0] + 15, node3_center[1] + 15,
-            fill='black')
-        
-        # bottom 2[45, 45, 75, 75]
-        node4_center = origin + np.array([UNIT, UNIT])
-        self.node4 = self.canvas.create_rectangle(
-            node4_center[0] - 15, node4_center[1] - 15,
-            node4_center[0] + 15, node4_center[1] + 15,
-            fill='black')
-        
-        # top 3[85, 5, 115, 35]
-        node5_center = origin + np.array([UNIT*2, 0])
-        self.node5 = self.canvas.create_rectangle(
-            node5_center[0] - 15, node5_center[1] - 15,
-            node5_center[0] + 15, node5_center[1] + 15,
-            fill='black')
-        
-        # bottom 3[85, 45, 115, 35]
-        node6_center = origin + np.array([UNIT*2, UNIT])
-        self.node6 = self.canvas.create_rectangle(
-            node6_center[0] - 15, node6_center[1] - 15,
-            node6_center[0] + 15, node6_center[1] + 15,
-            fill='black')
-        
-        # top 4[125, 5, 155, 35]
-        node7_center = origin + np.array([UNIT*3, 0])
-        self.node7 = self.canvas.create_rectangle(
-            node7_center[0] - 15, node7_center[1] - 15,
-            node7_center[0] + 15, node7_center[1] + 15,
-            fill='black')
-        
-        # bottom 4[125, 45, 155, 75]
-        node8_center = origin + np.array([UNIT*3, UNIT])
-        self.node8 = self.canvas.create_rectangle(
-            node8_center[0] - 15, node8_center[1] - 15,
-            node8_center[0] + 15, node8_center[1] + 15,
-            fill='black')
-        
-        # Goal
-        oval_center = origin + np.array([UNIT*4, 0])
-        self.oval = self.canvas.create_oval(
-            oval_center[0] - 15, oval_center[1] - 15,
-            oval_center[0] + 15, oval_center[1] + 15,
-            fill='yellow')'''
         
         # create red oval
         self.rect = self.canvas.create_oval(
@@ -215,39 +151,14 @@ class Maze(tk.Tk, object):
         print(self.all_nodes[4])
         # reward function
         if s_ == self.canvas.coords(self.all_nodes[-1]):
-            reward = 0
+            reward = 0.0
             done = True
             s_ = 'terminal'
-        elif s_ in [self.canvas.coords(self.all_nodes[x]) for x in range(2, (len(self.all_nodes)-1), 2)]:
-            reward = 1
-            done = False
-        elif s_ in [self.canvas.coords(self.all_nodes[x]) for x in range(3, len(self.all_nodes), 2)]:
-            reward = -1
-            done = False
-            
-        '''if s_ == self.canvas.coords(self.oval):
-            reward = 0
-            done = True
-            s_ = 'terminal'
-        elif s_ in [self.canvas.coords(self.node3)]:
-            reward = 0.8
-            done = False
-        elif s_ in [self.canvas.coords(self.node4)]:
-            reward = -0.5
-            done = False
-        elif s_ in [self.canvas.coords(self.node5)]:
-            reward = -0.1
-            done = False
-        elif s_ in [self.canvas.coords(self.node6)]:
-            reward = 0.3
-            done = False
-        elif s_ in [self.canvas.coords(self.node7)]:
-            reward = 0.1
-            done = False
-        elif s_ in [self.canvas.coords(self.node8)]:
-            reward = -0.7
-            done = False'''
         
+        for i in range(2, (len(self.all_nodes)-1), 1):
+            if s_ == self.canvas.coords(self.all_nodes[i]):
+                reward = self.reward_dict[str(i-2)]
+                done = False
         
         return s_, reward, done
 
