@@ -96,7 +96,7 @@ class RL(object):
 
 
 # off-policy
-class QLearningTable(RL):
+'''class QLearningTable(RL):
     def __init__(self, actions, learning_rate=0.01, reward_decay=0.9, e_greedy=0.5):
         super(QLearningTable, self).__init__(actions, learning_rate, reward_decay, e_greedy)
 
@@ -126,7 +126,7 @@ class SarsaTable(RL):
             q_target = r  # next state is terminal
         self.q_table.loc[s, a] += self.lr * (q_target - q_predict)  # update
         print(self.q_table)
-        #print("---------------------------------")
+        #print("---------------------------------")'''
         
 class SarsaLambdaTable(RL):
     def __init__(self, actions, learning_rate=0.01, reward_decay=0.9, e_greedy=0.9, trace_decay=0):
@@ -172,4 +172,8 @@ class SarsaLambdaTable(RL):
 
         # decay eligibility trace after update
         self.eligibility_trace *= self.gamma*self.lambda_
-        print(self.q_table)
+        #print(self.q_table)
+    
+    def get_q_table(self):
+        q_table = self.q_table
+        return q_table

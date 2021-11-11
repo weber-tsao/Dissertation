@@ -24,12 +24,14 @@ class Puf:
         self.bottom_path = []
         self.dict = {} # Ex. {'0':[0.1, 0.3]} --node, [delay when 1, delay when -1]
     
-    def puf_path(self):
-        self.mux_node = [x for x in range(len(self.challenge[0])*2)]
+    def puf_path(self, challenges):
+        self.mux_node = [x for x in range(len(challenges[0])*2)]
+        self.top_path = []
+        self.bottom_path = []
         prev = 0
-        for i in range(len(self.challenge[0])):
+        for i in range(len(challenges[0])):
             count = i*2
-            if self.challenge[0][i] == 1:
+            if challenges[0][i] == 1:
                 if prev%2 != 0:
                     self.top_path.append(self.mux_node[count+1])
                     self.bottom_path.append(self.mux_node[count])
@@ -38,7 +40,7 @@ class Puf:
                     self.top_path.append(self.mux_node[count])
                     self.bottom_path.append(self.mux_node[count+1])
                     prev = self.mux_node[count]
-            elif self.challenge[0][i] == -1:
+            elif challenges[0][i] == -1:
                 if prev%2 != 0:
                     self.top_path.append(self.mux_node[count])
                     self.bottom_path.append(self.mux_node[count+1])
@@ -66,7 +68,7 @@ class Puf:
     
     def cal_each_mux_delay(self):
         # look at challenge bits
-        top_path, bottom_path = self.puf_path()
+        top_path, bottom_path = self.puf_path(self.challenge)
         #print(top_path)
         delay_diff, stage_delay_diff = self.each_stage_delay()
             
@@ -118,7 +120,6 @@ class Puf:
         test_crps = self.crp_loaded
         return test_crps
     
-
 '''if __name__ == "__main__":
     x = Puf()
     y = x.each_stage_delay()

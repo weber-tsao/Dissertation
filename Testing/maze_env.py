@@ -37,9 +37,10 @@ class Maze(tk.Tk, object):
         self.n_actions = len(self.action_space)
         self.title('maze')
         #self.geometry('{0}x{1}'.format(MAZE_H * UNIT, MAZE_H * UNIT))
+        self.all_nodes_coord = []
         self._build_maze()
         self.change = 0
-
+        
     def _build_maze(self):
         self.canvas = tk.Canvas(self, bg='white',
                            height=MAZE_H * UNIT,
@@ -97,6 +98,10 @@ class Maze(tk.Tk, object):
 
         # pack all
         self.canvas.pack()
+        
+        for i in range(len(self.all_nodes)):
+            self.all_nodes_coord.append(self.canvas.coords(self.all_nodes[i]))
+                
 
     def reset(self):
         self.update()
@@ -165,5 +170,10 @@ class Maze(tk.Tk, object):
     def render(self):
         time.sleep(0.1)
         self.update()
+        
+    def get_maze_information(self):
+        nodes_location = self.all_nodes_coord
+        actions  = self.action_space
+        return nodes_location, actions
 
 

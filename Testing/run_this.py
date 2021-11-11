@@ -8,15 +8,12 @@ while q learning is more brave because it only cares about maximum behaviour.
 """
 
 from maze_env import Maze
-from RL_brain import SarsaTable
+#from RL_brain import SarsaTable
 from RL_brain import SarsaLambdaTable
 from Puf_delay_model import*
 
-puf = Puf()
-testing_crps = puf.testing_crps_for_RL()
-
 def update():
-    for episode in range(100):
+    for episode in range(30):
         # initial observation
         observation = env.reset()
         #print(str(observation))
@@ -58,17 +55,72 @@ def update():
     print('game over')
     env.destroy()
 
-def prediction_rate():
+def prediction_rate(q_table, nodes_location, actions):
     # method to calculate RL model accuracy
     # input path and calculate the sum of reward and compare that to label
     # run many times and see how many times we got it right
+    puf = Puf()
+    testing_crps = puf.testing_crps_for_RL()
+
+    for i in range(len(testing_crps)):
+        current_challenge = array([testing_crps[i][0]])
+        current_response_array = testing_crps[i][1]
+        current_response = current_response_array[0][0]
+        current_top_path, current_bottom_path = puf.puf_path(current_challenge)
+        
+        print(current_bottom_path)
+        print(nodes_location)
+        top_reward = 0
+        bottom_reward = 0
+        for x in range(len(current_top_path)):
+            if current_top_path[x] == 0:
+                top_reward += q_table.loc[str(nodes_location[0])][2]
+            elif current_top_path[x] == 1:
+                top_reward += q_table.loc[str(nodes_location[0])][1]
+            elif current_top_path[x-1]%2 == 0 and (current_top_path[x])%2 == 0:
+                top_reward += q_table.loc[str(nodes_location[current_top_path[x]])][2]
+                #print(str(nodes_location[current_top_path[x]]))
+            elif current_top_path[x-1]%2 != 0 and (current_top_path[x])%2 == 0:
+                top_reward += q_table.loc[str(nodes_location[current_top_path[x]+1])][0]
+                #print(str(nodes_location[current_top_path[x]+1]))
+            elif current_top_path[x-1]%2 == 0 and (current_top_path[x])%2 != 0:
+                top_reward += q_table.loc[str(nodes_location[current_top_path[x]+1])][1]
+                #print(str(nodes_location[current_top_path[x]+1]))
+            elif current_top_path[x-1]%2 != 0 and (current_top_path[x])%2 != 0:
+                top_reward += q_table.loc[str(nodes_location[current_top_path[x]])][2]
+                #print(str(nodes_location[current_top_path[x]]))
+        #print(top_reward)
+        for y in range(len(current_bottom_path)):
+            if current_bottom_path[y] == 0:
+                bottom_reward += q_table.loc[str(nodes_location[1])][0]
+                print(str(nodes_location[1]))
+            elif current_bottom_path[y] == 1:
+                bottom_reward += q_table.loc[str(nodes_location[1])][2]
+                print(str(nodes_location[1]))
+            elif current_bottom_path[y]%2 == 0 and (current_bottom_path[y-1])%2 == 0:
+                bottom_reward += q_table.loc[str(nodes_location[current_bottom_path[y]])][2]
+                print(str(nodes_location[current_bottom_path[y]]))
+            elif current_bottom_path[y]%2 != 0 and (current_bottom_path[y-1])%2 == 0:
+                bottom_reward += q_table.loc[str(nodes_location[current_bottom_path[y]-1])][1]
+                print(str(nodes_location[current_bottom_path[y]-1]))
+            elif current_bottom_path[y]%2 == 0 and (current_bottom_path[y-1])%2 != 0:
+                bottom_reward += q_table.loc[str(nodes_location[current_bottom_path[y]+1])][0]
+                print(str(nodes_location[current_bottom_path[y]+1]))
+            elif current_bottom_path[y]%2 != 0 and (current_bottom_path[y-1])%2 != 0:
+                bottom_reward += q_table.loc[str(nodes_location[current_bottom_path[y]])][2]
+                print(str(nodes_location[current_bottom_path[y]]))
+        print(bottom_reward)
+    
     print("prediction rate =" )
 
 if __name__ == "__main__":
+    #prediction_rate()
     env = Maze()
-    RL1 = SarsaTable(actions=list(range(env.n_actions)))
+    nodes_location, actions = env.get_maze_information()
     RL = SarsaLambdaTable(actions=list(range(env.n_actions)))
 
-    env.after(100, update)
+    env.after(30, update)
     env.mainloop()
-    prediction_rate()
+    q_table = RL.get_q_table()
+    print(q_table)
+    prediction_rate(q_table, nodes_location, actions)
