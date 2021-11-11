@@ -11,8 +11,8 @@ from numpy import array, ones
 
 class Puf:
     def __init__(self):
-        self.puf = pypuf.simulation.ArbiterPUF(n=5, seed=2)
-        self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=5, seed=2)
+        self.puf = pypuf.simulation.ArbiterPUF(n=16, seed=2)
+        self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=200, seed=2)
         self.crp.save('crps.npz')
         self.crp_loaded = pypuf.io.ChallengeResponseSet.load('crps.npz')
         print(self.crp_loaded[0])
@@ -102,11 +102,11 @@ class Puf:
         delay_dict = self.cal_each_mux_delay()
         for i in range(0, len(delay_dict), 2):
             if delay_dict[(str(i))] == 0:
-                delay_dict[(str(i))] = delay_dict[(str(i+1))] + 1
-                delay_dict[(str(i+1))] = 1
+                delay_dict[(str(i))] = delay_dict[(str(i+1))]
+                delay_dict[(str(i+1))] = -1
             else:
-                delay_dict[(str(i+1))] =  delay_dict[(str(i))] + 1
-                delay_dict[(str(i))] = 1
+                delay_dict[(str(i+1))] =  delay_dict[(str(i))]
+                delay_dict[(str(i))] = -1
         
         #print(len(delay_dict))
         #print(delay_dict)
