@@ -6,6 +6,7 @@ goal state is the d flipflop
 3. Still updating the file to put real PUF data,  ex. delay for each node and how to convert delay to reward in RL 
 4. Will nedd to implement method to show prediction rate
 5. Big table, will need to implement nerual network so no need to use table to store info
+6. Reward designmay can improve the accuracy 
 
 
 Problem to consider:

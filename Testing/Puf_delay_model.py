@@ -12,7 +12,7 @@ from numpy import array, ones
 class Puf:
     def __init__(self):
         self.puf = pypuf.simulation.ArbiterPUF(n=16, seed=2)
-        self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=200, seed=2)
+        self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=50, seed=2)
         self.crp.save('crps.npz')
         self.crp_loaded = pypuf.io.ChallengeResponseSet.load('crps.npz')
         print(self.crp_loaded[0])
@@ -94,7 +94,7 @@ class Puf:
             else:
                 self.dict[str(count)] = 0
                 self.dict[str(count-1)] = 0        
-        #print(self.dict)
+        print(self.dict)
         return self.dict
     
     def reward_related_to_delay(self):
@@ -103,13 +103,13 @@ class Puf:
         for i in range(0, len(delay_dict), 2):
             if delay_dict[(str(i))] == 0:
                 delay_dict[(str(i))] = delay_dict[(str(i+1))]
-                delay_dict[(str(i+1))] = -1
+                delay_dict[(str(i+1))] = 0
             else:
                 delay_dict[(str(i+1))] =  delay_dict[(str(i))]
-                delay_dict[(str(i))] = -1
+                delay_dict[(str(i))] = 0
         
         #print(len(delay_dict))
-        #print(delay_dict)
+        print(delay_dict)
         #print(type(0.0))
         #print(type(self.temp))
         #print(np.ones((1,1)))
@@ -120,11 +120,11 @@ class Puf:
         test_crps = self.crp_loaded
         return test_crps
     
-'''if __name__ == "__main__":
+if __name__ == "__main__":
     x = Puf()
-    y = x.each_stage_delay()
-    print(y)
+    #y = x.each_stage_delay()
+    #print(y)
     z = x.cal_each_mux_delay()
     print(z)
     #x.puf_path()
-    x.reward_related_to_delay()'''
+    x.reward_related_to_delay()
