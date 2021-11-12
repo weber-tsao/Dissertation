@@ -75,8 +75,8 @@ class RL(object):
             action_choose = [0, 1, 2]
             print("straight")
             
-        #action = np.random.choice(action_choose)
-        if np.random.rand() < self.epsilon:
+        action = np.random.choice(action_choose)
+        '''if np.random.rand() < self.epsilon:
             # choose best action
             state_action = self.q_table.loc[observation, action_choose]
             #print(self.q_table)
@@ -87,7 +87,7 @@ class RL(object):
         else:
             # choose random action
             action = np.random.choice(action_choose)
-            #print(action)
+            #print(action)'''
             
         return action
 
