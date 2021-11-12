@@ -14,7 +14,7 @@ MAZE_H = 2  # grid height
 #MAZE_W = 10  # grid width
 
 class RL(object):
-    def __init__(self, action_space, learning_rate=0.01, reward_decay=0.9, e_greedy=0.3):
+    def __init__(self, action_space, learning_rate=0.01, reward_decay=0.7, e_greedy=0.3):
         self.actions = action_space  # a list
         self.puf = Puf()
         self.reward_dict = self.puf.reward_related_to_delay()
@@ -93,40 +93,6 @@ class RL(object):
 
     def learn(self, *args):
         pass
-
-
-# off-policy
-'''class QLearningTable(RL):
-    def __init__(self, actions, learning_rate=0.01, reward_decay=0.9, e_greedy=0.5):
-        super(QLearningTable, self).__init__(actions, learning_rate, reward_decay, e_greedy)
-
-    def learn(self, s, a, r, s_):
-        self.check_state_exist(s_)
-        q_predict = self.q_table.loc[s, a]
-        if s_ != 'terminal':
-            q_target = r + self.gamma * self.q_table.loc[s_, :].max()  # next state is not terminal
-        else:
-            q_target = r  # next state is terminal
-        self.q_table.loc[s, a] += self.lr * (q_target - q_predict)  # update
-        #print(self.q_table)
-
-
-# on-policy
-class SarsaTable(RL):
-
-    def __init__(self, actions, learning_rate=0.01, reward_decay=0.9, e_greedy=0.5):
-        super(SarsaTable, self).__init__(actions, learning_rate, reward_decay, e_greedy)
-
-    def learn(self, s, a, r, s_, a_):
-        self.check_state_exist(s_)
-        q_predict = self.q_table.loc[s, a]
-        if s_ != 'terminal':
-            q_target = r + self.gamma * self.q_table.loc[s_, a_]  # next state is not terminal
-        else:
-            q_target = r  # next state is terminal
-        self.q_table.loc[s, a] += self.lr * (q_target - q_predict)  # update
-        print(self.q_table)
-        #print("---------------------------------")'''
         
 class SarsaLambdaTable(RL):
     def __init__(self, actions, learning_rate=0.01, reward_decay=0.9, e_greedy=0.9, trace_decay=0):

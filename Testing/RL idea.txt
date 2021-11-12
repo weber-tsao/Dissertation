@@ -13,5 +13,10 @@ Problem to consider:
 1. Is the method ok? There are no need to consider training Crps siz since we only need one pair and useit to get the 
    delay of each mux
    --Possible solution: maybe try all the crps and get the average delay????
+   
+   
+Result
+--16 challenge bits, 50 crps to validate, run 150 to update reward, prediction rate = 0.62
+--32 ...............................................................prediction rate = 0.54
 
    

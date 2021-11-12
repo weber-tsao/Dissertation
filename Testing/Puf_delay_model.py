@@ -11,7 +11,7 @@ from numpy import array, ones
 
 class Puf:
     def __init__(self):
-        self.puf = pypuf.simulation.ArbiterPUF(n=16, seed=2)
+        self.puf = pypuf.simulation.ArbiterPUF(n=32, seed=2)
         self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=50, seed=2)
         self.crp.save('crps.npz')
         self.crp_loaded = pypuf.io.ChallengeResponseSet.load('crps.npz')
@@ -120,11 +120,11 @@ class Puf:
         test_crps = self.crp_loaded
         return test_crps
     
-if __name__ == "__main__":
+'''if __name__ == "__main__":
     x = Puf()
     #y = x.each_stage_delay()
     #print(y)
     z = x.cal_each_mux_delay()
     print(z)
     #x.puf_path()
-    x.reward_related_to_delay()
+    x.reward_related_to_delay()'''
