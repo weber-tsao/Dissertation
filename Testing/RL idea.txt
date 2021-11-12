@@ -16,6 +16,9 @@ Problem to consider:
    
    
 Result
+--3                                                                 prediction rate= 0.54
+--10                                                                prediction rate= 0.56
+--10, with 300  times                                               prediction rate = 0.64
 --16 challenge bits, 50 crps to validate, run 150 to update reward, prediction rate = 0.62
 --32 ...............................................................prediction rate = 0.54
 

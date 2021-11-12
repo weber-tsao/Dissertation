@@ -12,7 +12,7 @@ from RL_brain import SarsaLambdaTable
 from Puf_delay_model import*
 
 def update():
-    for episode in range(150):
+    for episode in range(300):
         # initial observation
         observation = env.reset()
         #print(str(observation))
@@ -69,10 +69,10 @@ def prediction_rate(q_table, nodes_location, actions):
         current_response_array = testing_crps[i][1]
         current_response = current_response_array[0][0]
         current_top_path, current_bottom_path = puf.puf_path(current_challenge)
-        #print(current_challenge)
-        #print(current_response)
-        #print(current_top_path)
-        #print(current_bottom_path)
+        print(current_challenge)
+        print(current_response)
+        print(current_top_path)
+        print(current_bottom_path)
         #print(nodes_location)
         top_reward = 0
         bottom_reward = 0
@@ -89,7 +89,7 @@ def prediction_rate(q_table, nodes_location, actions):
                 top_reward += q_table.loc[str(nodes_location[current_top_path[x]+1])][1]
             elif current_top_path[x-1]%2 != 0 and (current_top_path[x])%2 != 0:
                 top_reward += q_table.loc[str(nodes_location[current_top_path[x]])][2]
-            
+        print(top_reward)
         for y in range(len(current_bottom_path)):
             if current_bottom_path[y] == 0:
                 bottom_reward += q_table.loc[str(nodes_location[1])][0]
@@ -103,15 +103,15 @@ def prediction_rate(q_table, nodes_location, actions):
                 bottom_reward += q_table.loc[str(nodes_location[current_bottom_path[y]+1])][0]
             elif current_bottom_path[y]%2 != 0 and (current_bottom_path[y-1])%2 != 0:
                 bottom_reward += q_table.loc[str(nodes_location[current_bottom_path[y]])][2]
-        #print(bottom_reward)
+        print(bottom_reward)
 
         #Compare top and bottom
         if bottom_reward > top_reward:
             label = -1
-            #print("bottom fast")
+            print("bottom fast")
         elif bottom_reward < top_reward:
             label = 1
-            #print("top fast")
+            print("top fast")
         else:
             print("speed equal")
 
@@ -119,6 +119,7 @@ def prediction_rate(q_table, nodes_location, actions):
         # check label is right and add a count to calculate the prediction rate 
         if label == current_response:
             success += 1
+            print("success")
 
     accuracy = success/crps_size         
     print("prediction rate = {}".format(accuracy))
@@ -128,7 +129,7 @@ if __name__ == "__main__":
     env = Maze()
     nodes_location, actions = env.get_maze_information()
     RL = SarsaLambdaTable(actions=list(range(env.n_actions)))
-    env.after(150, update)
+    env.after(300, update)
     env.mainloop()
     q_table = RL.get_q_table()
     print(q_table)
