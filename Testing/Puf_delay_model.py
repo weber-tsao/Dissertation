@@ -11,12 +11,12 @@ from numpy import array, ones
 
 class Puf:
     def __init__(self):
-        self.puf = pypuf.simulation.ArbiterPUF(n=10, seed=2)
-        self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=50, seed=2)
+        self.puf = pypuf.simulation.ArbiterPUF(n=5, seed=5)
+        self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=100, seed=2)
         self.crp.save('crps.npz')
         self.crp_loaded = pypuf.io.ChallengeResponseSet.load('crps.npz')
-        print(self.crp_loaded[0])
-        self.challenge = array([self.crp_loaded[0][0]])
+        print(self.crp_loaded[1])
+        self.challenge = array([self.crp_loaded[1][0]])
         self.delay_diff = []
         self.stage_delay_diff = []
         self.mux_node = []
@@ -71,6 +71,8 @@ class Puf:
         top_path, bottom_path = self.puf_path(self.challenge)
         #print(top_path)
         delay_diff, stage_delay_diff = self.each_stage_delay()
+        print(delay_diff)
+        print(stage_delay_diff)
             
         for i in range((len(self.challenge[0])-1), -1, -1):
             count = i*2
@@ -103,10 +105,10 @@ class Puf:
         for i in range(0, len(delay_dict), 2):
             if delay_dict[(str(i))] == 0:
                 delay_dict[(str(i))] = delay_dict[(str(i+1))]
-                delay_dict[(str(i+1))] = 0
+                delay_dict[(str(i+1))] = -1
             else:
                 delay_dict[(str(i+1))] =  delay_dict[(str(i))]
-                delay_dict[(str(i))] = 0
+                delay_dict[(str(i))] = -1
         
         #print(len(delay_dict))
         print(delay_dict)
