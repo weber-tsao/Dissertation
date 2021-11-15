@@ -1,13 +1,11 @@
-This is BibTeX, Version 0.99d
+This is BibTeX, Version 0.99d (TeX Live 2021/W32TeX)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
-The top-level auxiliary file: myReport.aux
-Reallocating 'name_of_file' (item size: 1) to 4 items.
+The top-level auxiliary file: dissertation.aux
 The style file: acm.bst
-Reallocating 'name_of_file' (item size: 1) to 15 items.
 Database file #1: mybibliography.bib
 You've used 3 entries,
             2253 wiz_defined-function locations,
-            553 strings with 4336 characters,
+            553 strings with 4344 characters,
 and the built_in function-call counts, 1071 in all, are:
 = -- 107
 > -- 46

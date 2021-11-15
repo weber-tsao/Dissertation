@@ -1,38 +1,41 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.10) (preloaded format=pdflatex 2021.11.5)  5 NOV 2021 15:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  15 NOV 2021 13:46
 entering extended mode
-**"c:/Users/Asus/Desktop/Dissertation_sheffield/Dissertation/Final report/myReport.tex"
-(c:/Users/Asus/Desktop/Dissertation_sheffield/Dissertation/Final report/myReport.tex
-LaTeX2e <2021-06-01> patch level 1
-L3 programming layer <2021-10-18> (C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/latex/base\book.cls
-Document Class: book 2021/02/12 v1.4n Standard LaTeX document class
-(C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/latex/base\bk11.clo
-File: bk11.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**"c:/Users/weber/OneDrive/Desktop/Dissertation/Stage 2/myReport.tex"
+(c:/Users/weber/OneDrive/Desktop/Dissertation/Stage 2/myReport.tex
+LaTeX2e <2021-11-15>
+L3 programming layer <2021-11-12> (c:/texlive/2021/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2021/10/04 v1.4n Standard LaTeX document class
+(c:/texlive/2021/texmf-dist/tex/latex/base/bk11.clo
+File: bk11.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count182
-\c@chapter=\count183
-\c@section=\count184
-\c@subsection=\count185
-\c@subsubsection=\count186
-\c@paragraph=\count187
-\c@subparagraph=\count188
-\c@figure=\count189
-\c@table=\count190
+\c@part=\count183
+\c@chapter=\count184
+\c@section=\count185
+\c@subsection=\count186
+\c@subsubsection=\count187
+\c@paragraph=\count188
+\c@subparagraph=\count189
+\c@figure=\count190
+\c@table=\count191
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
-) (C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+) (c:/texlive/2021/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
- (C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+ (c:/texlive/2021/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks16
-) (C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+) (c:/texlive/2021/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
- (C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+ (c:/texlive/2021/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2020/03/06 v1.0d TeX engine tests
 ))
-\Gm@cnth=\count191
-\Gm@cntv=\count192
-\c@Gm@tempcnt=\count193
+\Gm@cnth=\count192
+\Gm@cntv=\count193
+\c@Gm@tempcnt=\count194
 \Gm@bindingoffset=\dimen139
 \Gm@wd@mp=\dimen140
 \Gm@odd@mp=\dimen141
@@ -42,37 +45,37 @@ Package: iftex 2020/03/06 v1.0d TeX engine tests
 \Gm@layouthoffset=\dimen145
 \Gm@layoutvoffset=\dimen146
 \Gm@dimlist=\toks17
- (C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg)) (C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
+) (c:/texlive/2021/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2011/12/19 v6.7a set line spacing
-) (C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/latex/appendix\appendix.sty
+) (c:/texlive/2021/texmf-dist/tex/latex/appendix/appendix.sty
 Package: appendix 2020/02/08 v1.2c extra appendix facilities
-\c@@pps=\count194
-\c@@ppsavesec=\count195
-\c@@ppsaveapp=\count196
-) (C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/latex/hyphenat\hyphenat.sty
+\c@@pps=\count195
+\c@@ppsavesec=\count196
+\c@@ppsaveapp=\count197
+) (c:/texlive/2021/texmf-dist/tex/latex/hyphenat/hyphenat.sty
 Package: hyphenat 2009/09/02 v2.3c hyphenation utilities
-\langwohyphens=\language79
+\langwohyphens=\language87
 LaTeX Info: Redefining \_ on input line 43.
-) (C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
-Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
- (C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+) (c:/texlive/2021/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+ (c:/texlive/2021/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
- (C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
-Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
-) (C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
+ (c:/texlive/2021/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+) (c:/texlive/2021/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 107.
- (C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+ (c:/texlive/2021/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen147
 \Gin@req@width=\dimen148
-) (C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+) (c:/texlive/2021/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2021-10-18 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count197
+\l__color_backend_stack_int=\count198
 \l__pdf_internal_box=\box50
-) (myReport.aux)
+) (./myReport.aux)
 \openout1 = `myReport.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
@@ -124,24 +127,24 @@ LaTeX Font Info:    ... okay on input line 16.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-(C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+(c:/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count198
+\scratchcounter=\count199
 \scratchdimen=\dimen149
 \scratchbox=\box51
-\nofMPsegments=\count199
-\nofMParguments=\count266
+\nofMPsegments=\count266
+\nofMParguments=\count267
 \everyMPshowfont=\toks18
-\MPscratchCnt=\count267
+\MPscratchCnt=\count268
 \MPscratchDim=\dimen150
-\MPnumerator=\count268
-\makeMPintoPDFobject=\count269
+\MPnumerator=\count269
+\makeMPintoPDFobject=\count270
 \everyMPtoPDFconversion=\toks19
-) (C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+) (c:/texlive/2021/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
- (C:\Users\Asus\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+ (c:/texlive/2021/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 <images/tuoslogo.png, id=1, 78.2925pt x 79.2561pt>
 File: images/tuoslogo.png Graphic file (type png)
@@ -152,16 +155,16 @@ Package pdftex.def Info: images/tuoslogo.png  used on input line 28.
 
 
 
-{C:/Users/Asus/AppData/Local/MiKTeX/pdftex/config/pdftex.map} <./images/tuoslogo.png>]
+{c:/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./images/tuoslogo.png>] [2]
 Underfull \hbox (badness 10000) in paragraph at lines 48--49
 
  []
 
-(chapters/abstract.tex [1
+(./chapters/abstract.tex [1
 
 ]) [2
 
-] (myReport.toc
+] (./myReport.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <10.95> on input line 2.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -174,70 +177,71 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
  [3
 
-] (myReport.lof)
+] (./myReport.lof)
 \tf@lof=\write4
 \openout4 = `myReport.lof'.
 
  [4
 
-] (myReport.lot)
+] (./myReport.lot)
 \tf@lot=\write5
 \openout5 = `myReport.lot'.
 
  [5
 
-] (chapters/chapter1.tex
+] (./chapters/chapter1.tex
 Chapter 1.
 [1
 
 
-]) (chapters/chapter2.tex [2]
+]) (./chapters/chapter2.tex [2]
 Chapter 2.
-<figures/figure1.png, id=36, 645.16031pt x 304.13625pt>
+<figures/figure1.png, id=40, 645.16031pt x 304.13625pt>
 File: figures/figure1.png Graphic file (type png)
 <use figures/figure1.png>
 Package pdftex.def Info: figures/figure1.png  used on input line 13.
 (pdftex.def)             Requested size: 426.79134pt x 201.19461pt.
 [3
 
-] [4 <./figures/figure1.png>]) (chapters/chapter3.tex [5]
+] [4 <./figures/figure1.png>]) (./chapters/chapter3.tex [5]
 Chapter 3.
 [6
 
-]) (chapters/chapter4.tex [7]
+]) (./chapters/chapter4.tex [7]
 Chapter 4.
 [8
 
-]) (chapters/chapter5.tex [9]
+]) (./chapters/chapter5.tex [9]
 Chapter 5.
-) (myReport.bbl [10
+) (./myReport.bbl [10
 
 ]) [11
 
 ] [12
 
 
-] (chapters/appendixA.tex
+] (./chapters/appendixA.tex
 Appendix A.
-) (chapters/appendixB.tex [13
+) (./chapters/appendixB.tex [13
 
 ]
 Appendix B.
 ) [14
 
-] (myReport.aux) ) 
+] (./myReport.aux) ) 
 Here is how much of TeX's memory you used:
- 2052 strings out of 478907
- 33169 string characters out of 2852366
- 335577 words of memory out of 3000000
- 19896 multiletter control sequences out of 15000+600000
+ 2166 strings out of 478371
+ 35306 string characters out of 5852527
+ 340377 words of memory out of 5000000
+ 20245 multiletter control sequences out of 15000+600000
  410238 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,8n,66p,1506b,228s stack positions out of 5000i,500n,10000p,200000b,80000s
-<C:/Users/Asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/Asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Users/Asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Asus/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on myReport.pdf (20 pages, 318109 bytes).
+ 55i,8n,62p,1488b,228s stack positions out of 5000i,500n,10000p,200000b,80000s
+<c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on myReport.pdf (21 pages, 306312 bytes).
 PDF statistics:
- 136 PDF objects out of 1000 (max. 8388607)
+ 141 PDF objects out of 1000 (max. 8388607)
+ 88 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
