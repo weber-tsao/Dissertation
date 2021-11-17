@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  16 NOV 2021 02:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  17 NOV 2021 05:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -178,7 +178,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 49--50
 
 (./chapters/abstract.tex [1
 
-]) [2
+]
+Overfull \hbox (1.4114pt too wide) in paragraph at lines 10--13
+[]\OT1/cmr/m/n/10.95 The aim for the project is to pro-pose a novel, suit-able ma-chine learn-ing to at-tack PUF(physical
+ []
+
+
+Overfull \hbox (1.50267pt too wide) in paragraph at lines 15--18
+[]\OT1/cmr/m/n/10.95 The achieve-ments to date are hav-ing ro-bust un-der-stand-ing on PUF, re-con-fig-ura-bil-ity prop-erty,
+ []
+
+
+Overfull \hbox (1.74481pt too wide) in paragraph at lines 15--18
+\OT1/cmr/m/n/10.95 learn-ing re-in-force-ment learn-ing has been tested on PUF but ac-cord-ing to false im-ple-men-ta-tion,
+ []
+
+) [2
 
 ] (./myReport.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -207,6 +222,11 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 ] (./chapters/chapter1.tex
 Chapter 1.
+
+Overfull \hbox (12.99007pt too wide) in paragraph at lines 3--7
+\OT1/cmr/m/n/10.95 data, and many events in-clud-ing us-age of sen-si-tive in-for-ma-tion like bank trans-ac-tions. There-fore,
+ []
+
 [1
 
 
@@ -254,7 +274,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  55i,8n,62p,1488b,226s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on myReport.pdf (23 pages, 307077 bytes).
+Output written on myReport.pdf (23 pages, 307124 bytes).
 PDF statistics:
  147 PDF objects out of 1000 (max. 8388607)
  92 compressed objects within 1 object stream

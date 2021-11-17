@@ -3,44 +3,46 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: myReport.aux
 The style file: acm.bst
 Database file #1: mybibliography.bib
+Warning--empty journal in Reference3
 You've used 3 entries,
             2253 wiz_defined-function locations,
-            553 strings with 4336 characters,
-and the built_in function-call counts, 1071 in all, are:
-= -- 107
-> -- 46
+            548 strings with 4399 characters,
+and the built_in function-call counts, 858 in all, are:
+= -- 77
+> -- 51
 < -- 0
-+ -- 20
-- -- 16
-* -- 104
-:= -- 178
++ -- 22
+- -- 18
+* -- 68
+:= -- 158
 add.period$ -- 9
 call.type$ -- 3
-change.case$ -- 17
+change.case$ -- 18
 chr.to.int$ -- 0
-cite$ -- 3
-duplicate$ -- 27
-empty$ -- 83
-format.name$ -- 16
-if$ -- 211
+cite$ -- 4
+duplicate$ -- 26
+empty$ -- 57
+format.name$ -- 18
+if$ -- 165
 int.to.chr$ -- 0
 int.to.str$ -- 3
 missing$ -- 3
 newline$ -- 18
 num.names$ -- 6
-pop$ -- 11
+pop$ -- 15
 preamble$ -- 1
-purify$ -- 14
+purify$ -- 15
 quote$ -- 0
-skip$ -- 15
+skip$ -- 17
 stack$ -- 0
-substring$ -- 94
-swap$ -- 6
+substring$ -- 28
+swap$ -- 5
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 12
-warning$ -- 0
-while$ -- 12
+warning$ -- 1
+while$ -- 7
 width$ -- 4
-write$ -- 32
+write$ -- 29
+(There was 1 warning)
