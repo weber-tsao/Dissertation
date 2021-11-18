@@ -1,14 +1,17 @@
 \chapter{Introduction}
 
 In the rapid development of the information era, many daily events are achieved by a various of electronic devices such as computer or phones.
-Those electronic devices highly rely on integrated circuits(ICs) to handle those events. For example, devices 
-might contain personal data, and many events including usage of sensitive information like bank transactions. Therefore, information security, especially authentication 
-has become important on peoples' devices to protect from confidential data. However, this required devices to handle challenging problems like energy consumption, 
+Those electronic devices highly rely on integrated circuits(ICs) to perform specific events. For example, bank transaction can be done by different devices,
+the process contain personal data, and including usage of sensitive information. Therefore, information security like authentication, protecting confidential data
+has become important in nowadays society. In order to increase security's robustness, a range of ways has been proposed. One conventional way to is by storing secret key in non-volatile memory to encrypt sensitive data with it,
+and use asymmetric cryptography to authenticate the device [3]. However, the implementation process of cryptography is expensive, especially on resource-constraint device, and the device is still vulnerable to invasion attack. Ideally, devices should be able to handle challenging problems corresponding to energy consumption, 
 computational power and the ability to fight against cyber attack. \par
 
-The traditional method that stores and manage secret in memory is expensive and vulnerable to invasion attack. PUF(physical unclonable function) has the ability to deal with these challenges. 
-According to the random variation that is inevitable in ICs manufacturing process, PUF make use of the fact that no two IC have exact same physical characteristic. 
-This property is the critical idea of PUF.
+PUF(physical unclonable function) has the ability to deal with these challenges. It does not store secret in non-volatile memory, instead, the volatile secret is derived from devices' physical characteristics [3] .
+This is based on the inevitable random variation in ICs manufacturing process, which leads to the fact that no two IC have exact same physical characteristic. For example, each ICs has unique delay sequences in the transistors and wires.
+With this property, PUF does not require lots of computational power and is cost-effective because no need to implement cryptographic operation, which works particular well on
+resources-constraint devices such as RFID. Also, the attacker needs to perform attack when the device is on, which significantly increase the difficulty. As for invasion attack, 
+the attacker needs to have the exact information of its unique physical characteristics to successfully derive secret. Overall, PUF provides another interesting way for reinforce security.
 
 \section{Aims and Objectives}
 
