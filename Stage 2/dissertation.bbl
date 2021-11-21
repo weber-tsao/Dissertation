@@ -1,0 +1,25 @@
+\begin{thebibliography}{1}
+
+\bibitem{Reference2}
+{\sc Babaei, A., and Schiele, G.}
+\newblock Physical unclonable functions in the internet of things: State of the
+  art and open challenges.
+\newblock {\em Sensors}, 14 (2019).
+
+\bibitem{Reference4}
+{\sc Maes, R.}
+\newblock {\em Physically Unclonable Functions}.
+\newblock Springer, Berlin, Heidelberg, 2013.
+
+\bibitem{Reference1}
+{\sc McGrath, T., Bagci, I.~E., Wang, Z.~M., Roedig, U., and Young, R.~J.}
+\newblock A puf taxonomy.
+\newblock {\em Applied Physics Reviews 6}, 12 (February 2019).
+
+\bibitem{Reference3}
+{\sc Suh, G.~E., and Devadas, S.}
+\newblock Physical unclonable functions for device authentication and secret
+  key generation.
+\newblock 9--14.
+
+\end{thebibliography}
