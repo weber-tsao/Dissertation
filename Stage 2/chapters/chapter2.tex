@@ -16,13 +16,16 @@ generate another specific length of bits(so called response). According to the p
 
 \section{Weak and strong PUF}
 PUF can be classified into two categories, weak and strong PUF according to the strength of PUF. The strength of PUF indicate the number of challenge response pairs(so called CRPs) can be generate 
-from the PUF \cite{Reference1}. The higher numbers of the CRPs can a PUF generate, the better strength it has. For the weak PUF, it represent the PUF that has smaller set of CRPs. While it is impossible to 
-create a clone of PUF, but with small set of CRPs, this will allow attacker to have physical access to all the CRPs \cite{Reference1}. With the knowledge of CRPs, attacker can easily response the corresponding
-response to challenge as like they have a clone(See Figure \ref{fig:figure2}). The weak PUF can be use for authentication and key storage. However, since weak PUF's CRPs can be fully access, ensuring having a secure environment and whether the original PUF is being evaluating is relatively important \cite{Reference1}.
+from the PUF \cite{Reference1}. The higher numbers of the CRPs can a PUF generate, the better strength it has. Generally, if increasing the size of the PUF leads to a linear increase in the number of CRPs, it is consider weak PUF. 
+On the other hand, if increasing the size of the PUF leads to a exponential increase in the number of CRPs, it is consider strong PUF.\par
+
+For the weak PUF, it represent the PUF that has smaller set of CRPs. While it is impossible to 
+create a clone of PUF, but with small set of CRPs, this will allow attacker to record all the CRPs when attacker has physical access to PUF \cite{Reference1}. With the knowledge of CRPs, attacker can easily provide the corresponding
+response to challenge as like they have a clone(See Figure \ref{fig:figure2}). The weak PUF can be use for authentication and key storage. However, since weak PUF's CRPs can be fully access, ensure having a secure environment and whether the original PUF is being evaluating is relatively important \cite{Reference1}.
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=9cm]{figures/figure2.jpg}
-    \caption{Attacker can perform same behavior as Weak PUF when have fully access to CRPs}
+    \includegraphics[width=10cm]{figures/figure2.jpg}
+    \caption{Attacker can perform same behavior as Weak PUF when have fully access to CRPs and not under secure environment}
     \label{fig:figure2}
     \end{figure}
 
@@ -34,11 +37,37 @@ as serious as weak PUF.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=15cm]{figures/figure3.jpg}
-    \caption{Different PUF that generate different response when input same challenge}
+    \caption{The used CRP can not be used again in next evaluation for strong PUF}
     \label{fig:figure3}
     \end{figure}
 
-\section{Introduce to weak and strong then authentication stage or ...}
+\section{Authentication}
+One of the application of PUF is authentication. As discuss in Chapter 1's introduction, PUF does not require huge computational power and are cost effective, so it is suitable for many devices,
+especially the resources-constraint devices. The PUF's authentication included two stages, enrollment and authentication stage. In the enrollment stage, the company possess the PUF, so
+company can connect server to PUF and sent lots of challenges along with recording the CRPs into the database(See Figure \ref{fig:figure4}).
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=10cm]{figures/figure4.jpg}
+    \caption{Enrollment stage in PUF authentication}
+    \label{fig:figure4}
+    \end{figure}
+
+After recording all the CRPs, the company can now implement PUF on electronic devices.
+In the authentication stage, the server sent arbitrary challenge to the devices that contain PUF while the device will return response. Afterward, the server compare the response from the device with the database 
+, if the challenge and response pair exist in the database, the device is valid(See Figure \ref{fig:figure5}).
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=12cm]{figures/figure5.jpg}
+    \caption{Authentication stage in PUF authentication}
+    \label{fig:figure5}
+    \end{figure}
+
+\section{Different modeling attack on PUF}
+
+\section{PUF application example}
+
 
 \section{Summary}
 

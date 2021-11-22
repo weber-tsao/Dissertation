@@ -4,17 +4,19 @@
 \contentsline {chapter}{\numberline {2}Literature Survey}{3}{}%
 \contentsline {section}{\numberline {2.1}The PUF concept}{3}{}%
 \contentsline {section}{\numberline {2.2}Weak and strong PUF}{4}{}%
-\contentsline {section}{\numberline {2.3}Introduce to weak and strong then authentication stage or ...}{5}{}%
-\contentsline {section}{\numberline {2.4}Summary}{5}{}%
-\contentsline {chapter}{\numberline {3}Analysis}{6}{}%
-\contentsline {section}{\numberline {3.1}Project Requirements}{6}{}%
-\contentsline {section}{\numberline {3.2}Another Section}{7}{}%
-\contentsline {section}{\numberline {3.3}Ethical, Professional and Legal Issues}{7}{}%
-\contentsline {chapter}{\numberline {4}Planning}{9}{}%
-\contentsline {section}{\numberline {4.1}Risk Analysis}{9}{}%
-\contentsline {section}{\numberline {4.2}Project Plan}{9}{}%
-\contentsline {section}{\numberline {4.3}Another Section if You Need It}{10}{}%
-\contentsline {chapter}{\numberline {5}Conclusions}{11}{}%
-\contentsline {chapter}{Appendices}{13}{}%
-\contentsline {chapter}{\numberline {A}An Appendix of Some Kind}{14}{}%
-\contentsline {chapter}{\numberline {B}Another Appendix}{15}{}%
+\contentsline {section}{\numberline {2.3}Authentication}{5}{}%
+\contentsline {section}{\numberline {2.4}Different modeling attack on PUF}{6}{}%
+\contentsline {section}{\numberline {2.5}PUF application example}{6}{}%
+\contentsline {section}{\numberline {2.6}Summary}{6}{}%
+\contentsline {chapter}{\numberline {3}Analysis}{7}{}%
+\contentsline {section}{\numberline {3.1}Project Requirements}{7}{}%
+\contentsline {section}{\numberline {3.2}Another Section}{8}{}%
+\contentsline {section}{\numberline {3.3}Ethical, Professional and Legal Issues}{8}{}%
+\contentsline {chapter}{\numberline {4}Planning}{10}{}%
+\contentsline {section}{\numberline {4.1}Risk Analysis}{10}{}%
+\contentsline {section}{\numberline {4.2}Project Plan}{10}{}%
+\contentsline {section}{\numberline {4.3}Another Section if You Need It}{11}{}%
+\contentsline {chapter}{\numberline {5}Conclusions}{12}{}%
+\contentsline {chapter}{Appendices}{14}{}%
+\contentsline {chapter}{\numberline {A}An Appendix of Some Kind}{15}{}%
+\contentsline {chapter}{\numberline {B}Another Appendix}{16}{}%
