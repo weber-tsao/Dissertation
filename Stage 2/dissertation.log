@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  22 NOV 2021 17:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  23 NOV 2021 12:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -231,7 +231,12 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \tf@toc=\write3
 \openout3 = `dissertation.toc'.
 
- [4] (./dissertation.lof)
+ [4] (./dissertation.lof
+Overfull \hbox (4.452pt too wide) in paragraph at lines 5--5
+ [][] []\OT1/cmr/m/n/10.95 The at-tacker eaves-dropped CRP that has been used can not suc-cess-fully val-i-date 
+ []
+
+)
 \tf@lof=\write4
 \openout4 = `dissertation.lof'.
 
@@ -274,61 +279,65 @@ File: figures/figure2.jpg Graphic file (type jpg)
 Package pdftex.def Info: figures/figure2.jpg  used on input line 27.
 (pdftex.def)             Requested size: 284.52756pt x 152.24371pt.
  [4 <./figures/figure1.jpg> <./figures/figure2.jpg>]
-<figures/figure3.jpg, id=47, 984.67876pt x 371.13657pt>
+<figures/figure3.jpg, id=47, 995.21812pt x 423.08063pt>
 File: figures/figure3.jpg Graphic file (type jpg)
 <use figures/figure3.jpg>
 Package pdftex.def Info: figures/figure3.jpg  used on input line 39.
-(pdftex.def)             Requested size: 426.79134pt x 160.86546pt.
+(pdftex.def)             Requested size: 426.79134pt x 181.43694pt.
 <figures/figure4.jpg, id=48, 691.83469pt x 210.7875pt>
 File: figures/figure4.jpg Graphic file (type jpg)
 <use figures/figure4.jpg>
 Package pdftex.def Info: figures/figure4.jpg  used on input line 51.
 (pdftex.def)             Requested size: 284.52756pt x 86.69038pt.
- [5 <./figures/figure3.jpg> <./figures/figure4.jpg>]
-<figures/figure5.jpg, id=52, 816.80156pt x 175.40532pt>
+<figures/figure5.jpg, id=49, 816.80156pt x 175.40532pt>
 File: figures/figure5.jpg Graphic file (type jpg)
 <use figures/figure5.jpg>
 Package pdftex.def Info: figures/figure5.jpg  used on input line 62.
 (pdftex.def)             Requested size: 341.43306pt x 73.32178pt.
-) (./chapters/chapter3.tex [6 <./figures/figure5.jpg>]
+ [5 <./figures/figure3.jpg>]
+File: figures/figure5.jpg Graphic file (type jpg)
+<use figures/figure5.jpg>
+Package pdftex.def Info: figures/figure5.jpg  used on input line 76.
+(pdftex.def)             Requested size: 341.43306pt x 73.32178pt.
+) (./chapters/chapter3.tex [6 <./figures/figure4.jpg> <./figures/figure5.jpg>] [7]
 Chapter 3.
-[7
+[8
 
-]) (./chapters/chapter4.tex [8] [9]
+]) (./chapters/chapter4.tex [9] [10]
 Chapter 4.
-[10
+[11
 
-]) (./chapters/chapter5.tex [11]
+]) (./chapters/chapter5.tex [12]
 Chapter 5.
-) (./dissertation.bbl [12
+) (./dissertation.bbl [13
 
-]) [13
+]) [14
 
-] [14
+] [15
 
 
 ] (./chapters/appendixA.tex
 Appendix A.
-) (./chapters/appendixB.tex [15
+) (./chapters/appendixB.tex [16
 
 ]
 Appendix B.
-) [16
+) [17
 
 ] (./dissertation.aux) ) 
 Here is how much of TeX's memory you used:
- 2838 strings out of 478371
- 49472 string characters out of 5852527
- 350046 words of memory out of 5000000
- 20876 multiletter control sequences out of 15000+600000
+ 2839 strings out of 478371
+ 49485 string characters out of 5852527
+ 350056 words of memory out of 5000000
+ 20877 multiletter control sequences out of 15000+600000
  410238 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,7n,67p,1492b,230s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on dissertation.pdf (23 pages, 493106 bytes).
+Output written on dissertation.pdf (24 pages, 495147 bytes).
 PDF statistics:
- 129 PDF objects out of 1000 (max. 8388607)
- 79 compressed objects within 1 object stream
+ 132 PDF objects out of 1000 (max. 8388607)
+ 81 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

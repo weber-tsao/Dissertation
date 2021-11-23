@@ -31,20 +31,20 @@ response to challenge as like they have a clone(See Figure \ref{fig:figure2}). T
 
 For strong PUF, means the number of CRPs is significantly large that even attacker get access, having throughout knowledge of CRPs is impossible. While the number of CRPs is so large,
 and the CRP are randomly selected in usage, the probability that attacker has knowledge about the CRP currently using is small. In addition, each CRPs that is used once will 
-be discarded(See Figure \ref{fig:figure3}) so even if attacker recorded certain CRPs, they will not be able to put into use. The strong PUF can also be use for authentication but do not need to protect CRPs
+be discarded(See Figure \ref{fig:figure3}) so even if attacker recorded certain CRPs, also called eavesdropped, they will not be able to put them into use. The strong PUF can also be use for authentication but do not need to protect CRPs
 as serious as weak PUF.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=15cm]{figures/figure3.jpg}
-    \caption{The used CRP can not be used again in next evaluation for strong PUF}
+    \caption{The attacker eavesdropped CRP that has been used can not successfully validate in next evaluation for strong PUF}
     \label{fig:figure3}
     \end{figure}
 
 \section{Authentication}
 One of the application of PUF is authentication. As discuss in Chapter 1's introduction, PUF does not require huge computational power and are cost effective, so it is suitable for many devices,
 especially the resources-constraint devices. The PUF's authentication included two stages, enrollment and authentication stage. In the enrollment stage, the company possess the PUF, so
-company can connect server to PUF and sent lots of challenges along with recording the CRPs into the database(See Figure \ref{fig:figure4}).
+company can connect server to PUF and sent lots of challenges along with recording the CRPs into the database \cite{Reference2} (See Figure \ref{fig:figure4}).
 
 \begin{figure}[ht]
     \centering
@@ -54,8 +54,8 @@ company can connect server to PUF and sent lots of challenges along with recordi
     \end{figure}
 
 After recording all the CRPs, the company can now implement PUF on electronic devices.
-In the authentication stage, the server sent arbitrary challenge to the devices that contain PUF while the device will return response. Afterward, the server compare the response from the device with the database 
-, if the challenge and response pair exist in the database, the device is valid(See Figure \ref{fig:figure5}).
+In the authentication stage, the server sent arbitrary challenge to the devices that contain PUF while the device will return response. Afterward, the server compare the response from the device with the database, 
+if the challenge and response pair exist in the database, the device is valid \cite{Reference2} (See Figure \ref{fig:figure5}). A life example will be banking card.
 
 \begin{figure}[ht]
     \centering
@@ -64,9 +64,21 @@ In the authentication stage, the server sent arbitrary challenge to the devices 
     \label{fig:figure5}
     \end{figure}
 
-\section{Different modeling attack on PUF}
+\section{Arbiter PUF and XOR arbiter PUF}
+There are many different types of PUF such as arbiter PUF, ring oscillator PUF, lightweight PUF, etc. In this paper, arbiter PUF and its mutation will be introduced in detail. The general idea of
+the arbiter PUF is comparing the transition speed for two electrical signal in the PUF's structure(See Figure \ref{fig:figure6}). The arbiter PUF's structure contains a numbers of 
+multiplexers and a arbiter, and two multiplexers will combined into a switching box \cite{Reference3}. When enter a challenge bits, bit 1 indicate the upper and lower signal will switch and bit 0 indicate the two signals remain unchanged in each switching box, which will 
+eventually form paths for the signals. Then the signals start transferring, the time arrived at the arbiter for two signals is different since each multiplexer and wire has unique delay. The response will be determined by the arbiter. 
+The structure is fair, which will not favor one of the path, even there exist bias, a simple solution of adding a delay in the structure can solve the problem. For example, if the arbiter favor the lower path,
+by adding a delay to upper path, it can has a head start.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=12cm]{figures/figure5.jpg}
+    \caption{Arbiter PUF structure}
+    \label{fig:figure6}
+    \end{figure}
 
-\section{PUF application example}
+\section{Threat and modeling attack on PUF}
 
 
 \section{Summary}
