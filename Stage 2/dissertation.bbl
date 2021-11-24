@@ -16,6 +16,12 @@
 \newblock A puf taxonomy.
 \newblock {\em Applied Physics Reviews 6}, 12 (February 2019).
 
+\bibitem{Reference5}
+{\sc Santikellur, P., Bhattacharyay, A., and Chakraborty, R.~S.}
+\newblock Deep learning based model building attacks on arbiter puf
+  compositions.
+\newblock {\em IACR Cryptol. ePrint Arch. 2019\/} (2019), 566.
+
 \bibitem{Reference3}
 {\sc Suh, G.~E., and Devadas, S.}
 \newblock Physical unclonable functions for device authentication and secret

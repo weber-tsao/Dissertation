@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  23 NOV 2021 12:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  24 NOV 2021 19:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -288,56 +288,66 @@ Package pdftex.def Info: figures/figure3.jpg  used on input line 39.
 File: figures/figure4.jpg Graphic file (type jpg)
 <use figures/figure4.jpg>
 Package pdftex.def Info: figures/figure4.jpg  used on input line 51.
-(pdftex.def)             Requested size: 284.52756pt x 86.69038pt.
-<figures/figure5.jpg, id=49, 816.80156pt x 175.40532pt>
+(pdftex.def)             Requested size: 227.62204pt x 69.35103pt.
+ [5 <./figures/figure3.jpg> <./figures/figure4.jpg>]
+<figures/figure5.jpg, id=52, 816.80156pt x 175.40532pt>
 File: figures/figure5.jpg Graphic file (type jpg)
 <use figures/figure5.jpg>
 Package pdftex.def Info: figures/figure5.jpg  used on input line 62.
-(pdftex.def)             Requested size: 341.43306pt x 73.32178pt.
- [5 <./figures/figure3.jpg>]
-File: figures/figure5.jpg Graphic file (type jpg)
-<use figures/figure5.jpg>
-Package pdftex.def Info: figures/figure5.jpg  used on input line 76.
-(pdftex.def)             Requested size: 341.43306pt x 73.32178pt.
-) (./chapters/chapter3.tex [6 <./figures/figure4.jpg> <./figures/figure5.jpg>] [7]
+(pdftex.def)             Requested size: 227.62204pt x 48.8803pt.
+<figures/figure6.jpg, id=53, 977.15062pt x 424.58624pt>
+File: figures/figure6.jpg Graphic file (type jpg)
+<use figures/figure6.jpg>
+Package pdftex.def Info: figures/figure6.jpg  used on input line 81.
+(pdftex.def)             Requested size: 341.43306pt x 148.35474pt.
+<figures/figure7.jpg, id=54, 983.92593pt x 411.03563pt>
+File: figures/figure7.jpg Graphic file (type jpg)
+<use figures/figure7.jpg>
+Package pdftex.def Info: figures/figure7.jpg  used on input line 91.
+(pdftex.def)             Requested size: 341.43306pt x 142.63533pt.
+File: figures/figure6.jpg Graphic file (type jpg)
+<use figures/figure6.jpg>
+Package pdftex.def Info: figures/figure6.jpg  used on input line 98.
+(pdftex.def)             Requested size: 341.43306pt x 148.35474pt.
+ [6 <./figures/figure5.jpg>] [7 <./figures/figure6.jpg> <./figures/figure7.jpg>]) (./chapters/chapter3.tex [8]
 Chapter 3.
-[8
+[9
 
-]) (./chapters/chapter4.tex [9] [10]
+]) (./chapters/chapter4.tex [10] [11]
 Chapter 4.
-[11
+[12
 
-]) (./chapters/chapter5.tex [12]
+]) (./chapters/chapter5.tex [13]
 Chapter 5.
-) (./dissertation.bbl [13
+) (./dissertation.bbl [14
 
-]) [14
+]) [15
 
-] [15
+] [16
 
 
 ] (./chapters/appendixA.tex
 Appendix A.
-) (./chapters/appendixB.tex [16
+) (./chapters/appendixB.tex [17
 
 ]
 Appendix B.
-) [17
+) [18
 
 ] (./dissertation.aux) ) 
 Here is how much of TeX's memory you used:
- 2839 strings out of 478371
- 49485 string characters out of 5852527
- 350056 words of memory out of 5000000
- 20877 multiletter control sequences out of 15000+600000
+ 2856 strings out of 478371
+ 49835 string characters out of 5852527
+ 350079 words of memory out of 5000000
+ 20892 multiletter control sequences out of 15000+600000
  410238 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,7n,67p,1492b,230s stack positions out of 5000i,500n,10000p,200000b,80000s
-<c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on dissertation.pdf (24 pages, 495147 bytes).
+<c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on dissertation.pdf (25 pages, 649689 bytes).
 PDF statistics:
- 132 PDF objects out of 1000 (max. 8388607)
- 81 compressed objects within 1 object stream
+ 143 PDF objects out of 1000 (max. 8388607)
+ 87 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

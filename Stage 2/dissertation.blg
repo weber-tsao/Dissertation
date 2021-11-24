@@ -4,45 +4,45 @@ The top-level auxiliary file: dissertation.aux
 The style file: acm.bst
 Database file #1: reference.bib
 Warning--empty journal in Reference3
-You've used 4 entries,
+You've used 5 entries,
             2253 wiz_defined-function locations,
-            555 strings with 4503 characters,
-and the built_in function-call counts, 1079 in all, are:
-= -- 96
-> -- 58
+            561 strings with 4695 characters,
+and the built_in function-call counts, 1383 in all, are:
+= -- 124
+> -- 75
 < -- 0
-+ -- 25
-- -- 20
-* -- 78
-:= -- 196
-add.period$ -- 12
-call.type$ -- 4
-change.case$ -- 21
++ -- 32
+- -- 26
+* -- 104
+:= -- 249
+add.period$ -- 15
+call.type$ -- 5
+change.case$ -- 27
 chr.to.int$ -- 0
-cite$ -- 5
-duplicate$ -- 39
-empty$ -- 80
-format.name$ -- 20
-if$ -- 212
+cite$ -- 6
+duplicate$ -- 48
+empty$ -- 103
+format.name$ -- 26
+if$ -- 273
 int.to.chr$ -- 0
-int.to.str$ -- 4
-missing$ -- 5
-newline$ -- 23
-num.names$ -- 8
-pop$ -- 23
+int.to.str$ -- 5
+missing$ -- 6
+newline$ -- 28
+num.names$ -- 10
+pop$ -- 27
 preamble$ -- 1
-purify$ -- 18
+purify$ -- 23
 quote$ -- 0
-skip$ -- 23
+skip$ -- 28
 stack$ -- 0
-substring$ -- 33
-swap$ -- 7
+substring$ -- 47
+swap$ -- 9
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 14
+type$ -- 18
 warning$ -- 1
-while$ -- 9
-width$ -- 5
-write$ -- 39
+while$ -- 12
+width$ -- 6
+write$ -- 49
 (There was 1 warning)
