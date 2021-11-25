@@ -83,25 +83,32 @@ number of CRPs is $2^{n}$, which indicate the arbiter PUF is a strong PUF. Arbit
     \label{fig:figure6}
     \end{figure}
 
-XOR arbiter PUF is to increase the robustness of arbiter PUF. The basic concept is to integrated multiple parallel arbiter PUF, given same challenge to each arbiter PUF and XORed each response to produce final response(See Figure \ref{fig:figure7}) \cite{Reference5}.
-In this case, XOR arbiter PUF will have nonlinearity property (See Figure \ref{fig:figure8}) that makes attacker harder to model compare to arbiter PUF.
+The normal arbiter PUF is vulnerable to modeling attack, the propose of XOR arbiter PUF is to increase the robustness of arbiter PUF. The basic concept is to integrated multiple parallel arbiter PUF, given same challenge to each arbiter PUF and XORed each response to produce final response(See Figure \ref{fig:figure7}) \cite{Reference5}.
+According to simulation, in book \cite{Reference4} provides the XOR arbiter PUF will have nonlinearity property that makes it harder to model.
 
 \begin{figure}[htp]
     \centering
     \includegraphics[width=12cm]{figures/figure7.jpg}
-    \caption{Arbiter PUF structure}
+    \caption{XOR arbiter PUF structure}
     \label{fig:figure7}
     \end{figure}
 
-\begin{figure}[htp]
-    \centering
-    \includegraphics[width=12cm]{figures/figure6.jpg}
-    \caption{Arbiter PUF structure}
-    \label{fig:figure8}
-    \end{figure}
-
-\section{Threat and modeling attack on PUF}
-describe formula
+\section{Modeling attack on PUF}
+Many different threat can perform on devices, such as eavesdropped, gain access to the memory that store secret keys. For PUF, the main threat is that attacker can use technique 
+like machine learning to simulate the behavior of CRPs(so called modeling), which means even without the devices, attacker can still response correctly when a challenge is 
+provided. Take arbiter puf as example, assume an arbiter PUF with i switching box, and the challenge apply to each switching box is c[i]. The two signal travel through the 
+the path determine by challenge, and arrive at the arbiter in different time because of the delay in each component. The final response depend on the sign of final delay 
+difference:
+\begin{equation}
+    r =\begin{cases}
+    1, & \text{if $\Delta c<0$}.\\
+    0, & \text{otherwise}.
+    \end{cases}
+\end{equation}
+which the delay difference is calculated by subtract the upper path with lower path's delay. The final delay difference $\Delta c$ can represent as $w^{T}\Phi$, where $w^{T}$ is 
+a weight vector that represent delays for the components in PUF, and $\Phi$ is the applied i bits challenge \cite{Reference5}. It is clear that by accurately predicting the weight vector $w$,
+the pattern of the PUF can be observed. Machine learning such as logistic regression can play the role well. The modeling result for a arbiter PUF with 64 switching boxes, 
+the logistic regression can get a good performance of 99.5\% in very short time with 6800 training CRPs \cite{Reference5}.
 
 \section{Reconfigurability of PUF}
 
