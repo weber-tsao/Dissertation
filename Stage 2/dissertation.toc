@@ -8,16 +8,16 @@
 \contentsline {section}{\numberline {2.4}Arbiter PUF and XOR arbiter PUF}{6}{}%
 \contentsline {section}{\numberline {2.5}Modeling attack on PUF}{8}{}%
 \contentsline {section}{\numberline {2.6}Reconfigurability of PUF}{8}{}%
-\contentsline {section}{\numberline {2.7}Summary}{8}{}%
-\contentsline {chapter}{\numberline {3}Analysis}{9}{}%
-\contentsline {section}{\numberline {3.1}Project Requirements}{9}{}%
-\contentsline {section}{\numberline {3.2}Another Section}{9}{}%
-\contentsline {section}{\numberline {3.3}Ethical, Professional and Legal Issues}{9}{}%
-\contentsline {chapter}{\numberline {4}Planning}{10}{}%
-\contentsline {section}{\numberline {4.1}Risk Analysis}{10}{}%
-\contentsline {section}{\numberline {4.2}Project Plan}{10}{}%
-\contentsline {section}{\numberline {4.3}Another Section if You Need It}{10}{}%
-\contentsline {chapter}{\numberline {5}Conclusions}{11}{}%
-\contentsline {chapter}{Appendices}{13}{}%
-\contentsline {chapter}{\numberline {A}An Appendix of Some Kind}{14}{}%
-\contentsline {chapter}{\numberline {B}Another Appendix}{15}{}%
+\contentsline {section}{\numberline {2.7}Summary}{10}{}%
+\contentsline {chapter}{\numberline {3}Analysis}{11}{}%
+\contentsline {section}{\numberline {3.1}Project Requirements}{11}{}%
+\contentsline {section}{\numberline {3.2}Another Section}{11}{}%
+\contentsline {section}{\numberline {3.3}Ethical, Professional and Legal Issues}{11}{}%
+\contentsline {chapter}{\numberline {4}Planning}{12}{}%
+\contentsline {section}{\numberline {4.1}Risk Analysis}{12}{}%
+\contentsline {section}{\numberline {4.2}Project Plan}{12}{}%
+\contentsline {section}{\numberline {4.3}Another Section if You Need It}{12}{}%
+\contentsline {chapter}{\numberline {5}Conclusions}{13}{}%
+\contentsline {chapter}{Appendices}{15}{}%
+\contentsline {chapter}{\numberline {A}An Appendix of Some Kind}{16}{}%
+\contentsline {chapter}{\numberline {B}Another Appendix}{17}{}%

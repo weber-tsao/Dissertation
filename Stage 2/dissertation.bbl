@@ -6,6 +6,13 @@
   art and open challenges.
 \newblock {\em Sensors}, 14 (2019).
 
+\bibitem{Reference7}
+{\sc Gope, P., Sikdar, B., and Millwood, O.}
+\newblock A scalable protocol level approach to prevent machine learning
+  attacks on puf-based authentication mechanisms for
+  internet-of-medical-things.
+\newblock {\em IEEE Transactions on Industrial Informatics\/} (2021), 1--1.
+
 \bibitem{Reference4}
 {\sc Maes, R.}
 \newblock {\em Physically Unclonable Functions}.
@@ -15,6 +22,12 @@
 {\sc McGrath, T., Bagci, I.~E., Wang, Z.~M., Roedig, U., and Young, R.~J.}
 \newblock A puf taxonomy.
 \newblock {\em Applied Physics Reviews 6}, 12 (February 2019).
+
+\bibitem{Reference6}
+{\sc R\"{u}hrmair, U., Sehnke, F., S\"{o}lter, J., Dror, G., Devadas, S., and
+  Schmidhuber, J.}
+\newblock Modeling attacks on physical unclonable functions.
+\newblock 237–249.
 
 \bibitem{Reference5}
 {\sc Santikellur, P., Bhattacharyay, A., and Chakraborty, R.~S.}

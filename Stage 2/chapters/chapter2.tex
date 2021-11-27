@@ -106,14 +106,39 @@ difference:
     \end{cases}
 \end{equation}
 which the delay difference is calculated by subtract the upper path with lower path's delay. The final delay difference $\Delta c$ can represent as $w^{T}\Phi$, where $w^{T}$ is 
-a weight vector that represent delays for the components in PUF, and $\Phi$ is the applied i bits challenge \cite{Reference5}. It is clear that by accurately predicting the weight vector $w$,
-the pattern of the PUF can be observed. Machine learning such as logistic regression can play the role well. The modeling result for a arbiter PUF with 64 switching boxes, 
-the logistic regression can get a good performance of 99.5\% in very short time with 6800 training CRPs \cite{Reference5}.
+a weight vector that represent delays for the components in PUF, and $\Phi$ is the applied i bits challenge \cite{Reference5}. $w^{T}\Phi = 0$ will provide a hyperplane that separate the space for $\Phi$, one side of the hyperplane are predict as having response 1, the other side of the hyperplane
+are predict as having response -1. In conclusion, the correct hyperplane indicate the good prediction of PUF. Machine learning such as logistic regression can play the role well. The modeling result for a arbiter PUF with 64 switching boxes, 
+by using the logistic regression can get a good performance of 99.9\% in very short time with 18050 training CRPs \cite{Reference6}.
+
+For the XOR arbiter PUF, it is also possible to use logistic regression to predict the behavior but will be harder.
 
 \section{Reconfigurability of PUF}
+In order to alleviate the problem that PUF is vulnerable to modeling attack, reconfiguration property embedded on PUF has been proposed. For example, the one-time-PUF(so called 
+OPUF), the general idea is that the its configuration alter after every authentication session, which means CRPs behavior of the PUF is changed and invalidate the modeling attack. This is based on the
+forward unpredictability and backward unpredictability properties that OPUF possess \cite{Reference7}. In Figure \ref{fig:figure8} shows the concept of forward unpredictability and backward unpredictability.
+The orange line represent the forward unpredictability, which will ensure the responses collected before the reconfiguration process is invalid afterward. As for the blue line, 
+which represent backward unpredictability, it will ensure the pattern observed by attacker using modeling attack on PUF' is invalid for predicting the PUF before reconfiguration process. 
+In this case, assume an attacker are performing a modeling attack on the PUF, and required certain amount of CRPs to gain proper prediction. However, the OPUF's structure keep changing every execution, which means the CRPs 
+behavior is changing, so the modeling attack will can't be up to date or do mot have time to collect enough CRPs.
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=14cm]{figures/figure8.jpg}
+    \caption{Concept of forward unpredictability and backward unpredictability}
+    \label{fig:figure8}
+    \end{figure}
 
+DPUF can be consider as an example for creating the OPUF, it is build up with bit cells which contain capacitors and transistors, each cell store information of value 0 and 1. However, these component will leak 
+electrical signals every period of time, which means the behavior might be eavesdropped \cite{Reference7}. Therefore performing reconfiguration process every period of time is effective. The reconfigurability can be shown in Figure \ref{fig:figure9}, by varying parameters
+such as refresh-pause interval and the memory block, where the former can cause random bit flip in the cells while the latter store final response in an random memory block 
+which will alter every period of time, PUF can present unpredictable behavior that prevent from attacker perform modeling attack.
 
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=10cm]{figures/figure9.jpg}
+    \caption{Reconfigurability framework of DPUF}
+    \label{fig:figure9}
+    \end{figure}
 
 \section{Summary}
 
-
+How this concept of PUF can help my investigation.....etc...

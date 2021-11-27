@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  25 NOV 2021 18:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  27 NOV 2021 06:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -352,45 +352,67 @@ File: figures/figure7.jpg Graphic file (type jpg)
 <use figures/figure7.jpg>
 Package pdftex.def Info: figures/figure7.jpg  used on input line 91.
 (pdftex.def)             Requested size: 341.43306pt x 142.63533pt.
- [6 <./figures/figure5.jpg>] [7 <./figures/figure6.jpg> <./figures/figure7.jpg>]) (./chapters/chapter3.tex [8]
+ [6 <./figures/figure5.jpg>] [7 <./figures/figure6.jpg> <./figures/figure7.jpg>]
+<figures/figure8.jpg, id=63, 999.735pt x 327.47343pt>
+File: figures/figure8.jpg Graphic file (type jpg)
+<use figures/figure8.jpg>
+Package pdftex.def Info: figures/figure8.jpg  used on input line 125.
+(pdftex.def)             Requested size: 398.33858pt x 130.47737pt.
+ [8]
+<figures/figure9.jpg, id=69, 932.73468pt x 456.20438pt>
+File: figures/figure9.jpg Graphic file (type jpg)
+<use figures/figure9.jpg>
+Package pdftex.def Info: figures/figure9.jpg  used on input line 137.
+(pdftex.def)             Requested size: 284.52756pt x 139.15953pt.
+) (./chapters/chapter3.tex [9 <./figures/figure8.jpg> <./figures/figure9.jpg>] [10]
 Chapter 3.
-) (./chapters/chapter4.tex [9
+) (./chapters/chapter4.tex [11
 
 ]
 Chapter 4.
-) (./chapters/chapter5.tex [10
+) (./chapters/chapter5.tex [12
 
 ]
 Chapter 5.
-) (./dissertation.bbl [11
+) (./dissertation.bbl [13
 
-]) [12
+]
+Underfull \hbox (badness 1158) in paragraph at lines 10--15
+\OT1/cmr/m/n/10.95 to pre-vent ma-chine learn-ing at-tacks on puf-based au-then-ti-ca-tion mech-a-nisms for
+ []
 
-] [13
+
+Underfull \hbox (badness 2012) in paragraph at lines 27--31
+[]\OT1/cmr/m/sc/10.95 R[]uhrmair, U., Sehnke, F., S[]olter, J., Dror, G., De-vadas, S., and
+ []
+
+) [14
+
+] [15
 
 
 ] (./chapters/appendixA.tex
 Appendix A.
-) (./chapters/appendixB.tex [14
+) (./chapters/appendixB.tex [16
 
 ]
 Appendix B.
-) [15
+) [17
 
 ] (./dissertation.aux) ) 
 Here is how much of TeX's memory you used:
- 3550 strings out of 478371
- 59101 string characters out of 5852527
- 361293 words of memory out of 5000000
- 21568 multiletter control sequences out of 15000+600000
+ 3570 strings out of 478371
+ 59479 string characters out of 5852527
+ 362319 words of memory out of 5000000
+ 21586 multiletter control sequences out of 15000+600000
  411139 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,12n,67p,587b,235s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on dissertation.pdf (22 pages, 658159 bytes).
+Output written on dissertation.pdf (24 pages, 855277 bytes).
 PDF statistics:
- 143 PDF objects out of 1000 (max. 8388607)
- 86 compressed objects within 1 object stream
+ 151 PDF objects out of 1000 (max. 8388607)
+ 90 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
 

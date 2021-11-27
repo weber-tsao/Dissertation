@@ -425,6 +425,16 @@ INPUT figures/figure7.jpg
 INPUT ./figures/figure7.jpg
 INPUT ./figures/figure7.jpg
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT ./figures/figure8.jpg
+INPUT ./figures/figure8.jpg
+INPUT figures/figure8.jpg
+INPUT ./figures/figure8.jpg
+INPUT ./figures/figure8.jpg
+INPUT ./figures/figure9.jpg
+INPUT ./figures/figure9.jpg
+INPUT figures/figure9.jpg
+INPUT ./figures/figure9.jpg
+INPUT ./figures/figure9.jpg
 INPUT ./chapters/chapter3.tex
 INPUT chapters/chapter3.tex
 INPUT ./chapters/chapter3.tex
