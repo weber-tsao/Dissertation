@@ -11,11 +11,20 @@ deal with unseen data. To evaluate the work, an overall accuracy of the modeling
 paper \cite{Reference6}.
 
 The aims for part two are proposing a reconfigurability framework for the modeling attack in part one. Two different reconfigurability will be implemented. First, add intentional
-noise in PUF to 
+noise to PUF's response during authentication phase to disturb the modeling attack \cite{Reference8}. The basic idea is shown in Figure \ref{fig:figure10}, assume database has stored PUF's CRPs and provide a challenge c
+to PUF in authentication phase. The PUF return a response r', and add noise e with r'. Then e and r' compose helper data h and send back to verifier, where $h = r'\oplus e$. The verifier can reproduce $r'\oplus e$  
+with r and h if r and $r'\oplus e$ is similar. Last, both verifier and user create their own hashtag and compare to check if authenticate. In this case, attacker only access to c and $r'\oplus e$, which the modeling
+will not be accurate unless the attacker's model response is closed enough to r'.
 
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=14cm]{figures/figure8.jpg}
+    \caption{Add noise to PUF's response during authentication phase}
+    \label{fig:figure10}
+    \end{figure}
 Second, implement OPUF to change the behavior of CRPs.
 
-To evaluate the work, the modeling attack proposed in part one should have significantly accuracy drop.
+To evaluate the work, the modeling attack proposed in part one should have reasonable accuracy drop and the authentication will still work though noise is added.
 
 
 

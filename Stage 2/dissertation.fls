@@ -439,6 +439,10 @@ INPUT ./chapters/chapter3.tex
 INPUT chapters/chapter3.tex
 INPUT ./chapters/chapter3.tex
 INPUT chapters/chapter3.tex
+INPUT ./figures/figure8.jpg
+INPUT ./figures/figure8.jpg
+INPUT figures/figure8.jpg
+INPUT ./figures/figure8.jpg
 INPUT ./chapters/chapter4.tex
 INPUT chapters/chapter4.tex
 INPUT ./chapters/chapter4.tex
@@ -472,5 +476,7 @@ INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
 INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
 INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb
 INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb
+INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
 INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
 INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb
