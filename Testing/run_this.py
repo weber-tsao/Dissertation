@@ -12,7 +12,7 @@ from RL_brain import SarsaLambdaTable
 from Puf_delay_model import*
 
 def update():
-    for episode in range(20):
+    for episode in range(1000):
         # initial observation
         observation = env.reset()
         #print(str(observation))
@@ -79,30 +79,43 @@ def prediction_rate(q_table, nodes_location, actions):
         for x in range(len(current_top_path)):
             if current_top_path[x] == 0:
                 top_reward += q_table.loc[str(nodes_location[0])][2]
+                print(q_table.loc[str(nodes_location[0])][2])
             elif current_top_path[x] == 1:
                 top_reward += q_table.loc[str(nodes_location[0])][1]
+                print(q_table.loc[str(nodes_location[0])][1])
             elif current_top_path[x-1]%2 == 0 and (current_top_path[x])%2 == 0:
                 top_reward += q_table.loc[str(nodes_location[current_top_path[x]])][2]
+                print(q_table.loc[str(nodes_location[current_top_path[x]])][2])
             elif current_top_path[x-1]%2 != 0 and (current_top_path[x])%2 == 0:
                 top_reward += q_table.loc[str(nodes_location[current_top_path[x]+1])][0]
+                print(q_table.loc[str(nodes_location[current_top_path[x]+1])][0])
             elif current_top_path[x-1]%2 == 0 and (current_top_path[x])%2 != 0:
-                top_reward += q_table.loc[str(nodes_location[current_top_path[x]+1])][1]
+                top_reward += q_table.loc[str(nodes_location[current_top_path[x]-1])][1]
+                print(q_table.loc[str(nodes_location[current_top_path[x]-1])][1])
             elif current_top_path[x-1]%2 != 0 and (current_top_path[x])%2 != 0:
                 top_reward += q_table.loc[str(nodes_location[current_top_path[x]])][2]
+                print(q_table.loc[str(nodes_location[current_top_path[x]])][2])
         print(top_reward)
+        print("dddd")
         for y in range(len(current_bottom_path)):
             if current_bottom_path[y] == 0:
                 bottom_reward += q_table.loc[str(nodes_location[1])][0]
+                print(q_table.loc[str(nodes_location[1])][0])
             elif current_bottom_path[y] == 1:
                 bottom_reward += q_table.loc[str(nodes_location[1])][2]
+                print(q_table.loc[str(nodes_location[1])][2])
             elif current_bottom_path[y]%2 == 0 and (current_bottom_path[y-1])%2 == 0:
                 bottom_reward += q_table.loc[str(nodes_location[current_bottom_path[y]])][2]
+                print(q_table.loc[str(nodes_location[current_bottom_path[y]])][2])
             elif current_bottom_path[y]%2 != 0 and (current_bottom_path[y-1])%2 == 0:
-                bottom_reward += q_table.loc[str(nodes_location[current_bottom_path[y]+1])][1]
+                bottom_reward += q_table.loc[str(nodes_location[current_bottom_path[y]-1])][1]
+                print(q_table.loc[str(nodes_location[current_bottom_path[y]-1])][1])
             elif current_bottom_path[y]%2 == 0 and (current_bottom_path[y-1])%2 != 0:
                 bottom_reward += q_table.loc[str(nodes_location[current_bottom_path[y]+1])][0]
+                print(q_table.loc[str(nodes_location[current_bottom_path[y]+1])][0])
             elif current_bottom_path[y]%2 != 0 and (current_bottom_path[y-1])%2 != 0:
                 bottom_reward += q_table.loc[str(nodes_location[current_bottom_path[y]])][2]
+                print(q_table.loc[str(nodes_location[current_bottom_path[y]])][2])
         print(bottom_reward)
 
         #Compare top and bottom
@@ -129,8 +142,9 @@ if __name__ == "__main__":
     env = Maze()
     nodes_location, actions = env.get_maze_information()
     RL = SarsaLambdaTable(actions=list(range(env.n_actions)))
-    env.after(20, update)
+    env.after(5, update)
     env.mainloop()
     q_table = RL.get_q_table()
-    print(q_table)
+    #print(q_table)
     prediction_rate(q_table, nodes_location, actions)
+    print(q_table)

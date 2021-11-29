@@ -1,12 +1,21 @@
 \chapter{Analysis}
+Overall, total two objectives are required for the project. In the first part, propose a novel machine learning to modeling different PUF(physical unclonable function)
+behavior, in particular arbiter PUF and XOR arbiter PUF. In the second part, consider reconfigurability like adding noise, one-time-PUF to resilient against the modeling attack
+proposed in part one.
 
+\section{Project Aims and Evaluation}
+The aims for part one are that the machine learning for modeling should be related to ETA(estimated time arrival) problem or the one people haven't used for modeling
+PUF. Moreover, reconfigurability need to be considered when proposing the modeling attack while knowing the PUF can escape from it by changing CRPs behaviors in part 
+two. Therefore, the machine learning should ideally adapt to the changing behavior of CRPs or the PUF. For example, unsupervised learning can be a good way since it can 
+deal with unseen data. To evaluate the work, an overall accuracy of the modeling are expected to be around 90\% and take short time like the logistic regression in 
+paper \cite{Reference6}.
 
+The aims for part two are proposing a reconfigurability framework for the modeling attack in part one. Two different reconfigurability will be implemented. First, add intentional
+noise in PUF to 
 
-\section{Project Requirements}
+Second, implement OPUF to change the behavior of CRPs.
 
-
-
-\section{Another Section}
+To evaluate the work, the modeling attack proposed in part one should have significantly accuracy drop.
 
 
 

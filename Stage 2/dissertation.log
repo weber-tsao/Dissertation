@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  27 NOV 2021 15:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  29 NOV 2021 01:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -366,15 +366,15 @@ Package pdftex.def Info: figures/figure9.jpg  used on input line 137.
 (pdftex.def)             Requested size: 284.52756pt x 139.15953pt.
 ) (./chapters/chapter3.tex [9 <./figures/figure8.jpg> <./figures/figure9.jpg>] [10]
 Chapter 3.
-) (./chapters/chapter4.tex [11
+[11
 
-]
+]) (./chapters/chapter4.tex [12]
 Chapter 4.
-) (./chapters/chapter5.tex [12
+) (./chapters/chapter5.tex [13
 
 ]
 Chapter 5.
-) (./dissertation.bbl [13
+) (./dissertation.bbl [14
 
 ]
 Underfull \hbox (badness 1158) in paragraph at lines 10--15
@@ -386,18 +386,18 @@ Underfull \hbox (badness 2012) in paragraph at lines 27--31
 []\OT1/cmr/m/sc/10.95 R[]uhrmair, U., Sehnke, F., S[]olter, J., Dror, G., De-vadas, S., and
  []
 
-) [14
+) [15
 
-] [15
+] [16
 
 
 ] (./chapters/appendixA.tex
 Appendix A.
-) (./chapters/appendixB.tex [16
+) (./chapters/appendixB.tex [17
 
 ]
 Appendix B.
-) [17
+) [18
 
 ] (./dissertation.aux) ) 
 Here is how much of TeX's memory you used:
@@ -409,10 +409,10 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  60i,12n,67p,587b,235s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on dissertation.pdf (24 pages, 855617 bytes).
+Output written on dissertation.pdf (25 pages, 857346 bytes).
 PDF statistics:
- 151 PDF objects out of 1000 (max. 8388607)
- 90 compressed objects within 1 object stream
+ 155 PDF objects out of 1000 (max. 8388607)
+ 93 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  51 words of extra memory for PDF output out of 10000 (max. 10000000)
 

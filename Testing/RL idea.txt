@@ -36,4 +36,9 @@ Result
 2. 10,==> prediction = 0.55
 3. 
 
-   
+
+
+-------
+New idea 
+- Can first try to make the training path into the q learning and see how good it is
+-The environment keep changing with the input, and the agent explore and then change to another

@@ -10,14 +10,13 @@
 \contentsline {section}{\numberline {2.6}Reconfigurability of PUF}{8}{}%
 \contentsline {section}{\numberline {2.7}Summary}{10}{}%
 \contentsline {chapter}{\numberline {3}Analysis}{11}{}%
-\contentsline {section}{\numberline {3.1}Project Requirements}{11}{}%
-\contentsline {section}{\numberline {3.2}Another Section}{11}{}%
-\contentsline {section}{\numberline {3.3}Ethical, Professional and Legal Issues}{11}{}%
-\contentsline {chapter}{\numberline {4}Planning}{12}{}%
-\contentsline {section}{\numberline {4.1}Risk Analysis}{12}{}%
-\contentsline {section}{\numberline {4.2}Project Plan}{12}{}%
-\contentsline {section}{\numberline {4.3}Another Section if You Need It}{12}{}%
-\contentsline {chapter}{\numberline {5}Conclusions}{13}{}%
-\contentsline {chapter}{Appendices}{15}{}%
-\contentsline {chapter}{\numberline {A}An Appendix of Some Kind}{16}{}%
-\contentsline {chapter}{\numberline {B}Another Appendix}{17}{}%
+\contentsline {section}{\numberline {3.1}Project Aims and Evaluation}{11}{}%
+\contentsline {section}{\numberline {3.2}Ethical, Professional and Legal Issues}{12}{}%
+\contentsline {chapter}{\numberline {4}Planning}{13}{}%
+\contentsline {section}{\numberline {4.1}Risk Analysis}{13}{}%
+\contentsline {section}{\numberline {4.2}Project Plan}{13}{}%
+\contentsline {section}{\numberline {4.3}Another Section if You Need It}{13}{}%
+\contentsline {chapter}{\numberline {5}Conclusions}{14}{}%
+\contentsline {chapter}{Appendices}{16}{}%
+\contentsline {chapter}{\numberline {A}An Appendix of Some Kind}{17}{}%
+\contentsline {chapter}{\numberline {B}Another Appendix}{18}{}%

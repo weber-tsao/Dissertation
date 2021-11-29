@@ -71,8 +71,8 @@ class Puf:
         top_path, bottom_path = self.puf_path(self.challenge)
         #print(top_path)
         delay_diff, stage_delay_diff = self.each_stage_delay()
-        print(delay_diff)
-        print(stage_delay_diff)
+        #print(delay_diff)
+        #print(stage_delay_diff)
             
         for i in range((len(self.challenge[0])-1), -1, -1):
             count = i*2
@@ -96,7 +96,7 @@ class Puf:
             else:
                 self.dict[str(count)] = 0
                 self.dict[str(count-1)] = 0        
-        print(self.dict)
+        #print(self.dict)
         return self.dict
     
     def reward_related_to_delay(self):
@@ -111,7 +111,7 @@ class Puf:
                 delay_dict[(str(i))] = -1
         
         #print(len(delay_dict))
-        print(delay_dict)
+        #print(delay_dict)
         #print(type(0.0))
         #print(type(self.temp))
         #print(np.ones((1,1)))
