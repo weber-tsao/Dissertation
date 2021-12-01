@@ -14,7 +14,7 @@ MAZE_H = 2  # grid height
 #MAZE_W = 10  # grid width
 
 class RL(object):
-    def __init__(self, action_space, learning_rate=0.01, reward_decay=0.7, e_greedy=0.3):
+    def __init__(self, action_space, learning_rate=0.01, reward_decay=0.9, e_greedy=0.9):
         self.actions = action_space  # a list
         self.puf = Puf()
         self.reward_dict = self.puf.reward_related_to_delay()
@@ -54,27 +54,27 @@ class RL(object):
         if observation_ != 'terminal':
             if (observation_[0] + UNIT) == (5+UNIT*(self.state_num-1)) and (observation_[1] + UNIT) == 45:
                 action_choose.append(2)
-                print("straight")
+                #print("straight")
             elif (observation_[0] + UNIT) == (5+UNIT*(self.state_num-1)) and observation_[1] == 45:
                 action_choose.append(0)
-                print("cross up")
+                #print("cross up")
             else:
                 # cross up
                 if observation_[1] > UNIT and observation_[0] < (self.maze_w - 1) * UNIT:
                     action_choose.append(0)
-                    print("cross up")
+                    #print("cross up")
                 # cross down
                 if observation_[1] < (MAZE_H - 1) * UNIT and observation_[0] < (self.maze_w - 1) * UNIT:
                     action_choose.append(1)
-                    print("cross down")
+                    #print("cross down")
                 # straight
                 if observation_[0] < (self.maze_w - 1) * UNIT:
                     action_choose.append(2)
-                    print("straight")
+                    #print("straight")
         else:
             action_choose = [0, 1, 2]
-            print("straight")
-            
+            #print("straight")
+              
         action = np.random.choice(action_choose)
         '''if np.random.rand() < self.epsilon:
             # choose best action
@@ -95,7 +95,7 @@ class RL(object):
         pass
         
 class SarsaLambdaTable(RL):
-    def __init__(self, actions, learning_rate=0.01, reward_decay=0.9, e_greedy=0.9, trace_decay=0):
+    def __init__(self, actions, learning_rate=0.01, reward_decay=0.9, e_greedy=0.9, trace_decay=0.9):
         super(SarsaLambdaTable, self).__init__(actions, learning_rate, reward_decay, e_greedy)
 
         # backward view, eligibility trace.
@@ -121,6 +121,7 @@ class SarsaLambdaTable(RL):
         if s_ != 'terminal':
             q_target = r + self.gamma * self.q_table.loc[s_, a_]  # next state is not terminal
         else:
+            
             q_target = r  # next state is terminal
         error = q_target - q_predict
 

@@ -1,1 +1,4 @@
 GAT might work; Can still look at the  whole  graph, but make the path that is not used have attention 0 (so does not consider)
+
+
+Everytime concat two paths nodes info and put into classifier to train

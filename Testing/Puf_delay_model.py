@@ -49,7 +49,7 @@ class Puf:
                     self.top_path.append(self.mux_node[count+1])
                     self.bottom_path.append(self.mux_node[count])
                     prev = self.mux_node[count+1]
-        #print(self.top_path)
+        print(self.top_path)
         #print(self.bottom_path)
         return self.top_path, self.bottom_path
         
@@ -105,10 +105,10 @@ class Puf:
         for i in range(0, len(delay_dict), 2):
             if delay_dict[(str(i))] == 0:
                 delay_dict[(str(i))] = delay_dict[(str(i+1))]
-                delay_dict[(str(i+1))] = -1
+                delay_dict[(str(i+1))] = 0
             else:
                 delay_dict[(str(i+1))] =  delay_dict[(str(i))]
-                delay_dict[(str(i))] = -1
+                delay_dict[(str(i))] = 0
         
         #print(len(delay_dict))
         #print(delay_dict)

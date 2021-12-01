@@ -139,20 +139,20 @@ class Maze(tk.Tk, object):
             if s[1] > UNIT and s[0] < (self.maze_w - 1) * UNIT:
                 base_action[0] += UNIT
                 base_action[1] -= UNIT
-                print("cross up")
+                #print("cross up")
         elif action == 1:   # cross down
             if s[1] < (MAZE_H - 1) * UNIT and s[0] < (self.maze_w - 1) * UNIT:
                 base_action[0] += UNIT
                 base_action[1] += UNIT
-                print("cross down")
+                #print("cross down")
         elif action == 2:   # straight
             if s[0] < (self.maze_w - 1) * UNIT:
                 base_action[0] += UNIT
-                print("straight")
+                #print("straight")
 
         self.canvas.move(self.rect, base_action[0], base_action[1])  # move agent
         s_ = self.canvas.coords(self.rect)  # next state
-        print("Next state {}".format(s_))
+        #print("Next state {}".format(s_))
         #print(self.all_nodes[4])
         # reward function
         if s_ == self.canvas.coords(self.all_nodes[-1]):

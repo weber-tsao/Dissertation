@@ -12,33 +12,33 @@ from RL_brain import SarsaLambdaTable
 from Puf_delay_model import*
 
 def update():
-    for episode in range(1000):
+    for episode in range(100):
         # initial observation
         observation = env.reset()
         #print(str(observation))
         # RL choose action based on observation
         action = RL.choose_action(str(observation), observation)
         #print(str(observation))
-        print("Episode start")
-        print("Current episode node {}".format(observation))
-        print("Episode next action {}".format(action))
+        #print("Episode start")
+        #print("Current episode node {}".format(observation))
+        #print("Episode next action {}".format(action))
         
         #lambda
         RL.eligibility_trace *= 0
         
         while True:
             # fresh env
-            print("Loop since not reach terminal")
+            #print("Loop since not reach terminal")
             env.render()
 
             # RL take action and get next observation and reward
             observation_, reward, done = env.step(action)
-            print("Update to episode node to {}".format(observation_))
+            #print("Update to episode node to {}".format(observation_))
 
             #print(env.step(action))
             # RL choose action based on next observation
             action_ = RL.choose_action(str(observation_), observation_)
-            print("The new node next behaviour {}".format(action_))
+            #print("The new node next behaviour {}".format(action_))
             # RL learn from this transition (s, a, r, s, a) ==> Sarsa
             RL.learn(str(observation), action, reward, str(observation_), action_)
 
@@ -142,7 +142,7 @@ if __name__ == "__main__":
     env = Maze()
     nodes_location, actions = env.get_maze_information()
     RL = SarsaLambdaTable(actions=list(range(env.n_actions)))
-    env.after(5, update)
+    env.after(100, update)
     env.mainloop()
     q_table = RL.get_q_table()
     #print(q_table)
