@@ -103,7 +103,7 @@ class GraphAttention(Layer):
     def call(self, inputs):
         X = inputs[0]  # Node features (N x F)
         A = inputs[1]  # Adjacency matrix (N x N)
-
+        
         outputs = []
         for head in range(self.attn_heads):
             kernel = self.kernels[head]  # W in the paper (F x F')
@@ -150,6 +150,7 @@ class GraphAttention(Layer):
             output = K.mean(K.stack(outputs), axis=0)  # N x F')
 
         output = self.activation(output)
+        #A = input[2]
         return output
 
     def compute_output_shape(self, input_shape):
