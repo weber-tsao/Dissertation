@@ -11,10 +11,12 @@ from Puf_delay_model import Puf
 
 UNIT = 40   # pixels
 MAZE_H = 2  # grid height
+loop = 100
+epoch = 0
 #MAZE_W = 10  # grid width
 
 class RL(object):
-    def __init__(self, action_space, learning_rate=0.01, reward_decay=0.9, e_greedy=0.9):
+    def __init__(self, action_space, learning_rate=0.01, reward_decay=0.9, e_greedy=0):
         self.actions = action_space  # a list
         self.puf = Puf()
         self.reward_dict = self.puf.reward_related_to_delay()
@@ -75,10 +77,12 @@ class RL(object):
             action_choose = [0, 1, 2]
             #print("straight")
               
-        action = np.random.choice(action_choose)
-        '''if np.random.rand() < self.epsilon:
+       #action = np.random.choice(action_choose)
+        if np.random.rand() < self.epsilon:
             # choose best action
             state_action = self.q_table.loc[observation, action_choose]
+            print(self.epsilon)
+            self.epsilon += (0.9/10000)
             #print(self.q_table)
             #print(state_action[2])
             # some actions may have the same value, randomly choose on in these actions
@@ -86,8 +90,11 @@ class RL(object):
             #print(action)
         else:
             # choose random action
+            print("random")
+            print(self.epsilon)
+            self.epsilon += (0.9/10000)
             action = np.random.choice(action_choose)
-            #print(action)'''
+            #print(action)
             
         return action
 
@@ -95,7 +102,7 @@ class RL(object):
         pass
         
 class SarsaLambdaTable(RL):
-    def __init__(self, actions, learning_rate=0.01, reward_decay=0.9, e_greedy=0.9, trace_decay=0.9):
+    def __init__(self, actions, learning_rate=0.01, reward_decay=0.9, e_greedy=0, trace_decay=0):
         super(SarsaLambdaTable, self).__init__(actions, learning_rate, reward_decay, e_greedy)
 
         # backward view, eligibility trace.

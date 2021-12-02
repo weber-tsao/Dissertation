@@ -150,7 +150,7 @@ class GraphAttention(Layer):
             output = K.mean(K.stack(outputs), axis=0)  # N x F')
 
         output = self.activation(output)
-        #A = input[2]
+        #print(output)
         return output
 
     def compute_output_shape(self, input_shape):

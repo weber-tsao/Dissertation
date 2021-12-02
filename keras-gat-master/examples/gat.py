@@ -1,6 +1,7 @@
 from __future__ import division
 
 import numpy as np
+import tensorflow as tf
 from tensorflow.keras.callbacks import EarlyStopping, TensorBoard, ModelCheckpoint
 from tensorflow.keras.layers import Input, Dropout
 from tensorflow.keras.models import Model
@@ -27,7 +28,7 @@ n_attn_heads = 8              # Number of attention heads in first GAT layer
 dropout_rate = 0.5           # Dropout rate (between and inside GAT layers)
 l2_reg = 5e-4/2               # Factor for l2 regularization
 learning_rate = 5e-3          # Learning rate for Adam
-epochs = 10                # Number of training epochs
+epochs = 10             # Number of training epochs
 es_patience = 100             # Patience fot early stopping
 
 # Preprocessing operations
@@ -35,7 +36,7 @@ es_patience = 100             # Patience fot early stopping
 #print(X.shape)
 train_data = np.asmatrix(train_data)
 #train_data = preprocess_features(train_data)
-adj_mats = adj_mats
+#adj_mats = adj_mats
 #print(adj_mats[0])
 
 # Model definition (as per Section 3.3 of the paper)
@@ -60,9 +61,7 @@ graph_attention_2 = GraphAttention(n_classes,
                                    attn_kernel_regularizer=l2(l2_reg))([dropout2, adj_mats_in])
 
 # Build model
-
 model = Model(inputs=[train_data_in, adj_mats_in], outputs=graph_attention_2)
-print(graph_attention_2)
 optimizer = Adam(lr=learning_rate)
 model.compile(optimizer=optimizer,
               loss='sparse_categorical_crossentropy',   #loss='categorical_crossentropy',
@@ -79,26 +78,22 @@ mc_callback = ModelCheckpoint('logs/best_model.h5',
                               save_weights_only=True)
 
 # Train model
-#validation_data = ([train_data, adj_mats], y_val)
+validation_data = ([train_data, adj_mats], y_val)
+model.fit([train_data, adj_mats],
+          y_train,
+          epochs=epochs,
+          batch_size=N,
+          validation_data=validation_data,
+          shuffle=False,  # Shuffling data means shuffling the whole graph
+          callbacks=[es_callback, tb_callback, mc_callback])
 
-for epoch in range(epochs):
-    print(adj_mats[epoch])
-    validation_data = ([train_data, adj_mats[epoch]], y_val)
-    model.fit([train_data, adj_mats[epoch]],
-              y_train,
-              epochs=epoch,
-              batch_size=10,
-              validation_data=validation_data,
-              shuffle=False,  # Shuffling data means shuffling the whole graph
-              callbacks=[es_callback, tb_callback, mc_callback])
-    
 # Load best model
 model.load_weights('logs/best_model.h5')
 
 # Evaluate model
-eval_results = model.evaluate([train_data, adj_mats[3]],
+eval_results = model.evaluate([train_data, adj_mats],
                               y_test,
-                              batch_size=10,
+                              batch_size=N,
                               verbose=0)
 print('Done.\n'
       'Test loss: {}\n'

@@ -36,10 +36,13 @@ class Maze(tk.Tk, object):
         self.action_space = ['cross_up', 'cross_down', 'straight']
         self.n_actions = len(self.action_space)
         self.title('maze')
+        self.n_features = 2
         #self.geometry('{0}x{1}'.format(MAZE_H * UNIT, MAZE_H * UNIT))
         self.all_nodes_coord = []
         self._build_maze()
         self.change = 0
+        self.reward = 0
+        self.done = False
         
     def _build_maze(self):
         self.canvas = tk.Canvas(self, bg='white',
@@ -129,8 +132,11 @@ class Maze(tk.Tk, object):
                 node2_center[0] + 15, node2_center[1] + 15,
                 fill='red')
         # return observation
-        print(self.canvas.coords(self.rect))
-        return self.canvas.coords(self.rect)
+        #print(np.array(self.canvas.coords(self.oval)[:2]))
+        #return (np.array(self.canvas.coords(self.rect)[:2]) - np.array(self.canvas.coords(self.node)[:2]))/(MAZE_H*UNIT)
+        #print(self.canvas.coords(self.node)[:2])
+        print(np.array(self.canvas.coords(self.node)[:2]))
+        return np.array(self.canvas.coords(self.node)[:2])
 
     def step(self, action):
         s = self.canvas.coords(self.rect)
@@ -153,20 +159,25 @@ class Maze(tk.Tk, object):
 
         self.canvas.move(self.rect, base_action[0], base_action[1])  # move agent
         s_ = self.canvas.coords(self.rect)  # next state
+        #print(self.canvas.coords(self.rect))
         #print("Next state {}".format(s_))
         #print(self.all_nodes[4])
         # reward function
         if s_ == self.canvas.coords(self.all_nodes[-1]):
-            reward = 0.0
-            done = True
-            s_ = 'terminal'
+            self.reward = 0.0
+            self.done = True
+            #s_ = ['terminal', 'terminal']
+
         
         for i in range(2, (len(self.all_nodes)-1), 1):
             if s_ == self.canvas.coords(self.all_nodes[i]):
-                reward = self.reward_dict[str(i-2)]
-                done = False
-        
-        return s_, reward, done
+                self.reward = self.reward_dict[str(i-2)]
+                self.done = False
+                #print(np.array(s_[:2]))
+        #print((np.array(s_[:2]) - np.array(self.canvas.coords(self.all_nodes[-1])[:2])))
+        #s_ = (np.array(s_[:2]) - np.array(self.canvas.coords(self.all_nodes[-1])[:2]))/(MAZE_H*UNIT)
+        #print(np.array(s_[:2]))
+        return np.array(s_[:2]), self.reward, self.done
 
     def render(self):
         time.sleep(0.1)

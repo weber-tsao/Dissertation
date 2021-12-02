@@ -14,7 +14,8 @@ The aims for part two are proposing a reconfigurability framework for the modeli
 noise to PUF's response during authentication phase to disturb the modeling attack \cite{Reference8}. The basic idea is shown in Figure \ref{fig:figure10}, assume database has stored PUF's CRPs and provide a challenge c
 to PUF in authentication phase. The PUF return a response r', and add noise e with r'. Then e and r' compose helper data h and send back to verifier, where $h = r'\oplus e$. The verifier can reproduce $r'\oplus e$  
 with r and h if r and $r'\oplus e$ is similar. Last, both verifier and user create their own hashtag and compare to check if authenticate. In this case, attacker only access to c and $r'\oplus e$, which the modeling
-will not be accurate unless the attacker's model response is closed enough to r'.
+will not be accurate unless the attacker's model response is closed enough to r'. To evaluate the work of adding intentional noise, the modeling attack proposed in part one should have reasonable accuracy drop and the authentication will still work 
+though noise is added.
 
 \begin{figure}[htp]
     \centering
@@ -22,12 +23,10 @@ will not be accurate unless the attacker's model response is closed enough to r'
     \caption{Add noise to PUF's response during authentication phase}
     \label{fig:figure10}
     \end{figure}
-Second, implement OPUF to change the behavior of CRPs.
 
-To evaluate the work, the modeling attack proposed in part one should have reasonable accuracy drop and the authentication will still work though noise is added.
+Second, implement protection which referring to OPUF to change the behavior of CRPs and prevent modeling attack. With control of parameter like 1. Refreshed-pause timing 2. Allocating memory block, 
+the project will examinate the result of the protection. For example, look at the accuracy and time consumed when apply the modeling attack in part one.
 
 
-
-\section{Ethical, Professional and Legal Issues}
 
 
