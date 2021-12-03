@@ -8,17 +8,21 @@ explore the environment with a final goal by randomly choosing actions space and
 Assuming Figure \ref{fig:figure11} is the PUF environment, red and green circle is the starting point for top path and bottom path, each black rectangle represents a multiplexer with unique delay and the yellow 
 circle is the goal. There are three actions: going up, going down and going straight. The reward of multiplexer is determined by the delay, bigger the delay, the smaller the reward, vice versa. In training phase, 
 the agent will travel through different combination of multiplexers and construct a Q table(See Table \ref{tab:table1}) by collecting reward on multiplexer. The final gaol for the agent is to find the route with 
-lowest delay. After the training, when select a CRPs, and input the challenge to the agent, ideally, the agent can calculate, compare two paths' reward and reply the correct response. For example, challenge 00001
-gives a following reward for two paths:
+lowest delay. After the training, when select a CRPs, and input the challenge to the agent, ideally, the agent can calculate, compare two paths' reward and reply the correct response. For example, assume 
+an challenge 00001 has response 1(which means bottom path is faster), the calculation operation is:
 \begin{equation}
     Challenge(00001) =\begin{cases}
     0.082+0.008+0.041+0.002+0.07 = 0.203, & \text {Top path: 1,3,5,7,10}.\\
     0.022+0.415+0.222+0.555+0 = 1.214, & \text {Bottom path: 2,4,6,8,9}.
     \end{cases}
 \end{equation}
+
+\begin{equation}
+    0.203 < 1.214, \text { return response: 1}.
+\end{equation}
 In general, the route with lower delay will have higher reward, on the other hand, the route with higher delay will have lower reward. If the agent can predict with high accuracy, the arbiter PUF's CRPs pattern can said to 
-be modelled. However, the accuracy for this modeling is around 60\% - 69\%, which is not a satisfying result. The problem can be the following: not providing enough features, the exploration does not cover every 
-possible routes, etc.
+be successfully modelled. However, the accuracy for this modeling is around 60\% - 69\%, which is not a satisfying result. The problem can be the following: not providing enough features, the exploration does not 
+cover every possible routes, etc.
 
 \begin{figure}[htp]
     \centering
@@ -47,10 +51,57 @@ possible routes, etc.
     \label{tab:table1}
     \end{table}
 
-As for the GAT, there are some problem that need to solve. The basic idea of the GAT is that the ////. (give image!!)
+As for the GAT \cite{Reference10}, the basic idea of the GAT is that each node aggregate the neighbors' features based on adjacency attention matrix and update its own features. 
+The updated features will insert into the neural network and perform classifying task. In order to reach to high accuracy, the main task for the GAT is to update adjacency attention matrix to
+right value.
+
+For example, look at Figure \ref{fig:figure12}, which is a arbiter PUF structure, has node feature $f1,f2,f3,f4$. When input a challenge 00, a one way relation is defined: 
+$m3 \rightarrow m1$, $m4 \rightarrow m2$, including self-loop, and the adjacency matrix is constructed(See 4.3). 
+\begin{equation}
+    \begin{blockarray}{ccccc}
+    M1 & M2 & M3 & M4\\
+    \begin{block}{(cccc)c}
+        1 & 0 & 0 & 0 & M1\\
+        0 & 1 & 0 & 0 & M2\\
+        1 & 0 & 1 & 0 & M3\\
+        0 & 1 & 0 & 1 & M4\\
+    \end{block}
+    \end{blockarray}
+    \label{matrix}
+\end{equation}
+
+In article \cite{Reference10}, there are four steps to aggregate the features of each node. The first step, add a weight matrix into the feature so each feature has its own importance:
+\begin{equation}
+    n_i = \mathcal{W}_if_i
+\end{equation}
+
+The second step, compute a pair-wise un-normalized attention score between Here, it first concatenates the z embeddings of the two nodes, where || denotes concatenation, then takes a dot product of it
+with a learnable weight vector a, and applies a LeakyReLU in the end:
+\begin{equation}
+    e_{ij} = LeakyReLU(\overrightarrow{a}^T_i(n_i \Vert n_j))
+\end{equation}
+
+The third step, apply Softmax function normalize:
+\begin{equation}
+    a_{ij} = \frac{exp(e_{ij})}{\sum_{k \in N_i}  exp(e_{ik})} 
+\end{equation}
+
+The fourth step, aggregate the embeddings from neighbors to current node, then scaled by the attention scores:
+\begin{equation}
+    f_i = \sigma (\sum_{j \in N_i} a_{ij}n_j)
+\end{equation}
 
 
-In the future, XGBoost was a new idea to try if both the previous machine learning fail to model the arbiter PUF. However, more research on XGBoost was required.
+
+//Ideally the adjacency matrix will keep updating according to the input challenge, and the GAT will be able to learn the pattern after looking at many sample. However, there are doubt 
+that whether the GAT support dynamically changing adjacency matrix.//
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=10cm]{figures/figure12.jpg}
+    \caption{GAT aggregation}
+    \label{fig:figure12}
+    \end{figure}
 
 
 
