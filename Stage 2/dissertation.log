@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  2 DEC 2021 23:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  3 DEC 2021 08:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -369,17 +369,31 @@ Chapter 3.
 [11
 
 ]
-File: figures/figure8.jpg Graphic file (type jpg)
-<use figures/figure8.jpg>
-Package pdftex.def Info: figures/figure8.jpg  used on input line 22.
-(pdftex.def)             Requested size: 398.33858pt x 130.47737pt.
-) (./chapters/chapter4.tex [12]
+<figures/figure10.jpg, id=81, 794.2172pt x 485.56406pt>
+File: figures/figure10.jpg Graphic file (type jpg)
+<use figures/figure10.jpg>
+Package pdftex.def Info: figures/figure10.jpg  used on input line 22.
+(pdftex.def)             Requested size: 398.33858pt x 243.53716pt.
+) (./chapters/chapter4.tex [12 <./figures/figure10.jpg>]
 Chapter 4.
-) (./chapters/chapter5.tex [13
 
-]
+LaTeX Warning: Citation `Reference9' on page 13 undefined on input line 5.
+
+
+Overfull \hbox (10.65805pt too wide) in paragraph at lines 4--13
+\OT1/cmr/m/n/10.95 The project has two part, cur-rently the progress are at the point of dis-cov-er-ing and im-ple-ment-ing
+ []
+
+<figures/figure11.jpg, id=86, 213.79875pt x 86.57344pt>
+File: figures/figure11.jpg Graphic file (type jpg)
+<use figures/figure11.jpg>
+Package pdftex.def Info: figures/figure11.jpg  used on input line 16.
+(pdftex.def)             Requested size: 170.71652pt x 69.12805pt.
+[13
+
+]) (./chapters/chapter5.tex [14 <./figures/figure11.jpg>]
 Chapter 5.
-) (./dissertation.bbl [14
+) (./dissertation.bbl [15
 
 ]
 Underfull \hbox (badness 1158) in paragraph at lines 10--15
@@ -391,33 +405,37 @@ Underfull \hbox (badness 2012) in paragraph at lines 33--37
 []\OT1/cmr/m/sc/10.95 R[]uhrmair, U., Sehnke, F., S[]olter, J., Dror, G., De-vadas, S., and
  []
 
-) [15
+) [16
 
-] [16
+] [17
 
 
 ] (./chapters/appendixA.tex
 Appendix A.
-) (./chapters/appendixB.tex [17
+) (./chapters/appendixB.tex [18
 
 ]
 Appendix B.
-) [18
+) [19
 
-] (./dissertation.aux) ) 
+] (./dissertation.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3572 strings out of 478371
- 59505 string characters out of 5852527
- 362333 words of memory out of 5000000
- 21588 multiletter control sequences out of 15000+600000
+ 3588 strings out of 478371
+ 59857 string characters out of 5852527
+ 362355 words of memory out of 5000000
+ 21602 multiletter control sequences out of 15000+600000
  411139 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,12n,67p,587b,235s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on dissertation.pdf (25 pages, 875087 bytes).
+Output written on dissertation.pdf (26 pages, 973860 bytes).
 PDF statistics:
- 165 PDF objects out of 1000 (max. 8388607)
- 99 compressed objects within 1 object stream
+ 171 PDF objects out of 1000 (max. 8388607)
+ 101 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 61 words of extra memory for PDF output out of 10000 (max. 10000000)
 
