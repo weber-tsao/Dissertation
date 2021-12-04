@@ -30,7 +30,7 @@ response to challenge as like they have a clone(See Figure \ref{fig:figure2}). T
     \end{figure}
 
 For strong PUF, means the number of CRPs is significantly large that even attackers get access, having throughout knowledge of CRPs is impossible. While the number of CRPs is so large,
-and the CRP is randomly selected in usage, the probability that the attacker has knowledge about the CRP currently using is small. In addition, each CRPs that is used once will 
+and the CRP is randomly selected in usage, the probability that the attacker has knowledge about the CRP currently using is small \cite{Reference1}. In addition, each CRPs that is used once will 
 be discarded(See Figure \ref{fig:figure3}) so even if attackers recorded certain CRPs, also called eavesdropped, they will not be able to put them into use. The strong PUF can also be used for authentication but do not need to protect CRPs
 as serious as weak PUF.
 
@@ -117,9 +117,9 @@ In order to alleviate the problem that PUF is vulnerable to modeling attack, rec
 OPUF), the general idea is that its configuration alters after every authentication session, which means CRPs behaviour of the PUF is changed and invalidate the modeling attack. This is based on the
 forward unpredictability and backward unpredictability properties that OPUF possess \cite{Reference7}. Figure \ref{fig:figure8} shows the concept of forward unpredictability and backward unpredictability.
 The orange line represents the forward unpredictability, which will ensure the responses collected before the reconfiguration process is invalid afterwards. As for the blue line, 
-which represent backward unpredictability, it will ensure the pattern observed by an attacker using modeling attack on PUF' is invalid for predicting the PUF before reconfiguration process. 
+which represent backward unpredictability, it will ensure the pattern observed by an attacker using modeling attack on PUF' is invalid for predicting the PUF before reconfiguration process \cite{Reference7}. 
 In this case, assume an attacker is performing a modeling attack on the PUF, and required a certain amount of CRPs to gain proper prediction. However, the OPUF's structure keeps changing every execution, which means the CRPs 
-behaviour is changing, so the modeling attack can't keep up or do not have time to collect enough CRPs.
+behaviour is changing, so the modeling attack can't keep up or do not have time to collect enough CRPs \cite{Reference7}.
 \begin{figure}[htp]
     \centering
     \includegraphics[width=18cm]{figures/figure8.jpg}
@@ -130,7 +130,7 @@ behaviour is changing, so the modeling attack can't keep up or do not have time 
 DPUF can be considered as an example for creating the OPUF, it is built up with bit cells that contain capacitors and transistors, each cell stores information of values 0 and 1 \cite{Reference7}. However, these components will leak 
 electrical signals every period of time, which means the behaviour might be eavesdropped. Therefore performing the reconfiguration process every period of time is effective. The reconfigurability can be shown in Figure \ref{fig:figure9}, by varying parameters
 such as refresh-pause interval and the memory block, where the former can cause random bit flip in the cells while the latter store the final response in a random memory block 
-which will alter every period of time, PUF can present unpredictable behaviour that prevents from attacker perform modeling attack.
+which will alter every period of time, PUF can present unpredictable behaviour that prevents from attacker perform modeling attack \cite{Reference7}.
 
 \begin{figure}[htp]
     \centering
@@ -140,8 +140,9 @@ which will alter every period of time, PUF can present unpredictable behaviour t
     \end{figure}
 
 \section{Summary}
-In summary, chapter 2 describe PUF as a novel approach to increase the security robustness of electrical devices by making use of its unique physical characteristics and how it can be used
-for devices authentication. Also, the working process and concepts for arbiter PUF and XOR arbiter PUF is introduced in detail. Last, the largest potential threat on PUF is called the modeling attack 
-and its countermeasure are analyzed in detail.
+In summary, chapter 2 describe the important background that need to understand for the project. This include showing PUF as a novel approach to increase the security robustness of electrical devices 
+by making use of its unique physical characteristics and how it can be used for devices authentication. Also, the working process and concepts for arbiter PUF and XOR arbiter PUF is introduced in 
+detail. Last, the largest potential threat on PUF is called the modeling attack and reconfigurability as the countermeasure are analyzed in detail. This chapter should provide basic concepts to understand 
+project objectives.
 
 

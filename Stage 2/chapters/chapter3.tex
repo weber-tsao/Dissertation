@@ -14,7 +14,7 @@ The aim for part two is to propose a reconfigurability framework for the modelin
 noise to PUF's response during the authentication phase to disturb the modeling attack \cite{Reference8}. The basic idea is shown in Figure \ref{fig:figure10}, assuming the database has stored PUF's CRPs and provided a challenge c
 to PUF in the authentication phase. The PUF return a response r', and add noise e with r'. Then e and r' compose helper data h and send back to the verifier, where $h = r'\oplus e$. The verifier can reproduce $r'\oplus e$  
 with r and h if r and $r'\oplus e$ is similar. Last, the verifier send a arbitrary number x to user, both verifier and user create their own hashtag and compare to check if authenticate. In this case, because the attacker cannot accesses to r, they can only model based on c and $r'\oplus e$, the modeling
-might not be accurate, tha only thing attacker can do is try to build model that with high prediction accuracy based on $r'\oplus e$. To evaluate the work of adding intentional noise, the modeling attack proposed in part one should have a reasonable accuracy drop(3-4\% according to \cite{Reference8}) and the authentication will still work 
+might not be accurate, tha only thing attacker can do is try to build model that with high prediction accuracy based on $r'\oplus e$ \cite{Reference8}. To evaluate the work of adding intentional noise, the modeling attack proposed in part one should have a reasonable accuracy drop(3-4\% according to \cite{Reference8}) and the authentication will still work 
 though noise is added.
 
 \begin{figure}[htp]
