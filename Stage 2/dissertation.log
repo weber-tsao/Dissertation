@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  4 DEC 2021 04:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  4 DEC 2021 05:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -330,20 +330,20 @@ Package pdftex.def Info: figures/figure5.jpg  used on input line 62.
 <figures/figure6.jpg, id=57, 960.58875pt x 421.575pt>
 File: figures/figure6.jpg Graphic file (type jpg)
 <use figures/figure6.jpg>
-Package pdftex.def Info: figures/figure6.jpg  used on input line 81.
+Package pdftex.def Info: figures/figure6.jpg  used on input line 83.
 (pdftex.def)             Requested size: 512.1496pt x 224.77168pt.
 
-Overfull \hbox (71.30214pt too wide) in paragraph at lines 81--82
+Overfull \hbox (71.30214pt too wide) in paragraph at lines 83--84
  [][] 
  []
 
 <figures/figure7.jpg, id=58, 983.92593pt x 411.03563pt>
 File: figures/figure7.jpg Graphic file (type jpg)
 <use figures/figure7.jpg>
-Package pdftex.def Info: figures/figure7.jpg  used on input line 91.
+Package pdftex.def Info: figures/figure7.jpg  used on input line 93.
 (pdftex.def)             Requested size: 512.1496pt x 213.95927pt.
 
-Overfull \hbox (71.30214pt too wide) in paragraph at lines 91--92
+Overfull \hbox (71.30214pt too wide) in paragraph at lines 93--94
  [][] 
  []
 
@@ -351,10 +351,10 @@ Overfull \hbox (71.30214pt too wide) in paragraph at lines 91--92
 <figures/figure8.jpg, id=68, 999.735pt x 327.47343pt>
 File: figures/figure8.jpg Graphic file (type jpg)
 <use figures/figure8.jpg>
-Package pdftex.def Info: figures/figure8.jpg  used on input line 125.
+Package pdftex.def Info: figures/figure8.jpg  used on input line 127.
 (pdftex.def)             Requested size: 512.1496pt x 167.76376pt.
 
-Overfull \hbox (71.30214pt too wide) in paragraph at lines 125--126
+Overfull \hbox (71.30214pt too wide) in paragraph at lines 127--128
  [][] 
  []
 
@@ -362,10 +362,10 @@ Overfull \hbox (71.30214pt too wide) in paragraph at lines 125--126
 <figures/figure9.jpg, id=72, 932.73468pt x 456.20438pt>
 File: figures/figure9.jpg Graphic file (type jpg)
 <use figures/figure9.jpg>
-Package pdftex.def Info: figures/figure9.jpg  used on input line 137.
+Package pdftex.def Info: figures/figure9.jpg  used on input line 139.
 (pdftex.def)             Requested size: 512.1496pt x 250.50247pt.
 
-Overfull \hbox (71.30214pt too wide) in paragraph at lines 137--138
+Overfull \hbox (71.30214pt too wide) in paragraph at lines 139--140
  [][] 
  []
 
@@ -441,7 +441,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  55i,13n,62p,587b,235s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on dissertation.pdf (25 pages, 1092349 bytes).
+Output written on dissertation.pdf (25 pages, 1092431 bytes).
 PDF statistics:
  184 PDF objects out of 1000 (max. 8388607)
  108 compressed objects within 2 object streams

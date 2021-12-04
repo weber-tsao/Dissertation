@@ -3,7 +3,7 @@
 \section{The PUF concept}
 The simplest sentence to describe PUF is "A PUF is an object's fingerprint" \cite{Reference4}. The fingerprint can represent a specific human in the world, such as the PUF can represent
 an object. The fingerprint is inherently created when people were born, and so does PUF, which inherently exists in an object according to unique manufacturing random variation \cite{Reference4}.
-With the representation and inherent property, the fingerprint and the PUF is said to be unclonable since it is impossible to control and predict a human's fingerprint. This is an important concept for PUF. \par
+With the representation and inherent property, the PUF is said to be unclonable since it is impossible to control and predict a human's fingerprint. This is an important concept for PUF. \par
 
 This intrinsic property can be extracted from a chip that has PUF circuit that existed inside \cite{Reference2}. The way PUF works is by entering a certain length of bits(so-called challenge) into the PUF, and it will
 generate another specific length of bits(so-called response). According to the property of PUF that was discussed in Chapter 1, it is impossible to find two different PUF that will produce the same response when entering the same challenge(See Figure \ref{fig:figure1}).
@@ -68,12 +68,14 @@ if the challenge and response pair exists in the database, the device is valid \
 There are many different types of PUF such as arbiter PUF, ring oscillator PUF, lightweight PUF, etc. In this report, arbiter PUF and its mutation will be introduced in detail. The general idea of
 the arbiter PUF is comparing the transition speed for two electrical signals in the PUF's structure(See Figure \ref{fig:figure6}). The arbiter PUF's structure contains a number of 
 multiplexers and an arbiter(mostly D flipflop), and two multiplexers will be combined into a switching box \cite{Reference3}. Look at Figure \ref{fig:figure6}, when entering a challenge bit, apply each challenge bit to a switching box, bit 1 indicate the upper and lower signal will switch 
-while bit 0 indicate the two signals remain unchanged in each switching box. This will eventually form paths for the signals. Then the signals start transferring, the time arrived at the arbiter for two signals 
+while bit 0 indicate the two signals remain unchanged in each switching box. This will eventually form paths for the signals(red and green line). Then the signals start transferring, the time arrived at the arbiter for two signals 
 is different since each multiplexer and wire has a unique delay. The arbiter will determine which path is faster and based on that response a binary bit if the upper path is faster, the response is 1, 
 otherwise, the response is 0. \par
 
 The arbiter at the end is always fair, which will not favour any one of the paths. Even there exist bias, a simple solution of adding a delay in the structure can solve the problem. For example, if the arbiter favor the lower path,
-by adding a delay to the upper path, it can have a head start. By looking at Figure \ref{fig:figure6}, it is clear that the CRPs will be exponential. Assuming there are n switching boxes, two possible cases in each switching box, so the 
+by adding a delay to the upper path, it can have a head start. 
+
+By looking at Figure \ref{fig:figure6}, it is clear that the CRPs will be exponential. Assuming there are n switching boxes, two possible cases in each switching box, so the 
 number of CRPs is $2^{n}$, which indicate the arbiter PUF is a strong PUF. Arbiter PUF can also return a longer response by inputting K different challenges and getting a K bits response.
 
 \begin{figure}[htp]
