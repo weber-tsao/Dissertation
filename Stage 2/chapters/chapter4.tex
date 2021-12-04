@@ -55,7 +55,7 @@ As for the GAT \cite{Reference10}, the basic idea of the GAT is that each node a
 The updated features will insert into the neural network and perform the classifying task. In order to reach high accuracy, the main task for the GAT is to update the adjacency attention matrix to
 right value.
 
-For a detail example, look at Figure \ref{fig:figure12}, which is a arbiter PUF structure. Assume each nose in Figure \ref{fig:figure12} represent a multiplexer, and has node feature $f1,f2,f3,f4$. If input a 
+For a detail example, look at Figure \ref{fig:figure12}, which is a arbiter PUF structure. Assume each node in Figure \ref{fig:figure12} represent a multiplexer, and has node feature $f1,f2,f3,f4$. If input a 
 challenge 00, a one way relation is defined: 
 $m3 \rightarrow m1$, $m4 \rightarrow m2$, including self-loop, and the adjacency matrix can be constructed(See 4.3). 
 \begin{equation}
@@ -100,7 +100,7 @@ The fourth step, aggregate the updated features from neighbors to current node, 
     f_i^{'} = \sigma (\sum_{j \in N_i} \alpha_{ij}n_j)
 \end{equation}
 
-After updating every node's features, concatenates the node features of top path($f_1+f_3^{'}$)and bottom path($f_2+f_4^{'}$), and insert into a classify layer. Next, compare the output with ground fact
+After updating every node's features, concatenates the node features of top path($f_1^{'}+f_3^{'}$)and bottom path($f_2^{'}+f_4^{'}$), and insert into a classify layer. Next, compare the output with ground fact
 (response of the challenge) to update the parameter to increase the prediction rate. Ideally, the adjacency matrix will keep updating according to different input challenges, and the GAT will be able to 
 learn the pattern after looking at many samples. However, there is doubt that whether the GAT support dynamically changing adjacency matrix, so this idea is not done yet.
 
