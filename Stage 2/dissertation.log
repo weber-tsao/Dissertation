@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  4 DEC 2021 03:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  4 DEC 2021 04:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -418,8 +418,8 @@ Overfull \hbox (14.39662pt too wide) in paragraph at lines 76--77
 [15 <./figures/figure12.jpg>]) (./chapters/chapter5.tex [16]
 Chapter 5.
 )
-Overfull \hbox (2.9323pt too wide) in paragraph at lines 8--86
-[]\OT1/cmr/m/n/10.95 After the mod-el-ing at-tack is im-ple-mented, will start on de-sign-ing a re-con-fig-ura-bil-ity frame-work
+Overfull \hbox (8.9244pt too wide) in paragraph at lines 9--86
+[]\OT1/cmr/m/n/10.95 In the long term, af-ter the mod-el-ing at-tack is im-ple-mented, start on de-sign-ing a re-con-fig-ura-bil-ity
  []
 
 (./dissertation.bbl [17
@@ -441,7 +441,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  55i,13n,62p,587b,235s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on dissertation.pdf (25 pages, 1092297 bytes).
+Output written on dissertation.pdf (25 pages, 1092349 bytes).
 PDF statistics:
  184 PDF objects out of 1000 (max. 8388607)
  108 compressed objects within 2 object streams
