@@ -104,7 +104,7 @@ The fourth step, aggregate the updated features from neighbors to current node, 
 
 After updating every node's features, concatenates the node features of top path($f_1^{'}+f_3^{'}$)and bottom path($f_2^{'}+f_4^{'}$), and insert into a classify layer. Next, compare the output with ground fact
 (response of the challenge) and update the trainable parameter to increase the modeling accuracy. Ideally, the adjacency matrix will keep updating according to different input challenges, and the GAT will be able to 
-learn the CRPs pattern after looking at many CRPs. However, there is doubt that whether the GAT support dynamically changing adjacency matrix, so this idea is completed.
+learn the CRPs pattern after looking at many CRPs. However, there is doubt that whether the GAT support dynamically changing adjacency matrix, so this idea is not completely implemented yet.
 
 
 
