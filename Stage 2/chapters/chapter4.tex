@@ -7,8 +7,8 @@ explore the environment with a final goal by randomly choosing actions space and
 
 Assuming Figure \ref{fig:figure11} is the PUF environment, a red and green circle is the starting point for top path and bottom path, each black rectangle represents a multiplexer with unique delay and the yellow 
 circle is the goal. There are three actions: going up, going down and going straight. The reward of the multiplexer is determined by the delay, the bigger the delay, the smaller the reward, vice versa. In the training phase, 
-the agent will travel through different combinations of multiplexers and construct a Q table(See Table \ref{tab:table1}) by collecting rewards on multiplexers. The final goal for the agent is to find the route with 
-the lowest delay. After the training, when selecting a CRPs, and inputting the challenge to the agent, ideally, the agent can calculate, compare two paths' reward and reply the correct response. For example, assume 
+the agent will travel through different combinations of multiplexers(different challenge) and construct a Q table(See Table \ref{tab:table1}) by collecting rewards on multiplexers. The final goal for the agent is to find the route with 
+the lowest delay. After the training, when selecting a CRPs, and inputting the challenge to the agent, ideally, the agent can find the lowest delay route, and use the constructed Q table to calculate, compare two paths' reward and reply the correct response. For example, assume 
 a challenge 00001 has response 1(which means the bottom path is faster), the calculation operation is:
 \begin{equation}
     Challenge(00001) =\begin{cases}
@@ -20,7 +20,7 @@ a challenge 00001 has response 1(which means the bottom path is faster), the cal
 \begin{equation}
     0.203 < 1.214, \text { return response: 1}.
 \end{equation}
-In general, the route with lower delay will have a higher reward, on the other hand, the route with higher delay will have a lower reward. If the agent can predict with high accuracy, the arbiter PUF's CRPs pattern can say to 
+In general, the route with lower delay will have a higher reward, on the other hand, the route with higher delay will have a lower reward. If the agent can respond correct response in high probability, the arbiter PUF's CRPs pattern can say to 
 be successfully modelled. However, the accuracy for this modeling is around 60\% - 69\%, which is not a satisfying result. The problem can be the following: not providing enough features, the exploration does not 
 cover every possible route, etc.
 
@@ -74,11 +74,13 @@ $m3 \rightarrow m1$, $m4 \rightarrow m2$, including self-loop, and the adjacency
 \begin{figure}[htp]
     \centering
     \includegraphics[width=16cm]{figures/figure12.jpg}
-    \caption{GAT aggregation}
+    \caption{GAT aggregation on PUF structure}
     \label{fig:figure12}
     \end{figure}
 
-In article \cite{Reference10}, there are four steps to aggregate the features of each node. The first step, add a weight matrix $\mathcal{W}$ to gain enough expressive power to transform the features into higher-level features:
+In article \cite{Reference10}, there are four steps to aggregate the features of each node:
+
+The first step, add a weight matrix $\mathcal{W}$ to gain enough expressive power to transform the features into higher-level features:
 \begin{equation}
     n_i = \mathcal{W}f_i
 \end{equation}
@@ -90,19 +92,19 @@ adjacency matrix(See 4.3). First, concatenates the features of the two nodes(sym
     c_{ij} = LeakyReLU(\overrightarrow{a}^T(n_i \Vert n_j))
 \end{equation}
 
-The third step, apply Softmax function to normalize:
+The third step, apply Softmax function to normalize the attention value:
 \begin{equation}
     \alpha_{ij} = \frac{exp(c_{ij})}{\sum_{k \in N_i}  exp(c_{ik})} 
 \end{equation}
 
-The fourth step, aggregate the updated features from neighbors to current node, which consider the attention matrix:
+The fourth step, aggregate the updated features from neighbors to current node, which consider the attention value:
 \begin{equation}
     f_i^{'} = \sigma (\sum_{j \in N_i} \alpha_{ij}n_j)
 \end{equation}
 
 After updating every node's features, concatenates the node features of top path($f_1^{'}+f_3^{'}$)and bottom path($f_2^{'}+f_4^{'}$), and insert into a classify layer. Next, compare the output with ground fact
 (response of the challenge) and update the trainable parameter to increase the modeling accuracy. Ideally, the adjacency matrix will keep updating according to different input challenges, and the GAT will be able to 
-learn the pattern after looking at many CRPs. However, there is doubt that whether the GAT support dynamically changing adjacency matrix, so this idea is not done yet.
+learn the CRPs pattern after looking at many CRPs. However, there is doubt that whether the GAT support dynamically changing adjacency matrix, so this idea is completed.
 
 
 
