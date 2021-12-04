@@ -53,7 +53,7 @@ cover every possible route, etc.
 
 As for the GAT \cite{Reference10}, the basic idea of the GAT is that each node aggregate the neighbours’ features based on adjacency matrix, adjacency attention value then update each node's features. 
 The updated features will insert into the neural network and perform the classifying task. In order to reach high accuracy, the main task for the GAT is to update the adjacency attention matrix to
-right value.
+reasonable value.
 
 For a detail example, look at Figure \ref{fig:figure12}, which is a arbiter PUF structure. Assume each node in Figure \ref{fig:figure12} represent a multiplexer, and has node feature $f1,f2,f3,f4$. If input a 
 challenge 00, a one way relation is defined: 
@@ -78,9 +78,9 @@ $m3 \rightarrow m1$, $m4 \rightarrow m2$, including self-loop, and the adjacency
     \label{fig:figure12}
     \end{figure}
 
-In article \cite{Reference10}, there are four steps to aggregate the features of each node. The first step, add a weight matrix to gain enough expressive power to transform the features into higher-level features:
+In article \cite{Reference10}, there are four steps to aggregate the features of each node. The first step, add a weight matrix $\mathcal{W}$ to gain enough expressive power to transform the features into higher-level features:
 \begin{equation}
-    n_i = \mathcal{W}_if_i
+    n_i = \mathcal{W}f_i
 \end{equation}
 
 The second step, calculate a un-normalized attention value between every two nodes(i and j), but only consider nodes that is neighbor of i($j \in N_i$), where $N_i$ is the neighbor of node i that can be observed in 
