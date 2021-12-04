@@ -95,14 +95,14 @@ The third step, apply Softmax function to normalize:
     \alpha_{ij} = \frac{exp(c_{ij})}{\sum_{k \in N_i}  exp(c_{ik})} 
 \end{equation}
 
-The fourth step, aggregate the updated features from neighbors to current node, and consider the attention matrix:
+The fourth step, aggregate the updated features from neighbors to current node, which consider the attention matrix:
 \begin{equation}
     f_i^{'} = \sigma (\sum_{j \in N_i} \alpha_{ij}n_j)
 \end{equation}
 
 After updating every node's features, concatenates the node features of top path($f_1^{'}+f_3^{'}$)and bottom path($f_2^{'}+f_4^{'}$), and insert into a classify layer. Next, compare the output with ground fact
-(response of the challenge) to update the parameter to increase the prediction rate. Ideally, the adjacency matrix will keep updating according to different input challenges, and the GAT will be able to 
-learn the pattern after looking at many samples. However, there is doubt that whether the GAT support dynamically changing adjacency matrix, so this idea is not done yet.
+(response of the challenge) and update the trainable parameter to increase the prediction rate. Ideally, the adjacency matrix will keep updating according to different input challenges, and the GAT will be able to 
+learn the pattern after looking at many CRPs. However, there is doubt that whether the GAT support dynamically changing adjacency matrix, so this idea is not done yet.
 
 
 
