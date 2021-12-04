@@ -3,51 +3,48 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: dissertation.aux
 The style file: acm.bst
 Database file #1: reference.bib
-Warning--I'm ignoring Reference9's extra "year" field
---line 102 of file reference.bib
 Warning--empty journal in Reference10
 Warning--empty journal in Reference6
 Warning--empty journal in Reference3
-Warning--empty journal in Reference9
 You've used 11 entries,
             2253 wiz_defined-function locations,
             599 strings with 5893 characters,
-and the built_in function-call counts, 3126 in all, are:
+and the built_in function-call counts, 3151 in all, are:
 = -- 280
 > -- 187
 < -- 0
 + -- 80
 - -- 66
 * -- 231
-:= -- 564
+:= -- 562
 add.period$ -- 31
 call.type$ -- 11
 change.case$ -- 64
 chr.to.int$ -- 0
-cite$ -- 15
+cite$ -- 14
 duplicate$ -- 103
-empty$ -- 217
+empty$ -- 227
 format.name$ -- 66
-if$ -- 611
+if$ -- 621
 int.to.chr$ -- 0
 int.to.str$ -- 11
-missing$ -- 13
+missing$ -- 12
 newline$ -- 56
 num.names$ -- 22
-pop$ -- 65
+pop$ -- 70
 preamble$ -- 1
 purify$ -- 55
 quote$ -- 0
-skip$ -- 60
+skip$ -- 63
 stack$ -- 0
 substring$ -- 115
-swap$ -- 18
+swap$ -- 19
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 40
-warning$ -- 4
+warning$ -- 3
 while$ -- 26
 width$ -- 13
-write$ -- 101
-(There were 5 warnings)
+write$ -- 102
+(There were 3 warnings)

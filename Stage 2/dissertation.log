@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  4 DEC 2021 02:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  4 DEC 2021 03:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -255,11 +255,6 @@ Overfull \hbox (10.9927pt too wide) in paragraph at lines 5--9
 \OT1/cmr/m/n/10.95 This re-port in-ves-ti-gates and pro-vides a clear in-tro-duc-tion on PUF(physical un-clon-able func-tion),
  []
 
-
-Overfull \hbox (0.34683pt too wide) in paragraph at lines 5--9
-\OT1/cmr/m/n/10.95 on PUF, re-con-fig-ura-bil-ity frame-work and con-cepts cor-re-spond-ing to spe-cific ma-chine learn-ings
- []
-
 )
 Overfull \hbox (6.67351pt too wide) in paragraph at lines 15--68
 []\OT1/cmr/m/n/10.95 The achieve-ments to date are hav-ing a ro-bust un-der-stand-ing of PUF, re-con-fig-ura-bil-ity prop-erty,
@@ -292,11 +287,6 @@ Overfull \hbox (4.452pt too wide) in paragraph at lines 5--5
 
 ] (./chapters/chapter1.tex
 Chapter 1.
-
-Overfull \hbox (5.33278pt too wide) in paragraph at lines 16--23
-\OT1/cmr/m/n/10.95 in-sert-ing noise in PUF or ex-per-i-ment on OPUF(one-time-PUF) which con-tain a re-con-fig-u-ra-tion
- []
-
 [1
 
 
@@ -315,11 +305,11 @@ File: figures/figure2.jpg Graphic file (type jpg)
 <use figures/figure2.jpg>
 Package pdftex.def Info: figures/figure2.jpg  used on input line 27.
 (pdftex.def)             Requested size: 341.43306pt x 182.69359pt.
-<figures/figure3.jpg, id=44, 995.21812pt x 423.08063pt>
+<figures/figure3.jpg, id=44, 1004.25188pt x 423.08063pt>
 File: figures/figure3.jpg Graphic file (type jpg)
 <use figures/figure3.jpg>
 Package pdftex.def Info: figures/figure3.jpg  used on input line 39.
-(pdftex.def)             Requested size: 512.1496pt x 217.72433pt.
+(pdftex.def)             Requested size: 512.1496pt x 215.77472pt.
 
 Overfull \hbox (71.30214pt too wide) in paragraph at lines 39--40
  [][] 
@@ -337,11 +327,11 @@ File: figures/figure5.jpg Graphic file (type jpg)
 Package pdftex.def Info: figures/figure5.jpg  used on input line 62.
 (pdftex.def)             Requested size: 398.33858pt x 85.54253pt.
  [6 <./figures/figure4.jpg> <./figures/figure5.jpg>]
-<figures/figure6.jpg, id=57, 977.15062pt x 424.58624pt>
+<figures/figure6.jpg, id=57, 960.58875pt x 421.575pt>
 File: figures/figure6.jpg Graphic file (type jpg)
 <use figures/figure6.jpg>
 Package pdftex.def Info: figures/figure6.jpg  used on input line 81.
-(pdftex.def)             Requested size: 512.1496pt x 222.53535pt.
+(pdftex.def)             Requested size: 512.1496pt x 224.77168pt.
 
 Overfull \hbox (71.30214pt too wide) in paragraph at lines 81--82
  [][] 
@@ -451,7 +441,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  55i,13n,62p,587b,235s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on dissertation.pdf (25 pages, 1046480 bytes).
+Output written on dissertation.pdf (25 pages, 1092297 bytes).
 PDF statistics:
  184 PDF objects out of 1000 (max. 8388607)
  108 compressed objects within 2 object streams

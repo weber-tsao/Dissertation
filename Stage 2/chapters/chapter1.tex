@@ -17,8 +17,8 @@ The objectives are split into two parts for this project. In the first stage, pr
 behaviour, so predict the response from a given PUF when given challenge bits. For example, considered the simplest PUF which is arbiter PUF, its operation to create a response is to
 input a challenge bits(binary), and two signals will go through the multiplexers in the PUF structure depending on the value of it. Consequently response a binary bit
 that will indicate which signal is faster. Therefore, the machine learning for modeling will be related to the ETA(estimated time arrival) problem since the structure of PUF is similar to a road network. 
-For instance, travelling through each multiplexer is similar to travelling through each road segment, and both of them have delays to affect the time of arrival. Overall the first stage is to design a machine learning
-considering these concepts. In the second stage, design a reconfigurability framework to fight against such modeling. In detail, evaluate the machine learning by inserting noise in PUF or experiment on OPUF(one-time-PUF) which
+For instance, travelling through each multiplexer is similar to travelling through each road segment, and both of them have delays to affect the time of arrival. Overall the first stage is to design a modeling attack
+considering these concepts. In the second stage, design a reconfigurability framework to fight against such modeling. In detail, evaluate the modeling attack by inserting noise in PUF or experiment on OPUF(one-time-PUF) which
 contain a reconfiguration process that can alleviate modeling attack.
 
 \section{Overview of the Report}

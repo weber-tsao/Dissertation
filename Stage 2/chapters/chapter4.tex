@@ -92,7 +92,7 @@ adjacency matrix(See 4.3). First, concatenates the features of the two nodes(sym
 
 The third step, apply Softmax function to normalize:
 \begin{equation}
-    \alpha_{ij} = \frac{exp(e_{ij})}{\sum_{k \in N_i}  exp(e_{ik})} 
+    \alpha_{ij} = \frac{exp(c_{ij})}{\sum_{k \in N_i}  exp(c_{ik})} 
 \end{equation}
 
 The fourth step, aggregate the updated features from neighbors to current node, and consider the attention matrix:

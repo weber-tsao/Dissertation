@@ -4,7 +4,7 @@
 \contentsline {chapter}{\numberline {2}Literature Survey}{3}{}%
 \contentsline {section}{\numberline {2.1}The PUF concept}{3}{}%
 \contentsline {section}{\numberline {2.2}Weak and strong PUF}{4}{}%
-\contentsline {section}{\numberline {2.3}Authentication}{6}{}%
+\contentsline {section}{\numberline {2.3}Application of PUF: Authentication}{6}{}%
 \contentsline {section}{\numberline {2.4}Arbiter PUF and XOR arbiter PUF}{6}{}%
 \contentsline {section}{\numberline {2.5}Modeling attack on PUF}{8}{}%
 \contentsline {section}{\numberline {2.6}Reconfigurability of PUF}{9}{}%

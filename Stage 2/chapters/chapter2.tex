@@ -6,7 +6,7 @@ an object. The fingerprint is inherently created when people were born, and so d
 With the representation and inherent property, the fingerprint and the PUF is said to be unclonable since it is impossible to control and predict a human's fingerprint. This is an important concept for PUF. \par
 
 This intrinsic property can be extracted from a chip that has PUF circuit that existed inside \cite{Reference2}. The way PUF works is by entering a certain length of bits(so-called challenge) into the PUF, and it will
-generate another specific length of bits(so-called response). According to the property of PUF that was discussed above, it is impossible to find two different PUF that will produce the same response when entering the same challenge(See Figure \ref{fig:figure1}).
+generate another specific length of bits(so-called response). According to the property of PUF that was discussed in Chapter 1, it is impossible to find two different PUF that will produce the same response when entering the same challenge(See Figure \ref{fig:figure1}).
 \begin{figure}[htp]
 \centering
 \includegraphics[width=8cm]{figures/figure1.jpg}
@@ -41,8 +41,8 @@ as serious as weak PUF.
     \label{fig:figure3}
     \end{figure}
 
-\section{Authentication}
-One of the applications of PUF is authentication. As discussed in Chapter 1's introduction, PUF does not require huge computational power and are cost-effective, so it is suitable for many devices,
+\section{Application of PUF: Authentication}
+One of the applications of PUF is authentication. As discussed in introduction of Chapter 1, PUF does not require huge computational power and are cost-effective, so it is suitable for many devices,
 especially the resources-constraint devices. The PUF's authentication included two stages, the enrollment and the authentication stage. In the enrollment stage, the company possess the PUF, so
 the company can connect the server to PUF and send lots of challenges along with recording the CRPs into the database \cite{Reference2} (See Figure \ref{fig:figure4}).
 
@@ -65,7 +65,7 @@ if the challenge and response pair exists in the database, the device is valid \
     \end{figure}
 
 \section{Arbiter PUF and XOR arbiter PUF}
-There are many different types of PUF such as arbiter PUF, ring oscillator PUF, lightweight PUF, etc. In this paper, arbiter PUF and its mutation will be introduced in detail. The general idea of
+There are many different types of PUF such as arbiter PUF, ring oscillator PUF, lightweight PUF, etc. In this report, arbiter PUF and its mutation will be introduced in detail. The general idea of
 the arbiter PUF is comparing the transition speed for two electrical signals in the PUF's structure(See Figure \ref{fig:figure6}). The arbiter PUF's structure contains a number of 
 multiplexers and an arbiter(mostly D flipflop), and two multiplexers will be combined into a switching box \cite{Reference3}. Look at Figure \ref{fig:figure6}, when entering a challenge bit, apply each challenge bit to a switching box, bit 1 indicate the upper and lower signal will switch 
 while bit 0 indicate the two signals remain unchanged in each switching box. This will eventually form paths for the signals. Then the signals start transferring, the time arrived at the arbiter for two signals 
@@ -98,7 +98,7 @@ Many different threats can perform on devices, such as eavesdropped, gaining acc
 like machine learning to simulate the behaviour of CRPs(so-called modeling), which means even without the devices, attackers can still respond correctly when a challenge is 
 provided. Take arbiter puf as an example, assume an arbiter PUF with i switching box, and the challenge that applies to each switching box is c[i]. The two signals travel through the 
 path determined by challenge, and arrive at the arbiter at different time because of the delay in each component. The final response depends on the sign of final delay 
-difference:
+difference $\Delta c$:
 \begin{equation}
     r =\begin{cases}
     1, & \text{if $\Delta c<0$}.\\
@@ -106,11 +106,11 @@ difference:
     \end{cases}
 \end{equation}
 which the delay difference is calculated by subtracting the upper path with the lower path's delay. The final delay difference $\Delta c$ can represent as $w^{T}\Phi$, where $w^{T}$ is 
-a weight vector that represents delays for the components in PUF, and $\Phi$ is the applied i bits challenge \cite{Reference5}. $w^{T}\Phi = 0$ will provide a hyperplane that separates the space for $\Phi$, one side of the hyperplane are predicted as having response 1, the other side of the hyperplane
+a weight vector that represents delays for the components in PUF, and $\Phi$ is i bits challenges that was applied \cite{Reference5}. $w^{T}\Phi = 0$ will provide a hyperplane that separates the space for $\Phi$, one side of the hyperplane are predicted as having response 1, the other side of the hyperplane
 are predicted as having response -1. In conclusion, the correct hyperplane indicates a good prediction of PUF. Machine learning such as logistic regression can play the role well. The modeling result for an arbiter PUF with 64 switching boxes, 
 by using the logistic regression can get a good performance of 99.9\% in a very short time with 18050 training CRPs \cite{Reference6}.
 
-For the XOR arbiter PUF, it is also possible to use logistic regression to predict the behaviour but will be harder.
+For the XOR arbiter PUF, it is also possible to use logistic regression to predict the CRPs behaviour.
 
 \section{Reconfigurability of PUF}
 In order to alleviate the problem that PUF is vulnerable to modeling attack, reconfiguration property embedded on PUF has been proposed. For example, the one-time-PUF(so called 
@@ -119,7 +119,7 @@ forward unpredictability and backward unpredictability properties that OPUF poss
 The orange line represents the forward unpredictability, which will ensure the responses collected before the reconfiguration process is invalid afterwards. As for the blue line, 
 which represent backward unpredictability, it will ensure the pattern observed by an attacker using modeling attack on PUF' is invalid for predicting the PUF before reconfiguration process. 
 In this case, assume an attacker is performing a modeling attack on the PUF, and required a certain amount of CRPs to gain proper prediction. However, the OPUF's structure keeps changing every execution, which means the CRPs 
-behaviour is changing, so the modeling attack will can't be up to date or do not have time to collect enough CRPs.
+behaviour is changing, so the modeling attack can't keep up or do not have time to collect enough CRPs.
 \begin{figure}[htp]
     \centering
     \includegraphics[width=18cm]{figures/figure8.jpg}
