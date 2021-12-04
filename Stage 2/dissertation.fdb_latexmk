@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex dissertation"] 1638585755 "dissertation.aux" "dissertation.bbl" "dissertation" 1638586188
+["bibtex dissertation"] 1638586441 "dissertation.aux" "dissertation.bbl" "dissertation" 1638586609
   "c:/texlive/2021/texmf-dist/bibtex/bst/base/acm.bst" 1636970169 21064 c61a48664f3c347ce7f73c1a6a530506 ""
-  "dissertation.aux" 1638586188 5562 473c14684d884de34feeda4ed93da5b1 "pdflatex"
+  "dissertation.aux" 1638586609 5564 0c2711e08793ef353a6a17ecb4de8fc6 "pdflatex"
   "reference.bib" 1638584004 6093 47aea6a330bcd984e3225acfaa379b7c ""
   (generated)
   "dissertation.bbl"
   "dissertation.blg"
-["pdflatex"] 1638586186 "c:/Users/weber/OneDrive/Desktop/Dissertation/Stage 2/dissertation.tex" "dissertation.pdf" "dissertation" 1638586188
+["pdflatex"] 1638586608 "c:/Users/weber/OneDrive/Desktop/Dissertation/Stage 2/dissertation.tex" "dissertation.pdf" "dissertation" 1638586609
   "c:/Users/weber/OneDrive/Desktop/Dissertation/Stage 2/dissertation.tex" 1638575311 2826 ae3bcfb2f52450199c132b6556f709bf ""
   "c:/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1636971309 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1636969775 1004 54797486969f23fa377b128694d548df ""
@@ -82,16 +82,16 @@
   "c:/texlive/2021/texmf.cnf" 1636974676 713 614551405fc44b98efbf516466e3c909 ""
   "chapters/abstract.tex" 1638584763 1138 e7b590983f293a7ddc3751bff1e055d1 ""
   "chapters/chapter1.tex" 1638585150 4110 1baa1dd9db56fcfece248e1497294485 ""
-  "chapters/chapter2.tex" 1638585753 12682 7a3d4747236cba740f21759ff243dc15 ""
-  "chapters/chapter3.tex" 1638585987 2816 9041e32ea5ac3daf421e6f18e0dbbdd8 ""
-  "chapters/chapter4.tex" 1638586185 6022 1aa8d3e18945d6379356c66fc6b07bc4 ""
+  "chapters/chapter2.tex" 1638586607 12684 dd97a25b4abd66fb279669992b9df1a1 ""
+  "chapters/chapter3.tex" 1638586526 2816 d749e5c00eb1e7ce97bf15ef427c836b ""
+  "chapters/chapter4.tex" 1638586561 6022 ffc67f71db60e9fec9ba7412d25dee53 ""
   "chapters/chapter5.tex" 1638586040 976 bf3d081ed2337705c18ccd171b033c23 ""
-  "dissertation.aux" 1638586188 5562 473c14684d884de34feeda4ed93da5b1 "pdflatex"
-  "dissertation.bbl" 1638585755 2145 456b79dfa874cf6bfed27c537d0ed9b4 "bibtex dissertation"
-  "dissertation.lof" 1638586188 1507 9f4d403f945f0f472192a609e9b82ba6 "pdflatex"
-  "dissertation.lot" 1638586188 195 47369e61d66e4f441187060c05ace07b "pdflatex"
+  "dissertation.aux" 1638586609 5564 0c2711e08793ef353a6a17ecb4de8fc6 "pdflatex"
+  "dissertation.bbl" 1638586441 2145 456b79dfa874cf6bfed27c537d0ed9b4 "bibtex dissertation"
+  "dissertation.lof" 1638586609 1508 e7105e5f1fab52731053c4dd6fc9ac87 "pdflatex"
+  "dissertation.lot" 1638586609 195 47369e61d66e4f441187060c05ace07b "pdflatex"
   "dissertation.tex" 1638575311 2826 ae3bcfb2f52450199c132b6556f709bf ""
-  "dissertation.toc" 1638586188 1141 9fa9549028c1ccabbf78cc6f152ef373 "pdflatex"
+  "dissertation.toc" 1638586609 1141 5324a66e2e8d5e09e5092dfb0d27d7f3 "pdflatex"
   "figures/figure1.jpg" 1637601032 21300 ba9abfb218f423e7f362ae3c7b95b8f3 ""
   "figures/figure10.jpg" 1638495454 83414 4672d4bcfb9237c62bab613ad7e6076b ""
   "figures/figure11.jpg" 1638494752 11432 1ce88d6306757ab189159638d8486bd5 ""
@@ -107,8 +107,8 @@
   "images/tuoslogo.png" 1636983525 116271 a05bbca4b2b80522044d1f00bfb9b32f ""
   (generated)
   "dissertation.aux"
-  "dissertation.log"
   "dissertation.toc"
-  "dissertation.lot"
   "dissertation.pdf"
+  "dissertation.lot"
+  "dissertation.log"
   "dissertation.lof"

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  4 DEC 2021 02:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  4 DEC 2021 02:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -314,47 +314,72 @@ Package pdftex.def Info: figures/figure1.jpg  used on input line 12.
 File: figures/figure2.jpg Graphic file (type jpg)
 <use figures/figure2.jpg>
 Package pdftex.def Info: figures/figure2.jpg  used on input line 27.
-(pdftex.def)             Requested size: 284.52756pt x 152.24371pt.
+(pdftex.def)             Requested size: 341.43306pt x 182.69359pt.
 <figures/figure3.jpg, id=44, 995.21812pt x 423.08063pt>
 File: figures/figure3.jpg Graphic file (type jpg)
 <use figures/figure3.jpg>
 Package pdftex.def Info: figures/figure3.jpg  used on input line 39.
-(pdftex.def)             Requested size: 426.79134pt x 181.43694pt.
- [4 <./figures/figure1.jpg>] [5 <./figures/figure2.jpg> <./figures/figure3.jpg>]
+(pdftex.def)             Requested size: 512.1496pt x 217.72433pt.
+
+Overfull \hbox (71.30214pt too wide) in paragraph at lines 39--40
+ [][] 
+ []
+
+[4 <./figures/figure1.jpg>] [5 <./figures/figure2.jpg> <./figures/figure3.jpg>]
 <figures/figure4.jpg, id=51, 691.83469pt x 210.7875pt>
 File: figures/figure4.jpg Graphic file (type jpg)
 <use figures/figure4.jpg>
 Package pdftex.def Info: figures/figure4.jpg  used on input line 51.
-(pdftex.def)             Requested size: 227.62204pt x 69.35103pt.
+(pdftex.def)             Requested size: 398.33858pt x 121.3659pt.
 <figures/figure5.jpg, id=52, 816.80156pt x 175.40532pt>
 File: figures/figure5.jpg Graphic file (type jpg)
 <use figures/figure5.jpg>
 Package pdftex.def Info: figures/figure5.jpg  used on input line 62.
-(pdftex.def)             Requested size: 227.62204pt x 48.8803pt.
+(pdftex.def)             Requested size: 398.33858pt x 85.54253pt.
  [6 <./figures/figure4.jpg> <./figures/figure5.jpg>]
 <figures/figure6.jpg, id=57, 977.15062pt x 424.58624pt>
 File: figures/figure6.jpg Graphic file (type jpg)
 <use figures/figure6.jpg>
 Package pdftex.def Info: figures/figure6.jpg  used on input line 81.
-(pdftex.def)             Requested size: 341.43306pt x 148.35474pt.
+(pdftex.def)             Requested size: 512.1496pt x 222.53535pt.
+
+Overfull \hbox (71.30214pt too wide) in paragraph at lines 81--82
+ [][] 
+ []
+
 <figures/figure7.jpg, id=58, 983.92593pt x 411.03563pt>
 File: figures/figure7.jpg Graphic file (type jpg)
 <use figures/figure7.jpg>
 Package pdftex.def Info: figures/figure7.jpg  used on input line 91.
-(pdftex.def)             Requested size: 341.43306pt x 142.63533pt.
- [7 <./figures/figure6.jpg> <./figures/figure7.jpg>]
-<figures/figure8.jpg, id=63, 999.735pt x 327.47343pt>
+(pdftex.def)             Requested size: 512.1496pt x 213.95927pt.
+
+Overfull \hbox (71.30214pt too wide) in paragraph at lines 91--92
+ [][] 
+ []
+
+[7 <./figures/figure6.jpg>] [8 <./figures/figure7.jpg>]
+<figures/figure8.jpg, id=68, 999.735pt x 327.47343pt>
 File: figures/figure8.jpg Graphic file (type jpg)
 <use figures/figure8.jpg>
 Package pdftex.def Info: figures/figure8.jpg  used on input line 125.
-(pdftex.def)             Requested size: 398.33858pt x 130.47737pt.
- [8]
-<figures/figure9.jpg, id=69, 932.73468pt x 456.20438pt>
+(pdftex.def)             Requested size: 512.1496pt x 167.76376pt.
+
+Overfull \hbox (71.30214pt too wide) in paragraph at lines 125--126
+ [][] 
+ []
+
+[9 <./figures/figure8.jpg>]
+<figures/figure9.jpg, id=72, 932.73468pt x 456.20438pt>
 File: figures/figure9.jpg Graphic file (type jpg)
 <use figures/figure9.jpg>
 Package pdftex.def Info: figures/figure9.jpg  used on input line 137.
-(pdftex.def)             Requested size: 284.52756pt x 139.15953pt.
- [9 <./figures/figure8.jpg> <./figures/figure9.jpg>]) (./chapters/chapter3.tex [10]
+(pdftex.def)             Requested size: 512.1496pt x 250.50247pt.
+
+Overfull \hbox (71.30214pt too wide) in paragraph at lines 137--138
+ [][] 
+ []
+
+) (./chapters/chapter3.tex [10 <./figures/figure9.jpg>]
 Chapter 3.
 [11
 
@@ -363,7 +388,12 @@ Chapter 3.
 File: figures/figure10.jpg Graphic file (type jpg)
 <use figures/figure10.jpg>
 Package pdftex.def Info: figures/figure10.jpg  used on input line 22.
-(pdftex.def)             Requested size: 398.33858pt x 243.53716pt.
+(pdftex.def)             Requested size: 512.1496pt x 313.12343pt.
+
+Overfull \hbox (71.30214pt too wide) in paragraph at lines 22--23
+ [][] 
+ []
+
 ) (./chapters/chapter4.tex [12 <./figures/figure10.jpg>]
 Chapter 4.
 
@@ -389,8 +419,13 @@ Package pdftex.def Info: figures/figure11.jpg  used on input line 29.
 File: figures/figure12.jpg Graphic file (type jpg)
 <use figures/figure12.jpg>
 Package pdftex.def Info: figures/figure12.jpg  used on input line 76.
-(pdftex.def)             Requested size: 341.43306pt x 137.83684pt.
- [15 <./figures/figure12.jpg>]) (./chapters/chapter5.tex [16]
+(pdftex.def)             Requested size: 455.24408pt x 183.78648pt.
+
+Overfull \hbox (14.39662pt too wide) in paragraph at lines 76--77
+ [][] 
+ []
+
+[15 <./figures/figure12.jpg>]) (./chapters/chapter5.tex [16]
 Chapter 5.
 )
 Overfull \hbox (2.9323pt too wide) in paragraph at lines 8--86
@@ -410,13 +445,13 @@ Underfull \hbox (badness 1546) in paragraph at lines 37--41
 Here is how much of TeX's memory you used:
  3351 strings out of 478371
  52866 string characters out of 5852527
- 361113 words of memory out of 5000000
+ 361114 words of memory out of 5000000
  21390 multiletter control sequences out of 15000+600000
  412276 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,13n,62p,587b,235s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on dissertation.pdf (25 pages, 1046433 bytes).
+Output written on dissertation.pdf (25 pages, 1046480 bytes).
 PDF statistics:
  184 PDF objects out of 1000 (max. 8388607)
  108 compressed objects within 2 object streams

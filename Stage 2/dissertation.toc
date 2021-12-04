@@ -7,7 +7,7 @@
 \contentsline {section}{\numberline {2.3}Authentication}{6}{}%
 \contentsline {section}{\numberline {2.4}Arbiter PUF and XOR arbiter PUF}{6}{}%
 \contentsline {section}{\numberline {2.5}Modeling attack on PUF}{8}{}%
-\contentsline {section}{\numberline {2.6}Reconfigurability of PUF}{8}{}%
+\contentsline {section}{\numberline {2.6}Reconfigurability of PUF}{9}{}%
 \contentsline {section}{\numberline {2.7}Summary}{10}{}%
 \contentsline {chapter}{\numberline {3}Analysis}{11}{}%
 \contentsline {section}{\numberline {3.1}Project Aims and Evaluation}{11}{}%
