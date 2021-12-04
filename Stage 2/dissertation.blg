@@ -3,49 +3,51 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: dissertation.aux
 The style file: acm.bst
 Database file #1: reference.bib
-Warning--I didn't find a database entry for "Reference9"
+Warning--I'm ignoring Reference9's extra "year" field
+--line 102 of file reference.bib
 Warning--empty journal in Reference10
 Warning--empty journal in Reference6
 Warning--empty journal in Reference3
-You've used 9 entries,
+Warning--empty journal in Reference9
+You've used 11 entries,
             2253 wiz_defined-function locations,
-            592 strings with 5562 characters,
-and the built_in function-call counts, 2552 in all, are:
-= -- 231
-> -- 143
+            599 strings with 5893 characters,
+and the built_in function-call counts, 3126 in all, are:
+= -- 280
+> -- 187
 < -- 0
-+ -- 61
-- -- 50
-* -- 187
-:= -- 456
-add.period$ -- 26
-call.type$ -- 9
-change.case$ -- 50
++ -- 80
+- -- 66
+* -- 231
+:= -- 564
+add.period$ -- 31
+call.type$ -- 11
+change.case$ -- 64
 chr.to.int$ -- 0
-cite$ -- 12
-duplicate$ -- 86
-empty$ -- 185
-format.name$ -- 50
-if$ -- 504
+cite$ -- 15
+duplicate$ -- 103
+empty$ -- 217
+format.name$ -- 66
+if$ -- 611
 int.to.chr$ -- 0
-int.to.str$ -- 9
-missing$ -- 11
-newline$ -- 47
-num.names$ -- 18
-pop$ -- 52
+int.to.str$ -- 11
+missing$ -- 13
+newline$ -- 56
+num.names$ -- 22
+pop$ -- 65
 preamble$ -- 1
-purify$ -- 43
+purify$ -- 55
 quote$ -- 0
-skip$ -- 50
+skip$ -- 60
 stack$ -- 0
-substring$ -- 104
-swap$ -- 15
+substring$ -- 115
+swap$ -- 18
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 32
-warning$ -- 3
-while$ -- 22
-width$ -- 10
-write$ -- 85
-(There were 4 warnings)
+type$ -- 40
+warning$ -- 4
+while$ -- 26
+width$ -- 13
+write$ -- 101
+(There were 5 warnings)

@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{Reference2}
 {\sc Babaei, A., and Schiele, G.}
@@ -50,5 +50,16 @@
 \newblock Physical unclonable functions for device authentication and secret
   key generation.
 \newblock 9--14.
+
+\bibitem{Reference11}
+{\sc Yao, W., Zhengtai, C., Shanshan, S., Binwei, S., Zhi, Q., Wenbing, F., and
+  Juin, L.}
+\newblock A lightweight authentication protocol against modeling attacks based
+  on a novel lfsr-apuf and a private cover function.
+\newblock {\em IEEE Internet of Things Journal\/} (2021).
+
+\bibitem{Reference9}
+{\sc Zhou, M.}
+\newblock Reinforcement learning methods and tutorials.
 
 \end{thebibliography}

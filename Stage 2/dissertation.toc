@@ -4,7 +4,7 @@
 \contentsline {chapter}{\numberline {2}Literature Survey}{3}{}%
 \contentsline {section}{\numberline {2.1}The PUF concept}{3}{}%
 \contentsline {section}{\numberline {2.2}Weak and strong PUF}{4}{}%
-\contentsline {section}{\numberline {2.3}Authentication}{5}{}%
+\contentsline {section}{\numberline {2.3}Authentication}{6}{}%
 \contentsline {section}{\numberline {2.4}Arbiter PUF and XOR arbiter PUF}{6}{}%
 \contentsline {section}{\numberline {2.5}Modeling attack on PUF}{8}{}%
 \contentsline {section}{\numberline {2.6}Reconfigurability of PUF}{8}{}%
@@ -14,5 +14,4 @@
 \contentsline {chapter}{\numberline {4}Progress}{13}{}%
 \contentsline {section}{\numberline {4.1}Project progress}{13}{}%
 \contentsline {chapter}{\numberline {5}Conclusions}{17}{}%
-\contentsline {section}{\numberline {5.1}Project Plan}{17}{}%
-\contentsline {section}{\numberline {5.2}Summary of the project}{17}{}%
+\contentsline {section}{\numberline {5.1}Summary of the project and project Plan}{17}{}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  4 DEC 2021 01:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  4 DEC 2021 02:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -251,21 +251,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 52--53
 (./chapters/abstract.tex [1
 
 ]
-Overfull \hbox (0.4989pt too wide) in paragraph at lines 9--12
-[]\OT1/cmr/m/n/10.95 The aim for the project is to pro-pose a novel, suit-able ma-chine learn-ing to model PUF(physical
+Overfull \hbox (10.9927pt too wide) in paragraph at lines 5--9
+\OT1/cmr/m/n/10.95 This re-port in-ves-ti-gates and pro-vides a clear in-tro-duc-tion on PUF(physical un-clon-able func-tion),
  []
 
 
-Overfull \hbox (1.50267pt too wide) in paragraph at lines 14--17
-[]\OT1/cmr/m/n/10.95 The achieve-ments to date are hav-ing ro-bust un-der-stand-ing on PUF, re-con-fig-ura-bil-ity prop-erty,
+Overfull \hbox (0.34683pt too wide) in paragraph at lines 5--9
+\OT1/cmr/m/n/10.95 on PUF, re-con-fig-ura-bil-ity frame-work and con-cepts cor-re-spond-ing to spe-cific ma-chine learn-ings
  []
 
-
-Overfull \hbox (1.74481pt too wide) in paragraph at lines 14--17
-\OT1/cmr/m/n/10.95 learn-ing re-in-force-ment learn-ing has been tested on PUF but ac-cord-ing to false im-ple-men-ta-tion,
+)
+Overfull \hbox (6.67351pt too wide) in paragraph at lines 15--68
+[]\OT1/cmr/m/n/10.95 The achieve-ments to date are hav-ing a ro-bust un-der-stand-ing of PUF, re-con-fig-ura-bil-ity prop-erty,
  []
 
-) [2
+[2
 
 ] (./dissertation.toc [3
 
@@ -293,13 +293,8 @@ Overfull \hbox (4.452pt too wide) in paragraph at lines 5--5
 ] (./chapters/chapter1.tex
 Chapter 1.
 
-Overfull \hbox (16.1838pt too wide) in paragraph at lines 9--14
-\OT1/cmr/m/n/10.95 phys-i-cal char-ac-ter-is-tics [[]]. This is based on the in-evitable ran-dom vari-a-tion in ICs man-u-fac-tur-ing
- []
-
-
-Overfull \hbox (7.12859pt too wide) in paragraph at lines 16--23
-\OT1/cmr/m/n/10.95 PUF which is ar-biter PUF, its op-er-a-tion to cre-ate a re-sponse is to in-put a chal-lenge bits(binary),
+Overfull \hbox (5.33278pt too wide) in paragraph at lines 16--23
+\OT1/cmr/m/n/10.95 in-sert-ing noise in PUF or ex-per-i-ment on OPUF(one-time-PUF) which con-tain a re-con-fig-u-ra-tion
  []
 
 [1
@@ -320,34 +315,34 @@ File: figures/figure2.jpg Graphic file (type jpg)
 <use figures/figure2.jpg>
 Package pdftex.def Info: figures/figure2.jpg  used on input line 27.
 (pdftex.def)             Requested size: 284.52756pt x 152.24371pt.
- [4 <./figures/figure1.jpg> <./figures/figure2.jpg>]
-<figures/figure3.jpg, id=47, 995.21812pt x 423.08063pt>
+<figures/figure3.jpg, id=44, 995.21812pt x 423.08063pt>
 File: figures/figure3.jpg Graphic file (type jpg)
 <use figures/figure3.jpg>
 Package pdftex.def Info: figures/figure3.jpg  used on input line 39.
 (pdftex.def)             Requested size: 426.79134pt x 181.43694pt.
-<figures/figure4.jpg, id=48, 691.83469pt x 210.7875pt>
+ [4 <./figures/figure1.jpg>] [5 <./figures/figure2.jpg> <./figures/figure3.jpg>]
+<figures/figure4.jpg, id=51, 691.83469pt x 210.7875pt>
 File: figures/figure4.jpg Graphic file (type jpg)
 <use figures/figure4.jpg>
 Package pdftex.def Info: figures/figure4.jpg  used on input line 51.
 (pdftex.def)             Requested size: 227.62204pt x 69.35103pt.
- [5 <./figures/figure3.jpg> <./figures/figure4.jpg>]
 <figures/figure5.jpg, id=52, 816.80156pt x 175.40532pt>
 File: figures/figure5.jpg Graphic file (type jpg)
 <use figures/figure5.jpg>
 Package pdftex.def Info: figures/figure5.jpg  used on input line 62.
 (pdftex.def)             Requested size: 227.62204pt x 48.8803pt.
-<figures/figure6.jpg, id=53, 977.15062pt x 424.58624pt>
+ [6 <./figures/figure4.jpg> <./figures/figure5.jpg>]
+<figures/figure6.jpg, id=57, 977.15062pt x 424.58624pt>
 File: figures/figure6.jpg Graphic file (type jpg)
 <use figures/figure6.jpg>
 Package pdftex.def Info: figures/figure6.jpg  used on input line 81.
 (pdftex.def)             Requested size: 341.43306pt x 148.35474pt.
-<figures/figure7.jpg, id=54, 983.92593pt x 411.03563pt>
+<figures/figure7.jpg, id=58, 983.92593pt x 411.03563pt>
 File: figures/figure7.jpg Graphic file (type jpg)
 <use figures/figure7.jpg>
 Package pdftex.def Info: figures/figure7.jpg  used on input line 91.
 (pdftex.def)             Requested size: 341.43306pt x 142.63533pt.
- [6 <./figures/figure5.jpg>] [7 <./figures/figure6.jpg> <./figures/figure7.jpg>]
+ [7 <./figures/figure6.jpg> <./figures/figure7.jpg>]
 <figures/figure8.jpg, id=63, 999.735pt x 327.47343pt>
 File: figures/figure8.jpg Graphic file (type jpg)
 <use figures/figure8.jpg>
@@ -359,7 +354,7 @@ File: figures/figure9.jpg Graphic file (type jpg)
 <use figures/figure9.jpg>
 Package pdftex.def Info: figures/figure9.jpg  used on input line 137.
 (pdftex.def)             Requested size: 284.52756pt x 139.15953pt.
-) (./chapters/chapter3.tex [9 <./figures/figure8.jpg> <./figures/figure9.jpg>] [10]
+ [9 <./figures/figure8.jpg> <./figures/figure9.jpg>]) (./chapters/chapter3.tex [10]
 Chapter 3.
 [11
 
@@ -372,11 +367,8 @@ Package pdftex.def Info: figures/figure10.jpg  used on input line 22.
 ) (./chapters/chapter4.tex [12 <./figures/figure10.jpg>]
 Chapter 4.
 
-LaTeX Warning: Citation `Reference9' on page 13 undefined on input line 5.
-
-
-Overfull \hbox (10.65805pt too wide) in paragraph at lines 4--7
-\OT1/cmr/m/n/10.95 The project has two part, cur-rently the progress are at the point of dis-cov-er-ing and im-ple-ment-ing
+Overfull \hbox (10.08011pt too wide) in paragraph at lines 4--7
+\OT1/cmr/m/n/10.95 The project has two parts, cur-rently, the progress is at the point of dis-cov-er-ing and im-ple-ment-ing
  []
 
 
@@ -393,42 +385,38 @@ File: figures/figure11.jpg Graphic file (type jpg)
 Package pdftex.def Info: figures/figure11.jpg  used on input line 29.
 (pdftex.def)             Requested size: 170.71652pt x 69.12805pt.
  [14 <./figures/figure11.jpg>]
-<figures/figure12.jpg, id=93, 706.13812pt x 274.02374pt>
+<figures/figure12.jpg, id=93, 652.68843pt x 263.48438pt>
 File: figures/figure12.jpg Graphic file (type jpg)
 <use figures/figure12.jpg>
 Package pdftex.def Info: figures/figure12.jpg  used on input line 76.
-(pdftex.def)             Requested size: 341.43306pt x 132.49577pt.
+(pdftex.def)             Requested size: 341.43306pt x 137.83684pt.
  [15 <./figures/figure12.jpg>]) (./chapters/chapter5.tex [16]
 Chapter 5.
-) (./dissertation.bbl [17
-
-]
-Underfull \hbox (badness 1158) in paragraph at lines 14--19
-\OT1/cmr/m/n/10.95 to pre-vent ma-chine learn-ing at-tacks on puf-based au-then-ti-ca-tion mech-a-nisms for
+)
+Overfull \hbox (2.9323pt too wide) in paragraph at lines 8--86
+[]\OT1/cmr/m/n/10.95 After the mod-el-ing at-tack is im-ple-mented, will start on de-sign-ing a re-con-fig-ura-bil-ity frame-work
  []
 
+(./dissertation.bbl [17
 
-Underfull \hbox (badness 2012) in paragraph at lines 37--41
+]
+Underfull \hbox (badness 1546) in paragraph at lines 37--41
 []\OT1/cmr/m/sc/10.95 R[]uhrmair, U., Sehnke, F., S[]olter, J., Dror, G., De-vadas, S., and
  []
 
 ) [18
 
-] (./dissertation.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+] (./dissertation.aux) ) 
 Here is how much of TeX's memory you used:
- 3349 strings out of 478371
- 52841 string characters out of 5852527
- 361105 words of memory out of 5000000
- 21388 multiletter control sequences out of 15000+600000
+ 3351 strings out of 478371
+ 52866 string characters out of 5852527
+ 361113 words of memory out of 5000000
+ 21390 multiletter control sequences out of 15000+600000
  412276 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,13n,62p,587b,235s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on dissertation.pdf (25 pages, 1044238 bytes).
+Output written on dissertation.pdf (25 pages, 1046433 bytes).
 PDF statistics:
  184 PDF objects out of 1000 (max. 8388607)
  108 compressed objects within 2 object streams

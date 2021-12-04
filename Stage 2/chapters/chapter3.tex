@@ -1,20 +1,20 @@
 \chapter{Analysis}
-Overall, total two objectives are required for the project. In the first part, propose a novel machine learning to modeling different PUF(physical unclonable function)
-behavior, in particular arbiter PUF and XOR arbiter PUF. In the second part, consider reconfigurability like adding noise, one-time-PUF to resilient against the modeling attack
+Overall, a total of two objectives is required for the project. In the first part, propose a novel machine learning to modeling different PUF(physical unclonable function)
+behaviour, in particular arbiter PUF and XOR arbiter PUF. In the second part, consider reconfigurability like adding noise, one-time-PUF to resilient against the modeling attack
 proposed in part one.
 
 \section{Project Aims and Evaluation}
 The aims for part one are that the machine learning for modeling should be related to ETA(estimated time arrival) problem or the one people haven't used for modeling
-PUF. Moreover, reconfigurability need to be considered when proposing the modeling attack while knowing the PUF can escape from it by changing CRPs behaviors in part 
-two. Therefore, the machine learning should ideally adapt to the changing behavior of CRPs or the PUF. For example, unsupervised learning can be a good way since it can 
+PUF. Moreover, reconfigurability needs to be considered when proposing the modeling attack while knowing the PUF can escape from it by changing CRPs behaviours in part 
+two. Therefore, machine learning should ideally adapt to the changing behaviour of CRPs or the PUF. For example, unsupervised learning can be a good way since it can 
 deal with unseen data. To evaluate the work, an overall accuracy of the modeling are expected to be around 90\% and take short time like the logistic regression in 
 paper \cite{Reference6}.
 
-The aims for part two are proposing a reconfigurability framework for the modeling attack in part one. Two different reconfigurability will be implemented. First, add intentional
-noise to PUF's response during authentication phase to disturb the modeling attack \cite{Reference8}. The basic idea is shown in Figure \ref{fig:figure10}, assume database has stored PUF's CRPs and provide a challenge c
-to PUF in authentication phase. The PUF return a response r', and add noise e with r'. Then e and r' compose helper data h and send back to verifier, where $h = r'\oplus e$. The verifier can reproduce $r'\oplus e$  
-with r and h if r and $r'\oplus e$ is similar. Last, both verifier and user create their own hashtag and compare to check if authenticate. In this case, attacker only access to c and $r'\oplus e$, which the modeling
-will not be accurate unless the attacker's model response is closed enough to r'. To evaluate the work of adding intentional noise, the modeling attack proposed in part one should have reasonable accuracy drop and the authentication will still work 
+The aim for part two is to propose a reconfigurability framework for the modeling attack in part one. Two different reconfigurability will be implemented. First, add intentional
+noise to PUF's response during the authentication phase to disturb the modeling attack \cite{Reference8}. The basic idea is shown in Figure \ref{fig:figure10}, assuming the database has stored PUF's CRPs and provided a challenge c
+to PUF in the authentication phase. The PUF return a response r', and add noise e with r'. Then e and r' compose helper data h and send back to the verifier, where $h = r'\oplus e$. The verifier can reproduce $r'\oplus e$  
+with r and h if r and $r'\oplus e$ is similar. Last, both verifier and user create their own hashtag and compare to check if authenticate. In this case, the attacker only accesses to c and $r'\oplus e$, which the modeling
+will not be accurate unless the attacker's model response is closed enough to r'. To evaluate the work of adding intentional noise, the modeling attack proposed in part one should have a reasonable accuracy drop and the authentication will still work 
 though noise is added.
 
 \begin{figure}[htp]
@@ -24,8 +24,10 @@ though noise is added.
     \label{fig:figure10}
     \end{figure}
 
-Second, implement protection which referring to OPUF to change the behavior of CRPs and prevent modeling attack. With control of parameter like 1. Refreshed-pause timing 2. Allocating memory block, 
-the project will examinate the result of the protection. For example, look at the accuracy and time consumed when apply the modeling attack in part one.
+Second, implement protection which refers to OPUF to change the behaviour of CRPs and prevent modeling attacks. With control of parameters like 1. Refreshed-pause timing 2. Allocating memory block, 
+the project will examine the result of the protection. For example, look at the accuracy and time consumed when applying the modeling attack in part one.
+
+
 
 
 
