@@ -16,6 +16,3 @@
 \contentsline {chapter}{\numberline {5}Conclusions}{17}{}%
 \contentsline {section}{\numberline {5.1}Project Plan}{17}{}%
 \contentsline {section}{\numberline {5.2}Summary of the project}{17}{}%
-\contentsline {chapter}{Appendices}{19}{}%
-\contentsline {chapter}{\numberline {A}An Appendix of Some Kind}{20}{}%
-\contentsline {chapter}{\numberline {B}Another Appendix}{21}{}%

@@ -51,12 +51,13 @@ cover every possible routes, etc.
     \label{tab:table1}
     \end{table}
 
-As for the GAT \cite{Reference10}, the basic idea of the GAT is that each node aggregate the neighbors' features based on adjacency attention matrix and update its own features. 
+As for the GAT \cite{Reference10}, the basic idea of the GAT is that each node aggregate the neighbors' features based on adjacency matrix, adjacency attention value then update each node's features. 
 The updated features will insert into the neural network and perform classifying task. In order to reach to high accuracy, the main task for the GAT is to update adjacency attention matrix to
 right value.
 
-For example, look at Figure \ref{fig:figure12}, which is a arbiter PUF structure, has node feature $f1,f2,f3,f4$. When input a challenge 00, a one way relation is defined: 
-$m3 \rightarrow m1$, $m4 \rightarrow m2$, including self-loop, and the adjacency matrix is constructed(See 4.3). 
+For a detail example, look at Figure \ref{fig:figure12}, which is a arbiter PUF structure. Assume each nose in Figure \ref{fig:figure12} represent a multiplexer, and has node feature $f1,f2,f3,f4$. If input a 
+challenge 00, a one way relation is defined: 
+$m3 \rightarrow m1$, $m4 \rightarrow m2$, including self-loop, and the adjacency matrix can be constructed(See 4.3). 
 \begin{equation}
     \begin{blockarray}{ccccc}
     M1 & M2 & M3 & M4\\
@@ -70,38 +71,38 @@ $m3 \rightarrow m1$, $m4 \rightarrow m2$, including self-loop, and the adjacency
     \label{matrix}
 \end{equation}
 
-In article \cite{Reference10}, there are four steps to aggregate the features of each node. The first step, add a weight matrix into the feature so each feature has its own importance:
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=12cm]{figures/figure12.jpg}
+    \caption{GAT aggregation}
+    \label{fig:figure12}
+    \end{figure}
+
+In article \cite{Reference10}, there are four steps to aggregate the features of each node. The first step, add a weight matrix to gain enough expressive power to transform the features into higher level features:
 \begin{equation}
     n_i = \mathcal{W}_if_i
 \end{equation}
 
-The second step, compute a pair-wise un-normalized attention score between Here, it first concatenates the z embeddings of the two nodes, where || denotes concatenation, then takes a dot product of it
-with a learnable weight vector a, and applies a LeakyReLU in the end:
+The second step, calculate a un-normalized attention value between every two nodes(i and j). First, concatenates the features of the two nodes(symbol $\Vert$ represent concatenation), then perform a dot product
+with a trainable weight vector a, and applies a LeakyReLU at last:
 \begin{equation}
-    e_{ij} = LeakyReLU(\overrightarrow{a}^T_i(n_i \Vert n_j))
+    c_{ij} = LeakyReLU(\overrightarrow{a}^T(n_i \Vert n_j))
 \end{equation}
 
-The third step, apply Softmax function normalize:
+The third step, apply Softmax function to normalize:
 \begin{equation}
-    a_{ij} = \frac{exp(e_{ij})}{\sum_{k \in N_i}  exp(e_{ik})} 
+    \alpha_{ij} = \frac{exp(e_{ij})}{\sum_{k \in N_i}  exp(e_{ik})} 
 \end{equation}
 
-The fourth step, aggregate the embeddings from neighbors to current node, then scaled by the attention scores:
+The fourth step, aggregate the updated features from neighbors to current node, and consider the attention matrix:
 \begin{equation}
-    f_i = \sigma (\sum_{j \in N_i} a_{ij}n_j)
+    f_i^{'} = \sigma (\sum_{j \in N_i} \alpha_{ij}n_j)
 \end{equation}
 
 
-
-//Ideally the adjacency matrix will keep updating according to the input challenge, and the GAT will be able to learn the pattern after looking at many sample. However, there are doubt 
-that whether the GAT support dynamically changing adjacency matrix.//
-
-\begin{figure}[htp]
-    \centering
-    \includegraphics[width=10cm]{figures/figure12.jpg}
-    \caption{GAT aggregation}
-    \label{fig:figure12}
-    \end{figure}
+After updating every node's features, concatenates the node features of top path($f_1+f_3^{'}$)and bottom path($f_2+f_4^{'}$), and insert into a classify layer. Next, compare the output with ground fact
+(response of the challenge) to update the parameter to increase the prediction rate. Ideally, the adjacency matrix will keep updating according to different input challenge, and the GAT will be able to 
+learn the pattern after looking at many sample. However, there are doubt that whether the GAT support dynamically changing adjacency matrix, so this idea is not done yet.
 
 
 
