@@ -301,8 +301,8 @@ INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-OUTPUT dissertation.toc
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsl10.tfm
+OUTPUT dissertation.toc
 INPUT ./dissertation.lof
 INPUT dissertation.lof
 INPUT dissertation.lof

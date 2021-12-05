@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  5 DEC 2021 01:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  5 DEC 2021 02:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -166,20 +166,20 @@ File: l3backend-pdftex.def 2021-10-18 L3 backend support: PDF output (pdfTeX)
 ) (./dissertation.aux)
 \openout1 = `dissertation.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -237,14 +237,14 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 <images/tuoslogo.png, id=1, 78.2925pt x 79.2561pt>
 File: images/tuoslogo.png Graphic file (type png)
 <use images/tuoslogo.png>
-Package pdftex.def Info: images/tuoslogo.png  used on input line 32.
+Package pdftex.def Info: images/tuoslogo.png  used on input line 34.
 (pdftex.def)             Requested size: 142.26378pt x 144.03468pt.
  [1
 
 
 
 {c:/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./images/tuoslogo.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 52--53
+Underfull \hbox (badness 10000) in paragraph at lines 54--55
 
  []
 
@@ -256,7 +256,7 @@ Overfull \hbox (10.9927pt too wide) in paragraph at lines 5--9
  []
 
 )
-Overfull \hbox (6.67351pt too wide) in paragraph at lines 15--68
+Overfull \hbox (6.67351pt too wide) in paragraph at lines 15--70
 []\OT1/cmr/m/n/10.95 The achieve-ments to date are hav-ing a ro-bust un-der-stand-ing of PUF, re-con-fig-ura-bil-ity prop-erty,
  []
 
@@ -264,11 +264,11 @@ Overfull \hbox (6.67351pt too wide) in paragraph at lines 15--68
 
 ] (./dissertation.toc [3
 
-])
+] [4])
 \tf@toc=\write3
 \openout3 = `dissertation.toc'.
 
- [4] (./dissertation.lof
+ [5] (./dissertation.lof
 Overfull \hbox (4.452pt too wide) in paragraph at lines 5--5
  [][] []\OT1/cmr/m/n/10.95 The at-tacker eaves-dropped CRP that has been used can not suc-cess-fully val-i-date 
  []
@@ -277,13 +277,13 @@ Overfull \hbox (4.452pt too wide) in paragraph at lines 5--5
 \tf@lof=\write4
 \openout4 = `dissertation.lof'.
 
- [5
+ [6
 
 ] (./dissertation.lot)
 \tf@lot=\write5
 \openout5 = `dissertation.lot'.
 
- [6
+ [7
 
 ] (./chapters/chapter1.tex
 Chapter 1.
@@ -292,7 +292,7 @@ Chapter 1.
 
 ]) (./chapters/chapter2.tex [2]
 Chapter 2.
-<figures/figure1.jpg, id=39, 435.87843pt x 222.8325pt>
+<figures/figure1.jpg, id=42, 435.87843pt x 222.8325pt>
 File: figures/figure1.jpg Graphic file (type jpg)
 <use figures/figure1.jpg>
 Package pdftex.def Info: figures/figure1.jpg  used on input line 12.
@@ -300,13 +300,13 @@ Package pdftex.def Info: figures/figure1.jpg  used on input line 12.
 [3
 
  <./figures/figure1.jpg>]
-<figures/figure2.jpg, id=43, 686.565pt x 367.3725pt>
+<figures/figure2.jpg, id=46, 686.565pt x 367.3725pt>
 File: figures/figure2.jpg Graphic file (type jpg)
 <use figures/figure2.jpg>
 Package pdftex.def Info: figures/figure2.jpg  used on input line 29.
 (pdftex.def)             Requested size: 284.52756pt x 152.24371pt.
  [4 <./figures/figure2.jpg>]
-<figures/figure3.jpg, id=47, 1004.25188pt x 423.08063pt>
+<figures/figure3.jpg, id=50, 1004.25188pt x 423.08063pt>
 File: figures/figure3.jpg Graphic file (type jpg)
 <use figures/figure3.jpg>
 Package pdftex.def Info: figures/figure3.jpg  used on input line 43.
@@ -316,19 +316,19 @@ Overfull \hbox (14.39662pt too wide) in paragraph at lines 43--44
  [][] 
  []
 
-<figures/figure4.jpg, id=48, 691.83469pt x 210.7875pt>
+<figures/figure4.jpg, id=51, 691.83469pt x 210.7875pt>
 File: figures/figure4.jpg Graphic file (type jpg)
 <use figures/figure4.jpg>
 Package pdftex.def Info: figures/figure4.jpg  used on input line 58.
 (pdftex.def)             Requested size: 284.52756pt x 86.69038pt.
 [5 <./figures/figure3.jpg>]
-<figures/figure5.jpg, id=52, 816.80156pt x 175.40532pt>
+<figures/figure5.jpg, id=56, 816.80156pt x 175.40532pt>
 File: figures/figure5.jpg Graphic file (type jpg)
 <use figures/figure5.jpg>
 Package pdftex.def Info: figures/figure5.jpg  used on input line 70.
 (pdftex.def)             Requested size: 398.33858pt x 85.54253pt.
  [6 <./figures/figure4.jpg> <./figures/figure5.jpg>]
-<figures/figure6.jpg, id=57, 960.58875pt x 421.575pt>
+<figures/figure6.jpg, id=60, 960.58875pt x 421.575pt>
 File: figures/figure6.jpg Graphic file (type jpg)
 <use figures/figure6.jpg>
 Package pdftex.def Info: figures/figure6.jpg  used on input line 94.
@@ -338,7 +338,7 @@ Overfull \hbox (71.30214pt too wide) in paragraph at lines 94--95
  [][] 
  []
 
-<figures/figure7.jpg, id=58, 983.92593pt x 411.03563pt>
+<figures/figure7.jpg, id=61, 983.92593pt x 411.03563pt>
 File: figures/figure7.jpg Graphic file (type jpg)
 <use figures/figure7.jpg>
 Package pdftex.def Info: figures/figure7.jpg  used on input line 105.
@@ -349,7 +349,7 @@ Overfull \hbox (71.30214pt too wide) in paragraph at lines 105--106
  []
 
 [7 <./figures/figure6.jpg>] [8 <./figures/figure7.jpg>]
-<figures/figure8.jpg, id=68, 999.735pt x 327.47343pt>
+<figures/figure8.jpg, id=71, 999.735pt x 327.47343pt>
 File: figures/figure8.jpg Graphic file (type jpg)
 <use figures/figure8.jpg>
 Package pdftex.def Info: figures/figure8.jpg  used on input line 139.
@@ -360,7 +360,7 @@ Overfull \hbox (71.30214pt too wide) in paragraph at lines 139--140
  []
 
 [9 <./figures/figure8.jpg>]
-<figures/figure9.jpg, id=72, 932.73468pt x 456.20438pt>
+<figures/figure9.jpg, id=75, 932.73468pt x 456.20438pt>
 File: figures/figure9.jpg Graphic file (type jpg)
 <use figures/figure9.jpg>
 Package pdftex.def Info: figures/figure9.jpg  used on input line 152.
@@ -385,7 +385,7 @@ Overfull \hbox (22.67273pt too wide) in paragraph at lines 9--14
 [12
 
 ]
-<figures/figure10.jpg, id=83, 794.2172pt x 485.56406pt>
+<figures/figure10.jpg, id=86, 794.2172pt x 485.56406pt>
 File: figures/figure10.jpg Graphic file (type jpg)
 <use figures/figure10.jpg>
 Package pdftex.def Info: figures/figure10.jpg  used on input line 27.
@@ -404,13 +404,13 @@ Overfull \hbox (8.41194pt too wide) detected at line 22
 []\OML/cmm/m/it/10.95 Challenge\OT1/cmr/m/n/10.95 (00001) = []
  []
 
-<figures/figure11.jpg, id=95, 213.79875pt x 86.57344pt>
+<figures/figure11.jpg, id=98, 213.79875pt x 86.57344pt>
 File: figures/figure11.jpg Graphic file (type jpg)
 <use figures/figure11.jpg>
 Package pdftex.def Info: figures/figure11.jpg  used on input line 30.
 (pdftex.def)             Requested size: 170.71652pt x 69.12805pt.
 [16 <./figures/figure11.jpg>]
-<figures/figure12.jpg, id=99, 639.13782pt x 304.88907pt>
+<figures/figure12.jpg, id=102, 639.13782pt x 304.88907pt>
 File: figures/figure12.jpg Graphic file (type jpg)
 <use figures/figure12.jpg>
 Package pdftex.def Info: figures/figure12.jpg  used on input line 84.
@@ -423,7 +423,7 @@ Overfull \hbox (14.39662pt too wide) in paragraph at lines 84--85
 [17 <./figures/figure12.jpg>]) (./chapters/chapter5.tex [18]
 Chapter 5.
 )
-Overfull \hbox (8.9244pt too wide) in paragraph at lines 11--86
+Overfull \hbox (8.9244pt too wide) in paragraph at lines 11--88
 \OT1/cmr/m/n/10.95 In the long term, af-ter the mod-el-ing at-tack is im-ple-mented, start on de-sign-ing a re-con-fig-ura-bil-ity
  []
 
@@ -446,10 +446,10 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  55i,13n,62p,587b,235s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on dissertation.pdf (27 pages, 1104980 bytes).
+Output written on dissertation.pdf (28 pages, 1105627 bytes).
 PDF statistics:
- 190 PDF objects out of 1000 (max. 8388607)
- 112 compressed objects within 2 object streams
+ 193 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
