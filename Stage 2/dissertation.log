@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  5 DEC 2021 02:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  5 DEC 2021 03:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -422,34 +422,44 @@ Overfull \hbox (14.39662pt too wide) in paragraph at lines 84--85
 
 [17 <./figures/figure12.jpg>]) (./chapters/chapter5.tex [18]
 Chapter 5.
+<figures/figure13.jpg, id=113, 818.30719pt x 530.73282pt>
+File: figures/figure13.jpg Graphic file (type jpg)
+<use figures/figure13.jpg>
+Package pdftex.def Info: figures/figure13.jpg  used on input line 8.
+(pdftex.def)             Requested size: 512.1496pt x 332.185pt.
+
+Overfull \hbox (71.30214pt too wide) in paragraph at lines 8--9
+ [][] 
+ []
+
 )
-Overfull \hbox (8.9244pt too wide) in paragraph at lines 11--88
+Overfull \hbox (8.9244pt too wide) in paragraph at lines 19--88
 \OT1/cmr/m/n/10.95 In the long term, af-ter the mod-el-ing at-tack is im-ple-mented, start on de-sign-ing a re-con-fig-ura-bil-ity
  []
 
 (./dissertation.bbl [19
 
-]
+] [20 <./figures/figure13.jpg>]
 Underfull \hbox (badness 1546) in paragraph at lines 37--41
 []\OT1/cmr/m/sc/10.95 R[]uhrmair, U., Sehnke, F., S[]olter, J., Dror, G., De-vadas, S., and
  []
 
-) [20
+) [21
 
 ] (./dissertation.aux) ) 
 Here is how much of TeX's memory you used:
- 3352 strings out of 478371
- 52881 string characters out of 5852527
- 360114 words of memory out of 5000000
- 21391 multiletter control sequences out of 15000+600000
+ 3360 strings out of 478371
+ 53058 string characters out of 5852527
+ 360125 words of memory out of 5000000
+ 21398 multiletter control sequences out of 15000+600000
  412583 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,13n,62p,587b,235s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on dissertation.pdf (28 pages, 1105627 bytes).
+Output written on dissertation.pdf (29 pages, 1211895 bytes).
 PDF statistics:
- 193 PDF objects out of 1000 (max. 8388607)
- 114 compressed objects within 2 object streams
+ 197 PDF objects out of 1000 (max. 8388607)
+ 116 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 71 words of extra memory for PDF output out of 10000 (max. 10000000)
 
