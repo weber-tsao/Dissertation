@@ -1,10 +1,16 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}{}%
-\contentsline {section}{\numberline {1.1}Aims and Objectives}{2}{}%
+\contentsline {subsection}{\numberline {1.0.1}Conventional protection of devices}{1}{}%
+\contentsline {subsection}{\numberline {1.0.2}Advantage of PUF compare to conventional protection on devices}{1}{}%
+\contentsline {section}{\numberline {1.1}Aims and Objectives of the project}{2}{}%
 \contentsline {section}{\numberline {1.2}Overview of the Report}{2}{}%
 \contentsline {chapter}{\numberline {2}Literature Survey}{3}{}%
 \contentsline {section}{\numberline {2.1}The PUF concept}{3}{}%
 \contentsline {section}{\numberline {2.2}Weak and strong PUF}{4}{}%
-\contentsline {section}{\numberline {2.3}Application of PUF: Authentication}{6}{}%
+\contentsline {subsection}{\numberline {2.2.1}Weak PUF}{4}{}%
+\contentsline {subsection}{\numberline {2.2.2}Strong PUF}{4}{}%
+\contentsline {section}{\numberline {2.3}Application of PUF: Authentication}{5}{}%
+\contentsline {subsection}{\numberline {2.3.1}Authentication process: Enrollment stage}{5}{}%
+\contentsline {subsection}{\numberline {2.3.2}Authentication process: Authentication stage}{6}{}%
 \contentsline {section}{\numberline {2.4}Arbiter PUF and XOR arbiter PUF}{6}{}%
 \contentsline {section}{\numberline {2.5}Modeling attack on PUF}{8}{}%
 \contentsline {section}{\numberline {2.6}Reconfigurability of PUF}{9}{}%

@@ -315,6 +315,7 @@ INPUT ./chapters/chapter1.tex
 INPUT chapters/chapter1.tex
 INPUT ./chapters/chapter1.tex
 INPUT chapters/chapter1.tex
+INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT ./chapters/chapter2.tex
 INPUT chapters/chapter2.tex
 INPUT ./chapters/chapter2.tex
