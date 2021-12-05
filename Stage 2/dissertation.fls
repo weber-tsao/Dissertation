@@ -397,11 +397,11 @@ INPUT ./chapters/chapter5.tex
 INPUT chapters/chapter5.tex
 INPUT ./chapters/chapter5.tex
 INPUT chapters/chapter5.tex
-INPUT ./figures/figure13.jpg
-INPUT ./figures/figure13.jpg
-INPUT figures/figure13.jpg
-INPUT ./figures/figure13.jpg
-INPUT ./figures/figure13.jpg
+INPUT ./figures/project_plan.png
+INPUT ./figures/project_plan.png
+INPUT figures/project_plan.png
+INPUT ./figures/project_plan.png
+INPUT ./figures/project_plan.png
 INPUT ./dissertation.bbl
 INPUT dissertation.bbl
 INPUT ./dissertation.bbl
