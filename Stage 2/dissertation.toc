@@ -11,13 +11,30 @@
 \contentsline {section}{\numberline {2.3}Application of PUF: Authentication}{5}{}%
 \contentsline {subsection}{\numberline {2.3.1}Authentication process: Enrollment stage}{5}{}%
 \contentsline {subsection}{\numberline {2.3.2}Authentication process: Authentication stage}{6}{}%
-\contentsline {section}{\numberline {2.4}Arbiter PUF and XOR arbiter PUF}{6}{}%
-\contentsline {section}{\numberline {2.5}Modeling attack on PUF}{8}{}%
-\contentsline {section}{\numberline {2.6}Reconfigurability of PUF}{9}{}%
+\contentsline {section}{\numberline {2.4}Different type of PUF: Arbiter PUF and XOR arbiter PUF}{6}{}%
+\contentsline {subsection}{\numberline {2.4.1}Idea of arbiter PUF}{6}{}%
+\contentsline {subsection}{\numberline {2.4.2}Idea of XOR arbiter PUF}{7}{}%
+\contentsline {section}{\numberline {2.5}Potential threat on PUF: Modeling attack}{8}{}%
+\contentsline {section}{\numberline {2.6}Countermeasure for modeling attack: Reconfigurability}{9}{}%
+\contentsline {subsection}{\numberline {2.6.1}Basic concept of a type of reconfigurability framework: OPUF}{9}{}%
+\contentsline {subsection}{\numberline {2.6.2}DPUF: An example of OPUF}{10}{}%
 \contentsline {section}{\numberline {2.7}Summary}{10}{}%
-\contentsline {chapter}{\numberline {3}Analysis}{11}{}%
-\contentsline {section}{\numberline {3.1}Project Aims and Evaluation}{11}{}%
-\contentsline {chapter}{\numberline {4}Progress}{13}{}%
-\contentsline {section}{\numberline {4.1}Project progress}{13}{}%
-\contentsline {chapter}{\numberline {5}Conclusions}{17}{}%
-\contentsline {section}{\numberline {5.1}Summary of the project and project Plan}{17}{}%
+\contentsline {chapter}{\numberline {3}Analysis}{12}{}%
+\contentsline {section}{\numberline {3.1}Project Aims and Evaluation}{12}{}%
+\contentsline {subsection}{\numberline {3.1.1}Modeling attack}{12}{}%
+\contentsline {subsection}{\numberline {3.1.2}Reconfigurability framework}{13}{}%
+\contentsline {subsubsection}{Add intentional noise}{13}{}%
+\contentsline {subsubsection}{OPUF}{14}{}%
+\contentsline {chapter}{\numberline {4}Progress}{15}{}%
+\contentsline {section}{\numberline {4.1}Project progress}{15}{}%
+\contentsline {subsection}{\numberline {4.1.1}SARSALambda Q learning}{15}{}%
+\contentsline {subsubsection}{Example of SARSALambda Q learning}{15}{}%
+\contentsline {subsubsection}{Evaluation of SARSALambda Q learning}{16}{}%
+\contentsline {subsection}{\numberline {4.1.2}Graph attention neural network}{17}{}%
+\contentsline {subsubsection}{Example of Graph attention neural network}{17}{}%
+\contentsline {subsubsection}{Aggregate operation of Graph attention neural network}{18}{}%
+\contentsline {subsubsection}{Evaluation of Graph attention neural network}{18}{}%
+\contentsline {chapter}{\numberline {5}Conclusions}{19}{}%
+\contentsline {section}{\numberline {5.1}Summary of the project and project Plan}{19}{}%
+\contentsline {subsection}{\numberline {5.1.1}Short term plan}{19}{}%
+\contentsline {subsection}{\numberline {5.1.2}Long term plan}{19}{}%

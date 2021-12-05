@@ -72,9 +72,12 @@ if the challenge and response pair exists in the database, the device is valid \
     \label{fig:figure5}
     \end{figure}
 
-\section{Arbiter PUF and XOR arbiter PUF}
-There are many different types of PUF such as arbiter PUF, ring oscillator PUF, lightweight PUF, etc. In this report, arbiter PUF and its mutation will be introduced in detail. The general idea of
-the arbiter PUF is comparing the transition speed for two electrical signals in the PUF's structure(See Figure \ref{fig:figure6}). The arbiter PUF's structure contains a number of 
+\section{Different type of PUF: Arbiter PUF and XOR arbiter PUF}
+There are many different types of PUF such as arbiter PUF, ring oscillator PUF, lightweight PUF, etc. In this report, arbiter PUF and its mutation will be introduced in detail. 
+
+\subsection{Idea of arbiter PUF}
+The general idea of the arbiter PUF is comparing the transition speed for two electrical signals in the PUF's structure(See Figure \ref{fig:figure6}). 
+The arbiter PUF's structure contains a number of 
 multiplexers and an arbiter(mostly D flipflop), and two multiplexers will be combined into a switching box \cite{Reference3}. Look at Figure \ref{fig:figure6}, when entering a challenge bit, apply each challenge bit to a switching box, bit 1 indicate the upper and lower signal will switch 
 while bit 0 indicate the two signals remain unchanged in each switching box. This will eventually form paths for the signals(red and green line). Then the signals start transferring, the time arrived at the arbiter for two signals 
 is different since each multiplexer and wire has a unique delay. The arbiter will determine which path is faster and based on that response a binary bit if the upper path is faster, the response is 1, 
@@ -93,6 +96,7 @@ number of CRPs is $2^{n}$, which indicate the arbiter PUF is a strong PUF. Arbit
     \label{fig:figure6}
     \end{figure}
 
+\subsection{Idea of XOR arbiter PUF}
 The normal arbiter PUF is vulnerable to modeling attack, the purpose of XOR arbiter PUF is to increase the robustness of arbiter PUF. The basic concept is to integrate multiple parallel arbiter PUF, given the same challenge to each arbiter PUF and XORed each response to produce the final response(See Figure \ref{fig:figure7}) \cite{Reference5}.
 According to simulation, book \cite{Reference4} provides the XOR arbiter PUF will have nonlinearity property that makes it harder to model.
 
@@ -103,7 +107,7 @@ According to simulation, book \cite{Reference4} provides the XOR arbiter PUF wil
     \label{fig:figure7}
     \end{figure}
 
-\section{Modeling attack on PUF}
+\section{Potential threat on PUF: Modeling attack}
 Many different threats can perform on devices, such as eavesdropped, gaining access to the memory that stores secret keys. For PUF, the main threat is that attackers can use techniques 
 like machine learning to simulate the behaviour of CRPs(so-called modeling), which means even without the devices, attackers can still respond correctly when a challenge is 
 provided. Take arbiter puf as an example, assume an arbiter PUF with i switching box, and the challenge that applies to each switching box is c[i]. The two signals travel through the 
@@ -120,7 +124,9 @@ a weight vector that represents delays for the components in PUF, and $\Phi$ is 
 are predicted as having response -1. In conclusion, the correct hyperplane indicates a good prediction of PUF. Machine learning such as logistic regression can play the role well. The modeling result for an arbiter PUF with 64 switching boxes, 
 by using the logistic regression can get a good performance of 99.9\% in a very short time with 18050 training CRPs \cite{Reference6}.
 
-\section{Reconfigurability of PUF}
+\section{Countermeasure for modeling attack: Reconfigurability}
+
+\subsection{Basic concept of a type of reconfigurability framework: OPUF}
 In order to alleviate the problem that PUF is vulnerable to modeling attack, reconfiguration property embedded on PUF has been proposed. For example, the one-time-PUF(so called 
 OPUF), the general idea is that its configuration alters after every authentication session, which means CRPs behaviour of the PUF is changed and invalidate the modeling attack. This is based on the
 forward unpredictability and backward unpredictability properties that OPUF possess \cite{Reference7}. Figure \ref{fig:figure8} shows the concept of forward unpredictability and backward unpredictability.
@@ -135,6 +141,7 @@ behaviour is changing, so the modeling attack can't keep up or do not have time 
     \label{fig:figure8}
     \end{figure}
 
+\subsection{DPUF: An example of OPUF}
 DPUF can be considered as an example for creating the OPUF, it is built up with bit cells that contain capacitors and transistors, each cell stores information of values 0 and 1 \cite{Reference7}. However, these components will leak 
 electrical signals every period of time, which means the behaviour might be eavesdropped. Therefore performing the reconfiguration process every period of time is effective. The reconfigurability can be shown in Figure \ref{fig:figure9}, by varying parameters
 such as refresh-pause interval and the memory block, where the former can cause random bit flip in the cells while the latter store the final response in a random memory block 

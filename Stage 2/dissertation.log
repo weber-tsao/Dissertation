@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  5 DEC 2021 00:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  5 DEC 2021 01:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -331,121 +331,125 @@ Package pdftex.def Info: figures/figure5.jpg  used on input line 70.
 <figures/figure6.jpg, id=57, 960.58875pt x 421.575pt>
 File: figures/figure6.jpg Graphic file (type jpg)
 <use figures/figure6.jpg>
-Package pdftex.def Info: figures/figure6.jpg  used on input line 91.
+Package pdftex.def Info: figures/figure6.jpg  used on input line 94.
 (pdftex.def)             Requested size: 512.1496pt x 224.77168pt.
 
-Overfull \hbox (71.30214pt too wide) in paragraph at lines 91--92
+Overfull \hbox (71.30214pt too wide) in paragraph at lines 94--95
  [][] 
  []
 
 <figures/figure7.jpg, id=58, 983.92593pt x 411.03563pt>
 File: figures/figure7.jpg Graphic file (type jpg)
 <use figures/figure7.jpg>
-Package pdftex.def Info: figures/figure7.jpg  used on input line 101.
+Package pdftex.def Info: figures/figure7.jpg  used on input line 105.
 (pdftex.def)             Requested size: 512.1496pt x 213.95927pt.
 
-Overfull \hbox (71.30214pt too wide) in paragraph at lines 101--102
+Overfull \hbox (71.30214pt too wide) in paragraph at lines 105--106
  [][] 
  []
 
-[7 <./figures/figure6.jpg>]
-<figures/figure8.jpg, id=63, 999.735pt x 327.47343pt>
+[7 <./figures/figure6.jpg>] [8 <./figures/figure7.jpg>]
+<figures/figure8.jpg, id=68, 999.735pt x 327.47343pt>
 File: figures/figure8.jpg Graphic file (type jpg)
 <use figures/figure8.jpg>
-Package pdftex.def Info: figures/figure8.jpg  used on input line 133.
+Package pdftex.def Info: figures/figure8.jpg  used on input line 139.
 (pdftex.def)             Requested size: 512.1496pt x 167.76376pt.
 
-Overfull \hbox (71.30214pt too wide) in paragraph at lines 133--134
+Overfull \hbox (71.30214pt too wide) in paragraph at lines 139--140
  [][] 
  []
 
-[8 <./figures/figure7.jpg>]
-<figures/figure9.jpg, id=69, 932.73468pt x 456.20438pt>
+[9 <./figures/figure8.jpg>]
+<figures/figure9.jpg, id=72, 932.73468pt x 456.20438pt>
 File: figures/figure9.jpg Graphic file (type jpg)
 <use figures/figure9.jpg>
-Package pdftex.def Info: figures/figure9.jpg  used on input line 145.
+Package pdftex.def Info: figures/figure9.jpg  used on input line 152.
 (pdftex.def)             Requested size: 512.1496pt x 250.50247pt.
 
-Overfull \hbox (71.30214pt too wide) in paragraph at lines 145--146
+Overfull \hbox (71.30214pt too wide) in paragraph at lines 152--153
  [][] 
  []
 
-[9 <./figures/figure8.jpg>]) (./chapters/chapter3.tex [10 <./figures/figure9.jpg>]
+) (./chapters/chapter3.tex [10 <./figures/figure9.jpg>] [11]
 Chapter 3.
-[11
+
+Overfull \hbox (19.23563pt too wide) in paragraph at lines 9--14
+\OT1/cmr/m/n/10.95 The aim for part one is that the ma-chine learn-ing for mod-el-ing should be re-lated to ETA(estimated
+ []
+
+
+Overfull \hbox (22.67273pt too wide) in paragraph at lines 9--14
+\OT1/cmr/m/n/10.95 time ar-rival) prob-lem or the one peo-ple haven't used for mod-el-ing PUF. More-over, re-con-fig-ura-bil-ity
+ []
+
+[12
 
 ]
-<figures/figure10.jpg, id=79, 794.2172pt x 485.56406pt>
+<figures/figure10.jpg, id=83, 794.2172pt x 485.56406pt>
 File: figures/figure10.jpg Graphic file (type jpg)
 <use figures/figure10.jpg>
-Package pdftex.def Info: figures/figure10.jpg  used on input line 22.
-(pdftex.def)             Requested size: 512.1496pt x 313.12343pt.
-
-Overfull \hbox (71.30214pt too wide) in paragraph at lines 22--23
- [][] 
- []
-
-) (./chapters/chapter4.tex [12 <./figures/figure10.jpg>]
+Package pdftex.def Info: figures/figure10.jpg  used on input line 27.
+(pdftex.def)             Requested size: 426.79134pt x 260.93373pt.
+ [13 <./figures/figure10.jpg>]) (./chapters/chapter4.tex [14]
 Chapter 4.
 
-Overfull \hbox (10.08011pt too wide) in paragraph at lines 4--7
+Overfull \hbox (10.08011pt too wide) in paragraph at lines 4--6
 \OT1/cmr/m/n/10.95 The project has two parts, cur-rently, the progress is at the point of dis-cov-er-ing and im-ple-ment-ing
  []
 
+[15
 
-Overfull \hbox (8.41194pt too wide) detected at line 18
+]
+Overfull \hbox (8.41194pt too wide) detected at line 22
 []\OML/cmm/m/it/10.95 Challenge\OT1/cmr/m/n/10.95 (00001) = []
  []
 
-[13
-
-]
-<figures/figure11.jpg, id=89, 213.79875pt x 86.57344pt>
+<figures/figure11.jpg, id=95, 213.79875pt x 86.57344pt>
 File: figures/figure11.jpg Graphic file (type jpg)
 <use figures/figure11.jpg>
-Package pdftex.def Info: figures/figure11.jpg  used on input line 29.
+Package pdftex.def Info: figures/figure11.jpg  used on input line 30.
 (pdftex.def)             Requested size: 170.71652pt x 69.12805pt.
- [14 <./figures/figure11.jpg>]
-<figures/figure12.jpg, id=93, 639.13782pt x 304.88907pt>
+[16 <./figures/figure11.jpg>]
+<figures/figure12.jpg, id=99, 639.13782pt x 304.88907pt>
 File: figures/figure12.jpg Graphic file (type jpg)
 <use figures/figure12.jpg>
-Package pdftex.def Info: figures/figure12.jpg  used on input line 76.
+Package pdftex.def Info: figures/figure12.jpg  used on input line 84.
 (pdftex.def)             Requested size: 455.24408pt x 217.16592pt.
 
-Overfull \hbox (14.39662pt too wide) in paragraph at lines 76--77
+Overfull \hbox (14.39662pt too wide) in paragraph at lines 84--85
  [][] 
  []
 
-[15 <./figures/figure12.jpg>]) (./chapters/chapter5.tex [16]
+[17 <./figures/figure12.jpg>]) (./chapters/chapter5.tex [18]
 Chapter 5.
 )
-Overfull \hbox (8.9244pt too wide) in paragraph at lines 9--86
-[]\OT1/cmr/m/n/10.95 In the long term, af-ter the mod-el-ing at-tack is im-ple-mented, start on de-sign-ing a re-con-fig-ura-bil-ity
+Overfull \hbox (8.9244pt too wide) in paragraph at lines 11--86
+\OT1/cmr/m/n/10.95 In the long term, af-ter the mod-el-ing at-tack is im-ple-mented, start on de-sign-ing a re-con-fig-ura-bil-ity
  []
 
-(./dissertation.bbl [17
+(./dissertation.bbl [19
 
 ]
 Underfull \hbox (badness 1546) in paragraph at lines 37--41
 []\OT1/cmr/m/sc/10.95 R[]uhrmair, U., Sehnke, F., S[]olter, J., Dror, G., De-vadas, S., and
  []
 
-) [18
+) [20
 
 ] (./dissertation.aux) ) 
 Here is how much of TeX's memory you used:
  3352 strings out of 478371
  52881 string characters out of 5852527
- 361114 words of memory out of 5000000
+ 360114 words of memory out of 5000000
  21391 multiletter control sequences out of 15000+600000
  412583 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,13n,62p,587b,235s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on dissertation.pdf (25 pages, 1098704 bytes).
+Output written on dissertation.pdf (27 pages, 1104980 bytes).
 PDF statistics:
- 184 PDF objects out of 1000 (max. 8388607)
- 108 compressed objects within 2 object streams
+ 190 PDF objects out of 1000 (max. 8388607)
+ 112 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
