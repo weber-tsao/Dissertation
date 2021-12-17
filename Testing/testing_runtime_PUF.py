@@ -26,7 +26,7 @@ print(puf.eval(array([crp_loaded[1][0]])))'''
 
 # Calculate delay difference
 puf = pypuf.simulation.ArbiterPUF(n=5, seed=1)
-challenges = pypuf.io.random_inputs(n=5, N=1, seed=2)
+challenges = pypuf.io.random_inputs(n=5, N=1, seed=7)
 puf.val(challenges) # delay difference after the last stage
 print(challenges)
 print(puf.val(challenges))

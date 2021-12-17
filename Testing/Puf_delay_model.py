@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Nov  4 23:40:37 2021
-
-@author: weber
-"""
 import pypuf.simulation
 import pypuf.io
 import numpy as np
@@ -15,7 +9,7 @@ class Puf:
         self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=100, seed=2)
         self.crp.save('crps.npz')
         self.crp_loaded = pypuf.io.ChallengeResponseSet.load('crps.npz')
-        print(self.crp_loaded[1])
+        #print(self.crp_loaded[1])
         self.challenge = array([self.crp_loaded[1][0]])
         self.delay_diff = []
         self.stage_delay_diff = []
@@ -49,7 +43,7 @@ class Puf:
                     self.top_path.append(self.mux_node[count+1])
                     self.bottom_path.append(self.mux_node[count])
                     prev = self.mux_node[count+1]
-        print(self.top_path)
+        #print(self.top_path)
         #print(self.bottom_path)
         return self.top_path, self.bottom_path
         
@@ -122,11 +116,11 @@ class Puf:
         test_crps = self.crp_loaded
         return test_crps
     
-'''if __name__ == "__main__":
+if __name__ == "__main__":
     x = Puf()
     #y = x.each_stage_delay()
     #print(y)
     z = x.cal_each_mux_delay()
     print(z)
     #x.puf_path()
-    x.reward_related_to_delay()'''
+    #x.reward_related_to_delay()
