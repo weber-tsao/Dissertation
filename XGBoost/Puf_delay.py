@@ -11,8 +11,8 @@ from numpy import array, ones
 
 class Puf:
     def __init__(self):
-        self.node_num = 10
-        self.N = 1000
+        self.node_num = 32
+        self.N = 5000
         self.puf = pypuf.simulation.ArbiterPUF(n=self.node_num, seed=5)
         self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=self.N, seed=2)
         self.crp.save('crps.npz')
@@ -130,17 +130,25 @@ class Puf:
         for i in range(data_len):
             # data
             challenge = list(test_crps[i][0])
-            challenge = [0 if c == -1 else 1 for c in challenge]
+            
             top_path, bottom_path = self.puf_path(test_crps[i])
             top_delay, bottom_delay, top_delay_list, bottom_delay_list = self.cal_top_bottom_delay(test_crps[i], top_path, bottom_path)
-            #print(top_delay)
             #train_data.append(challenge+[top_delay]+[bottom_delay]+top_path+bottom_path)
             
-            res = 1 # int(challenge[0])
-            for x in range(len(challenge)):
-                res = self.concat(res, challenge[x])
+            #res = 1 # int(challenge[0])
+            #for x in range(len(challenge)):
+            #    res = self.concat(res, challenge[x])
             
-            train_data.append([res])
+            top_path_num = 0 #int(top_path[0])
+            bottom_path_num = 0 # int(bottom_path[0])
+            for x in range(len(top_path)):
+                top_path_num = self.concat(top_path_num, top_path[x])
+                bottom_path_num = self.concat(bottom_path_num, bottom_path[x])
+                
+            
+            challenge = [0 if c == -1 else 1 for c in challenge]
+            train_data.append(challenge+top_path+bottom_path)
+            #train_data.append([res])
             #train_data.append(challenge)
             
             # label

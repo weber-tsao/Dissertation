@@ -4,6 +4,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import make_hastie_10_2
 import matplotlib.pyplot as plt
+from Puf_delay import*
 
 """ HELPER FUNCTION: GET ERROR RATE ========================================="""
 def get_error_rate(pred, Y):
@@ -68,16 +69,19 @@ def plot_error_rate(er_train, er_test):
 
 """ MAIN SCRIPT ============================================================="""
 if __name__ == '__main__':
-    
+    puf = Puf()
+    data, data_label = puf.load_data()
     # Read data
     x, y = make_hastie_10_2()
     df = pd.DataFrame(x)
     df['Y'] = y
 
     # Split into training and test set
-    train, test = train_test_split(df, test_size = 0.2)
-    X_train, Y_train = train.iloc[:,:-1], train.iloc[:,-1]
-    X_test, Y_test = test.iloc[:,:-1], test.iloc[:,-1]
+    X_train, X_test, Y_train, Y_test = train_test_split(data, data_label, train_size=0.7, random_state=123)
+    #train, test = train_test_split(df, test_size = 0.2)
+    #X_train, Y_train = train.iloc[:,:-1], train.iloc[:,-1]
+    #X_test, Y_test = test.iloc[:,:-1], test.iloc[:,-1]
+    #print(Y_train.shape)
     
     # Fit a simple decision tree first
     clf_tree = DecisionTreeClassifier(max_depth = 1, random_state = 1)
