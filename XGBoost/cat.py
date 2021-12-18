@@ -74,7 +74,7 @@ booster.fit(X_train, Y_train,
 #cat_predictions = model_cat.predict_proba(test_data)[:, 1]
 #cat_predictions_df = pd.DataFrame({'class': cat_predictions})
 
-booster = CatBoostClassifier(iterations=1000, loss_function='Logloss', verbose=100)
+booster = CatBoostClassifier(iterations=1000, loss_function='Logloss', verbose=100, learning_rate= 0.3)
 
 booster.fit(X_train, Y_train, eval_set=(X_val, Y_val));
 booster.set_feature_names(cat_features)

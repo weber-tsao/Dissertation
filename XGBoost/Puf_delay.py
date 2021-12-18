@@ -13,8 +13,8 @@ class Puf:
     def __init__(self):
         self.node_num = 32
         self.N = 5000
-        self.puf = pypuf.simulation.ArbiterPUF(n=self.node_num, seed=5)
-        self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=self.N, seed=2)
+        self.puf = pypuf.simulation.ArbiterPUF(n=self.node_num, seed=35)
+        self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=self.N, seed=134)
         self.crp.save('crps.npz')
         self.crp_loaded = pypuf.io.ChallengeResponseSet.load('crps.npz')
         #print(self.crp_loaded[1])
