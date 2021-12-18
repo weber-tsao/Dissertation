@@ -11,10 +11,10 @@ from numpy import array, ones
 
 class Puf:
     def __init__(self):
-        self.node_num = 32
-        self.N = 5000
-        self.puf = pypuf.simulation.ArbiterPUF(n=self.node_num, seed=35)
-        self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=self.N, seed=134)
+        self.node_num = 64
+        self.N = 6800
+        self.puf = pypuf.simulation.ArbiterPUF(n=self.node_num, seed=3)
+        self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=self.N, seed=13)
         self.crp.save('crps.npz')
         self.crp_loaded = pypuf.io.ChallengeResponseSet.load('crps.npz')
         #print(self.crp_loaded[1])
@@ -123,9 +123,11 @@ class Puf:
 
     def load_data(self):
         test_crps = self.crp_loaded
+        #test_crps = np.unique(test_crps)
         data_len = len(test_crps)
         train_data = []
         train_label = []
+        data = []
         
         for i in range(data_len):
             # data
@@ -154,12 +156,24 @@ class Puf:
             # label
             response = test_crps[i][1]
             response = response[0]
+            data_r = 0
             if response == -1:
                 train_label.append([0])
+                data_r = 0
             else: 
-                train_label.append([1])            
+                train_label.append([1])
+                data_r = 1
+                
             
+            data.append(challenge+top_path+bottom_path+[data_r])
         train_data = np.array(train_data)
         train_label = np.array(train_label)
+        
+        data = np.array(data)
+        data = np.unique(data,axis=0)
+        #print(data[:,-1])
+        #print(data[:,0:-1])
+        train_label = data[:,-1]
+        train_data = data[:,0:-1]
         
         return train_data, train_label
