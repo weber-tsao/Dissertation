@@ -35,7 +35,8 @@ xgboostModel = XGBClassifier(
     learning_rate= 0.3, 
     objective="binary:logistic",
     tree_method='gpu_hist',
-    evals_result=evals_result
+    evals_result=evals_result,
+    min_child_weight=100
     )
 #setattr(xgboostModel, 'verbosity', 2)
 xgboostModel.fit(X_train, y_train,eval_set=eval_s)
