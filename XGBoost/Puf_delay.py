@@ -134,7 +134,7 @@ class Puf:
             challenge = list(test_crps[i][0])
             
             top_path, bottom_path = self.puf_path(test_crps[i])
-            top_delay, bottom_delay, top_delay_list, bottom_delay_list = self.cal_top_bottom_delay(test_crps[i], top_path, bottom_path)
+            #top_delay, bottom_delay, top_delay_list, bottom_delay_list = self.cal_top_bottom_delay(test_crps[i], top_path, bottom_path)
             #train_data.append(challenge+[top_delay]+[bottom_delay]+top_path+bottom_path)
             
             #res = 1 # int(challenge[0])
