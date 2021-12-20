@@ -11,10 +11,10 @@ from numpy import array, ones
 
 class Puf:
     def __init__(self):
-        self.node_num = 128
-        self.N = 8000
-        self.puf = pypuf.simulation.ArbiterPUF(n=self.node_num, seed=3)
-        self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=self.N, seed=13)
+        self.node_num = 64
+        self.N = 6800
+        self.puf = pypuf.simulation.ArbiterPUF(n=self.node_num, seed=431)
+        self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=self.N, seed=34)
         self.crp.save('crps.npz')
         self.crp_loaded = pypuf.io.ChallengeResponseSet.load('crps.npz')
         #print(self.crp_loaded[1])
@@ -123,7 +123,7 @@ class Puf:
         last_stage_ind = len(challenge[0])-1
         puf_delay = pypuf.simulation.LTFArray(weight_array=self.puf.weight_array[:, :last_stage_ind], bias=None, transform=self.puf.transform)
         stage_delay_diff = puf_delay.val(challenge[:, :last_stage_ind])
-
+        print(stage_delay_diff)
         return stage_delay_diff
     
     def concat(self, a, b):
@@ -140,7 +140,7 @@ class Puf:
             ### data ###
             challenge = list(test_crps[i][0])
             final_delay_diff = self.total_delay_diff(test_crps[i])
-            print(final_delay_diff[0])
+            #print([final_delay_diff[0]])
             top_path, bottom_path = self.puf_path(test_crps[i])
             
             top_path_num = 0
@@ -166,6 +166,7 @@ class Puf:
                 
             
             data.append([final_delay_diff[0]]+challenge+top_path+bottom_path+[data_r])
+            
         #train_data = np.array(train_data)
         #train_label = np.array(train_label)
         

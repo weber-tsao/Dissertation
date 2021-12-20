@@ -19,8 +19,8 @@ puf = Puf()
 data, data_label = puf.load_data()
 
 ### Split train, test data for the model ###
-X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.35, random_state=42)
-X_test, X_val, y_test, y_val = train_test_split(X_testVal, y_testVal, test_size=.5, random_state=34)
+X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.5, random_state=66)
+X_test, X_val, y_test, y_val = train_test_split(X_testVal, y_testVal, test_size=.5, random_state=24)
 evals_result ={}
 eval_s = [(X_train, y_train),(X_val, y_val)]
 print('Training data shape:',X_train.shape)
@@ -31,12 +31,12 @@ start_time = datetime.now()
 
 ### Create XGBClassifier model ###
 xgboostModel = XGBClassifier(
-    n_estimators=2000, 
+    n_estimators=10, 
     learning_rate= 0.3, 
     objective="binary:logistic",
     tree_method='gpu_hist',
-    min_child_weight=60,
-    max_depth=2,
+    #min_child_weight=60,
+    #max_depth=2,
     use_label_encoder=False,
     eval_metric='logloss'
     #gamma=0.1,
