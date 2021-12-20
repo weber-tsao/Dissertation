@@ -11,8 +11,8 @@ from numpy import array, ones
 
 class Puf:
     def __init__(self):
-        self.node_num = 64
-        self.N = 6800
+        self.node_num = 128
+        self.N = 8000
         self.puf = pypuf.simulation.ArbiterPUF(n=self.node_num, seed=3)
         self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=self.N, seed=13)
         self.crp.save('crps.npz')
@@ -55,7 +55,7 @@ class Puf:
 
         return self.top_path, self.bottom_path
         
-    def each_stage_delay(self, challenge):
+    '''def each_stage_delay(self, challenge):
         challenge = array([challenge[0]])
         for i in range(len(challenge[0])+1):
             puf_delay = pypuf.simulation.LTFArray(weight_array=self.puf.weight_array[:, :i], bias=None, transform=self.puf.transform)
@@ -67,9 +67,9 @@ class Puf:
             delay_diff2 = self.delay_diff[x+1]
             self.stage_delay_diff.append(delay_diff2-delay_diff1)
 
-        return self.delay_diff, self.stage_delay_diff
+        return self.delay_diff, self.stage_delay_diff'''
     
-    def cal_each_mux_delay(self, challenge):
+    '''def cal_each_mux_delay(self, challenge):
         # look at challenge bits
         challenge = array([challenge[0]])
         top_path, bottom_path = self.puf_path(challenge)
@@ -100,9 +100,9 @@ class Puf:
                 self.dict[str(count)] = 0
                 self.dict[str(count-1)] = 0        
             #print(self.dict)
-        return self.dict
+        return self.dict'''
     
-    def cal_top_bottom_delay(self, challenge, topPath, bottomPath):
+    '''def cal_top_bottom_delay(self, challenge, topPath, bottomPath):
         challenge = array([challenge[0]])
         top_delay = 0
         bottom_delay = 0
@@ -116,63 +116,61 @@ class Puf:
             bottom_delay_list.append(delay_dict[str(bottomPath[i])])
         #print(topPath)
         #print(top_delay_list)
-        return top_delay, bottom_delay, top_delay_list, bottom_delay_list
+        return top_delay, bottom_delay, top_delay_list, bottom_delay_list'''
+    
+    def total_delay_diff(self, challenge):
+        challenge = array([challenge[0]])
+        last_stage_ind = len(challenge[0])-1
+        puf_delay = pypuf.simulation.LTFArray(weight_array=self.puf.weight_array[:, :last_stage_ind], bias=None, transform=self.puf.transform)
+        stage_delay_diff = puf_delay.val(challenge[:, :last_stage_ind])
+
+        return stage_delay_diff
     
     def concat(self, a, b):
         return int(f"{a}{b}")
 
     def load_data(self):
         test_crps = self.crp_loaded
-        #test_crps = np.unique(test_crps)
         data_len = len(test_crps)
         train_data = []
         train_label = []
         data = []
         
         for i in range(data_len):
-            # data
+            ### data ###
             challenge = list(test_crps[i][0])
-            
+            final_delay_diff = self.total_delay_diff(test_crps[i])
+            print(final_delay_diff[0])
             top_path, bottom_path = self.puf_path(test_crps[i])
-            #top_delay, bottom_delay, top_delay_list, bottom_delay_list = self.cal_top_bottom_delay(test_crps[i], top_path, bottom_path)
-            #train_data.append(challenge+[top_delay]+[bottom_delay]+top_path+bottom_path)
             
-            #res = 1 # int(challenge[0])
-            #for x in range(len(challenge)):
-            #    res = self.concat(res, challenge[x])
-            
-            top_path_num = 0 #int(top_path[0])
-            bottom_path_num = 0 # int(bottom_path[0])
+            top_path_num = 0
+            bottom_path_num = 0
             for x in range(len(top_path)):
                 top_path_num = self.concat(top_path_num, top_path[x])
                 bottom_path_num = self.concat(bottom_path_num, bottom_path[x])
                 
             
             challenge = [0 if c == -1 else 1 for c in challenge]
-            train_data.append(challenge+top_path+bottom_path)
-            #train_data.append([res])
-            #train_data.append(challenge)
+            #train_data.append(challenge+top_path+bottom_path)
             
-            # label
+            ### label ###
             response = test_crps[i][1]
             response = response[0]
             data_r = 0
             if response == -1:
-                train_label.append([0])
+                #train_label.append([0])
                 data_r = 0
             else: 
-                train_label.append([1])
+                #train_label.append([1])
                 data_r = 1
                 
             
-            data.append(challenge+top_path+bottom_path+[data_r])
-        train_data = np.array(train_data)
-        train_label = np.array(train_label)
+            data.append([final_delay_diff[0]]+challenge+top_path+bottom_path+[data_r])
+        #train_data = np.array(train_data)
+        #train_label = np.array(train_label)
         
         data = np.array(data)
         data = np.unique(data,axis=0)
-        #print(data[:,-1])
-        #print(data[:,0:-1])
         train_label = data[:,-1]
         train_data = data[:,0:-1]
         

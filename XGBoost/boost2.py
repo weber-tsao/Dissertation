@@ -13,8 +13,6 @@ from Puf_delay import*
 from datetime import datetime
 import warnings
 warnings.filterwarnings("ignore")
-### Set start time ###
-#start_time = datetime.now()
 
 ### Load data ###
 puf = Puf()
@@ -30,6 +28,7 @@ print('Testing data shape:',X_test.shape)
 
 ### Set start time ###
 start_time = datetime.now()
+
 ### Create XGBClassifier model ###
 xgboostModel = XGBClassifier(
     n_estimators=2000, 
@@ -56,6 +55,7 @@ print('Testing accuracy: {}%'.format(testing_acc*100))
 end_time = datetime.now()
 print('Runtime: {}'.format(end_time - start_time))
 
+### plot loss graph ###
 results = xgboostModel.evals_result()
 plt.plot(results['validation_0']['logloss'], label='train')
 plt.plot(results['validation_1']['logloss'], label='test')
@@ -64,11 +64,11 @@ plt.legend()
 # show the plot
 plt.show()
 
-
-### Cross validation 
+### Cross validation ###
 kfold  = KFold(n_splits=30)
 results = cross_val_score(xgboostModel, data, data_label, cv=kfold)
 print("Accuracy: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
+
 
 '''
 param_test1 = {  
