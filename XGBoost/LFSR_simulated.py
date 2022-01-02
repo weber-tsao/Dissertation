@@ -8,10 +8,12 @@ import pypuf.simulation
 from pypuf.io import random_inputs
 import pypuf.io
 import random
+import numpy as np
+from numpy import array, ones
 
 class LSFR_simulated:
     def __init__(self):
-        self.node_num = 128
+        self.node_num = 5
         self.N = 8000
         self.puf = pypuf.simulation.ArbiterPUF(n=self.node_num, seed=431)
 
@@ -25,9 +27,9 @@ class LSFR_simulated:
      
     # Function to generate a random
     # binary string of length N
-    def generateBinaryString(self, N):
+    def generateCRPs(self):
          
-        # Stores the empty string
+        '''# Stores the empty string
         challenge_string = ""
         challenge_r = 0
      
@@ -42,10 +44,34 @@ class LSFR_simulated:
         
         challenge_r = int(challenge_string.zfill(N))
         # Print the resulting string
-        print(challenge_string.zfill(N))
-        print(random_inputs(n=64, N=3, seed=2))
-        #print(self.puf.eval([11]))
+        print(challenge_string.zfill(N))'''
+        
+        challengesConfig = random_inputs(n=self.node_num+4, N=10, seed=2)
+        challenges = []
+        obfuscate_config = []
+        for i in range(len(challengesConfig)):
+            challenges.append(challengesConfig[i][4:])
+            obfuscate_config.append(challengesConfig[i][0:4])
+        
+        challenges = np.array(challenges)
+        obfuscate_config = np.array(obfuscate_config)
+        responses = self.puf.eval(challenges)
+        crps = pypuf.io.ChallengeResponseSet(challenges, responses)
+        
+        return crps, obfuscate_config
+
+    def obfuscateChallenge(self):
+        base = random.randrange(10, 1000)
+        print(base)
+        crps, obfuscate_config = self.generateCRPs()
+        binary_obfus = list(obfuscate_config[0])
+        binary_obfus = [0 if c == -1 else 1 for c in binary_obfus]
+        binary_obfus_str = ''.join(str(x) for x in binary_obfus)
+        
+        print(int(binary_obfus_str, 2))
+        
     
 if __name__ == "__main__":
     LSFR_object = LSFR_simulated()
-    LSFR_object.generateBinaryString(7)
+    LSFR_object.generateCRPs()
+    LSFR_object.obfuscateChallenge()
