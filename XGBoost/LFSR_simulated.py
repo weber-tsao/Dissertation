@@ -4,11 +4,16 @@ Created on Thu Nov  4 23:40:37 2021
 
 @author: weber
 """
+import pypuf.simulation
+from pypuf.io import random_inputs
+import pypuf.io
 import random
 
 class LSFR_simulated:
     def __init__(self):
+        self.node_num = 128
         self.N = 8000
+        self.puf = pypuf.simulation.ArbiterPUF(n=self.node_num, seed=431)
 
     def findRandom(self):
          
@@ -23,7 +28,8 @@ class LSFR_simulated:
     def generateBinaryString(self, N):
          
         # Stores the empty string
-        S = ""
+        challenge_string = ""
+        challenge_r = 0
      
         # Iterate over the range [0, N - 1]
         for i in range(N):
@@ -32,10 +38,13 @@ class LSFR_simulated:
             x = self.findRandom()
      
             # Append it to the string
-            S += str(x)
-         
+            challenge_string += str(x)
+        
+        challenge_r = int(challenge_string.zfill(N))
         # Print the resulting string
-        print(S)
+        print(challenge_string.zfill(N))
+        print(random_inputs(n=64, N=3, seed=2))
+        #print(self.puf.eval([11]))
     
 if __name__ == "__main__":
     LSFR_object = LSFR_simulated()
