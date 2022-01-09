@@ -16,72 +16,50 @@ from pylfsr import LFSR
 class LSFR_simulated:
     def __init__(self):
         self.node_num = 5
-        self.N = 8000
+        self.N = 10
         self.puf = pypuf.simulation.ArbiterPUF(n=self.node_num, seed=431)
+        #self.challengesConfig = random_inputs(n=self.node_num+4, N=10, seed=2)
+        #print(self.challengesConfig)
 
-    def findRandom(self):
-         
-        # Generate the random number
-        num = random.randint(0, 1)
-     
-        # Return the generated number
-        return num
-     
-    # Function to generate a random
-    # binary string of length N
-    def generateCRPs(self):
-         
-        '''# Stores the empty string
-        challenge_string = ""
-        challenge_r = 0
-     
-        # Iterate over the range [0, N - 1]
-        for i in range(N):
-             
-            # Store the random number
-            x = self.findRandom()
-     
-            # Append it to the string
-            challenge_string += str(x)
+    def splitCRPs(self, challenge):
+        spited_challenge = []
+        obfuscate_bits = []
+        spited_challenge.append(challenge[4:])
+        obfuscate_bits.append(challenge[0:4])
         
-        challenge_r = int(challenge_string.zfill(N))
-        # Print the resulting string
-        print(challenge_string.zfill(N))'''
-        
-        challengesConfig = random_inputs(n=self.node_num+4, N=10, seed=2)
-        challenges = []
-        obfuscate_config = []
-        for i in range(len(challengesConfig)):
-            challenges.append(challengesConfig[i][4:])
-            obfuscate_config.append(challengesConfig[i][0:4])
-        
-        challenges = np.array(challenges)
-        obfuscate_config = np.array(obfuscate_config)
-        responses = self.puf.eval(challenges)
-        crps = pypuf.io.ChallengeResponseSet(challenges, responses)
-        
-        return crps, obfuscate_config
+        spited_challenge = np.array(spited_challenge[0])
+        obfuscate_bits = np.array(obfuscate_bits[0])
 
-    def obfuscateChallenge(self):
-        state = [0,0,0,1,0]
-        fpoly = [5,4]
-        L = LFSR(fpoly=fpoly,initstate=state, verbose=True)
-        L.runKCycle(11)
-        print(L.seq)
-        L.info()
+        return spited_challenge, obfuscate_bits
+
+    def createShiftCount(self, obfuscate_bits):     
+        # create random base number
+        base = random.randrange(2, 1000)
         
-        
-        base = random.randrange(10, 1000)
-        print(base)
-        crps, obfuscate_config = self.generateCRPs()
-        binary_obfus = list(obfuscate_config[0])
+        # create count by looking at crp and splited crp bits
+        binary_obfus = list(obfuscate_bits)
         binary_obfus = [0 if c == -1 else 1 for c in binary_obfus]
         binary_obfus_str = ''.join(str(x) for x in binary_obfus)
+        count = int(binary_obfus_str, 2)
         
-        print(int(binary_obfus_str, 2))
+        # calculate shift_count
+        shift_count = base*count
         
+        return shift_count
+        
+    def createObfuscateChallenge(self, challenge):
+        spited_challenge, obfuscate_bits = self.splitCRPs(challenge)
+        shift_count = self.createShiftCount(obfuscate_bits)
+        
+        challenge_state = [0 if c == -1 else 1 for c in list(obfuscate_bits)]
+        fpoly = [4,3] # look at the optimize table to determine
+        print(challenge_state)
+        L = LFSR(fpoly=fpoly, initstate=challenge_state, verbose=False)
+        L.runKCycle(shift_count)
+        print(L.state)
+        L.info()
     
 if __name__ == "__main__":
     LSFR_object = LSFR_simulated()
-    LSFR_object.generateCRPs()
-    LSFR_object.obfuscateChallenge()
+    challengesConfig = random_inputs(n=9, N=10, seed=2)
+    LSFR_object.createObfuscateChallenge(challengesConfig[0])

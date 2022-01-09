@@ -27,6 +27,7 @@ class Puf:
         self.dict = {} # Ex. {'0':[0.1, 0.3]} --node, [delay when 1, delay when -1]
     
     def puf_path(self, challenge):
+        print(challenge)
         challenge = array([challenge[0]])
         self.mux_node = [x for x in range(len(challenge[0])*2)]
         self.top_path = []
