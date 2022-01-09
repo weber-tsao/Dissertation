@@ -10,6 +10,7 @@ from xgboost import XGBClassifier
 from xgboost import plot_importance
 from xgboost import plot_tree
 from Puf_delay import*
+from LSFR_simulated import*
 from datetime import datetime
 import warnings
 warnings.filterwarnings("ignore")

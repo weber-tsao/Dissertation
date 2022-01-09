@@ -61,7 +61,14 @@ class LSFR_simulated:
         
         return L.state
     
+    def produceObfuscateResponse(self, puf, obfuscate_Challenge):
+        response = puf.eval(np.array([obfuscate_Challenge]))
+        print(response)
+        return response
+    
 if __name__ == "__main__":
     LSFR_object = LSFR_simulated()
     challengesConfig = random_inputs(n=9, N=10, seed=2)
-    LSFR_object.createObfuscateChallenge(challengesConfig[0])
+    obfuscate_Challenge = LSFR_object.createObfuscateChallenge(challengesConfig[0])
+    puf = pypuf.simulation.ArbiterPUF(n=5, seed=431)
+    LSFR_object.produceObfuscateResponse(puf, obfuscate_Challenge)
