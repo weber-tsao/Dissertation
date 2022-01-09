@@ -51,13 +51,15 @@ class LSFR_simulated:
         spited_challenge, obfuscate_bits = self.splitCRPs(challenge)
         shift_count = self.createShiftCount(obfuscate_bits)
         
-        challenge_state = [0 if c == -1 else 1 for c in list(obfuscate_bits)]
-        fpoly = [4,3] # look at the optimize table to determine
-        print(challenge_state)
+        challenge_state = [0 if c == -1 else 1 for c in list(spited_challenge)]
+        fpoly = [5,3] # look at the optimize table to determine
+        #print(challenge_state)
         L = LFSR(fpoly=fpoly, initstate=challenge_state, verbose=False)
         L.runKCycle(shift_count)
         print(L.state)
         L.info()
+        
+        return L.state
     
 if __name__ == "__main__":
     LSFR_object = LSFR_simulated()
