@@ -10,6 +10,8 @@ import pypuf.io
 import random
 import numpy as np
 from numpy import array, ones
+import numpy as np
+from pylfsr import LFSR
 
 class LSFR_simulated:
     def __init__(self):
@@ -61,6 +63,14 @@ class LSFR_simulated:
         return crps, obfuscate_config
 
     def obfuscateChallenge(self):
+        state = [0,0,0,1,0]
+        fpoly = [5,4]
+        L = LFSR(fpoly=fpoly,initstate=state, verbose=True)
+        L.runKCycle(11)
+        print(L.seq)
+        L.info()
+        
+        
         base = random.randrange(10, 1000)
         print(base)
         crps, obfuscate_config = self.generateCRPs()
