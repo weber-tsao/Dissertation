@@ -13,15 +13,10 @@ from numpy import array, ones
 import numpy as np
 from pylfsr import LFSR
 
-class LSFR_simulated:
-    def __init__(self):
-        self.node_num = 5
-        self.N = 10
-        self.puf = pypuf.simulation.ArbiterPUF(n=self.node_num, seed=431)
-        #self.challengesConfig = random_inputs(n=self.node_num+4, N=10, seed=2)
-        #print(self.challengesConfig)
+class LFSR_simulated:
 
     def splitCRPs(self, challenge):
+        challenge = np.array(challenge)
         spited_challenge = []
         obfuscate_bits = []
         spited_challenge.append(challenge[4:])
@@ -34,7 +29,7 @@ class LSFR_simulated:
 
     def createShiftCount(self, obfuscate_bits):     
         # create random base number
-        base = random.randrange(2, 1000)
+        base = random.randrange(2, 100)
         
         # create count by looking at crp and splited crp bits
         binary_obfus = list(obfuscate_bits)
@@ -53,22 +48,21 @@ class LSFR_simulated:
         
         challenge_state = [0 if c == -1 else 1 for c in list(spited_challenge)]
         fpoly = [5,3] # look at the optimize table to determine
-        #print(challenge_state)
         L = LFSR(fpoly=fpoly, initstate=challenge_state, verbose=False)
         L.runKCycle(shift_count)
-        print(L.state)
-        L.info()
+        #print(L.state)
+        #L.info()
         
         return L.state
     
     def produceObfuscateResponse(self, puf, obfuscate_Challenge):
         response = puf.eval(np.array([obfuscate_Challenge]))
-        print(response)
+        #print(response)
         return response
     
 if __name__ == "__main__":
-    LSFR_object = LSFR_simulated()
+    LFSR_object = LFSR_simulated()
     challengesConfig = random_inputs(n=9, N=10, seed=2)
-    obfuscate_Challenge = LSFR_object.createObfuscateChallenge(challengesConfig[0])
-    puf = pypuf.simulation.ArbiterPUF(n=5, seed=431)
-    LSFR_object.produceObfuscateResponse(puf, obfuscate_Challenge)
+    obfuscate_Challenge = LFSR_object.createObfuscateChallenge(challengesConfig[0])
+    puf = pypuf.simulation.ArbiterPUF(n=5, seed=21)
+    LFSR_object.produceObfuscateResponse(puf, obfuscate_Challenge)

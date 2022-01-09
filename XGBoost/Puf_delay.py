@@ -8,11 +8,12 @@ import pypuf.simulation
 import pypuf.io
 import numpy as np
 from numpy import array, ones
+from LFSR_simulated import*
 
 class Puf:
     def __init__(self):
-        self.node_num = 128
-        self.N = 8000
+        self.node_num = 9
+        self.N = 100
         self.puf = pypuf.simulation.ArbiterPUF(n=self.node_num, seed=431)
         self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=self.N, seed=34)
         self.crp.save('crps.npz')
@@ -25,10 +26,11 @@ class Puf:
         self.top_path = []
         self.bottom_path = []
         self.dict = {} # Ex. {'0':[0.1, 0.3]} --node, [delay when 1, delay when -1]
+        self.LFSR_simulated = LFSR_simulated()
     
     def puf_path(self, challenge):
-        print(challenge)
-        challenge = array([challenge[0]])
+        #print(challenge)
+        challenge = array([challenge])
         self.mux_node = [x for x in range(len(challenge[0])*2)]
         self.top_path = []
         self.bottom_path = []
@@ -57,7 +59,7 @@ class Puf:
         return self.top_path, self.bottom_path
     
     def total_delay_diff(self, challenge):
-        challenge = array([challenge[0]])
+        challenge = array([challenge])
         last_stage_ind = len(challenge[0])-1
         puf_delay = pypuf.simulation.LTFArray(weight_array=self.puf.weight_array[:, :last_stage_ind], bias=None, transform=self.puf.transform)
         stage_delay_diff = puf_delay.val(challenge[:, :last_stage_ind])
@@ -77,9 +79,16 @@ class Puf:
         for i in range(data_len):
             ### data ###
             challenge = list(test_crps[i][0])
-            final_delay_diff = self.total_delay_diff(test_crps[i])
-            #print([final_delay_diff[0]])
-            top_path, bottom_path = self.puf_path(test_crps[i])
+            
+            ### obfuscate part
+            #print(challenge)
+            x = self.LFSR_simulated.createObfuscateChallenge(challenge)
+            #print(x)
+            #print(test_crps[i])
+            #print(self.total_delay_diff(list(x)))
+            
+            final_delay_diff = self.total_delay_diff(test_crps[i][0])
+            top_path, bottom_path = self.puf_path(test_crps[i][0])
             
             top_path_num = 0
             bottom_path_num = 0
