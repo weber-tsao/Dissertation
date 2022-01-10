@@ -14,7 +14,7 @@ import numpy as np
 from pylfsr import LFSR
 
 class LFSR_simulated:
-
+    
     def splitCRPs(self, challenge):
         challenge = np.array(challenge)
         spited_challenge = []
@@ -63,6 +63,7 @@ class LFSR_simulated:
 if __name__ == "__main__":
     LFSR_object = LFSR_simulated()
     challengesConfig = random_inputs(n=9, N=10, seed=2)
+    #print(challengesConfig[0])
     obfuscate_Challenge = LFSR_object.createObfuscateChallenge(challengesConfig[0])
     puf = pypuf.simulation.ArbiterPUF(n=5, seed=21)
     LFSR_object.produceObfuscateResponse(puf, obfuscate_Challenge)

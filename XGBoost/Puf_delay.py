@@ -12,21 +12,18 @@ from LFSR_simulated import*
 
 class Puf:
     def __init__(self):
-        self.node_num = 9
-        self.N = 100
-        self.puf = pypuf.simulation.ArbiterPUF(n=self.node_num, seed=431)
+        self.total_bits_num = 68
+        self.N = 6800
+        self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=13)
+        self.lfsrChallenges = random_inputs(n=self.total_bits_num, N=self.N, seed=2) # LFSR random challenges data
         self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=self.N, seed=34)
         self.crp.save('crps.npz')
         self.crp_loaded = pypuf.io.ChallengeResponseSet.load('crps.npz')
-        #print(self.crp_loaded[1])
-        #self.challenge = array([self.crp_loaded[1][0]])
-        self.delay_diff = []
-        self.stage_delay_diff = []
         self.mux_node = []
         self.top_path = []
         self.bottom_path = []
-        self.dict = {} # Ex. {'0':[0.1, 0.3]} --node, [delay when 1, delay when -1]
         self.LFSR_simulated = LFSR_simulated()
+        self.lfsr = True
     
     def puf_path(self, challenge):
         #print(challenge)
@@ -70,25 +67,32 @@ class Puf:
         return int(f"{a}{b}")
 
     def load_data(self):
-        test_crps = self.crp_loaded
-        data_len = len(test_crps)
+        data_len = self.N
         train_data = []
         train_label = []
         data = []
         
+        if self.lfsr:
+            test_crps = self.lfsrChallenges
+        else:
+            test_crps = self.crp_loaded
+        
+        
         for i in range(data_len):
             ### data ###
-            challenge = list(test_crps[i][0])
-            
-            ### obfuscate part
-            #print(challenge)
-            x = self.LFSR_simulated.createObfuscateChallenge(challenge)
-            #print(x)
-            #print(test_crps[i])
-            #print(self.total_delay_diff(list(x)))
-            
-            final_delay_diff = self.total_delay_diff(test_crps[i][0])
-            top_path, bottom_path = self.puf_path(test_crps[i][0])
+            if self.lfsr: 
+                challenge = test_crps[i]
+                # obfuscate part
+                #print(challenge)
+                obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
+                #print(obfuscateChallenge)
+                obfuscateChallenge = [-1 if c == 0 else 1 for c in obfuscateChallenge]
+                final_delay_diff = self.total_delay_diff(obfuscateChallenge)
+                top_path, bottom_path = self.puf_path(obfuscateChallenge)
+            else:
+                challenge = list(test_crps[i][0])
+                final_delay_diff = self.total_delay_diff(test_crps[i][0])
+                top_path, bottom_path = self.puf_path(test_crps[i][0])
             
             top_path_num = 0
             bottom_path_num = 0
@@ -101,18 +105,31 @@ class Puf:
             #train_data.append(challenge+top_path+bottom_path)
             
             ### label ###
-            response = test_crps[i][1]
-            response = response[0]
-            data_r = 0
-            if response == -1:
-                #train_label.append([0])
+            if self.lfsr:
+                response = self.LFSR_simulated.produceObfuscateResponse(self.puf, obfuscateChallenge)
+                response = np.array(response)
                 data_r = 0
-            else: 
-                #train_label.append([1])
-                data_r = 1
+                if response == -1:
+                    #train_label.append([0])
+                    data_r = 0
+                else:
+                    #train_label.append([1])
+                    data_r = 1
+            else:
+                response = test_crps[i][1]
+                response = response[0]
+                
+                data_r = 0
+                if response == -1:
+                    #train_label.append([0])
+                    data_r = 0
+                else:
+                    #train_label.append([1])
+                    data_r = 1
                 
             
             data.append([final_delay_diff[0]]+challenge+top_path+bottom_path+[data_r])
+            #print(len([final_delay_diff[0]]+challenge+top_path+bottom_path+[data_r]))
             
         #train_data = np.array(train_data)
         #train_label = np.array(train_label)
@@ -123,3 +140,4 @@ class Puf:
         train_data = data[:,0:-1]
         
         return train_data, train_label
+        
