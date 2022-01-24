@@ -14,8 +14,8 @@ class Puf:
     def __init__(self):
         self.total_bits_num = 68
         self.N = 6800
-        self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=13)
-        self.lfsrChallenges = random_inputs(n=self.total_bits_num, N=self.N, seed=2) # LFSR random challenges data
+        self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=16)
+        self.lfsrChallenges = random_inputs(n=self.total_bits_num, N=self.N, seed=10) # LFSR random challenges data
         self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=self.N, seed=34)
         self.crp.save('crps.npz')
         self.crp_loaded = pypuf.io.ChallengeResponseSet.load('crps.npz')
