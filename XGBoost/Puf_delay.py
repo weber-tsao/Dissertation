@@ -9,12 +9,18 @@ import pypuf.io
 import numpy as np
 from numpy import array, ones
 from LFSR_simulated import*
+from pypuf.simulation import XORArbiterPUF
+from pypuf.simulation import LightweightSecurePUF
+from pypuf.simulation import InterposePUF
 
 class Puf:
     def __init__(self):
         self.total_bits_num = 68
         self.N = 6800
-        self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=16)
+        self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=12)
+        #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=8, seed=10, noisiness=.05)
+        #self.puf = LightweightSecurePUF(n=64, k=1, seed=10, noisiness=.05)
+        #self.puf = InterposePUF(n=(self.total_bits_num-4), k_up=8, k_down=8, seed=1, noisiness=.05)
         self.lfsrChallenges = random_inputs(n=self.total_bits_num, N=self.N, seed=10) # LFSR random challenges data
         self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=self.N, seed=34)
         self.crp.save('crps.npz')

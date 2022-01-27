@@ -6,6 +6,8 @@ import seaborn as sns
 import io
 import requests
 from sklearn.model_selection import train_test_split, KFold, cross_val_score, GridSearchCV
+from sklearn.metrics import auc
+from sklearn.metrics import roc_curve
 from xgboost import XGBClassifier
 from xgboost import plot_importance
 from xgboost import plot_tree
@@ -20,12 +22,12 @@ puf = Puf()
 data, data_label = puf.load_data()
 
 ### Split train, test data for the model ###
-X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.5, random_state=66)
+'''X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.5, random_state=66)
 X_test, X_val, y_test, y_val = train_test_split(X_testVal, y_testVal, test_size=.5, random_state=24)
 evals_result ={}
 eval_s = [(X_train, y_train),(X_val, y_val)]
 print('Training data shape:',X_train.shape)
-print('Testing data shape:',X_test.shape)
+print('Testing data shape:',X_test.shape)'''
 
 ### Set start time ###
 start_time = datetime.now()
@@ -45,32 +47,70 @@ xgboostModel = XGBClassifier(
     #colsample_bytree=0.8
     )
 
-xgboostModel.fit(X_train, y_train, eval_set=eval_s)
+'''xgboostModel.fit(X_train, y_train, eval_set=eval_s)
 predicted = xgboostModel.predict(X_test)
 training_acc = xgboostModel.score(X_train,y_train)
 testing_acc = xgboostModel.score(X_test,y_test)
 print('Training accuracy: {}%'.format(training_acc*100))
-print('Testing accuracy: {}%'.format(testing_acc*100))
-
-### Calculate training time ###
-end_time = datetime.now()
-print('Runtime: {}'.format(end_time - start_time))
+print('Testing accuracy: {}%'.format(testing_acc*100))'''
 
 ### plot loss graph ###
-results = xgboostModel.evals_result()
+'''results = xgboostModel.evals_result()
 plt.plot(results['validation_0']['logloss'], label='train')
 plt.plot(results['validation_1']['logloss'], label='test')
 # show the legend
 plt.legend()
 # show the plot
-plt.show()
+plt.show()'''
 
 ### Cross validation ###
-kfold  = KFold(n_splits=30)
+'''kfold  = KFold(n_splits=30)
 results = cross_val_score(xgboostModel, data, data_label, cv=kfold)
-print("Accuracy: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
+print("Accuracy: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))'''
 
 
+### Cross validation with plotting confidence graph ###
+kfold  = KFold(n_splits=30)
+tprs = []
+base_fpr = np.linspace(0, 1, 101)
+
+plt.figure(figsize=(5, 5))
+plt.axes().set_aspect('equal', 'datalim')
+
+for i, (train, test) in enumerate(kfold.split(data, data_label)):
+    model = xgboostModel.fit(data[train], data_label[train])
+    y_score = xgboostModel.predict_proba(data[test])
+    fpr, tpr, _ = roc_curve(data_label[test], y_score[:, 1])
+    
+    plt.plot(fpr, tpr, 'g', alpha=0.15)
+    tpr = np.interp(base_fpr, fpr, tpr)
+    tpr[0] = 0.0
+    tprs.append(tpr)
+
+tprs = np.array(tprs)
+mean_tprs = tprs.mean(axis=0)
+std = tprs.std(axis=0)
+
+tprs_upper = np.minimum(mean_tprs + std, 1)
+tprs_lower = mean_tprs - std
+#print(mean_tprs)
+#print(std)
+print('Accuracy: {}%'.format(np.mean(mean_tprs)*100))
+print('Standard deviation: {}%'.format(np.mean(std)*100))
+
+plt.plot(base_fpr, mean_tprs, 'b')
+plt.fill_between(base_fpr, tprs_lower, tprs_upper, color='grey', alpha=0.3)
+
+plt.plot([0, 1], [0, 1],'r--')
+plt.xlim([-0.01, 1.01])
+plt.ylim([-0.01, 1.01])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+plt.show()
+
+### Calculate training time ###
+end_time = datetime.now()
+print('Runtime: {}'.format(end_time - start_time))
 '''
 param_test1 = {  
     #'max_depth':[2,3,4,5,6] #Best: 2
