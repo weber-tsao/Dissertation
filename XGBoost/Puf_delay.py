@@ -18,8 +18,8 @@ class Puf:
         self.total_bits_num = 68
         self.N = 6800
         self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=12)
-        #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=8, seed=10, noisiness=.05)
-        #self.puf = LightweightSecurePUF(n=64, k=1, seed=10, noisiness=.05)
+        #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=6, seed=10)
+        #self.puf = LightweightSecurePUF(n=68, k=2, seed=10)
         #self.puf = InterposePUF(n=(self.total_bits_num-4), k_up=8, k_down=8, seed=1, noisiness=.05)
         self.lfsrChallenges = random_inputs(n=self.total_bits_num, N=self.N, seed=10) # LFSR random challenges data
         self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=self.N, seed=34)
