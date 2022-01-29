@@ -21,6 +21,9 @@ from datetime import datetime
 import warnings
 warnings.filterwarnings("ignore")
 
+### Set running start time ###
+start_time = datetime.now()
+
 ### Load data ###
 puf = Puf()
 data, data_label = puf.load_data()
@@ -33,23 +36,34 @@ eval_s = [(X_train, y_train),(X_val, y_val)]
 print('Training data shape:',X_train.shape)
 print('Testing data shape:',X_test.shape)'''
 
-### Set running start time ###
-start_time = datetime.now()
-
 ### Create XGBClassifier model ###
 xgboostModel = XGBClassifier(
+    learning_rate=0.05, 
+    n_estimators=1000, 
+    max_depth=2,
+    tree_method='gpu_hist',
+    min_child_weight=10, 
+    objective='binary:logistic', 
+    gamma=0.8,
+    subsample=0.8,
+    colsample_bytree=0.8,
+    early_stopping_rounds=10,
+    seed=27
+    )
+
+'''xgboostModel = XGBClassifier(
     n_estimators=10, 
     learning_rate= 0.3, 
     objective="binary:logistic",
     tree_method='gpu_hist',
     #min_child_weight=60,
-    #max_depth=2,
+    #max_depth=9,
     use_label_encoder=False,
-    eval_metric='logloss'
+    eval_metric='logloss',
     #gamma=0.1,
-    #subsample=0.8,
-    #colsample_bytree=0.8
-    )
+    #subsample=0.9,
+    #colsample_bytree=0.9
+    )'''
 
 '''xgboostModel.fit(X_train, y_train, eval_set=eval_s)
 predicted = xgboostModel.predict(X_test)
@@ -68,11 +82,14 @@ plt.legend()
 plt.show()'''
 
 ### Cross validation ###
-kfold  = KFold(n_splits=10)
+kfold = KFold(n_splits=5)
 results = cross_val_score(xgboostModel, data, data_label, cv=kfold)
 print("Accuracy: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
 
-# Logistic Regression
+'''plt.bar(range(len(xgboostModel.feature_importances_)), xgboostModel.feature_importances_)
+plt.show()'''
+
+'''# Logistic Regression
 lr_results = cross_val_score(LogisticRegression(), data, data_label, cv=kfold)
 print("Accuracy: %.2f%% (%.2f%%)" % (lr_results.mean()*100, lr_results.std()*100))
 
@@ -93,10 +110,10 @@ print("Accuracy: %.2f%% (%.2f%%)" % (knn_results.mean()*100, knn_results.std()*1
 # Naive Bayes
 gnb = GaussianNB()
 gnb_results = cross_val_score(gnb, data, data_label, cv=kfold)
-print("Accuracy: %.2f%% (%.2f%%)" % (gnb_results.mean()*100, gnb_results.std()*100))
+print("Accuracy: %.2f%% (%.2f%%)" % (gnb_results.mean()*100, gnb_results.std()*100))'''
 
 ### Cross validation with plotting confidence graph ###
-tprs = []
+'''tprs = []
 aucs = []
 mean_fpr = np.linspace(0, 1, 100)
 
@@ -131,8 +148,7 @@ ax.fill_between(mean_fpr, tprs_lower, tprs_upper, color='grey', alpha=.2,
 ax.set(xlim=[-0.05, 1.05], ylim=[-0.05, 1.05],
        title="Receiver operating characteristic example")
 ax.legend(loc="lower right")
-plt.show()
-
+plt.show()'''
 
 ### Calculate running time ###
 end_time = datetime.now()
@@ -142,27 +158,27 @@ print('Runtime: {}'.format(end_time - start_time))
 
 '''### Modify training parameter ###
 param_test1 = {  
-    #'max_depth':[2,3,4,5,6] #Best: 2
-    #'min_child_weight' :[10,20,30,40,50,60,70,80,90,100,110,120,130,140] #Bset: 60
-    #'gamma': [0,0.1,0.5,0.8,1.2,1.5,2.0,3.0,4.0,5.0] #Best: 0.1
+    #'max_depth':[2,3,4,5,6,7,8,9,10] #Best: 2
+    #'min_child_weight' :[10,20,30,40,50,60,70,80,90,100,110,120,130,140] #Best: 10
+    #'gamma': [0,0.1,0.5,0.8,1.2,1.5,2.0,3.0,4.0,5.0] #Best: 0.8
     #'subsample': [0,0.1,0.5,0.8,1.2,1.5,2.0,3.0,4.0,5.0] #Best: 0.8
     #'colsample_bytree': [0,0.1,0.5,0.8,1.2,1.5,2.0,3.0,4.0,5.0] #Best: 0.8
+    #'learning_rate': [0.01,0.05,0.1,0.2,0.3,0.5] #Best: 0.05
+    #'n_estimators': [100,500,1000,2000,3000] #Best: 1000 
 }  
-gsearch1 = GridSearchCV(estimator=XGBClassifier( learning_rate=0.3, 
-                                                 n_estimators=2000, 
+gsearch1 = GridSearchCV(estimator=XGBClassifier( learning_rate=0.05, 
+                                                 n_estimators=1000, 
                                                  max_depth=2,
                                                  tree_method='gpu_hist',
-                                                 evals_result=evals_result,
-                                                 min_child_weight=60, 
+                                                 min_child_weight=10, 
                                                  objective='binary:logistic', 
-                                                 gamma=0.1,
+                                                 gamma=0.8,
                                                  subsample=0.8,
                                                  colsample_bytree=0.8,
                                                  seed=27),
                                                  param_grid=param_test1,scoring='roc_auc', cv=5, n_jobs=4)  
-gsearch1.fit(X_train,y_train)  
+gsearch1.fit(data, data_label)  
 evaluate_value = gsearch1.cv_results_
 print(evaluate_value)
 print(gsearch1.best_params_)
-print(gsearch1.best_score_)
-'''
+print(gsearch1.best_score_)'''
