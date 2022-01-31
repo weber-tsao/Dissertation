@@ -17,7 +17,7 @@ class Puf:
         self.total_bits_num = 68
         self.N = 6800
         self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=12)
-        #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=6, seed=21)
+        #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=5, seed=21)
         #self.puf = XORFeedForwardArbiterPUF(n=(self.total_bits_num-4), k=4, ff=[(32, 60)], seed=1)
         #self.puf = LightweightSecurePUF(n=(self.total_bits_num-4), k=4, seed=10)
         #self.puf = InterposePUF(n=(self.total_bits_num-4), k_up=8, k_down=8, seed=1, noisiness=.05)
@@ -142,8 +142,8 @@ class Puf:
         #train_label = np.array(train_label)
         
         data = np.array(data)
-        min_max_scaler = preprocessing.MinMaxScaler()
-        data = min_max_scaler.fit_transform(data)
+        #min_max_scaler = preprocessing.MinMaxScaler()
+        #data = min_max_scaler.fit_transform(data)
         #data = np.unique(data,axis=0)
         train_label = data[:,-1]
         train_data = data[:,0:-1]

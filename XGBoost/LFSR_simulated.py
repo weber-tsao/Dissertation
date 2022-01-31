@@ -29,7 +29,7 @@ class LFSR_simulated:
 
     def createShiftCount(self, obfuscate_bits):     
         # create random base number
-        base = 10#random.randrange(2, 100)
+        base = 20#random.randrange(2, 100)
         
         # create count by looking at crp and splited crp bits
         binary_obfus = list(obfuscate_bits)
@@ -48,7 +48,7 @@ class LFSR_simulated:
         
         challenge_state = [0 if c == -1 else 1 for c in list(spited_challenge)]
         #print(challenge_state)
-        fpoly = [5,3] # look at the optimize table to determine
+        fpoly = [4,3] # look at the optimize table to determine
         L = LFSR(fpoly=fpoly, initstate=challenge_state, verbose=False)
         L.runKCycle(shift_count)
         #print(L.state)
