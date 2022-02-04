@@ -103,12 +103,12 @@ print("Accuracy: %.2f%% (%.2f%%)" % (lr_results.mean()*100, lr_results.std()*100
 
 # Decision Tree
 dt_results = cross_val_score(DecisionTreeClassifier(), data_reduct, data_label, cv=kfold)
-print("Accuracy: %.2f%% (%.2f%%)" % (dt_results.mean()*100, dt_results.std()*100))'''
+print("Accuracy: %.2f%% (%.2f%%)" % (dt_results.mean()*100, dt_results.std()*100))
 
 # SVM
 SVM = svm.SVC(kernel='rbf',C=1,gamma='auto')
 svm_results = cross_val_score(SVM, data_reduct, data_label, cv=kfold)
-print("Accuracy: %.2f%% (%.2f%%)" % (svm_results.mean()*100, svm_results.std()*100))
+print("Accuracy: %.2f%% (%.2f%%)" % (svm_results.mean()*100, svm_results.std()*100))'''
 
 '''# KNeighbors
 knn = KNeighborsClassifier(n_neighbors=1)
@@ -120,7 +120,7 @@ gnb = GaussianNB()
 gnb_results = cross_val_score(gnb, data_reduct, data_label, cv=kfold)
 print("Accuracy: %.2f%% (%.2f%%)" % (gnb_results.mean()*100, gnb_results.std()*100))'''
 
-### Plot relation graph ###
+'''### Plot relation graph ###
 #0: 95.47, 0.6
 #1: 56.91, 0.87
 #2: 56.21, 0.79
@@ -150,7 +150,7 @@ plt.xlabel('Base')
 plt.ylabel('Accuarcy(%)')
 plt.title('LFSR')
 plt.legend(['XGBoost', 'SVM'])
-plt.show()
+plt.show()'''
 
 ### Cross validation with plotting confidence graph ###
 '''tprs = []

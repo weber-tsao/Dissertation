@@ -29,7 +29,7 @@ class LFSR_simulated:
 
     def createShiftCount(self, obfuscate_bits):     
         # create random base number
-        base = 20#random.randrange(2, 100)
+        base = 0
         
         # create count by looking at crp and splited crp bits
         binary_obfus = list(obfuscate_bits)
@@ -47,7 +47,6 @@ class LFSR_simulated:
         shift_count = self.createShiftCount(obfuscate_bits)
         
         challenge_state = [0 if c == -1 else 1 for c in list(spited_challenge)]
-        #print(challenge_state)
         fpoly = [4,3] # look at the optimize table to determine
         L = LFSR(fpoly=fpoly, initstate=challenge_state, verbose=False)
         L.runKCycle(shift_count)
@@ -58,13 +57,13 @@ class LFSR_simulated:
     
     def produceObfuscateResponse(self, puf, obfuscate_Challenge):
         response = puf.eval(np.array([obfuscate_Challenge]))
-        #print(response)
+        
         return response
     
-if __name__ == "__main__":
+'''if __name__ == "__main__":
     LFSR_object = LFSR_simulated()
     challengesConfig = random_inputs(n=9, N=10, seed=2)
     #print(challengesConfig[0])
     obfuscate_Challenge = LFSR_object.createObfuscateChallenge(challengesConfig[0])
     puf = pypuf.simulation.ArbiterPUF(n=5, seed=21)
-    LFSR_object.produceObfuscateResponse(puf, obfuscate_Challenge)
+    LFSR_object.produceObfuscateResponse(puf, obfuscate_Challenge)'''
