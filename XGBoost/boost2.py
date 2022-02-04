@@ -195,7 +195,6 @@ end_time = datetime.now()
 print('Runtime: {}'.format(end_time - start_time))
 
 
-
 '''### Modify training parameter ###
 param_test1 = {  
     #'max_depth':[2,3,4,5,6,7,8,9,10] #Best: 2

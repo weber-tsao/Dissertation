@@ -7,6 +7,8 @@ Created on Thu Nov  4 23:40:37 2021
 import pypuf.simulation
 import pypuf.io
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 from numpy import array, ones
 from sklearn import preprocessing
 from LFSR_simulated import*
@@ -117,8 +119,10 @@ class Puf:
                 else:
                     for x in range(j):
                         temp *= (1-2*challenge[x])
-                parity_vector.append(temp)'''
-                
+                parity_vector.append(temp)
+            parity_vector = [0 if c == -1 else 1 for c in parity_vector]
+            print(parity_vector)'''
+            
             ### label ###
             if self.lfsr:
                 response = self.LFSR_simulated.produceObfuscateResponse(self.puf, obfuscateChallenge)
@@ -139,14 +143,23 @@ class Puf:
                     data_r = 1
             
             #data.append(self.zeroArray+challenge+top_path+bottom_path+[data_r])
-            data.append([final_delay_diff[0]]+challenge+top_path+bottom_path+[data_r])
+            data.append(challenge+[data_r])
         
         data = np.array(data)
+        
         #min_max_scaler = preprocessing.MinMaxScaler()
         #data = min_max_scaler.fit_transform(data)
         #data = np.unique(data,axis=0)
         train_label = data[:,-1]
         train_data = data[:,0:-1]
+        #plt.hist(train_label, bins=50)
+        #plt.show()
+        '''num = 0
+        for i in range(len(train_label)):
+            if train_label[i] == 1:
+                num += 1
+        print(num)'''
+            
         
         return train_data, train_label
         
