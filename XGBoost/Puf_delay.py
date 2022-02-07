@@ -19,7 +19,7 @@ class Puf:
         self.total_bits_num = 68
         self.N = 6800
         self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=12)
-        #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=5, seed=21)
+        #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=2, seed=21)
         #self.puf = XORFeedForwardArbiterPUF(n=(self.total_bits_num-4), k=5, ff=[(32,60)], seed=1)
         #self.puf = LightweightSecurePUF(n=(self.total_bits_num-4), k=3, seed=10)
         #self.puf = InterposePUF(n=(self.total_bits_num-4), k_up=8, k_down=8, seed=1, noisiness=.05)
@@ -95,6 +95,7 @@ class Puf:
                 obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
                 obfuscateChallenge = [-1 if c == 0 else 1 for c in obfuscateChallenge]
                 final_delay_diff = self.total_delay_diff(obfuscateChallenge)
+                #print(self.puf.val(pypuf.io.random_inputs(n=64, N=1, seed=1)))
                 top_path, bottom_path = self.puf_path(obfuscateChallenge)
             else:
                 challenge = list(test_crps[i][0])
@@ -143,7 +144,7 @@ class Puf:
                     data_r = 1
             
             #data.append(self.zeroArray+challenge+top_path+bottom_path+[data_r])
-            data.append(challenge+[data_r])
+            data.append([final_delay_diff[0]]+challenge+top_path+bottom_path+[data_r])
         
         data = np.array(data)
         

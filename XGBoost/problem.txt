@@ -1,0 +1,154 @@
+1. The sklearn logistic regression does not have many parameter to tune
+
+
+
+
+
+
+
+
+Stored the grid search code
+-------------------------------------------------------------------------------------------------------------------------
+#XGBoost random grid search
+testingModel=XGBClassifier()
+
+param_dist = {  
+    'max_depth':range(2,11,1),
+    'min_child_weight' :range(10,50,10),
+    'gamma': range(0.1,1,0.1),
+    'subsample': range(0.1,1,0.1),
+    'colsample_bytree': range(0.1,1,0.1),
+    'learning_rate': [0.01,0.05,0.1,0.2,0.3,0.5],
+    'n_estimators': [100,500,1000,2000,3000]
+}  
+
+grid = RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=500,n_jobs = -1,verbose = 2)
+
+grid.fit(data_reduct, data_label)
+best_estimator = grid.best_estimator_
+print(best_estimator)
+print(grid.best_score_)
+print(grid.best_params)
+-------------------------------------------------------------------------------------------------------------------------
+# Logistic regression random grid search(best: LogisticRegression(C=1, class_weight='balanced', fit_intercept=False,
+                                                                  intercept_scaling=9, max_iter=300, penalty='l1',
+                                                                  solver='liblinear', tol=1, warm_start=True)
+                                                                  accuracy:0.52)
+testingModel=LogisticRegression()
+
+param_dist = {
+        'penalty':['l1', 'l2', 'elasticnet', 'none'], 
+        'dual':[True, False], 
+        'tol':[1e-4, 1e-3, 1e-2, 1e-1, 1],
+        'C':range(0,10,1),
+        'fit_intercept':[True, False], 
+        'intercept_scaling':range(0,10,1),
+        'class_weight':['dict', 'balanced'],
+        'solver':['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga'],
+        'max_iter':[100, 200,300,500,1000],
+        'multi_class':['auto', 'ovr', 'multinomial'],
+        'warm_start':[True, False],
+        
+        }
+
+grid = RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=500,n_jobs = -1,verbose = 2)
+
+grid.fit(data_reduct, data_label)
+best_estimator = grid.best_estimator_
+print(best_estimator)
+print(grid.best_score_)
+print(grid.best_params)
+--------------------------------------------------------------------------------------------------------------------------
+# Decision tree classifier random grid search(best: DecisionTreeClassifier(class_weight='balanced', max_depth=85, max_features=4,
+                                                                           min_impurity_decrease=0.37473684210526315,
+                                                                           min_samples_leaf=8, min_samples_split=6,
+                                                                           min_weight_fraction_leaf=0, splitter='random')
+                                                                           accuaracy: 0.5)
+testingModel=DecisionTreeClassifier()
+
+param_dist = {
+        'criterion':['entropy', 'gini'], 
+        'splitter':['best', 'random'], 
+        'max_depth':range(0,100,1), 
+        'min_samples_split':range(0,15,1), 
+        'min_samples_leaf':range(0,15,1), 
+        'min_weight_fraction_leaf':range(0,5,1), 
+        'max_features':range(0,5,1),
+        'min_impurity_decrease':np.linspace(0.01,1,20),
+        'class_weight':['dict', 'list of dicts', 'balanced']
+        }
+
+grid = RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=500,n_jobs = -1,verbose = 2)
+
+grid.fit(data_reduct, data_label)
+best_estimator = grid.best_estimator_
+print(best_estimator)
+print(grid.best_score_)
+print(grid.best_params_)
+--------------------------------------------------------------------------------------------------------------------------
+# SVM random grid search(Very slow no result)
+testingModel=svm.SVC()
+
+param_dist = {
+        'C':range(0,5,1), 
+        'kernel':['linear', 'poly', 'rbf', 'sigmoid'], 
+        'degree':range(0,20,5), 
+        'gamma':['scale', 'auto'], 
+        'coef0':range(0,20,5), 
+        'shrinking':[True, False], 
+        'probability':[True, False],
+        'tol':[1e-4, 1e-3, 1e-2, 1e-1, 1],
+        'cache_size':range(100,1000,200),
+        'class_weight':['dict', 'balanced'],
+        'decision_function_shape':['ovo', 'ovr'],
+        'break_ties':[True, False]
+        }
+
+grid = RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=500,n_jobs = -1,verbose = 2)
+
+grid.fit(data_reduct, data_label)
+best_estimator = grid.best_estimator_
+print(best_estimator)
+print(grid.best_score_)
+print(grid.best_params_)
+--------------------------------------------------------------------------------------------------------------------------
+# KNN random grid search(best: KNeighborsClassifier(algorithm='ball_tree', 
+                                                    leaf_size=1, 
+                                                    n_neighbors=9)
+                                                    accuaracy:0.88)
+#{'p': 2, 'n_neighbors': 9, 'metric_params': None, 'metric': 'minkowski', 'leaf_size': 1, 'algorithm': 'ball_tree'}
+testingModel=KNeighborsClassifier()
+
+param_dist = {
+        'n_neighbors':range(0,10,1), 
+        'algorithm':['auto', 'ball_tree', 'kd_tree', 'brute'], 
+        'leaf_size':range(10,50,10), 
+        'p':[1,2], 
+        'metric':['str', 'callable', 'minkowski'], 
+        'metric_params':[dict, None]
+        }
+
+grid = RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=500,n_jobs = -1,verbose = 2)
+
+grid.fit(data_reduct, data_label)
+best_estimator = grid.best_estimator_
+print(best_estimator)
+print(grid.best_score_)
+print(grid.best_params_)
+--------------------------------------------------------------------------------------------------------------------------
+# NB random grid search(best: GaussianNB(var_smoothing=3) 
+                                         accuracy:0.5188)
+#{'var_smoothing': 3}
+testingModel=GaussianNB()
+
+param_dist = {
+        'var_smoothing':[1e-9, 1e-7, 1e-5, 1e-3, 1e-1, 1]
+        }
+
+grid = RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=500,n_jobs = -1,verbose = 2)
+
+grid.fit(data_reduct, data_label)
+best_estimator = grid.best_estimator_
+print(best_estimator)
+print(grid.best_score_)
+print(grid.best_params_)

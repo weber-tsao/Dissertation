@@ -6,12 +6,12 @@ import seaborn as sns
 import io
 import requests
 from sklearn import svm
-from sklearn.model_selection import train_test_split, KFold, cross_val_score, GridSearchCV
+from sklearn.model_selection import train_test_split, KFold, cross_val_score, GridSearchCV, RandomizedSearchCV
 from sklearn.metrics import auc, plot_roc_curve, accuracy_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import GaussianNB,BernoulliNB
 from sklearn.feature_selection import SelectFromModel
 from xgboost import XGBClassifier
 from xgboost import plot_importance
@@ -48,8 +48,7 @@ xgboostModel = XGBClassifier(
     gamma=0.8,
     subsample=0.8,
     colsample_bytree=0.8,
-    #early_stopping_rounds=10,
-    seed=27
+    label_encoder=False
     )
 
 xgboostModel.fit(X_train, y_train, eval_set=eval_s)
@@ -82,9 +81,10 @@ for thresh in thresholds:
 	accuracy = accuracy_score(y_test, predictions)
 	print("Thresh=%.3f, n=%d, Accuracy: %.2f%%" % (thresh, select_X_train.shape[1], accuracy*100.0))'''
 
+### Feature selction ###
 selection = SelectFromModel(xgboostModel, threshold=0.001, prefit=True)
 data_reduct = selection.transform(data)
-print(data_reduct.shape)
+
 ### Cross validation ###
 kfold = KFold(n_splits=5)
 results = cross_val_score(xgboostModel, data_reduct, data_label, cv=kfold)
@@ -98,14 +98,22 @@ print("Accuracy: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
 plt.show()'''
 
 '''# Logistic Regression
-lr_results = cross_val_score(LogisticRegression(), data_reduct, data_label, cv=kfold)
-print("Accuracy: %.2f%% (%.2f%%)" % (lr_results.mean()*100, lr_results.std()*100))
+lr_results = cross_val_score(LogisticRegression(class_weight='balanced', 
+                                                fit_intercept=False,
+                                                penalty='l1',
+                                                solver='liblinear', 
+                                                warm_start=True,
+                                                tol=2, 
+                                                C=17,
+                                                intercept_scaling=16,
+                                                max_iter=450), data_reduct, data_label, cv=kfold)
+print("Accuracy: %.2f%% (%.2f%%)" % (lr_results.mean()*100, lr_results.std()*100))'''
 
-# Decision Tree
+'''# Decision Tree
 dt_results = cross_val_score(DecisionTreeClassifier(), data_reduct, data_label, cv=kfold)
-print("Accuracy: %.2f%% (%.2f%%)" % (dt_results.mean()*100, dt_results.std()*100))
+print("Accuracy: %.2f%% (%.2f%%)" % (dt_results.mean()*100, dt_results.std()*100))'''
 
-# SVM
+'''# SVM
 SVM = svm.SVC(kernel='rbf',C=1,gamma='auto')
 svm_results = cross_val_score(SVM, data_reduct, data_label, cv=kfold)
 print("Accuracy: %.2f%% (%.2f%%)" % (svm_results.mean()*100, svm_results.std()*100))'''
@@ -116,7 +124,7 @@ knn_results = cross_val_score(knn, data_reduct, data_label, cv=kfold)
 print("Accuracy: %.2f%% (%.2f%%)" % (knn_results.mean()*100, knn_results.std()*100))
 
 # Naive Bayes
-gnb = GaussianNB()
+gnb = BernoulliNB()
 gnb_results = cross_val_score(gnb, data_reduct, data_label, cv=kfold)
 print("Accuracy: %.2f%% (%.2f%%)" % (gnb_results.mean()*100, gnb_results.std()*100))'''
 
@@ -194,30 +202,28 @@ plt.show()'''
 end_time = datetime.now()
 print('Runtime: {}'.format(end_time - start_time))
 
+### GridSearch ###
+testingModel=XGBClassifier( 
+                            n_estimators=1000, 
+                            tree_method='gpu_hist',
+                            objective='binary:logistic',
+                            label_encoder=False)
 
-'''### Modify training parameter ###
-param_test1 = {  
-    #'max_depth':[2,3,4,5,6,7,8,9,10] #Best: 2
-    #'min_child_weight' :[10,20,30,40,50,60,70,80,90,100,110,120,130,140] #Best: 10
-    #'gamma': [0,0.1,0.5,0.8,1.2,1.5,2.0,3.0,4.0,5.0] #Best: 0.8
-    #'subsample': [0,0.1,0.5,0.8,1.2,1.5,2.0,3.0,4.0,5.0] #Best: 0.8
-    #'colsample_bytree': [0,0.1,0.5,0.8,1.2,1.5,2.0,3.0,4.0,5.0] #Best: 0.8
-    #'learning_rate': [0.01,0.05,0.1,0.2,0.3,0.5] #Best: 0.05
-    #'n_estimators': [100,500,1000,2000,3000] #Best: 1000 
+param_dist = {  
+    'max_depth':[1,2,3],
+    'min_child_weight' :[9,10,11],
+    'gamma': [0.7,0.8,0.9],
+    'subsample': [0.7,0.8,0.9],
+    'colsample_bytree': [0.7,0.8,0.9],
+    'learning_rate': [0.01,0.03,0.06]
+    #'n_estimators': [100,500,1000]#100
 }  
-gsearch1 = GridSearchCV(estimator=XGBClassifier( learning_rate=0.05, 
-                                                 n_estimators=1000, 
-                                                 max_depth=2,
-                                                 tree_method='gpu_hist',
-                                                 min_child_weight=10, 
-                                                 objective='binary:logistic', 
-                                                 gamma=0.8,
-                                                 subsample=0.8,
-                                                 colsample_bytree=0.8,
-                                                 seed=27),
-                                                 param_grid=param_test1,scoring='roc_auc', cv=5, n_jobs=4)  
-gsearch1.fit(data, data_label)  
-evaluate_value = gsearch1.cv_results_
-print(evaluate_value)
-print(gsearch1.best_params_)
-print(gsearch1.best_score_)'''
+
+#grid = RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=500,n_jobs = -1,verbose = 2)
+grid = GridSearchCV(testingModel, param_dist, scoring='roc_auc', cv=5, n_jobs=4)
+
+grid.fit(data_reduct, data_label)
+best_estimator = grid.best_estimator_
+print(best_estimator)
+print(grid.best_score_)
+print(grid.best_params_)
