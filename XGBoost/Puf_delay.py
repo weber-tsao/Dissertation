@@ -18,13 +18,13 @@ class Puf:
     def __init__(self):
         self.total_bits_num = 68
         self.N = 6800
-        self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=12)
-        #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=2, seed=21)
-        #self.puf = XORFeedForwardArbiterPUF(n=(self.total_bits_num-4), k=5, ff=[(32,60)], seed=1)
-        #self.puf = LightweightSecurePUF(n=(self.total_bits_num-4), k=3, seed=10)
+        #self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=12)
+        #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=6, seed=21)
+        self.puf = XORFeedForwardArbiterPUF(n=(self.total_bits_num-4), k=5, ff=[(32,60)], seed=1)
+        #self.puf = LightweightSecurePUF(n=(self.total_bits_num-4), k=6, seed=10)
         #self.puf = InterposePUF(n=(self.total_bits_num-4), k_up=8, k_down=8, seed=1, noisiness=.05)
         self.lfsrChallenges = random_inputs(n=self.total_bits_num, N=self.N, seed=10) # LFSR random challenges data
-        self.zeroArray = list(np.zeros(1))
+        #self.zeroArray = list(np.zeros(1))
         #self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=self.N, seed=34)
         #self.crp.save('crps.npz')
         #self.crp_loaded = pypuf.io.ChallengeResponseSet.load('crps.npz')
@@ -94,8 +94,14 @@ class Puf:
                 # obfuscate part
                 obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
                 obfuscateChallenge = [-1 if c == 0 else 1 for c in obfuscateChallenge]
-                final_delay_diff = self.total_delay_diff(obfuscateChallenge)
-                #print(self.puf.val(pypuf.io.random_inputs(n=64, N=1, seed=1)))
+                #final_delay_diff = self.total_delay_diff(obfuscateChallenge)
+                
+                final_delay_diff= self.puf.val(np.array([obfuscateChallenge]))
+                '''count=0
+                for p in self.puf.simulations:
+                    count+=1
+                    #print(p, p.val(np.array([obfuscateChallenge])))
+                print(count)'''
                 top_path, bottom_path = self.puf_path(obfuscateChallenge)
             else:
                 challenge = list(test_crps[i][0])
@@ -121,8 +127,8 @@ class Puf:
                     for x in range(j):
                         temp *= (1-2*challenge[x])
                 parity_vector.append(temp)
-            parity_vector = [0 if c == -1 else 1 for c in parity_vector]
-            print(parity_vector)'''
+            parity_vector = [0 if c == -1 else 1 for c in parity_vector]'''
+            
             
             ### label ###
             if self.lfsr:
@@ -145,6 +151,7 @@ class Puf:
             
             #data.append(self.zeroArray+challenge+top_path+bottom_path+[data_r])
             data.append([final_delay_diff[0]]+challenge+top_path+bottom_path+[data_r])
+            #data.append(parity_vector)
         
         data = np.array(data)
         

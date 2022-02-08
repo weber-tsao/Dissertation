@@ -11,7 +11,7 @@ from sklearn.metrics import auc, plot_roc_curve, accuracy_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.naive_bayes import GaussianNB,BernoulliNB
+from sklearn.naive_bayes import GaussianNB,BernoulliNB,MultinomialNB,CategoricalNB
 from sklearn.feature_selection import SelectFromModel
 from xgboost import XGBClassifier
 from xgboost import plot_importance
@@ -47,8 +47,7 @@ xgboostModel = XGBClassifier(
     objective='binary:logistic', 
     gamma=0.8,
     subsample=0.8,
-    colsample_bytree=0.8,
-    label_encoder=False
+    colsample_bytree=0.8
     )
 
 xgboostModel.fit(X_train, y_train, eval_set=eval_s)
@@ -114,17 +113,28 @@ dt_results = cross_val_score(DecisionTreeClassifier(), data_reduct, data_label, 
 print("Accuracy: %.2f%% (%.2f%%)" % (dt_results.mean()*100, dt_results.std()*100))'''
 
 '''# SVM
-SVM = svm.SVC(kernel='rbf',C=1,gamma='auto')
+SVM = svm.SVC(kernel='rbf',
+              C=1,
+              gamma='auto',
+              degree=0,
+              coef0=0,
+              shrinking=True,
+              probability=True,
+              tol=0.001,
+              cache_size=100,
+              class_weight='balanced',
+              decision_function_shape='ovo'
+              )
 svm_results = cross_val_score(SVM, data_reduct, data_label, cv=kfold)
 print("Accuracy: %.2f%% (%.2f%%)" % (svm_results.mean()*100, svm_results.std()*100))'''
 
 '''# KNeighbors
 knn = KNeighborsClassifier(n_neighbors=1)
 knn_results = cross_val_score(knn, data_reduct, data_label, cv=kfold)
-print("Accuracy: %.2f%% (%.2f%%)" % (knn_results.mean()*100, knn_results.std()*100))
+print("Accuracy: %.2f%% (%.2f%%)" % (knn_results.mean()*100, knn_results.std()*100))'''
 
-# Naive Bayes
-gnb = BernoulliNB()
+'''# Naive Bayes
+gnb = MultinomialNB()
 gnb_results = cross_val_score(gnb, data_reduct, data_label, cv=kfold)
 print("Accuracy: %.2f%% (%.2f%%)" % (gnb_results.mean()*100, gnb_results.std()*100))'''
 
@@ -202,22 +212,35 @@ plt.show()'''
 end_time = datetime.now()
 print('Runtime: {}'.format(end_time - start_time))
 
-### GridSearch ###
-testingModel=XGBClassifier( 
-                            n_estimators=1000, 
-                            tree_method='gpu_hist',
-                            objective='binary:logistic',
-                            label_encoder=False)
+'''### GridSearch ###
+testingModel=svm.SVC(kernel='rbf',
+                     C=1,
+                     gamma='auto',
+                     degree=0,
+                     coef0=0,
+                     shrinking=True,
+                     probability=True,
+                     tol=0.001,
+                     cache_size=100,
+                     class_weight='balanced',
+                     decision_function_shape='ovo',
+                     break_ties=True
+                     )
 
-param_dist = {  
-    'max_depth':[1,2,3],
-    'min_child_weight' :[9,10,11],
-    'gamma': [0.7,0.8,0.9],
-    'subsample': [0.7,0.8,0.9],
-    'colsample_bytree': [0.7,0.8,0.9],
-    'learning_rate': [0.01,0.03,0.06]
-    #'n_estimators': [100,500,1000]#100
-}  
+param_dist = {
+        #'C':range(0,5,1), #2
+        #'kernel':['linear', 'poly', 'rbf', 'sigmoid'], #sigmoid
+        #'degree':range(0,20,5), #0
+        #'gamma':['scale', 'auto'], #auto
+        #'coef0':range(0,20,5), #0
+        #'shrinking':[True, False], #False
+        #'probability':[True, False],#True
+        #'tol':[1e-4, 1e-3, 1e-2, 1e-1, 1],#0.001
+        #cache_size':range(100,1000,200),#100
+        #'class_weight':['dict', 'balanced'],#balanced
+        #'decision_function_shape':['ovo', 'ovr'],#ovo
+        'break_ties':[True, False]#True
+        }
 
 #grid = RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=500,n_jobs = -1,verbose = 2)
 grid = GridSearchCV(testingModel, param_dist, scoring='roc_auc', cv=5, n_jobs=4)
@@ -227,3 +250,7 @@ best_estimator = grid.best_estimator_
 print(best_estimator)
 print(grid.best_score_)
 print(grid.best_params_)
+
+cv_result = pd.DataFrame.from_dict(grid.cv_results_)
+
+cv_result.to_csv()'''
