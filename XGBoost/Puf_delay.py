@@ -17,11 +17,11 @@ from pypuf.simulation import XORArbiterPUF, XORFeedForwardArbiterPUF, Lightweigh
 class Puf:
     def __init__(self):
         self.total_bits_num = 68
-        self.N = 6800
+        self.N = 240000
         #self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=12)
         #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=6, seed=21)
-        self.puf = XORFeedForwardArbiterPUF(n=(self.total_bits_num-4), k=5, ff=[(32,60)], seed=1)
-        #self.puf = LightweightSecurePUF(n=(self.total_bits_num-4), k=6, seed=10)
+        #self.puf = XORFeedForwardArbiterPUF(n=(self.total_bits_num-4), k=5, ff=[(32,60)], seed=1)
+        self.puf = LightweightSecurePUF(n=(self.total_bits_num-4), k=4, seed=10)
         #self.puf = InterposePUF(n=(self.total_bits_num-4), k_up=8, k_down=8, seed=1, noisiness=.05)
         self.lfsrChallenges = random_inputs(n=self.total_bits_num, N=self.N, seed=10) # LFSR random challenges data
         #self.zeroArray = list(np.zeros(1))
@@ -150,7 +150,7 @@ class Puf:
                     data_r = 1
             
             #data.append(self.zeroArray+challenge+top_path+bottom_path+[data_r])
-            data.append([final_delay_diff[0]]+challenge+top_path+bottom_path+[data_r])
+            data.append([final_delay_diff[0]]+top_path+bottom_path+challenge+[data_r])
             #data.append(parity_vector)
         
         data = np.array(data)
