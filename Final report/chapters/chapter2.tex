@@ -1,41 +1,163 @@
 \chapter{Literature Survey}
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. \cite{Reference2} Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. 
-\begin{equation}
-M = \frac{1}{T}\sum_{t=1}^{T} e(t) / \max_{t}[e(t)]
-\end{equation}
-Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc.
+\section{The PUF concept}
+The simplest sentence to describe PUF is "A PUF is an object's fingerprint" \cite{Reference4}. The fingerprint can represent a specific human in the world, such as the PUF can represent
+an object. The fingerprint is inherently created when people were born, and so does PUF, which inherently exists in an object according to unique manufacturing random variation \cite{Reference4}.
+With the representation and inherent property, the PUF is said to be unclonable since it is impossible to control and predict a human's fingerprint. This is an important concept for PUF. \par
 
-\section{A Section that Contains a Figure}
-
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim \cite{Reference1}. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. 
-\begin{figure}[ht]
-\includegraphics[width=15cm]{figures/figure1.png}
-\caption{A simple figure in \LaTeX. Reproduced from http://tinyurl.com/nqtrlj5 with the permission of the copyright owner.}
-\label{fig:graph}
+This intrinsic property can be extracted from a chip that has PUF circuit that existed inside \cite{Reference2}. The way PUF works is by entering a certain length of bits(so-called challenge) into the PUF, and it will
+generate another specific length of bits(so-called response). According to the property of PUF that was discussed in Chapter 1, it is impossible to find two different PUF that will produce the same response when entering the same challenge(See Figure \ref{fig:figure1}).
+\begin{figure}[htp]
+\centering
+\includegraphics[width=6cm]{figures/figure1.jpg}
+\caption{Different PUF that generate a different response when input same challenge}
+\label{fig:figure1}
 \end{figure}
-Porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. See Figure \ref{fig:graph}. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc.
 
-\section{A Section that Contains a Table}
+\section{Weak and strong PUF}
+PUF can be classified into two categories, weak and strong PUF according to the strength of PUF. The strength of PUF indicates the number of challenge-response pairs(so-called CRPs) that can be generated 
+from the PUF \cite{Reference1}. The higher numbers of CRPs can a PUF generate, the better strength it has. Generally, if increasing the size of the PUF leads to a linear increase in the number of CRPs, it is considered weak PUF. 
+On the other hand, if increasing the size of the PUF leads to an exponential increase in the number of CRPs, it is considered strong PUF.\par
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, \cite{Reference3} pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, 
 
-\begin{table}[ht]
-\center
-\begin{tabular}{cc|c}
-A & B & A XOR B\\
-\hline
-0 & 0 & 0\\
-0 & 1 & 1\\
-1 & 0 & 1\\
-1 & 1 & 0\\
-\end{tabular}
-\caption{A simple table in \LaTeX.}
-\label{tab:xor}
-\end{table}
+\subsection{Weak PUF}
+For the weak PUF, it represents the PUF that has a smaller set of CRPs. While it is impossible to 
+create a clone of PUF, but with a small set of CRPs, this will allow an attacker to record all the CRPs when the attacker has physical access to PUF \cite{Reference1}. With the knowledge of CRPs, attackers can easily provide the corresponding
+response to challenge as like they have a clone(See Figure \ref{fig:figure2}). The weak PUF can be used for authentication and key storage. However, since weak PUF's CRPs can be fully accessed, ensuring having a secure environment and whether the original PUF is being evaluated is relatively important \cite{Reference1}.
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=10cm]{figures/figure2.jpg}
+    \caption{Attacker can perform same behaviour as Weak PUF when having full access to CRPs and not under secure environment}
+    \label{fig:figure2}
+    \end{figure}
 
-porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. See Table \ref{tab:xor}. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc.
+
+\subsection{Strong PUF}
+For strong PUF, means the number of CRPs is significantly large that even attackers get access, having throughout knowledge of CRPs is impossible. While the number of CRPs is so large,
+and the CRP is randomly selected in usage, the probability that the attacker has knowledge about the CRP currently using is small \cite{Reference1}. In addition, each CRPs that is used once will 
+be discarded(See Figure \ref{fig:figure3}) so even if attackers recorded certain CRPs, also called eavesdropped, they will not be able to put them into use. The strong PUF can also be used for authentication but do not need to protect CRPs
+as serious as weak PUF.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=16cm]{figures/figure3.jpg}
+    \caption{The attacker eavesdropped CRP that has been used can not successfully validate in next evaluation for strong PUF}
+    \label{fig:figure3}
+    \end{figure}
+
+\section{Application of PUF: Authentication}
+One of the applications of PUF is authentication. As discussed in introduction of Chapter 1, PUF does not require huge computational power and are cost-effective, so it is suitable for many devices,
+especially the resources-constraint devices. The PUF's authentication included two stages, the enrollment and the authentication stage. 
+
+\subsection{Authentication process: Enrollment stage}
+In the enrollment stage, the company possess the PUF, so
+the company can connect the server to PUF and send lots of challenges along with recording the CRPs into the database \cite{Reference2} (See Figure \ref{fig:figure4}).
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=10cm]{figures/figure4.jpg}
+    \caption{Enrollment stage in PUF authentication}
+    \label{fig:figure4}
+    \end{figure}
+
+\subsection{Authentication process: Authentication stage}
+After recording all the CRPs, the company can now implement PUF on electronic devices.
+In the authentication stage, the server sent an arbitrary challenge to the devices that contain PUF while the device will return response. Afterwards, the server compares the response from the device with the database, 
+if the challenge and response pair exists in the database, the device is valid \cite{Reference2} (See Figure \ref{fig:figure5}). A life example will be a banking card.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=14cm]{figures/figure5.jpg}
+    \caption{Authentication stage in PUF authentication}
+    \label{fig:figure5}
+    \end{figure}
+
+\section{Different type of PUF: Arbiter PUF and XOR arbiter PUF}
+There are many different types of PUF such as arbiter PUF, ring oscillator PUF, lightweight PUF, etc. In this report, arbiter PUF and its mutation will be introduced in detail. 
+
+\subsection{Idea of arbiter PUF}
+The general idea of the arbiter PUF is comparing the transition speed for two electrical signals in the PUF's structure(See Figure \ref{fig:figure6}). 
+The arbiter PUF's structure contains a number of 
+multiplexers and an arbiter(mostly D flipflop), and two multiplexers will be combined into a switching box \cite{Reference3}. Look at Figure \ref{fig:figure6}, when entering a challenge bit, apply each challenge bit to a switching box, bit 1 indicate the upper and lower signal will switch 
+while bit 0 indicate the two signals remain unchanged in each switching box. This will eventually form paths for the signals(red and green line). Then the signals start transferring, the time arrived at the arbiter for two signals 
+is different since each multiplexer and wire has a unique delay. The arbiter will determine which path is faster and based on that response a binary bit if the upper path is faster, the response is 1, 
+otherwise, the response is 0. \par
+
+The arbiter at the end is always fair, which will not favour any one of the paths. Even there exist bias, a simple solution of adding a delay in the structure can solve the problem. For example, if the arbiter favor the lower path,
+by adding a delay to the upper path, it can have a head start. 
+
+By looking at Figure \ref{fig:figure6}, it is clear that the CRPs will be exponential. Assuming there are n switching boxes, two possible cases in each switching box, so the 
+number of CRPs is $2^{n}$, which indicate the arbiter PUF is a strong PUF. Arbiter PUF can also return a longer response by inputting K different challenges and getting a K bits response.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=18cm]{figures/figure6.jpg}
+    \caption{Arbiter PUF structure}
+    \label{fig:figure6}
+    \end{figure}
+
+\subsection{Idea of XOR arbiter PUF}
+The normal arbiter PUF is vulnerable to modeling attack, the purpose of XOR arbiter PUF is to increase the robustness of arbiter PUF. The basic concept is to integrate multiple parallel arbiter PUF, given the same challenge to each arbiter PUF and XORed each response to produce the final response(See Figure \ref{fig:figure7}) \cite{Reference5}.
+According to simulation, book \cite{Reference4} provides the XOR arbiter PUF will have nonlinearity property that makes it harder to model.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=18cm]{figures/figure7.jpg}
+    \caption{XOR arbiter PUF structure}
+    \label{fig:figure7}
+    \end{figure}
+
+\section{Potential threat on PUF: Modeling attack}
+Many different threats can perform on devices, such as eavesdropped, gaining access to the memory that stores secret keys. For PUF, the main threat is that attackers can use techniques 
+like machine learning to simulate the behaviour of CRPs(so-called modeling), which means even without the devices, attackers can still respond correctly when a challenge is 
+provided. Take arbiter puf as an example, assume an arbiter PUF with i switching box, and the challenge that applies to each switching box is c[i]. The two signals travel through the 
+path determined by challenge, and arrive at the arbiter at different time because of the delay in each component. The final response depends on the sign of final delay 
+difference $\Delta c$:
+\begin{equation}
+    r =\begin{cases}
+    1, & \text{if $\Delta c<0$}.\\
+    0, & \text{otherwise}.
+    \end{cases}
+\end{equation}
+which the delay difference is calculated by subtracting the upper path with the lower path's delay. The final delay difference $\Delta c$ can represent as $w^{T}\Phi$, where $w^{T}$ is 
+a weight vector that represents delays for the components in PUF, and $\Phi$ is i bits challenges that was applied \cite{Reference5}. $w^{T}\Phi = 0$ will provide a hyperplane that separates the space for $\Phi$, one side of the hyperplane are predicted as having response 1, the other side of the hyperplane
+are predicted as having response -1. In conclusion, the correct hyperplane indicates a good prediction of PUF. Machine learning such as logistic regression can play the role well. The modeling result for an arbiter PUF with 64 switching boxes, 
+by using the logistic regression can get a good performance of 99.9\% in a very short time with 18050 training CRPs \cite{Reference6}.
+
+\section{Countermeasure for modeling attack: Reconfigurability}
+
+\subsection{Basic concept of a type of reconfigurability framework: OPUF}
+In order to alleviate the problem that PUF is vulnerable to modeling attack, reconfiguration property embedded on PUF has been proposed. For example, the one-time-PUF(so called 
+OPUF), the general idea is that its configuration alters after every authentication session, which means CRPs behaviour of the PUF is changed and invalidate the modeling attack. This is based on the
+forward unpredictability and backward unpredictability properties that OPUF possess \cite{Reference7}. Figure \ref{fig:figure8} shows the concept of forward unpredictability and backward unpredictability.
+The orange line represents the forward unpredictability, which will ensure the responses collected before the reconfiguration process is invalid afterwards. As for the blue line, 
+which represent backward unpredictability, it will ensure the pattern observed by an attacker using modeling attack on PUF' is invalid for predicting the PUF before reconfiguration process \cite{Reference7}. 
+In this case, assume an attacker is performing a modeling attack on the PUF, and required a certain amount of CRPs to gain proper prediction. However, the OPUF's structure keeps changing every execution, which means the CRPs 
+behaviour is changing, so the modeling attack can't keep up or do not have time to collect enough CRPs \cite{Reference7}.
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=18cm]{figures/figure8.jpg}
+    \caption{Concept of forward unpredictability and backward unpredictability}
+    \label{fig:figure8}
+    \end{figure}
+
+\subsection{DPUF: An example of OPUF}
+DPUF can be considered as an example for creating the OPUF, it is built up with bit cells that contain capacitors and transistors, each cell stores information of values 0 and 1 \cite{Reference7}. However, these components will leak 
+electrical signals every period of time, which means the behaviour might be eavesdropped. Therefore performing the reconfiguration process every period of time is effective. The reconfigurability can be shown in Figure \ref{fig:figure9}, by varying parameters
+such as refresh-pause interval and the memory block, where the former can cause random bit flip in the cells while the latter store the final response in a random memory block 
+which will alter every period of time, PUF can present unpredictable behaviour that prevents from attacker perform modeling attack \cite{Reference7}.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=18cm]{figures/figure9.jpg}
+    \caption{Reconfigurability framework of DPUF}
+    \label{fig:figure9}
+    \end{figure}
 
 \section{Summary}
+In summary, chapter 2 describe the important background that need to understand for the project. This include showing PUF as a novel approach to increase the security robustness of electrical devices 
+by making use of its unique physical characteristics and how it can be used for devices authentication. Also, the working process and concepts for arbiter PUF and XOR arbiter PUF is introduced in 
+detail. Last, the largest potential threat on PUF is called the modeling attack and reconfigurability as the countermeasure are analyzed in detail. This chapter should provide basic concepts to understand 
+project objectives.
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc.
+

@@ -97,15 +97,15 @@ print("Accuracy: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
 plt.show()'''
 
 '''# Logistic Regression
-lr_results = cross_val_score(LogisticRegression(class_weight='balanced', 
+lr_results = cross_val_score(LogisticRegression(C=1, 
+                                                class_weight='balanced', 
                                                 fit_intercept=False,
+                                                intercept_scaling=9,
+                                                max_iter=300, 
                                                 penalty='l1',
                                                 solver='liblinear', 
-                                                warm_start=True,
-                                                tol=2, 
-                                                C=17,
-                                                intercept_scaling=16,
-                                                max_iter=450), data_reduct, data_label, cv=kfold)
+                                                tol=1, 
+                                                warm_start=True), data_reduct, data_label, cv=kfold)
 print("Accuracy: %.2f%% (%.2f%%)" % (lr_results.mean()*100, lr_results.std()*100))'''
 
 '''# Decision Tree
@@ -126,15 +126,18 @@ SVM = svm.SVC(kernel='rbf',
               decision_function_shape='ovo'
               )
 svm_results = cross_val_score(SVM, data_reduct, data_label, cv=kfold)
-print("Accuracy: %.2f%% (%.2f%%)" % (svm_results.mean()*100, svm_results.std()*100))'''
+print("Accuracy: %.2f%% (%.2f%%)" % (svm_results.mean()*100, svm_results.std()*100))
+'''
 
 '''# KNeighbors
-knn = KNeighborsClassifier(n_neighbors=1)
+knn = KNeighborsClassifier(algorithm='ball_tree', 
+                           leaf_size=1, 
+                           n_neighbors=9)
 knn_results = cross_val_score(knn, data_reduct, data_label, cv=kfold)
 print("Accuracy: %.2f%% (%.2f%%)" % (knn_results.mean()*100, knn_results.std()*100))'''
 
 '''# Naive Bayes
-gnb = MultinomialNB()
+gnb = GaussianNB(var_smoothing=3)
 gnb_results = cross_val_score(gnb, data_reduct, data_label, cv=kfold)
 print("Accuracy: %.2f%% (%.2f%%)" % (gnb_results.mean()*100, gnb_results.std()*100))'''
 
