@@ -16,8 +16,8 @@ from pypuf.simulation import XORArbiterPUF, XORFeedForwardArbiterPUF, Lightweigh
 
 class Puf:
     def __init__(self):
-        self.total_bits_num = 128
-        self.N = 8000
+        self.total_bits_num = 68
+        self.N = 6800
         self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=12)
         #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=3, seed=21)
         #self.puf = XORFeedForwardArbiterPUF(n=(self.total_bits_num-4), k=6, ff=[(32,60)], seed=1)
@@ -94,14 +94,20 @@ class Puf:
                 # obfuscate part
                 obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
                 obfuscateChallenge = [-1 if c == 0 else 1 for c in obfuscateChallenge]
-                final_delay_diff = self.total_delay_diff(obfuscateChallenge)
                 
+                #final_delay_diff = self.total_delay_diff(obfuscateChallenge)
                 #final_delay_diff= self.puf.val(np.array([obfuscateChallenge]))
+                
+                ### For interpose PUF
+                #final_delay_diff = self.puf.up.val(np.array([obfuscateChallenge]))
+                #final_delay_diff = self.puf.down.val(np.array([obfuscateChallenge]))
+                
                 '''count=0
                 for p in self.puf.simulations:
                     count+=1
                     #print(p, p.val(np.array([obfuscateChallenge])))
                 print(count)'''
+                
                 top_path, bottom_path = self.puf_path(obfuscateChallenge)
             else:
                 challenge = list(test_crps[i][0])
