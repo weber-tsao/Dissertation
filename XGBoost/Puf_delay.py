@@ -17,9 +17,9 @@ from pypuf.simulation import XORArbiterPUF, XORFeedForwardArbiterPUF, Lightweigh
 class Puf:
     def __init__(self):
         self.total_bits_num = 68
-        self.N = 6800
+        self.N = 8000
         self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=12)
-        #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=3, seed=21)
+        #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=2, seed=21)
         #self.puf = XORFeedForwardArbiterPUF(n=(self.total_bits_num-4), k=6, ff=[(32,60)], seed=1)
         #self.puf = LightweightSecurePUF(n=(self.total_bits_num-4), k=5, seed=10)
         #self.puf = InterposePUF(n=(self.total_bits_num-4), k_up=8, k_down=8, seed=1, noisiness=.05)
@@ -95,7 +95,7 @@ class Puf:
                 obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
                 obfuscateChallenge = [-1 if c == 0 else 1 for c in obfuscateChallenge]
                 
-                #final_delay_diff = self.total_delay_diff(obfuscateChallenge)
+                final_delay_diff = self.total_delay_diff(obfuscateChallenge)
                 #final_delay_diff= self.puf.val(np.array([obfuscateChallenge]))
                 
                 ### For interpose PUF
@@ -123,7 +123,7 @@ class Puf:
             
             challenge = [0 if c == -1 else 1 for c in challenge]
             
-            '''### challenge to parity vector
+            ### challenge to parity vector
             parity_vector = []
             temp = 0
             for j in range(len(challenge)):
@@ -133,7 +133,7 @@ class Puf:
                     for x in range(j):
                         temp *= (1-2*challenge[x])
                 parity_vector.append(temp)
-            parity_vector = [0 if c == -1 else 1 for c in parity_vector]'''
+            parity_vector = [0 if c == -1 else 1 for c in parity_vector]
             
             
             ### label ###
@@ -163,7 +163,7 @@ class Puf:
         
         #min_max_scaler = preprocessing.MinMaxScaler()
         #data = min_max_scaler.fit_transform(data)
-        #data = np.unique(data,axis=0)
+        data = np.unique(data,axis=0)
         train_label = data[:,-1]
         train_data = data[:,0:-1]
         #plt.hist(train_label, bins=50)

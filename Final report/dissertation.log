@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  5 DEC 2021 03:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.11.15)  11 FEB 2022 13:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/weber/OneDrive/Desktop/Dissertation/Stage 2/dissertation.tex"
-(c:/Users/weber/OneDrive/Desktop/Dissertation/Stage 2/dissertation.tex
+**"c:/Users/weber/OneDrive/Desktop/Dissertation/Final report/dissertation.tex"
+(c:/Users/weber/OneDrive/Desktop/Dissertation/Final report/dissertation.tex
 LaTeX2e <2021-11-15>
 L3 programming layer <2021-11-12> (c:/texlive/2021/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2021/10/04 v1.4n Standard LaTeX document class
@@ -449,14 +449,14 @@ Underfull \hbox (badness 1546) in paragraph at lines 37--41
 ] (./dissertation.aux) ) 
 Here is how much of TeX's memory you used:
  3360 strings out of 478371
- 53086 string characters out of 5852527
+ 53101 string characters out of 5852527
  360125 words of memory out of 5000000
  21398 multiletter control sequences out of 15000+600000
  412583 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,13n,62p,587b,235s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,13n,62p,592b,235s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on dissertation.pdf (29 pages, 1194905 bytes).
+Output written on dissertation.pdf (29 pages, 1195106 bytes).
 PDF statistics:
  199 PDF objects out of 1000 (max. 8388607)
  117 compressed objects within 2 object streams

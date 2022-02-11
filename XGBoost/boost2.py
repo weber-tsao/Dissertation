@@ -6,7 +6,7 @@ import seaborn as sns
 import io
 import requests
 from sklearn import svm
-from sklearn.model_selection import train_test_split, KFold, cross_val_score, GridSearchCV, RandomizedSearchCV
+from sklearn.model_selection import train_test_split, KFold, cross_val_score, GridSearchCV, RandomizedSearchCV, ShuffleSplit
 from sklearn.metrics import auc, plot_roc_curve, accuracy_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
@@ -85,9 +85,14 @@ selection = SelectFromModel(xgboostModel, threshold=0.001, prefit=True)
 data_reduct = selection.transform(data)
 
 ### Cross validation ###
-kfold = KFold(n_splits=5)
-results = cross_val_score(xgboostModel, data_reduct, data_label, cv=kfold)
+data_train, data_test, train_label, test_label = train_test_split(data_reduct, data_label, test_size=.1, random_state=66)
+#kfold = KFold(n_splits=5)
+ss = ShuffleSplit(n_splits=5, test_size=0.25, random_state=3)
+results = cross_val_score(xgboostModel, data_reduct, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
+xgboostModel.fit(data_train, train_label)
+testing2 = xgboostModel.score(data_test,test_label)
+print('Testing accuracy2: {}%'.format(testing2*100))
 #print(xgboostModel.get_booster().get_score(importance_type="gain"))
 #plot_importance(xgboostModel)
 #plt.figure(figsize = (30, 30))
