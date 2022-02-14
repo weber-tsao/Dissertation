@@ -47,7 +47,8 @@ xgboostModel = XGBClassifier(
     objective='binary:logistic', 
     gamma=0.8,
     subsample=0.8,
-    colsample_bytree=0.8
+    colsample_bytree=0.8,
+    early_stopping_rounds=100
     )
 
 xgboostModel.fit(X_train, y_train, eval_set=eval_s)

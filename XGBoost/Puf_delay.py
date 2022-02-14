@@ -17,13 +17,13 @@ from pypuf.simulation import XORArbiterPUF, XORFeedForwardArbiterPUF, Lightweigh
 class Puf:
     def __init__(self):
         self.total_bits_num = 68
-        self.N = 68000
+        self.N = 6800
         self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=12)
         #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=6, seed=21)
         #self.puf = XORFeedForwardArbiterPUF(n=(self.total_bits_num-4), k=6, ff=[(32,60)], seed=1)
         #self.puf = LightweightSecurePUF(n=(self.total_bits_num-4), k=5, seed=10)
         #self.puf = InterposePUF(n=(self.total_bits_num-4), k_up=3, k_down=3, seed=12)
-        self.lfsrChallenges = random_inputs(n=self.total_bits_num, N=self.N, seed=10) # LFSR random challenges data
+        self.lfsrChallenges = random_inputs(n=self.total_bits_num, N=self.N, seed=123) # LFSR random challenges data
         #self.zeroArray = list(np.zeros(1))
         #self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=self.N, seed=34)
         #self.crp.save('crps.npz')
