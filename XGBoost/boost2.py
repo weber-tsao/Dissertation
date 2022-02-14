@@ -7,7 +7,7 @@ import io
 import requests
 from sklearn import svm
 from sklearn.model_selection import train_test_split, KFold, cross_val_score, GridSearchCV, RandomizedSearchCV, ShuffleSplit
-from sklearn.metrics import auc, plot_roc_curve, accuracy_score
+from sklearn.metrics import auc, plot_roc_curve, accuracy_score, f1_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
@@ -30,7 +30,7 @@ puf = Puf()
 data, data_label = puf.load_data()
 
 ### Split train, test data for the model ###
-X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.5, random_state=66)
+X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.1, random_state=66)
 X_test, X_val, y_test, y_val = train_test_split(X_testVal, y_testVal, test_size=.5, random_state=24)
 evals_result ={}
 eval_s = [(X_train, y_train),(X_val, y_val)]
@@ -111,6 +111,8 @@ for i in range(len(test_label)):
         cnt2 += 1
 
 print("Accuracy: %.2f %% " % (100 * cnt1 / (cnt1 + cnt2)))
+cc = f1_score(test_label, testingacc)
+print(cc)
 #testing2 = xgboostModel.score(data_test,test_label)
 #print('Testing accuracy2: {}%'.format(testing2*100))
 
