@@ -40,7 +40,7 @@ print('Testing data shape:',X_test.shape)
 ### Create XGBClassifier model ###
 xgboostModel = XGBClassifier(
     learning_rate=0.05, 
-    n_estimators=1000, 
+    n_estimators=100, 
     max_depth=2,
     tree_method='gpu_hist',
     min_child_weight=10, 
@@ -81,18 +81,42 @@ for thresh in thresholds:
 	print("Thresh=%.3f, n=%d, Accuracy: %.2f%%" % (thresh, select_X_train.shape[1], accuracy*100.0))'''
 
 ### Feature selction ###
-selection = SelectFromModel(xgboostModel, threshold=0.001, prefit=True)
+selection = SelectFromModel(xgboostModel, threshold=0.00001, prefit=True)
+print(xgboostModel.feature_importances_)
 data_reduct = selection.transform(data)
 
 ### Cross validation ###
-data_train, data_test, train_label, test_label = train_test_split(data_reduct, data_label, test_size=.1, random_state=66)
-#kfold = KFold(n_splits=5)
 ss = ShuffleSplit(n_splits=5, test_size=0.25, random_state=3)
+
+### Calculate training time ###
+end_time = datetime.now()
+print('Training time: {}'.format(end_time - start_time))
+
+### Set testing start time ###
+test_start_time = datetime.now()
 results = cross_val_score(xgboostModel, data_reduct, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
+
+### Check overfitting ###
+data_train, data_test, train_label, test_label = train_test_split(data_reduct, data_label, test_size=.1, random_state=66)
 xgboostModel.fit(data_train, train_label)
-testing2 = xgboostModel.score(data_test,test_label)
-print('Testing accuracy2: {}%'.format(testing2*100))
+testingacc = xgboostModel.predict(data_test)
+cnt1 = 0
+cnt2 = 0
+for i in range(len(test_label)):
+    if testingacc[i] == test_label[i]:
+        cnt1 += 1
+    else:
+        cnt2 += 1
+
+print("Accuracy: %.2f %% " % (100 * cnt1 / (cnt1 + cnt2)))
+#testing2 = xgboostModel.score(data_test,test_label)
+#print('Testing accuracy2: {}%'.format(testing2*100))
+
+### Calculate testing time ###
+test_end_time = datetime.now()
+print('Testing time: {}'.format(test_end_time - test_start_time))
+
 #print(xgboostModel.get_booster().get_score(importance_type="gain"))
 #plot_importance(xgboostModel)
 #plt.figure(figsize = (30, 30))
@@ -178,8 +202,8 @@ plt.title('LFSR')
 plt.legend(['XGBoost', 'SVM'])
 plt.show()'''
 
-### Cross validation with plotting confidence graph ###
-'''tprs = []
+'''### Cross validation with plotting confidence graph ###
+tprs = []
 aucs = []
 mean_fpr = np.linspace(0, 1, 100)
 
@@ -215,10 +239,6 @@ ax.set(xlim=[-0.05, 1.05], ylim=[-0.05, 1.05],
        title="Receiver operating characteristic example")
 ax.legend(loc="lower right")
 plt.show()'''
-
-### Calculate running time ###
-end_time = datetime.now()
-print('Runtime: {}'.format(end_time - start_time))
 
 '''### GridSearch ###
 testingModel=svm.SVC(kernel='rbf',

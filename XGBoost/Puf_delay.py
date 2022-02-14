@@ -17,12 +17,12 @@ from pypuf.simulation import XORArbiterPUF, XORFeedForwardArbiterPUF, Lightweigh
 class Puf:
     def __init__(self):
         self.total_bits_num = 68
-        self.N = 8000
+        self.N = 68000
         self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=12)
-        #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=2, seed=21)
+        #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=6, seed=21)
         #self.puf = XORFeedForwardArbiterPUF(n=(self.total_bits_num-4), k=6, ff=[(32,60)], seed=1)
         #self.puf = LightweightSecurePUF(n=(self.total_bits_num-4), k=5, seed=10)
-        #self.puf = InterposePUF(n=(self.total_bits_num-4), k_up=8, k_down=8, seed=1, noisiness=.05)
+        #self.puf = InterposePUF(n=(self.total_bits_num-4), k_up=3, k_down=3, seed=12)
         self.lfsrChallenges = random_inputs(n=self.total_bits_num, N=self.N, seed=10) # LFSR random challenges data
         #self.zeroArray = list(np.zeros(1))
         #self.crp = pypuf.io.ChallengeResponseSet.from_simulation(self.puf, N=self.N, seed=34)
@@ -33,6 +33,10 @@ class Puf:
         self.bottom_path = []
         self.LFSR_simulated = LFSR_simulated()
         self.lfsr = True
+        self.diff2 = []
+        self.diff3 = []
+        self.diff4 = []
+        self.diff_index = 0
     
     def puf_path(self, challenge):
         challenge = array([challenge])
@@ -93,14 +97,28 @@ class Puf:
                 
                 # obfuscate part
                 obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
-                obfuscateChallenge = [-1 if c == 0 else 1 for c in obfuscateChallenge]
+                obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
                 
                 final_delay_diff = self.total_delay_diff(obfuscateChallenge)
                 #final_delay_diff= self.puf.val(np.array([obfuscateChallenge]))
                 
                 ### For interpose PUF
-                #final_delay_diff = self.puf.up.val(np.array([obfuscateChallenge]))
-                #final_delay_diff = self.puf.down.val(np.array([obfuscateChallenge]))
+                #final_delay_diff_up = self.puf.up.val(np.array([obfuscateChallenge]))
+                
+                ### For general model
+                '''if i <= 32000:
+                    final_delay_diff= self.puf2.val(np.array([obfuscateChallenge]))
+                    self.diff2.append(final_delay_diff)
+                    self.diff_index = 2
+                elif i > 32000 and i <= 64000:
+                    final_delay_diff= self.puf3.val(np.array([obfuscateChallenge]))
+                    self.diff3.append(final_delay_diff)
+                    self.diff_index = 3
+                else:
+                    final_delay_diff= self.puf4.val(np.array([obfuscateChallenge]))
+                    self.diff4.append(final_delay_diff)
+                    self.diff_index = 4'''
+                
                 
                 '''count=0
                 for p in self.puf.simulations:
@@ -120,10 +138,9 @@ class Puf:
                 top_path_num = self.concat(top_path_num, top_path[x])
                 bottom_path_num = self.concat(bottom_path_num, bottom_path[x])
                 
+            challenge = [0 if c == -1 else c for c in challenge]
             
-            challenge = [0 if c == -1 else 1 for c in challenge]
-            
-            ### challenge to parity vector
+            '''### challenge to parity vector
             parity_vector = []
             temp = 0
             for j in range(len(challenge)):
@@ -133,11 +150,18 @@ class Puf:
                     for x in range(j):
                         temp *= (1-2*challenge[x])
                 parity_vector.append(temp)
-            parity_vector = [0 if c == -1 else 1 for c in parity_vector]
+            parity_vector = [0 if c == -1 else 1 for c in parity_vector]'''
             
             
             ### label ###
             if self.lfsr:
+                '''if self.diff_index == 2:
+                    response = self.LFSR_simulated.produceObfuscateResponse(self.puf2, obfuscateChallenge)
+                elif self.diff_index == 3:
+                    response = self.LFSR_simulated.produceObfuscateResponse(self.puf3, obfuscateChallenge)
+                else:
+                    response = self.LFSR_simulated.produceObfuscateResponse(self.puf4, obfuscateChallenge)'''
+                
                 response = self.LFSR_simulated.produceObfuscateResponse(self.puf, obfuscateChallenge)
                 response = np.array(response)
                 data_r = 0
@@ -155,6 +179,10 @@ class Puf:
                 else:
                     data_r = 1
             
+            '''midpoint = (self.total_bits_num-4)//2+1
+            obfuscateChallenge = obfuscateChallenge[0:midpoint] + [response[0]] + obfuscateChallenge[midpoint:] 
+            final_delay_diff_down = self.puf.down.val(np.array([obfuscateChallenge]))
+            final_delay_diff = final_delay_diff_up+final_delay_diff_down'''
             #data.append(self.zeroArray+challenge+top_path+bottom_path+[data_r])
             data.append([final_delay_diff[0]]+top_path+bottom_path+challenge+[data_r])
             #data.append(parity_vector)
