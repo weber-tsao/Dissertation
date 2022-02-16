@@ -131,12 +131,21 @@ lr_results = cross_val_score(LogisticRegression(C=1,
                                                 penalty='l1',
                                                 solver='liblinear', 
                                                 tol=1, 
-                                                warm_start=True), data_reduct, data_label, cv=kfold)
+                                                warm_start=True), data_reduct, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (lr_results.mean()*100, lr_results.std()*100))'''
 
-'''# Decision Tree
-dt_results = cross_val_score(DecisionTreeClassifier(), data_reduct, data_label, cv=kfold)
-print("Accuracy: %.2f%% (%.2f%%)" % (dt_results.mean()*100, dt_results.std()*100))'''
+# Decision Tree
+'''decisionTree = DecisionTreeClassifier(max_depth=2, 
+                                      max_leaf_nodes=2
+                                      )
+decisionTree.fit(data_train, train_label)
+trainingdt = decisionTree.score(data_train, train_label)
+testingdt = decisionTree.score(data_test, test_label)
+print('Training accuracy2: {}%'.format(trainingdt*100))
+print('Testing accuracy2: {}%'.format(testingdt*100))'''
+
+dt_results = cross_val_score(DecisionTreeClassifier(), data_reduct, data_label, cv=ss)
+print("Accuracy: %.2f%% (%.2f%%)" % (dt_results.mean()*100, dt_results.std()*100))
 
 '''# SVM
 SVM = svm.SVC(kernel='rbf',
@@ -151,15 +160,15 @@ SVM = svm.SVC(kernel='rbf',
               class_weight='balanced',
               decision_function_shape='ovo'
               )
-svm_results = cross_val_score(SVM, data_reduct, data_label, cv=kfold)
-print("Accuracy: %.2f%% (%.2f%%)" % (svm_results.mean()*100, svm_results.std()*100))
-'''
+svm_results = cross_val_score(SVM, data_reduct, data_label, cv=ss)
+print("Accuracy: %.2f%% (%.2f%%)" % (svm_results.mean()*100, svm_results.std()*100))'''
+
 
 '''# KNeighbors
 knn = KNeighborsClassifier(algorithm='ball_tree', 
                            leaf_size=1, 
                            n_neighbors=9)
-knn_results = cross_val_score(knn, data_reduct, data_label, cv=kfold)
+knn_results = cross_val_score(knn, data_reduct, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (knn_results.mean()*100, knn_results.std()*100))'''
 
 '''# Naive Bayes
@@ -168,35 +177,24 @@ gnb_results = cross_val_score(gnb, data_reduct, data_label, cv=kfold)
 print("Accuracy: %.2f%% (%.2f%%)" % (gnb_results.mean()*100, gnb_results.std()*100))'''
 
 '''### Plot relation graph ###
-#0: 95.47, 0.6
-#1: 56.91, 0.87
-#2: 56.21, 0.79
-#3: 57.79, 1.11
-#4: 59.94, 0.94
-#5: 67.19, 1.24
-#7: 75.13, 1.3
-#9: 80.71, 1.09
-#10: 83.16, 0.34
-#15: 89.47, 0.56
-#20: 92.01, 0.67
 
-x1 = [0,1,2,3,4,5,7,9,15,20]
-y1 = [99.94, 77.97, 78.76, 78.66, 80.71, 79.31, 84.57, 87.19, 92.06, 93.96]
+x1 = [0,1,2,3,4,5,6,7,9,15,20]
+y1 = [93.03,64.52,67.11,66.14,58.5,64.04,60.26,60.78,64.72,63.58,62.28]
 plt.plot(x1, y1, color='red', linestyle='dashed', linewidth = 3,
          marker='o', markerfacecolor='red', markersize=8)
 
-x2 = [0,1,2,3,4,5,7,9,15,20]
-y2 = [95.47, 56.91, 56.21, 57.79, 59.94, 67.19, 75.13, 80.71, 89.47, 92.01]
+x2 = [0,1,2,3,4,5,6,7,9,15,20]
+y2 = [81.19,61.84,62.96,61.42,65.94,61.29,57.36,66.04,63.14,71.7,71.95]
 plt.plot(x2, y2, color='green', linestyle='dashed', linewidth = 3,
          marker='o', markerfacecolor='green', markersize=8)
  
 # setting x and y axis range
-plt.ylim(0,100)
-plt.xlim(0,25)
+plt.ylim(50,100)
+plt.xlim(0,20)
 plt.xlabel('Base')
 plt.ylabel('Accuarcy(%)')
 plt.title('LFSR')
-plt.legend(['XGBoost', 'SVM'])
+plt.legend(['XGBoost', 'DT'])
 plt.show()'''
 
 '''x1 = [0,1,2,3,4,5,6,7,9,15,20]

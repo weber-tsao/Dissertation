@@ -17,13 +17,13 @@ from pypuf.simulation import XORArbiterPUF, XORFeedForwardArbiterPUF, Lightweigh
 class Puf:
     def __init__(self):
         self.total_bits_num = 68
-        self.N = 240000
-        #self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=12)
-        #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=6, seed=21)
+        self.N = 8500
+        self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=12)
+        #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=3, seed=21)
         #self.puf2 = XORArbiterPUF(n=(self.total_bits_num-4), k=6, seed=34)
         #self.puf = XORFeedForwardArbiterPUF(n=(self.total_bits_num-4), k=6, ff=[(32,60)], seed=1)
         #self.puf = LightweightSecurePUF(n=(self.total_bits_num-4), k=5, seed=10)
-        self.puf = InterposePUF(n=(self.total_bits_num-4), k_up=3, k_down=3, seed=12)
+        #self.puf = InterposePUF(n=(self.total_bits_num-4), k_up=3, k_down=3, seed=12)
         self.lfsrChallenges = random_inputs(n=self.total_bits_num, N=self.N, seed=123) # LFSR random challenges data
         #self.xorChallenges = random_inputs(n=self.total_bits_num, N=680000, seed=134) 
         #self.zeroArray = list(np.zeros(1))
@@ -109,12 +109,12 @@ class Puf:
                 #xorobfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(xorchallenge)
                 #xorobfuscateChallenge = [-1 if c == 0 else c for c in xorobfuscateChallenge]
                 
-                #final_delay_diff = self.total_delay_diff(obfuscateChallenge)
+                final_delay_diff = self.total_delay_diff(obfuscateChallenge)
                 #final_delay_diff = self.puf.val(np.array([obfuscateChallenge]))
                 #xorfinal_delay_diff = self.puf2.val(np.array([xorobfuscateChallenge]))
                 
                 ### For interpose PUF
-                final_delay_diff_up = self.puf.up.val(np.array([obfuscateChallenge]))
+                #final_delay_diff_up = self.puf.up.val(np.array([obfuscateChallenge]))
                 
                 ### For general model
                 '''if i <= 32000:
@@ -194,12 +194,12 @@ class Puf:
                 else:
                     data_r = 1
             
-            midpoint = (self.total_bits_num-4)//2+1
+            '''midpoint = (self.total_bits_num-4)//2+1
             downChallenge = obfuscateChallenge[0:midpoint] + [response[0]] + obfuscateChallenge[midpoint:]
             final_delay_diff_down = self.puf.down.val(np.array([downChallenge]))
-            final_delay_diff = final_delay_diff_up+final_delay_diff_down
+            final_delay_diff = final_delay_diff_up+final_delay_diff_down'''
             #data.append(self.zeroArray+challenge+top_path+bottom_path+[data_r])
-            data.append([final_delay_diff[0]]+top_path+bottom_path+challenge+downChallenge+[data_r])
+            data.append([final_delay_diff[0]]+top_path+bottom_path+challenge+[data_r])
             #xordata.append([xorfinal_delay_diff[0]]+xortop_path+xorbottom_path+xorchallenge+[xordata_r])
             #data.append(parity_vector)
         
