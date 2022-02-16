@@ -30,7 +30,7 @@ puf = Puf()
 data, data_label = puf.load_data()
 
 ### Split train, test data for the model ###
-X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.1, random_state=66)
+X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
 X_test, X_val, y_test, y_val = train_test_split(X_testVal, y_testVal, test_size=.5, random_state=24)
 evals_result ={}
 eval_s = [(X_train, y_train),(X_val, y_val)]
@@ -40,7 +40,7 @@ print('Testing data shape:',X_test.shape)
 ### Create XGBClassifier model ###
 xgboostModel = XGBClassifier(
     learning_rate=0.05, 
-    n_estimators=100, 
+    n_estimators=80, 
     max_depth=2,
     tree_method='gpu_hist',
     min_child_weight=10, 
@@ -99,22 +99,16 @@ results = cross_val_score(xgboostModel, data_reduct, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
 
 ### Check overfitting ###
-data_train, data_test, train_label, test_label = train_test_split(data_reduct, data_label, test_size=.1, random_state=66)
+data_train, data_test, train_label, test_label = train_test_split(data_reduct, data_label, test_size=.25, random_state=66)
 xgboostModel.fit(data_train, train_label)
-testingacc = xgboostModel.predict(data_test)
-cnt1 = 0
-cnt2 = 0
-for i in range(len(test_label)):
-    if testingacc[i] == test_label[i]:
-        cnt1 += 1
-    else:
-        cnt2 += 1
+#testingacc = xgboostModel.predict(data_test)
+training2 = xgboostModel.score(data_train, train_label)
+testing2 = xgboostModel.score(data_test, test_label)
+print('Training accuracy2: {}%'.format(training2*100))
+print('Testing accuracy2: {}%'.format(testing2*100))
 
-print("Accuracy: %.2f %% " % (100 * cnt1 / (cnt1 + cnt2)))
-cc = f1_score(test_label, testingacc)
-print(cc)
-#testing2 = xgboostModel.score(data_test,test_label)
-#print('Testing accuracy2: {}%'.format(testing2*100))
+#cc = f1_score(test_label, testingacc)
+#print(cc)
 
 ### Calculate testing time ###
 test_end_time = datetime.now()
@@ -203,6 +197,18 @@ plt.xlabel('Base')
 plt.ylabel('Accuarcy(%)')
 plt.title('LFSR')
 plt.legend(['XGBoost', 'SVM'])
+plt.show()'''
+
+'''x1 = [0,1,2,3,4,5,6,7,9,15,20]
+y1 = [93.03,64.52,67.11,66.14,58.5,64.04,60.26,60.78,64.72,63.58,62.28]
+plt.plot(x1, y1, color='red', linestyle='dashed', linewidth = 3,
+         marker='o', markerfacecolor='red', markersize=8)
+ 
+# setting x and y axis range
+plt.ylim(50,100)
+plt.xlim(0,20)
+plt.xlabel('Base')
+plt.ylabel('Accuracy(%)')
 plt.show()'''
 
 '''### Cross validation with plotting confidence graph ###
