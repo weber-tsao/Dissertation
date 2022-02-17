@@ -144,8 +144,8 @@ testingdt = decisionTree.score(data_test, test_label)
 print('Training accuracy2: {}%'.format(trainingdt*100))
 print('Testing accuracy2: {}%'.format(testingdt*100))'''
 
-dt_results = cross_val_score(DecisionTreeClassifier(), data_reduct, data_label, cv=ss)
-print("Accuracy: %.2f%% (%.2f%%)" % (dt_results.mean()*100, dt_results.std()*100))
+'''dt_results = cross_val_score(DecisionTreeClassifier(), data_reduct, data_label, cv=ss)
+print("Accuracy: %.2f%% (%.2f%%)" % (dt_results.mean()*100, dt_results.std()*100))'''
 
 '''# SVM
 SVM = svm.SVC(kernel='rbf',

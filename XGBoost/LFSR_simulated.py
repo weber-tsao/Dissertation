@@ -29,7 +29,7 @@ class LFSR_simulated:
 
     def createShiftCount(self, obfuscate_bits):     
         # create random base number
-        base = 20
+        base = 0
         
         # create count by looking at crp and splited crp bits
         binary_obfus = list(obfuscate_bits)
