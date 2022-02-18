@@ -21,6 +21,7 @@ from lightweight_PUF import*
 from feedforward_PUF import*
 from interpose_PUF import*
 from LFSR_simulated import*
+from general_model import*
 from datetime import datetime
 import warnings
 warnings.filterwarnings("ignore")
