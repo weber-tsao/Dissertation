@@ -88,10 +88,10 @@ class Puf:
             #xorchallenge = xor_test_crps[i]
             
             # obfuscate part
-            obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
+            obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge, 0)
             obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
             
-            #xorobfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(xorchallenge)
+            #xorobfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(xorchallenge, 0)
             #xorobfuscateChallenge = [-1 if c == 0 else c for c in xorobfuscateChallenge]
             
             #final_delay_diff = self.total_delay_diff(obfuscateChallenge)

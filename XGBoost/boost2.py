@@ -2,12 +2,10 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 import io
-import requests
 from sklearn import svm
 from sklearn.utils import shuffle
-from sklearn.model_selection import train_test_split, KFold, cross_val_score, GridSearchCV, RandomizedSearchCV, ShuffleSplit
+from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV, RandomizedSearchCV, ShuffleSplit
 from sklearn.metrics import auc, plot_roc_curve, accuracy_score, f1_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
@@ -18,6 +16,10 @@ from xgboost import XGBClassifier
 from xgboost import plot_importance
 from xgboost import plot_tree
 from Puf_delay import*
+from arbiter_PUF import*
+from XOR_PUF import*
+from lightweight_PUF import*
+from feedforward_PUF import*
 from LFSR_simulated import*
 from datetime import datetime
 import warnings
@@ -27,8 +29,16 @@ warnings.filterwarnings("ignore")
 start_time = datetime.now()
 
 ### Load data ###
-puf = Puf()
-data, data_label = puf.load_data()
+#puf = Puf()
+#data, data_label = puf.load_data()
+arbiter_puf = arbiter_PUF()
+data, data_label = arbiter_puf.load_data()
+#xor_puf = XOR_PUF()
+#data, data_label = xor_puf.load_data()
+#lightweight_puf = lightweight_PUF()
+#data, data_label = lightweight_puf.load_data()
+#feedforward_puf = feedforward_PUF()
+#data, data_label = feedforward_puf.load_data()
 
 ### Split train, test data for the model ###
 X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
