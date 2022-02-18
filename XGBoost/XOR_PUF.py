@@ -14,22 +14,19 @@ from pypuf.simulation import XORArbiterPUF
 
 class XOR_PUF:
     def __init__(self):
-        self.total_bits_num = 68
-        self.N = 32000
-        self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=2, seed=21)
-        #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=4, seed=21, noisiness=.1)
-        self.lfsrChallenges = random_inputs(n=self.total_bits_num, N=self.N, seed=123) # LFSR random challenges data
         self.LFSR_simulated = LFSR_simulated()
 
-    def load_data(self):
-        data_len = self.N
+    def load_data(self, stages, data_num, xor_num, cus_seed):
+        puf = XORArbiterPUF(n=(stages-4), k=xor_num, seed=21)
+        #puf = XORArbiterPUF(n=(stages-4), k=xor_num, seed=21, noisiness=.1)
+        lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
         train_data = []
         train_label = []
         data = []
         
-        test_crps = self.lfsrChallenges
+        test_crps = lfsrChallenges
         
-        for i in range(data_len):
+        for i in range(data_num):
             ### data ###
             challenge = test_crps[i]
             
@@ -37,12 +34,12 @@ class XOR_PUF:
             obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge, 0)
             obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
             
-            final_delay_diff = self.puf.val(np.array([obfuscateChallenge]))        
+            final_delay_diff = puf.val(np.array([obfuscateChallenge]))        
                 
             challenge = [0 if c == -1 else c for c in challenge]            
             
             ### label ###            
-            response = self.LFSR_simulated.produceObfuscateResponse(self.puf, obfuscateChallenge)
+            response = self.LFSR_simulated.produceObfuscateResponse(puf, obfuscateChallenge)
             response = np.array(response)
             data_r = 0
             if response == -1:

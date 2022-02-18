@@ -29,16 +29,16 @@ warnings.filterwarnings("ignore")
 start_time = datetime.now()
 
 ### Load data ###
-#arbiter_puf = arbiter_PUF()
-#data, data_label = arbiter_puf.load_data()
+arbiter_puf = arbiter_PUF()
+data, data_label = arbiter_puf.load_data(68, 6800, 123)
 #xor_puf = XOR_PUF()
-#data, data_label = xor_puf.load_data()
+#data, data_label = xor_puf.load_data(68, 32000, 2, 123)
 #lightweight_puf = lightweight_PUF()
-#data, data_label = lightweight_puf.load_data()
+#data, data_label = lightweight_puf.load_data(68, 80000, 3, 123)
 #feedforward_puf = feedforward_PUF()
-#data, data_label = feedforward_puf.load_data()
-interpose_puf = interpose_PUF()
-data, data_label = interpose_puf.load_data()
+#data, data_label = feedforward_puf.load_data(68, 68000, 3, 32, 60, 123)
+#interpose_puf = interpose_PUF()
+#data, data_label = interpose_puf.load_data(68, 240000, 3, 3, 123)
 
 ### Split train, test data for the model ###
 X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)

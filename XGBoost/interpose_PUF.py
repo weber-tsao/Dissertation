@@ -14,23 +14,20 @@ from pypuf.simulation import InterposePUF
 
 class interpose_PUF:
     def __init__(self):
-        self.total_bits_num = 68
-        self.N = 41200
-        self.puf = InterposePUF(n=(self.total_bits_num-4), k_up=3, k_down=3, seed=12)
-        #self.puf = InterposePUF(n=(self.total_bits_num-4), k_up=4, k_down=4, seed=12, noisiness=.1)
-        self.lfsrChallenges = random_inputs(n=self.total_bits_num, N=self.N, seed=123) # LFSR random challenges data
         self.LFSR_simulated = LFSR_simulated()
     
     
-    def load_data(self):
-        data_len = self.N
+    def load_data(self, stages, data_num, xor_num_up, xor_num_down, cus_seed):
+        puf = InterposePUF(n=(stages-4), k_up=xor_num_up, k_down=xor_num_down, seed=12)
+        #puf = InterposePUF(n=(stages-4), k_up=xor_num_up, k_down=xor_num_down, seed=12, noisiness=.1)
+        lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
         train_data = []
         train_label = []
         data = []
         
-        test_crps = self.lfsrChallenges
+        test_crps = lfsrChallenges
         
-        for i in range(data_len):
+        for i in range(data_num):
             ### data ###
             challenge = test_crps[i]
                         
@@ -38,12 +35,12 @@ class interpose_PUF:
             obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge, 0)
             obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
             
-            final_delay_diff_up = self.puf.up.val(np.array([obfuscateChallenge]))
+            final_delay_diff_up = puf.up.val(np.array([obfuscateChallenge]))
                             
             challenge = [0 if c == -1 else c for c in challenge]
             
             ### label ###
-            response = self.LFSR_simulated.produceObfuscateResponse(self.puf, obfuscateChallenge)
+            response = self.LFSR_simulated.produceObfuscateResponse(puf, obfuscateChallenge)
             response = np.array(response)
             data_r = 0
             if response == -1:
@@ -51,9 +48,9 @@ class interpose_PUF:
             else:
                 data_r = 1
             
-            midpoint = (self.total_bits_num-4)//2+1
+            midpoint = (stages-4)//2+1
             downChallenge = obfuscateChallenge[0:midpoint] + [response[0]] + obfuscateChallenge[midpoint:]
-            final_delay_diff_down = self.puf.down.val(np.array([downChallenge]))
+            final_delay_diff_down = puf.down.val(np.array([downChallenge]))
             final_delay_diff = final_delay_diff_up+final_delay_diff_down
             data.append([final_delay_diff[0]]+challenge+[data_r])
         

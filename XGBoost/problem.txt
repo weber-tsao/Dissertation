@@ -1,12 +1,3 @@
-1. The sklearn logistic regression does not have many parameter to tune
-
-
-
-
-
-
-
-
 Stored the grid search code
 -------------------------------------------------------------------------------------------------------------------------
 #XGBoost random grid search

@@ -13,11 +13,6 @@ from LFSR_simulated import*
 
 class arbiter_PUF:
     def __init__(self):
-        self.total_bits_num = 68
-        self.N = 6800
-        self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=12)
-        #self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=12, noisiness=.1)
-        self.lfsrChallenges = random_inputs(n=self.total_bits_num, N=self.N, seed=123) # LFSR random challenges data
         self.mux_node = []
         self.top_path = []
         self.bottom_path = []
@@ -52,23 +47,25 @@ class arbiter_PUF:
 
         return self.top_path, self.bottom_path
     
-    def total_delay_diff(self, challenge):
+    def total_delay_diff(self, challenge, puf):
         challenge = array([challenge])
         last_stage_ind = len(challenge[0])-1
-        puf_delay = pypuf.simulation.LTFArray(weight_array=self.puf.weight_array[:, :last_stage_ind], bias=None, transform=self.puf.transform)
+        puf_delay = pypuf.simulation.LTFArray(weight_array=puf.weight_array[:, :last_stage_ind], bias=None, transform=puf.transform)
         stage_delay_diff = puf_delay.val(challenge[:, :last_stage_ind])
 
         return stage_delay_diff
 
-    def load_data(self):
-        data_len = self.N
+    def load_data(self, stages, data_num, cus_seed):
+        puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=12)
+        #puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=12, noisiness=.1)
+        lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
         train_data = []
         train_label = []
         data = []
         
-        test_crps = self.lfsrChallenges
+        test_crps = lfsrChallenges
         
-        for i in range(data_len):
+        for i in range(data_num):
             ### data ###
             challenge = test_crps[i]
             
@@ -76,12 +73,12 @@ class arbiter_PUF:
             obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge, 0)
             obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
             
-            final_delay_diff = self.total_delay_diff(obfuscateChallenge)
+            final_delay_diff = self.total_delay_diff(obfuscateChallenge, puf)
                             
             challenge = [0 if c == -1 else c for c in challenge]            
             
             ### label ###            
-            response = self.LFSR_simulated.produceObfuscateResponse(self.puf, obfuscateChallenge)
+            response = self.LFSR_simulated.produceObfuscateResponse(puf, obfuscateChallenge)
             response = np.array(response)
             data_r = 0
             if response == -1:
