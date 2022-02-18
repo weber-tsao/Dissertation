@@ -1,4 +1,4 @@
-# Import important packages
+### Import important packages ###
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -6,6 +6,7 @@ import seaborn as sns
 import io
 import requests
 from sklearn import svm
+from sklearn.utils import shuffle
 from sklearn.model_selection import train_test_split, KFold, cross_val_score, GridSearchCV, RandomizedSearchCV, ShuffleSplit
 from sklearn.metrics import auc, plot_roc_curve, accuracy_score, f1_score
 from sklearn.linear_model import LogisticRegression
@@ -34,8 +35,6 @@ X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test
 X_test, X_val, y_test, y_val = train_test_split(X_testVal, y_testVal, test_size=.5, random_state=24)
 evals_result ={}
 eval_s = [(X_train, y_train),(X_val, y_val)]
-print('Training data shape:',X_train.shape)
-print('Testing data shape:',X_test.shape)
 
 ### Create XGBClassifier model ###
 xgboostModel = XGBClassifier(
@@ -52,39 +51,25 @@ xgboostModel = XGBClassifier(
     )
 
 xgboostModel.fit(X_train, y_train, eval_set=eval_s)
-predicted = xgboostModel.predict(X_test)
-training_acc = xgboostModel.score(X_train,y_train)
-testing_acc = xgboostModel.score(X_test,y_test)
-print('Training accuracy: {}%'.format(training_acc*100))
-print('Testing accuracy: {}%'.format(testing_acc*100))
+#training_acc = xgboostModel.score(X_train,y_train)
+#testing_acc = xgboostModel.score(X_test,y_test)
+#print('Training accuracy: {}%'.format(training_acc*100))
+#print('Testing accuracy: {}%'.format(testing_acc*100))
 
-### plot loss graph ###
+'''### plot loss graph ###
 results = xgboostModel.evals_result()
 plt.plot(results['validation_0']['logloss'], label='train')
 plt.plot(results['validation_1']['logloss'], label='test')
 # show the legend
 plt.legend()
 # show the plot
-plt.show()
-
-'''# Fit model using each importance as a threshold
-thresholds = np.sort(xgboostModel.feature_importances_)
-for thresh in thresholds:
-	# select features using threshold
-	selection = SelectFromModel(xgboostModel, threshold=thresh, prefit=True)
-	select_X_train = selection.transform(X_train)
-	# train model
-	xgboostModel.fit(select_X_train, y_train)
-	# eval model
-	select_X_test = selection.transform(X_test)
-	predictions = xgboostModel.predict(select_X_test)
-	accuracy = accuracy_score(y_test, predictions)
-	print("Thresh=%.3f, n=%d, Accuracy: %.2f%%" % (thresh, select_X_train.shape[1], accuracy*100.0))'''
+plt.show()'''
 
 ### Feature selction ###
-selection = SelectFromModel(xgboostModel, threshold=0.00001, prefit=True)
-print(xgboostModel.feature_importances_)
+selection = SelectFromModel(xgboostModel, threshold=0.00001, prefit=True, max_features=10)
+#print(xgboostModel.feature_importances_)
 data_reduct = selection.transform(data)
+data_reduct, data_label = shuffle(data_reduct, data_label)
 
 ### Cross validation ###
 ss = ShuffleSplit(n_splits=5, test_size=0.25, random_state=3)
@@ -134,8 +119,8 @@ lr_results = cross_val_score(LogisticRegression(C=1,
                                                 warm_start=True), data_reduct, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (lr_results.mean()*100, lr_results.std()*100))'''
 
-# Decision Tree
-'''decisionTree = DecisionTreeClassifier(max_depth=2, 
+'''# Decision Tree
+decisionTree = DecisionTreeClassifier(max_depth=2, 
                                       max_leaf_nodes=2
                                       )
 decisionTree.fit(data_train, train_label)

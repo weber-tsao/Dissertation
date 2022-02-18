@@ -47,7 +47,6 @@ class LFSR_simulated:
         shift_count = self.createShiftCount(obfuscate_bits)
         
         challenge_state = [0 if c == -1 else 1 for c in list(spited_challenge)]
-        #fpoly = [64,63,61,60] # look at the optimize table to determine
         fpoly = [64,63,61,60]
         L = LFSR(fpoly=fpoly, initstate=challenge_state, verbose=False)
         L.runKCycle(shift_count)

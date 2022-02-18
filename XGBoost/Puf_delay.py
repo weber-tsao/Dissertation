@@ -17,9 +17,9 @@ from pypuf.simulation import XORArbiterPUF, XORFeedForwardArbiterPUF, Lightweigh
 class Puf:
     def __init__(self):
         self.total_bits_num = 68
-        self.N = 32000
+        self.N = 41200
         #self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=12)
-        self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=2, seed=21)
+        self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=4, seed=21, noisiness=.1)
         #self.pufx = XORArbiterPUF(n=(self.total_bits_num-4), k=4, seed=34)
         #self.puf = XORFeedForwardArbiterPUF(n=(self.total_bits_num-4), k=6, ff=[(32,60)], seed=1)
         #self.pufl = LightweightSecurePUF(n=(self.total_bits_num-4), k=3, seed=10)
@@ -163,7 +163,6 @@ class Puf:
             downChallenge = obfuscateChallenge[0:midpoint] + [response[0]] + obfuscateChallenge[midpoint:]
             final_delay_diff_down = self.puf.down.val(np.array([downChallenge]))
             final_delay_diff = final_delay_diff_up+final_delay_diff_down'''
-            #data.append(self.zeroArray+challenge+top_path+bottom_path+[data_r])
             #if self.diff_index == 77:
             #    unseen.append([final_delay_diff[0]]+top_path+bottom_path+challenge+[data_r])
             #else:
