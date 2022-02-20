@@ -36,7 +36,7 @@ class XOR_PUF:
             
             final_delay_diff = puf.val(np.array([obfuscateChallenge]))        
                 
-            challenge = [0 if c == -1 else c for c in challenge]            
+            obfuscateChallenge = [0 if c == -1 else c for c in obfuscateChallenge]         
             
             ### label ###            
             response = self.LFSR_simulated.produceObfuscateResponse(puf, obfuscateChallenge)
@@ -47,7 +47,7 @@ class XOR_PUF:
             else:
                 data_r = 1
             
-            data.append([final_delay_diff[0]]+challenge+[data_r])
+            data.append([final_delay_diff[0]]+obfuscateChallenge+[data_r])
         
         data = np.array(data)        
         data = np.unique(data,axis=0)

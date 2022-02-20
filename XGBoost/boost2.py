@@ -30,16 +30,18 @@ warnings.filterwarnings("ignore")
 start_time = datetime.now()
 
 ### Load data ###
-arbiter_puf = arbiter_PUF()
-data, data_label = arbiter_puf.load_data(68, 6800, 123)
-#xor_puf = XOR_PUF()
-#data, data_label = xor_puf.load_data(68, 32000, 2, 123)
+#arbiter_puf = arbiter_PUF()
+#data, data_label = arbiter_puf.load_data(68, 6800, 123)
+xor_puf = XOR_PUF()
+data, data_label = xor_puf.load_data(20, 25000, 2, 123)
 #lightweight_puf = lightweight_PUF()
 #data, data_label = lightweight_puf.load_data(68, 80000, 3, 123)
 #feedforward_puf = feedforward_PUF()
 #data, data_label = feedforward_puf.load_data(68, 68000, 3, 32, 60, 123)
 #interpose_puf = interpose_PUF()
 #data, data_label = interpose_puf.load_data(68, 240000, 3, 3, 123)
+#general_model = general_model()
+#general_data, general_data_label = general_model.load_data()
 
 ### Split train, test data for the model ###
 X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
@@ -58,10 +60,11 @@ xgboostModel = XGBClassifier(
     gamma=0.8,
     subsample=0.8,
     colsample_bytree=0.8,
-    early_stopping_rounds=100
+    #early_stopping_rounds=100,
+    eval_metric='error'
     )
 
-xgboostModel.fit(X_train, y_train, eval_set=eval_s)
+xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, verbose = 0)
 #training_acc = xgboostModel.score(X_train,y_train)
 #testing_acc = xgboostModel.score(X_test,y_test)
 #print('Training accuracy: {}%'.format(training_acc*100))
@@ -78,7 +81,7 @@ plt.show()'''
 
 ### Feature selction ###
 selection = SelectFromModel(xgboostModel, threshold=0.00001, prefit=True, max_features=10)
-#print(xgboostModel.feature_importances_)
+print(xgboostModel.feature_importances_)
 data_reduct = selection.transform(data)
 data_reduct, data_label = shuffle(data_reduct, data_label)
 
@@ -92,7 +95,7 @@ print('Training time: {}'.format(end_time - start_time))
 ### Set testing start time ###
 test_start_time = datetime.now()
 results = cross_val_score(xgboostModel, data_reduct, data_label, cv=ss)
-print("Accuracy: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
+print("cross validation accuracy: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
 
 ### Check overfitting ###
 data_train, data_test, train_label, test_label = train_test_split(data_reduct, data_label, test_size=.25, random_state=66)
@@ -100,8 +103,9 @@ xgboostModel.fit(data_train, train_label)
 #testingacc = xgboostModel.predict(data_test)
 training2 = xgboostModel.score(data_train, train_label)
 testing2 = xgboostModel.score(data_test, test_label)
-print('Training accuracy2: {}%'.format(training2*100))
-print('Testing accuracy2: {}%'.format(testing2*100))
+print('For unseen data')
+print('Training accuracy: {}%'.format(training2*100))
+print('Testing accuracy: {}%'.format(testing2*100))
 
 #cc = f1_score(test_label, testingacc)
 #print(cc)
