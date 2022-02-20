@@ -33,7 +33,7 @@ start_time = datetime.now()
 #arbiter_puf = arbiter_PUF()
 #data, data_label = arbiter_puf.load_data(68, 6800, 123)
 xor_puf = XOR_PUF()
-data, data_label = xor_puf.load_data(20, 25000, 2, 123)
+data, data_label = xor_puf.load_data(68, 25000, 3, 123)
 #lightweight_puf = lightweight_PUF()
 #data, data_label = lightweight_puf.load_data(68, 80000, 3, 123)
 #feedforward_puf = feedforward_PUF()
@@ -80,6 +80,16 @@ plt.legend()
 plt.show()'''
 
 ### Feature selction ###
+'''feature_names = [str(x) for x in range(65)]
+importance = xgboostModel.feature_importances_
+idx_third = importance.argsort()[-3]
+threshold = importance[idx_third]
+print(threshold)
+idx_features = (-importance).argsort()[:3]
+name_features = np.array(feature_names)[idx_features]
+print(name_features)
+print(data[64])'''
+
 selection = SelectFromModel(xgboostModel, threshold=0.00001, prefit=True, max_features=10)
 print(xgboostModel.feature_importances_)
 data_reduct = selection.transform(data)
