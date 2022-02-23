@@ -37,7 +37,7 @@ class interpose_PUF:
             
             final_delay_diff_up = puf.up.val(np.array([obfuscateChallenge]))
                             
-            obfuscateChallenge = [0 if c == -1 else c for c in obfuscateChallenge] 
+            #obfuscateChallenge = [0 if c == -1 else c for c in obfuscateChallenge] 
             
             ### label ###
             response = self.LFSR_simulated.produceObfuscateResponse(puf, obfuscateChallenge)

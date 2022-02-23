@@ -7,45 +7,14 @@ Created on Thu Nov  4 23:40:37 2021
 import pypuf.simulation
 import pypuf.io
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from numpy import array
 from LFSR_simulated import*
 
 class arbiter_PUF:
     def __init__(self):
-        self.mux_node = []
-        self.top_path = []
-        self.bottom_path = []
         self.LFSR_simulated = LFSR_simulated()
-    
-    def puf_path(self, challenge):
-        challenge = array([challenge])
-        self.mux_node = [x for x in range(len(challenge[0])*2)]
-        self.top_path = []
-        self.bottom_path = []
-        prev = 0
-        for i in range(len(challenge[0])):
-            count = i*2
-            if challenge[0][i] == 1:
-                if prev%2 != 0:
-                    self.top_path.append(self.mux_node[count+1])
-                    self.bottom_path.append(self.mux_node[count])
-                    prev = self.mux_node[count+1]
-                else:
-                    self.top_path.append(self.mux_node[count])
-                    self.bottom_path.append(self.mux_node[count+1])
-                    prev = self.mux_node[count]
-            elif challenge[0][i] == -1:
-                if prev%2 != 0:
-                    self.top_path.append(self.mux_node[count])
-                    self.bottom_path.append(self.mux_node[count+1])
-                    prev = self.mux_node[count]
-                else:
-                    self.top_path.append(self.mux_node[count+1])
-                    self.bottom_path.append(self.mux_node[count])
-                    prev = self.mux_node[count+1]
-
-        return self.top_path, self.bottom_path
     
     def total_delay_diff(self, challenge, puf):
         challenge = array([challenge])
@@ -57,11 +26,14 @@ class arbiter_PUF:
 
     def load_data(self, stages, data_num, cus_seed):
         puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=12)
-        #puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=12, noisiness=.1)
+        #puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=12, noisiness=.05)
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
         train_data = []
         train_label = []
         data = []
+        data_label = []
+        delay_diff = []
+        qcut_one_hot = []
         
         test_crps = lfsrChallenges
         
@@ -70,14 +42,13 @@ class arbiter_PUF:
             challenge = test_crps[i]
             
             # obfuscate part
-            obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge, 0)
+            obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
             obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
             
             final_delay_diff = self.total_delay_diff(obfuscateChallenge, puf)
-                            
-            obfuscateChallenge = [0 if c == -1 else c for c in obfuscateChallenge]       
-            
-            ### label ###            
+
+            #obfuscateChallenge = [0 if c == -1 else c for c in obfuscateChallenge]       
+                  
             response = self.LFSR_simulated.produceObfuscateResponse(puf, obfuscateChallenge)
             response = np.array(response)
             data_r = 0
@@ -86,12 +57,35 @@ class arbiter_PUF:
             else:
                 data_r = 1
             
+            '''data.append(obfuscateChallenge)
+            delay_diff.append(final_delay_diff[0])
+            data_label.append([data_r])
+           
+        data = np.array(data)
+        qcut_label = pd.qcut(delay_diff, q=4, labels=["1", "2", "3", "4"])
+        
+        data_cut = []
+        for x in range(len(qcut_label)):
+           if qcut_label[x] == "1":
+               data_cut.append(np.concatenate((data[x],[1,0,0,0])))
+           elif qcut_label[x] == "2":
+               data_cut.append(np.concatenate((data[x],[0,1,0,0])))
+           elif qcut_label[x] == "3":
+               data_cut.append(np.concatenate((data[x],[0,0,1,0])))
+           else:
+               data_cut.append(np.concatenate((data[x],[0,0,0,1])))
+        
+        data_cut = np.array(data_cut)
+        train_data = data_cut
+        train_label = np.array(data_label)'''
+        
+        ### Without qcut and one hot encode
             data.append([final_delay_diff[0]]+obfuscateChallenge+[data_r])
            
         data = np.array(data)
-        data = np.unique(data,axis=0)
+        #data = np.unique(data,axis=0)
         train_label = data[:,-1]
-        train_data = data[:,0:-1]            
+        train_data = data[:,0:-1]   
         
         return train_data, train_label
         

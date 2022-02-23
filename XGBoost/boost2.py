@@ -12,6 +12,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB,BernoulliNB,MultinomialNB,CategoricalNB
 from sklearn.feature_selection import SelectFromModel
+from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 from xgboost import plot_importance
 from xgboost import plot_tree
@@ -19,8 +20,9 @@ from arbiter_PUF import*
 from XOR_PUF import*
 from lightweight_PUF import*
 from feedforward_PUF import*
-from interpose_PUF import*
+#from interpose_PUF import*
 from LFSR_simulated import*
+from Puf_delay import*
 from general_model import*
 from datetime import datetime
 import warnings
@@ -30,10 +32,12 @@ warnings.filterwarnings("ignore")
 start_time = datetime.now()
 
 ### Load data ###
+#puf = Puf()
+#data, data_label = puf.load_data()
 arbiter_puf = arbiter_PUF()
 data, data_label = arbiter_puf.load_data(68, 6800, 123)
 #xor_puf = XOR_PUF()
-#data, data_label = xor_puf.load_data(68, 25000, 3, 123)
+#data, data_label = xor_puf.load_data(68, 36800, 3, 133)
 #lightweight_puf = lightweight_PUF()
 #data, data_label = lightweight_puf.load_data(68, 80000, 3, 123)
 #feedforward_puf = feedforward_PUF()
@@ -124,10 +128,29 @@ print('Testing accuracy: {}%'.format(testing2*100))
 test_end_time = datetime.now()
 print('Testing time: {}'.format(test_end_time - test_start_time))
 
-#print(xgboostModel.get_booster().get_score(importance_type="gain"))
-#plot_importance(xgboostModel)
-#plt.figure(figsize = (30, 30))
-#plt.show()
+'''print(xgboostModel.get_booster().get_score(importance_type="gain"))
+plot_importance(xgboostModel)
+plt.figure(figsize = (30, 30))
+plt.show()'''
+
+
+train_f, test_f, train_label_f, test_label_f = train_test_split(data, data_label, test_size=.25, random_state=66)
+random_f = RandomForestClassifier(max_depth=2, random_state=0)
+random_f.fit(train_f, train_label_f)
+
+importances = random_f.feature_importances_
+std = np.std([tree.feature_importances_ for tree in random_f.estimators_], axis=0)
+#print(std)
+
+feature_names = [str(x) for x in range(65)]
+forest_importances = pd.Series(importances, index=feature_names)
+fig, ax = plt.subplots()
+#forest_importances.plot.bar(yerr=std, ax=ax)
+plt.bar(range(len(forest_importances)), forest_importances)
+ax.set_title("Feature importances")
+ax.set_ylabel("Importances")
+fig.tight_layout()
+print(importances)
 
 '''plt.bar(range(len(xgboostModel.feature_importances_)), xgboostModel.feature_importances_)
 plt.show()'''

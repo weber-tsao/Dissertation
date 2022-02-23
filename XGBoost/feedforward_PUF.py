@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Nov  4 23:40:37 2021
-
 @author: weber
 """
 import pypuf.simulation
@@ -17,7 +16,7 @@ class feedforward_PUF:
         self.LFSR_simulated = LFSR_simulated()
 
     def load_data(self, stages, data_num, xor_num, f1, f2, cus_seed):
-        puf = XORFeedForwardArbiterPUF(n=(stages-4), k=xor_num, ff=[(f1,f2)], seed=1)
+        puf = XORFeedForwardArbiterPUF(n=(stages-4), k=xor_num, ff=[(f1,f2)], seed=122)
         #puf = XORFeedForwardArbiterPUF(n=(stages-4), k=xor_num, ff=[(f1,f2)], seed=1, noisiness=.1)
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
         train_data = []
@@ -36,7 +35,7 @@ class feedforward_PUF:
             
             final_delay_diff = puf.val(np.array([obfuscateChallenge]))
                 
-            obfuscateChallenge = [0 if c == -1 else c for c in obfuscateChallenge] 
+            #obfuscateChallenge = [0 if c == -1 else c for c in obfuscateChallenge] 
             
             ### label ###            
             response = self.LFSR_simulated.produceObfuscateResponse(puf, obfuscateChallenge)
@@ -55,4 +54,3 @@ class feedforward_PUF:
         train_data = data[:,0:-1]            
         
         return train_data, train_label
-        
