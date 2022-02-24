@@ -17,9 +17,9 @@ from pypuf.simulation import XORArbiterPUF, XORFeedForwardArbiterPUF, Lightweigh
 class Puf:
     def __init__(self):
         self.total_bits_num = 68
-        self.N = 6800
-        self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=12)
-        #self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=4, seed=21, noisiness=.1)
+        self.N = 32000
+        #self.puf = pypuf.simulation.ArbiterPUF(n=(self.total_bits_num-4), seed=12)
+        self.puf = XORArbiterPUF(n=(self.total_bits_num-4), k=2, seed=21)
         #self.pufx = XORArbiterPUF(n=(self.total_bits_num-4), k=4, seed=34)
         #self.puf = XORFeedForwardArbiterPUF(n=(self.total_bits_num-4), k=6, ff=[(32,60)], seed=1)
         #self.pufl = LightweightSecurePUF(n=(self.total_bits_num-4), k=3, seed=10)
@@ -93,8 +93,8 @@ class Puf:
             #xorobfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(xorchallenge, 0)
             #xorobfuscateChallenge = [-1 if c == 0 else c for c in xorobfuscateChallenge]
             
-            final_delay_diff = self.total_delay_diff(obfuscateChallenge)
-            #final_delay_diff = self.puf.val(np.array([obfuscateChallenge]))
+            #final_delay_diff = self.total_delay_diff(obfuscateChallenge)
+            final_delay_diff = self.puf.val(np.array([obfuscateChallenge]))
             #xorfinal_delay_diff = self.pufx.val(np.array([xorobfuscateChallenge]))
             
             ### For interpose PUF
@@ -119,8 +119,9 @@ class Puf:
             
             #top_path, bottom_path = self.puf_path(obfuscateChallenge)
             #xortop_path, xorbottom_path = self.puf_path(xorobfuscateChallenge)
-                
-            #obfuscateChallenge = [0 if c == -1 else c for c in obfuscateChallenge]
+            
+            challenge = challenge[4:]
+            challenge = [0 if c == -1 else c for c in challenge]
             #xorchallenge = [0 if c == -1 else c for c in xorchallenge]
             
             '''### challenge to parity vector
@@ -165,7 +166,7 @@ class Puf:
             #if self.diff_index == 77:
             #    unseen.append([final_delay_diff[0]]+top_path+bottom_path+challenge+[data_r])
             #else:
-            data.append([final_delay_diff[0]]+obfuscateChallenge+[data_r])
+            data.append([final_delay_diff[0]]+challenge+[data_r])
             #xordata.append([xorfinal_delay_diff[0]]+xorchallenge+[xordata_r])
             #data.append(parity_vector)
         

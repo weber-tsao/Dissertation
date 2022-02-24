@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import io
 from sklearn import svm
 from sklearn.utils import shuffle
-from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV, RandomizedSearchCV, ShuffleSplit
+from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV, RandomizedSearchCV, StratifiedKFold,ShuffleSplit
 from sklearn.metrics import auc, plot_roc_curve, accuracy_score, f1_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
@@ -35,9 +35,9 @@ start_time = datetime.now()
 #puf = Puf()
 #data, data_label = puf.load_data()
 arbiter_puf = arbiter_PUF()
-data, data_label = arbiter_puf.load_data(68, 6800, 123)
+data, data_label = arbiter_puf.load_data(68, 8500, 55)
 #xor_puf = XOR_PUF()
-#data, data_label = xor_puf.load_data(68, 36800, 3, 133)
+#data, data_label = xor_puf.load_data(68, 32000, 2, 123)
 #lightweight_puf = lightweight_PUF()
 #data, data_label = lightweight_puf.load_data(68, 80000, 3, 123)
 #feedforward_puf = feedforward_PUF()
@@ -94,13 +94,14 @@ name_features = np.array(feature_names)[idx_features]
 print(name_features)
 print(data[64])'''
 
-selection = SelectFromModel(xgboostModel, threshold=0.00001, prefit=True, max_features=10)
+selection = SelectFromModel(xgboostModel, threshold=0.00001, prefit=True)
 print(xgboostModel.feature_importances_)
 data_reduct = selection.transform(data)
 data_reduct, data_label = shuffle(data_reduct, data_label)
 
 ### Cross validation ###
-ss = ShuffleSplit(n_splits=5, test_size=0.25, random_state=3)
+#ss = ShuffleSplit(n_splits=5, test_size=0.25, random_state=3)
+ss = StratifiedKFold(n_splits=5)
 
 ### Calculate training time ###
 end_time = datetime.now()
@@ -142,7 +143,7 @@ importances = random_f.feature_importances_
 std = np.std([tree.feature_importances_ for tree in random_f.estimators_], axis=0)
 #print(std)
 
-feature_names = [str(x) for x in range(65)]
+feature_names = [str(x) for x in range(68)]
 forest_importances = pd.Series(importances, index=feature_names)
 fig, ax = plt.subplots()
 #forest_importances.plot.bar(yerr=std, ax=ax)
@@ -230,8 +231,8 @@ plt.title('LFSR')
 plt.legend(['XGBoost', 'DT'])
 plt.show()'''
 
-'''x1 = [0,1,2,3,4,5,6,7,9,15,20]
-y1 = [93.03,64.52,67.11,66.14,58.5,64.04,60.26,60.78,64.72,63.58,62.28]
+'''x1 = [0,1,2,3,4,6,8,10,15,20]
+y1 = [93.22,50.91,50.78,50.84,50.84,51.5,50.49,51.21,51.79,53.03]
 plt.plot(x1, y1, color='red', linestyle='dashed', linewidth = 3,
          marker='o', markerfacecolor='red', markersize=8)
  

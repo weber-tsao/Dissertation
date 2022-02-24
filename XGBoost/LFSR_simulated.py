@@ -45,9 +45,11 @@ class LFSR_simulated:
     def createObfuscateChallenge(self, challenge):
         spited_challenge, obfuscate_bits = self.splitCRPs(challenge)
         shift_count = self.createShiftCount(obfuscate_bits)
-
+        
         challenge_state = [0 if c == -1 else c for c in list(spited_challenge)]
+
         fpoly = [64,63,61,60]
+        #fpoly = [16,15,13,4]
         L = LFSR(fpoly=fpoly, initstate=challenge_state, verbose=False)
         L.runKCycle(shift_count)
         #print(L.state)

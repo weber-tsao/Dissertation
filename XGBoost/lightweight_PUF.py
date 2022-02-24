@@ -18,7 +18,7 @@ class lightweight_PUF:
         self.LFSR_simulated = LFSR_simulated()
 
     def load_data(self, stages, data_num, xor_num, cus_seed):
-        puf = LightweightSecurePUF(n=(stages-4), k=xor_num, seed=0)
+        puf = LightweightSecurePUF(n=(stages-4), k=xor_num, seed=6)
         #puf = LightweightSecurePUF(n=(stages-4), k=xor_num, seed=10, noisiness=.1)
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
         train_data = []
@@ -35,12 +35,13 @@ class lightweight_PUF:
             challenge = test_crps[i]
             
             # obfuscate part
-            obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge, 0)
+            obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
             obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
             
             final_delay_diff = puf.val(np.array([obfuscateChallenge]))
-                
-            #obfuscateChallenge = [0 if c == -1 else c for c in obfuscateChallenge] 
+            
+            challenge = challenge[4:]
+            challenge = [0 if c == -1 else c for c in challenge] 
             
             ### label ###            
             response = self.LFSR_simulated.produceObfuscateResponse(puf, obfuscateChallenge)
@@ -51,7 +52,7 @@ class lightweight_PUF:
             else:
                 data_r = 1
 
-            data.append(obfuscateChallenge)
+            data.append(challenge)
             delay_diff.append(final_delay_diff[0])
             data_label.append([data_r])
            

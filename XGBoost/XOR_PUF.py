@@ -18,7 +18,7 @@ class XOR_PUF:
         self.LFSR_simulated = LFSR_simulated()
 
     def load_data(self, stages, data_num, xor_num, cus_seed):
-        puf = XORArbiterPUF(n=(stages-4), k=xor_num, seed=21)
+        puf = XORArbiterPUF(n=(stages-4), k=xor_num, seed=44)
         #puf = XORArbiterPUF(n=(stages-4), k=xor_num, seed=21, noisiness=.1)
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
         train_data = []
@@ -39,8 +39,9 @@ class XOR_PUF:
             obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
             
             final_delay_diff = puf.val(np.array([obfuscateChallenge]))        
-                
-            #obfuscateChallenge = [0 if c == -1 else c for c in obfuscateChallenge]         
+            
+            challenge = challenge[4:]
+            challenge = [0 if c == -1 else c for c in challenge]  
             
             ### label ###            
             response = self.LFSR_simulated.produceObfuscateResponse(puf, obfuscateChallenge)
@@ -51,7 +52,7 @@ class XOR_PUF:
             else:
                 data_r = 1
             
-            '''data.append(obfuscateChallenge)
+            data.append(challenge)
             delay_diff.append(final_delay_diff[0])
             data_label.append([data_r])
            
@@ -71,14 +72,14 @@ class XOR_PUF:
         
         data_cut = np.array(data_cut)
         train_data = data_cut
-        train_label = np.array(data_label)'''
+        train_label = np.array(data_label)
         
-        ### Without qcut and one hot encode
+        '''### Without qcut and one hot encode
             data.append([final_delay_diff[0]]+obfuscateChallenge+[data_r])
            
         data = np.array(data)
         train_label = data[:,-1]
-        train_data = data[:,0:-1]
+        train_data = data[:,0:-1]'''
         
         return train_data, train_label
         
