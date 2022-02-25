@@ -25,8 +25,8 @@ class arbiter_PUF:
         return stage_delay_diff
 
     def load_data(self, stages, data_num, cus_seed):
-        #puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=111)
-        puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=12, noisiness=.05)
+        puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=111)
+        #puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=12, noisiness=.05)
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
         train_data = []
         train_label = []
@@ -79,13 +79,6 @@ class arbiter_PUF:
         data_cut = np.array(data_cut)
         train_data = data_cut
         train_label = np.array(data_label)
-        
-        '''### Without qcut and one hot encode
-            data.append([final_delay_diff[0]]+challenge+[data_r])
-           
-        data = np.array(data)
-        train_label = data[:,-1]
-        train_data = data[:,0:-1]'''
         
         return train_data, train_label
         

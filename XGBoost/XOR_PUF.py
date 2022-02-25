@@ -19,7 +19,7 @@ class XOR_PUF:
 
     def load_data(self, stages, data_num, xor_num, cus_seed):
         puf = XORArbiterPUF(n=(stages-4), k=xor_num, seed=44)
-        #puf = XORArbiterPUF(n=(stages-4), k=xor_num, seed=21, noisiness=.1)
+        #puf = XORArbiterPUF(n=(stages-4), k=xor_num, seed=21, noisiness=.05)
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
         train_data = []
         train_label = []
@@ -73,13 +73,6 @@ class XOR_PUF:
         data_cut = np.array(data_cut)
         train_data = data_cut
         train_label = np.array(data_label)
-        
-        '''### Without qcut and one hot encode
-            data.append([final_delay_diff[0]]+obfuscateChallenge+[data_r])
-           
-        data = np.array(data)
-        train_label = data[:,-1]
-        train_data = data[:,0:-1]'''
         
         return train_data, train_label
         

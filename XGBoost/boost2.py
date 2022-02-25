@@ -34,16 +34,16 @@ start_time = datetime.now()
 ### Load data ###
 #puf = Puf()
 #data, data_label = puf.load_data()
-arbiter_puf = arbiter_PUF()
-data, data_label = arbiter_puf.load_data(68, 8500, 55)
+#arbiter_puf = arbiter_PUF()
+#data, data_label = arbiter_puf.load_data(68, 6800, 11)
 #xor_puf = XOR_PUF()
-#data, data_label = xor_puf.load_data(68, 32000, 2, 123)
+#data, data_label = xor_puf.load_data(68, 32000, 2, 34)
 #lightweight_puf = lightweight_PUF()
 #data, data_label = lightweight_puf.load_data(68, 80000, 3, 123)
 #feedforward_puf = feedforward_PUF()
 #data, data_label = feedforward_puf.load_data(68, 68000, 3, 32, 60, 123)
-#interpose_puf = interpose_PUF()
-#data, data_label = interpose_puf.load_data(68, 240000, 3, 3, 123)
+interpose_puf = interpose_PUF()
+data, data_label = interpose_puf.load_data(68, 240000, 3, 3, 123)
 #general_model = general_model()
 #general_data, general_data_label = general_model.load_data()
 
@@ -56,7 +56,7 @@ eval_s = [(X_train, y_train),(X_val, y_val)]
 ### Create XGBClassifier model ###
 xgboostModel = XGBClassifier(
     learning_rate=0.05, 
-    n_estimators=80, 
+    n_estimators=400, 
     max_depth=2,
     tree_method='gpu_hist',
     min_child_weight=10, 
@@ -232,7 +232,7 @@ plt.legend(['XGBoost', 'DT'])
 plt.show()'''
 
 '''x1 = [0,1,2,3,4,6,8,10,15,20]
-y1 = [93.22,50.91,50.78,50.84,50.84,51.5,50.49,51.21,51.79,53.03]
+y1 = [98.85,51.56,52.78,53.53,52.57,51.4,51.04,49.94,50.57,50.94]
 plt.plot(x1, y1, color='red', linestyle='dashed', linewidth = 3,
          marker='o', markerfacecolor='red', markersize=8)
  
