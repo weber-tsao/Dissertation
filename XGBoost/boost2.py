@@ -39,9 +39,9 @@ start_time = datetime.now()
 xor_puf = XOR_PUF()
 data, data_label = xor_puf.load_data(68, 32000, 2, 34)
 #lightweight_puf = lightweight_PUF()
-#data, data_label = lightweight_puf.load_data(68, 80000, 3, 123)
+#data, data_label = lightweight_puf.load_data(68, 80000, 5, 123)
 #feedforward_puf = feedforward_PUF()
-#data, data_label = feedforward_puf.load_data(68, 68000, 3, 32, 60, 123)
+#data, data_label = feedforward_puf.load_data(68, 68000, 6, 32, 60, 123)
 #interpose_puf = interpose_PUF()
 #data, data_label = interpose_puf.load_data(68, 240000, 3, 3, 123)
 #general_model = general_model()
@@ -282,37 +282,19 @@ ax.legend(loc="lower right")
 plt.show()'''
 
 '''### GridSearch ###
-testingModel=svm.SVC(kernel='rbf',
-                     C=1,
-                     gamma='auto',
-                     degree=0,
-                     coef0=0,
-                     shrinking=True,
-                     probability=True,
-                     tol=0.001,
-                     cache_size=100,
-                     class_weight='balanced',
-                     decision_function_shape='ovo',
-                     break_ties=True
-                     )
+testingModel=XGBClassifier()
+param_dist = {  
+    'max_depth':range(2,11,1),
+    'min_child_weight' :range(10,50,10),
+    'gamma': [0.1,0.5,0.9],
+    'subsample': [0.1,0.5,0.9],
+    'colsample_bytree': [0.1,0.5,0.9],
+    'learning_rate': [0.01,0.05,0.1,0.2,0.3,0.5],
+    'n_estimators': [100,500,1000,2000,3000]
+}
 
-param_dist = {
-        #'C':range(0,5,1), #2
-        #'kernel':['linear', 'poly', 'rbf', 'sigmoid'], #sigmoid
-        #'degree':range(0,20,5), #0
-        #'gamma':['scale', 'auto'], #auto
-        #'coef0':range(0,20,5), #0
-        #'shrinking':[True, False], #False
-        #'probability':[True, False],#True
-        #'tol':[1e-4, 1e-3, 1e-2, 1e-1, 1],#0.001
-        #cache_size':range(100,1000,200),#100
-        #'class_weight':['dict', 'balanced'],#balanced
-        #'decision_function_shape':['ovo', 'ovr'],#ovo
-        'break_ties':[True, False]#True
-        }
-
-#grid = RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=500,n_jobs = -1,verbose = 2)
-grid = GridSearchCV(testingModel, param_dist, scoring='roc_auc', cv=5, n_jobs=4)
+grid = RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=500,n_jobs = -1,verbose = 2)
+#grid = GridSearchCV(testingModel, param_dist, scoring='roc_auc', cv=5, n_jobs=4)
 
 grid.fit(data_reduct, data_label)
 best_estimator = grid.best_estimator_

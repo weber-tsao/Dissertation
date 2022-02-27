@@ -32,8 +32,10 @@ class XOR_PUF:
         puf4 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=67)
         puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=90)
         puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=111)
+        puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]
         #puf = XORArbiterPUF(n=(stages-4), k=xor_num, seed=21, noisiness=.05)
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
+        final_delay_diff = 1
         train_data = []
         train_label = []
         data = []
@@ -45,62 +47,31 @@ class XOR_PUF:
         
         for i in range(data_num):
             ### data ###
+            final_delay_diff = 1
             challenge = test_crps[i]
             
             # obfuscate part
             obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
             obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
             
-            final_delay_diff1 = self.total_delay_diff(obfuscateChallenge, puf1)
-            final_delay_diff2 = self.total_delay_diff(obfuscateChallenge, puf2)
-            final_delay_diff3 = self.total_delay_diff(obfuscateChallenge, puf3)
-            final_delay_diff4 = self.total_delay_diff(obfuscateChallenge, puf4)
-            #final_delay_diff5 = self.total_delay_diff(obfuscateChallenge, puf5)
-            #final_delay_diff6 = self.total_delay_diff(obfuscateChallenge, puf6)
-            final_delay_diff = final_delay_diff1[0]*final_delay_diff2[0]*final_delay_diff3[0]*final_delay_diff4[0]
-            
+            for p in range(xor_num):
+                final_delay_diffc = self.total_delay_diff(obfuscateChallenge, puf_list[p])
+                final_delay_diff = final_delay_diffc[0]*final_delay_diff
+                
+                ### label ###
+                response1 = puf_list[p].eval(np.array([obfuscateChallenge]))
+                if response1[0] == -1:
+                    response1 = 0
+                else:
+                    response1 = 1
+                if p == 0: 
+                    data_r = response1
+                else:
+                    data_r = data_r^response1
+                    
             challenge = challenge[4:]
             challenge = [0 if c == -1 else c for c in challenge]
-            
-            ### label ###            
-            response1 = puf1.eval(np.array([obfuscateChallenge]))
-            if response1[0] == -1:
-                response1 = 0
-            else:
-                response1 = 1
-            
-            response2 = puf2.eval(np.array([obfuscateChallenge]))
-            if response2[0] == -1:
-                response2 = 0
-            else:
-                response2 = 1
-            
-            response3 = puf3.eval(np.array([obfuscateChallenge]))
-            if response3[0] == -1:
-                response3 = 0
-            else:
-                response3 = 1
-            
-            response4 = puf4.eval(np.array([obfuscateChallenge]))
-            if response4[0] == -1:
-                response4 = 0
-            else:
-                response4 = 1
-            
-            '''response5 = puf5.eval(np.array([obfuscateChallenge]))
-            if response5[0] == -1:
-                response5 = 0
-            else:
-                response5 = 1
-            
-            response6 = puf6.eval(np.array([obfuscateChallenge]))
-            if response6[0] == -1:
-                response6 = 0
-            else:
-                response6 = 1'''
-            
-            data_r = response1^response2^response3^response4
-            
+                                                    
             data.append(challenge)
             delay_diff.append(final_delay_diff)
             data_label.append(data_r)
