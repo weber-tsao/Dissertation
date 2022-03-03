@@ -45,7 +45,7 @@ start_time = datetime.now()
 #interpose_puf = interpose_PUF()
 #data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)
 general_model = general_model()
-data, data_label = general_model.load_data(5, 6, 0, 0, 0)
+data, data_label = general_model.load_data(2, 2, 0, 0, 0)
 
 ### Split train, test data for the model ###
 X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)

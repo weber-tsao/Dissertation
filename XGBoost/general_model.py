@@ -26,7 +26,8 @@ class general_model:
             random_num = random.randint(1,100)
             arbiter_puf = arbiter_PUF()
             arbiter_data, arbiter_data_label = arbiter_puf.load_data(68, 500, random_num)
-            puf_label = np.ones((500, 1))*(a+1)
+            puf_label = np.ones((500, 1))*(arbiter_num)
+            arbiter_num = arbiter_num-1
             arbiter_data = np.concatenate((arbiter_data, puf_label), axis=1)
             total_data.append(arbiter_data)
             total_label.append(arbiter_data_label)
@@ -36,7 +37,8 @@ class general_model:
             random_xor_num = random.randint(1,6)
             xor_puf = XOR_PUF()
             xor_data, xor_data_label = xor_puf.load_data(68, 500, random_xor_num, random_num)
-            puf_label = np.ones((500, 1))*(a+1) #Sth wrong here, need to deal with this
+            puf_label = np.ones((500, 1))*(xor_num) #Sth wrong here, need to deal with this
+            xor_num = xor_num - 1
             xor_data = np.concatenate((xor_data, puf_label), axis=1)
             total_data.append(xor_data)
             total_label.append(xor_data_label)
