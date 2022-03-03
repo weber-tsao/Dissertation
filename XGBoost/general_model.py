@@ -36,7 +36,7 @@ class general_model:
             random_xor_num = random.randint(1,6)
             xor_puf = XOR_PUF()
             xor_data, xor_data_label = xor_puf.load_data(68, 500, random_xor_num, random_num)
-            puf_label = np.ones((500, 1))*(a+1)
+            puf_label = np.ones((500, 1))*(a+1) #Sth wrong here, need to deal with this
             xor_data = np.concatenate((xor_data, puf_label), axis=1)
             total_data.append(xor_data)
             total_label.append(xor_data_label)
