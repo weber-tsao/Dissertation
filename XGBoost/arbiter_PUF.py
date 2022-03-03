@@ -60,7 +60,7 @@ class arbiter_PUF:
             
             data.append(challenge)
             delay_diff.append(final_delay_diff[0])
-            data_label.append([data_r])
+            data_label.append(data_r)
            
         data = np.array(data)
         qcut_label = pd.qcut(delay_diff, q=4, labels=["1", "2", "3", "4"])

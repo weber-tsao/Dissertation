@@ -20,7 +20,7 @@ from arbiter_PUF import*
 from XOR_PUF import*
 from lightweight_PUF import*
 from feedforward_PUF import*
-#from interpose_PUF import*
+from interpose_PUF import*
 from LFSR_simulated import*
 from Puf_delay import*
 from general_model import*
@@ -44,8 +44,8 @@ start_time = datetime.now()
 #data, data_label = feedforward_puf.load_data(68, 68000, 6, 32, 60, 123)
 #interpose_puf = interpose_PUF()
 #data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)
-#general_model = general_model()
-#general_data, general_data_label = general_model.load_data()
+general_model = general_model()
+data, data_label = general_model.load_data()
 
 ### Split train, test data for the model ###
 X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
