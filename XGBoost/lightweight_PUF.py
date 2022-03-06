@@ -26,13 +26,12 @@ class lightweight_PUF:
 
         return stage_delay_diff
     
-    def interconnected_network(self, puf_index, pre_challenge):
+    def interconnected_network(self, puf_index, pre_challenge, routes):
         modified_challenge = [0]*len(pre_challenge)
-        randomlist = random.sample(range(0, 6), 6)
-        print(randomlist)
+        #randomlist = random.sample(range(0, 64), 64)
+        #print(pre_challenge)
         for i in range(len(pre_challenge)):
-            modified_challenge[i] = pre_challenge[randomlist[i]]
-
+            modified_challenge[i] = pre_challenge[routes[puf_index][i]]
         return modified_challenge
     
     def input_network(self, challenge):
@@ -54,6 +53,24 @@ class lightweight_PUF:
 
         return modified_challenge
     
+    def output_network(self, response_list, xor_combinNum, shift, output_num):
+        final_response = []
+        for i in range(output_num):
+            temp_r = 0
+            #print("iii")
+            for j in range(xor_combinNum):
+                index = (i+j+shift)%len(response_list)
+                #print("jjjj")
+                #print(index)
+                if j == 0:
+                    temp_r = response_list[index]
+                else:
+                    temp_r = temp_r^response_list[index]
+                   
+            final_response.append(temp_r)
+
+        return final_response
+    
     def load_data(self, stages, data_num, xor_num, cus_seed):
         puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=91)
         puf2 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=123)
@@ -62,8 +79,12 @@ class lightweight_PUF:
         puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=90)
         puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=111)
         puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]
+        puf1_routes = random.sample(range(0, 64), 64)
+        puf2_routes = random.sample(range(0, 64), 64)
+        puf_routes = [puf1_routes, puf2_routes]
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
         pre_challenge = []
+        each_puf_output = []
         final_delay_diff = 1
         train_data = []
         train_label = []
@@ -76,21 +97,24 @@ class lightweight_PUF:
         
         for i in range(data_num):
             ### data ###
+            each_puf_output = []
             final_delay_diff = 1
             challenge = test_crps[i]
             
             # obfuscate part
             obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
-            obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
             
             for p in range(xor_num):
-                if xor_num != 0:
-                    obfuscateChallenge = self.interconnected_network(xor_num, pre_challenge)
+                if p != 0:
+                    obfuscateChallenge = self.interconnected_network(p, pre_challenge, puf_routes)### the route is not consistent
                 
                 pre_challenge = obfuscateChallenge
                 obfuscateChallenge = self.input_network(obfuscateChallenge)
+                
+                obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
                 final_delay_diffc = self.total_delay_diff(obfuscateChallenge, puf_list[p])
                 final_delay_diff = final_delay_diffc[0]*final_delay_diff
+                
                 
                 ### label ###
                 response1 = puf_list[p].eval(np.array([obfuscateChallenge]))
@@ -102,7 +126,18 @@ class lightweight_PUF:
                     data_r = response1
                 else:
                     data_r = data_r^response1
-                    
+                '''### label ###
+                response = puf_list[p].eval(np.array([obfuscateChallenge]))
+                if response[0] == -1:
+                    data_r = 0
+                else:
+                    data_r = 1
+                
+                each_puf_output.append(data_r)
+            
+            
+            response_output = self.output_network(each_puf_output, 64, 1, xor_num)'''
+            
             challenge = challenge[4:]
             challenge = [0 if c == -1 else c for c in challenge]
                                                     
@@ -134,5 +169,9 @@ if __name__ == "__main__":
    lsPUF = lightweight_PUF()
    #x = lsPUF.interconnected_network(1, [1,1,0,0,0,1])
    #print(x)
-   y = lsPUF.input_network([0,0,1,0])
-   print(y)
+   #y = lsPUF.input_network([0,0,1,0])
+   #print(y)
+   z = lsPUF.output_network([0,1,1,1],1,1,4)
+   print(z)
+   a = map(str, z)    
+   print(str(''.join(a)))
