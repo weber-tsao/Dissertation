@@ -45,13 +45,39 @@ class general_model:
             random_num = [11,23,34,56,7,88,99,534,222,345]
             random_seed1 = [13,256,22,77,89,90,367,123,555,987]
             random_seed2 = [15,25,12,57,9,98,37,13,55,907]
+            random_seed3 = [16,26,13,58,10,99,38,19,556,917]
+            random_seed4 = [17,27,14,59,11,100,39,20,557,927]
+            random_seed5 = [18,28,15,60,12,101,40,21,558,937]
+            random_seed6 = [19,29,16,61,13,102,41,22,559,947]
             xor_puf = XOR_PUF()
-            xor_data, xor_data_label = xor_puf.load_data(68, 3000, 2, random_seed1[x], random_seed2[x], random_num[x])
+            xor_data, xor_data_label = xor_puf.load_data(68, 3000, 2, random_seed1[x], random_seed2[x], 
+                                                         random_seed3[x], random_seed4[x], random_seed5[x], 
+                                                         random_seed6[x], random_num[x])
             puf_label = np.ones((3000, 1))*(total_num) #Sth wrong here, need to deal with this
             total_num = total_num-1
             xor_data = np.concatenate((xor_data, puf_label), axis=1)
             total_data.append(xor_data)
             total_label.append(xor_data_label)
+        
+        for f in range(feedforward_num):
+            #random_num = random.randint(1,1000)
+            #random_xor_num = random.randint(1,6)
+            random_num = [11,23,34,56,7,88,99,534,222,345]
+            random_seed1 = [13,256,22,77,89,90,367,123,555,987]
+            random_seed2 = [15,25,12,57,9,98,37,13,55,907]
+            random_seed3 = [16,26,13,58,10,99,38,19,556,917]
+            random_seed4 = [17,27,14,59,11,100,39,20,557,927]
+            random_seed5 = [18,28,15,60,12,101,40,21,558,937]
+            random_seed6 = [19,29,16,61,13,102,41,22,559,947]
+            ff_puf = feedforward_PUF()
+            ff_data, ff_data_label = ff_puf.load_data(68, 3000, 2, 32, 60, random_seed1[f], random_seed2[f], 
+                                                         random_seed3[f], random_seed4[f], random_seed5[f], 
+                                                         random_seed6[f], random_num[f])
+            puf_label = np.ones((3000, 1))*(total_num) #Sth wrong here, need to deal with this
+            total_num = total_num-1
+            ff_data = np.concatenate((ff_data, puf_label), axis=1)
+            total_data.append(ff_data)
+            total_label.append(ff_data_label)
         
         for p in range(total_num_label):
             if p == 0:
