@@ -34,12 +34,12 @@ start_time = datetime.now()
 ### Load data ###
 #puf = Puf()
 #data, data_label = puf.load_data()
-#arbiter_puf = arbiter_PUF()
-#data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
+arbiter_puf = arbiter_PUF()
+data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
 #xor_puf = XOR_PUF()
 #data, data_label = xor_puf.load_data(68, 32000, 4, 34)
-lightweight_puf = lightweight_PUF()
-data, data_label = lightweight_puf.load_data(68, 68000, 2, 123)
+#lightweight_puf = lightweight_PUF()
+#data, data_label = lightweight_puf.load_data(68, 68000, 2, 123)
 #feedforward_puf = feedforward_PUF()
 #data, data_label = feedforward_puf.load_data(68, 68000, 6, 32, 60, 123)
 #interpose_puf = interpose_PUF()
@@ -135,7 +135,7 @@ plt.figure(figsize = (30, 30))
 plt.show()'''
 
 
-train_f, test_f, train_label_f, test_label_f = train_test_split(data, data_label, test_size=.25, random_state=66)
+'''train_f, test_f, train_label_f, test_label_f = train_test_split(data, data_label, test_size=.25, random_state=66)
 random_f = RandomForestClassifier(max_depth=2, random_state=0)
 random_f.fit(train_f, train_label_f)
 
@@ -151,7 +151,7 @@ plt.bar(range(len(forest_importances)), forest_importances)
 ax.set_title("Feature importances")
 ax.set_ylabel("Importances")
 fig.tight_layout()
-print(importances)
+print(importances)'''
 
 '''plt.bar(range(len(xgboostModel.feature_importances_)), xgboostModel.feature_importances_)
 plt.show()'''
@@ -172,11 +172,8 @@ print("Accuracy: %.2f%% (%.2f%%)" % (lr_results.mean()*100, lr_results.std()*100
 decisionTree = DecisionTreeClassifier(max_depth=2, 
                                       max_leaf_nodes=2
                                       )
-decisionTree.fit(data_train, train_label)
-trainingdt = decisionTree.score(data_train, train_label)
-testingdt = decisionTree.score(data_test, test_label)
-print('Training accuracy2: {}%'.format(trainingdt*100))
-print('Testing accuracy2: {}%'.format(testingdt*100))'''
+dt_result = cross_val_score(decisionTree, data_reduct, data_label, cv=ss)
+print("Accuracy: %.2f%% (%.2f%%)" % (dt_result.mean()*100, dt_result.std()*100))'''
 
 '''dt_results = cross_val_score(DecisionTreeClassifier(), data_reduct, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (dt_results.mean()*100, dt_results.std()*100))'''
@@ -197,13 +194,12 @@ SVM = svm.SVC(kernel='rbf',
 svm_results = cross_val_score(SVM, data_reduct, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (svm_results.mean()*100, svm_results.std()*100))'''
 
-
-'''# KNeighbors
+# KNeighbors
 knn = KNeighborsClassifier(algorithm='ball_tree', 
-                           leaf_size=1, 
+                           leaf_size=2, 
                            n_neighbors=9)
 knn_results = cross_val_score(knn, data_reduct, data_label, cv=ss)
-print("Accuracy: %.2f%% (%.2f%%)" % (knn_results.mean()*100, knn_results.std()*100))'''
+print("Accuracy: %.2f%% (%.2f%%)" % (knn_results.mean()*100, knn_results.std()*100))
 
 '''# Naive Bayes
 gnb = GaussianNB(var_smoothing=3)
@@ -282,19 +278,18 @@ ax.legend(loc="lower right")
 plt.show()'''
 
 '''### GridSearch ###
-testingModel=XGBClassifier()
-param_dist = {  
-    'max_depth':range(2,11,1),
-    'min_child_weight' :range(10,50,10),
-    'gamma': [0.1,0.5,0.9],
-    'subsample': [0.1,0.5,0.9],
-    'colsample_bytree': [0.1,0.5,0.9],
-    'learning_rate': [0.01,0.05,0.1,0.2,0.3,0.5],
-    'n_estimators': [100,500,1000,2000,3000]
-}
+testingModel=KNeighborsClassifier()
+
+param_dist = {
+        'n_neighbors':range(0,10,1), 
+        'algorithm':['auto', 'ball_tree', 'kd_tree', 'brute'], 
+        'leaf_size':range(10,50,10), 
+        'p':[1,2], 
+        'metric':['str', 'callable', 'minkowski'], 
+        'metric_params':[dict, None]
+        }
 
 grid = RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=500,n_jobs = -1,verbose = 2)
-#grid = GridSearchCV(testingModel, param_dist, scoring='roc_auc', cv=5, n_jobs=4)
 
 grid.fit(data_reduct, data_label)
 best_estimator = grid.best_estimator_
