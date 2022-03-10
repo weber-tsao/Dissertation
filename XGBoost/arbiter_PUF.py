@@ -73,24 +73,27 @@ class arbiter_PUF:
             data_label.append(data_r)
           
         data = np.array(data)
-        print(data.shape)
-        data = self.get_parity_vectors(data)
+        '''data = self.get_parity_vectors(data)
         for d in range(len(data)):
             for j in range(65):
                 if data[d][j] == -1:
-                    data[d][j] = 0
+                    data[d][j] = 0'''
         qcut_label = pd.qcut(delay_diff, q=4, labels=["1", "2", "3", "4"])
         
         data_cut = []
         for x in range(len(qcut_label)):
            if qcut_label[x] == "1":
                data_cut.append(np.concatenate((data[x],[1,0,0,0])))
+               #data_cut.append([1,0,0,0])
            elif qcut_label[x] == "2":
                data_cut.append(np.concatenate((data[x],[0,1,0,0])))
+               #data_cut.append([0,1,0,0])
            elif qcut_label[x] == "3":
                data_cut.append(np.concatenate((data[x],[0,0,1,0])))
+               #data_cut.append([0,0,1,0])
            else:
                data_cut.append(np.concatenate((data[x],[0,0,0,1])))
+               #data_cut.append([0,0,0,1])
         
         data_cut = np.array(data_cut)
         train_data = data_cut
