@@ -34,8 +34,8 @@ start_time = datetime.now()
 ### Load data ###
 #puf = Puf()
 #data, data_label = puf.load_data()
-arbiter_puf = arbiter_PUF()
-data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
+#arbiter_puf = arbiter_PUF()
+#data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
 #xor_puf = XOR_PUF()
 #data, data_label = xor_puf.load_data(68, 32000, 4, 34)
 #lightweight_puf = lightweight_PUF()
@@ -44,8 +44,8 @@ data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
 #data, data_label = feedforward_puf.load_data(68, 68000, 6, 32, 60, 123)
 #interpose_puf = interpose_PUF()
 #data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)
-#general_model = general_model()
-#data, data_label = general_model.load_data(6, 6, 6, 0, 0)
+general_model = general_model()
+data, data_label = general_model.load_data(6, 6, 6, 6, 0)
 
 ### Split train, test data for the model ###
 X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
@@ -194,12 +194,12 @@ SVM = svm.SVC(kernel='rbf',
 svm_results = cross_val_score(SVM, data_reduct, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (svm_results.mean()*100, svm_results.std()*100))'''
 
-# KNeighbors
+'''# KNeighbors
 knn = KNeighborsClassifier(algorithm='ball_tree', 
                            leaf_size=2, 
                            n_neighbors=9)
 knn_results = cross_val_score(knn, data_reduct, data_label, cv=ss)
-print("Accuracy: %.2f%% (%.2f%%)" % (knn_results.mean()*100, knn_results.std()*100))
+print("Accuracy: %.2f%% (%.2f%%)" % (knn_results.mean()*100, knn_results.std()*100))'''
 
 '''# Naive Bayes
 gnb = GaussianNB(var_smoothing=3)
