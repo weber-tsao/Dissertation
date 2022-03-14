@@ -18,8 +18,8 @@ class lightweight_PUF:
     def __init__(self):
         self.LFSR_simulated = LFSR_simulated()
     
-    def load_data(self, stages, data_num, xor_num, cus_seed):
-        puf = LightweightSecurePUF(n=(stages-4), k=xor_num, seed=123)
+    def load_data(self, stages, data_num, xor_num, puf_seed, cus_seed):
+        puf = LightweightSecurePUF(n=(stages-4), k=xor_num, seed=puf_seed, noisiness=.1)
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
         train_data = []
         train_label = []
