@@ -25,23 +25,33 @@ class XOR_PUF:
 
         return stage_delay_diff
     
-    def load_data(self, stages, data_num, xor_num, puf_seed1, puf_seed2, puf_seed3, puf_seed4, puf_seed5, puf_seed6, cus_seed):
-    #def load_data(self, stages, data_num, xor_num, cus_seed):
-        '''puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=91)
+    def get_parity_vectors(self, C):
+        n=C.shape[1]
+        m=C.shape[0]
+        C[C==0]=-1
+        parityVec=np.zeros((m,n+1))
+        parityVec[:,0:1]=np.ones((m,1))
+        for i in range(2,n+2):
+            parityVec[:,i-1:i]=np.prod(C[:,0:i-1],axis=1).reshape((m,1))
+        return parityVec
+    
+    #def load_data(self, stages, data_num, xor_num, puf_seed1, puf_seed2, puf_seed3, puf_seed4, puf_seed5, puf_seed6, cus_seed):
+    def load_data(self, stages, data_num, xor_num, cus_seed):
+        puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=91)
         puf2 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=123)
         puf3 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=43)
         puf4 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=67)
         puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=90)
-        puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=111)'''
-        puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed1, noisiness=.1)
-        puf2 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed2, noisiness=.1)
-        puf3 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed3, noisiness=.1)
-        puf4 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed4, noisiness=.1)
-        puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed5, noisiness=.1)
-        puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed6, noisiness=.1)
+        puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=111)
+        '''puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed1)
+        puf2 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed2)
+        puf3 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed3)
+        puf4 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed4)
+        puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed5)
+        puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed6)'''
         puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]
         #puf = XORArbiterPUF(n=(stages-4), k=xor_num, seed=21, noisiness=.05)
-        lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
+        lfsrChallenges = random_inputs(n=stages, N=data_num, seed=123) # LFSR random challenges data
         final_delay_diff = 1
         train_data = []
         train_label = []
@@ -84,6 +94,11 @@ class XOR_PUF:
             data_label.append(data_r)
            
         data = np.array(data)
+        data = self.get_parity_vectors(data)
+        for d in range(len(data)):
+            for j in range(65):
+                if data[d][j] == -1:
+                    data[d][j] = 0
         qcut_label = pd.qcut(delay_diff, q=4, labels=["1", "2", "3", "4"])
         
         data_cut = []

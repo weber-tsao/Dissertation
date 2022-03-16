@@ -36,16 +36,16 @@ start_time = datetime.now()
 #data, data_label = puf.load_data()
 #arbiter_puf = arbiter_PUF()
 #data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
-#xor_puf = XOR_PUF()
-#data, data_label = xor_puf.load_data(68, 32000, 4, 34)
+xor_puf = XOR_PUF()
+data, data_label = xor_puf.load_data(68, 32000, 2, 34)
 #lightweight_puf = lightweight_PUF()
 #data, data_label = lightweight_puf.load_data(68, 68000, 2, 123)
 #feedforward_puf = feedforward_PUF()
 #data, data_label = feedforward_puf.load_data(68, 68000, 6, 32, 60, 123)
 #interpose_puf = interpose_PUF()
 #data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)
-general_model = general_model()
-data, data_label = general_model.load_data(7, 7, 7, 0, 0)
+#general_model = general_model()
+#data, data_label = general_model.load_data(7, 7, 7, 7, 0)
 
 ### Split train, test data for the model ###
 X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
@@ -55,13 +55,13 @@ eval_s = [(X_train, y_train),(X_val, y_val)]
 
 ### Create XGBClassifier model ###
 xgboostModel = XGBClassifier(
-    learning_rate=0.05, 
-    n_estimators=400, 
+    learning_rate=0.01, 
+    n_estimators=500, 
     max_depth=2,
     tree_method='gpu_hist',
     min_child_weight=10, 
     objective='binary:logistic', 
-    gamma=0.8,
+    gamma=0.6,
     subsample=0.8,
     colsample_bytree=0.8,
     #early_stopping_rounds=100,
@@ -278,25 +278,29 @@ ax.legend(loc="lower right")
 plt.show()'''
 
 '''### GridSearch ###
-testingModel=KNeighborsClassifier()
+testingModel=XGBClassifier(tree_method='gpu_hist',
+                           objective='binary:logistic', 
+                           eval_metric='error'
+                           )
 
-param_dist = {
-        'n_neighbors':range(0,10,1), 
-        'algorithm':['auto', 'ball_tree', 'kd_tree', 'brute'], 
-        'leaf_size':range(10,50,10), 
-        'p':[1,2], 
-        'metric':['str', 'callable', 'minkowski'], 
-        'metric_params':[dict, None]
-        }
+param_dist = {  
+    'max_depth':range(2,11,2),
+    'min_child_weight' :range(10,50,10),
+    'gamma': [0.1,0.4,0.6,0.8],
+    'subsample': [0.1,0.4,0.6,0.8],
+    'colsample_bytree': [0.1,0.4,0.6,0.8],
+    'learning_rate': [0.01,0.05,0.1,0.2],
+    'n_estimators': [100,500,1000]
+}  
 
-grid = RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=500,n_jobs = -1,verbose = 2)
+grid = RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=100,n_jobs = -1,verbose = 2)
 
 grid.fit(data_reduct, data_label)
 best_estimator = grid.best_estimator_
 print(best_estimator)
 print(grid.best_score_)
-print(grid.best_params_)
+print(grid.best_params)
 
-cv_result = pd.DataFrame.from_dict(grid.cv_results_)
+#cv_result = pd.DataFrame.from_dict(grid.cv_results_)
 
-cv_result.to_csv()'''
+#cv_result.to_csv()'''

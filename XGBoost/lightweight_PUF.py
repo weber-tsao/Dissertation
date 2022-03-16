@@ -20,7 +20,7 @@ class lightweight_PUF:
     
     def load_data(self, stages, data_num, xor_num, puf_seed, cus_seed):
         puf = LightweightSecurePUF(n=(stages-4), k=xor_num, seed=puf_seed, noisiness=.1)
-        lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
+        lfsrChallenges = random_inputs(n=stages, N=data_num, seed=123) # LFSR random challenges data
         train_data = []
         train_label = []
         delay_diff = []
