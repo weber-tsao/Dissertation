@@ -22,6 +22,7 @@ from lightweight_PUF import*
 from feedforward_PUF import*
 from interpose_PUF import*
 from LFSR_simulated import*
+from Puf_resilience import*
 from Puf_delay import*
 from general_model import*
 from datetime import datetime
@@ -36,12 +37,12 @@ start_time = datetime.now()
 #data, data_label = puf.load_data()
 #arbiter_puf = arbiter_PUF()
 #data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
-xor_puf = XOR_PUF()
-data, data_label = xor_puf.load_data(68, 32000, 2, 34)
+#xor_puf = XOR_PUF()
+#data, data_label = xor_puf.load_data(68, 32000, 6, 34)
 #lightweight_puf = lightweight_PUF()
-#data, data_label = lightweight_puf.load_data(68, 68000, 2, 123)
-#feedforward_puf = feedforward_PUF()
-#data, data_label = feedforward_puf.load_data(68, 68000, 6, 32, 60, 123)
+#data, data_label = lightweight_puf.load_data(68, 68000, 2, 123, 11)
+feedforward_puf = feedforward_PUF()
+data, data_label = feedforward_puf.load_data(64, 68000, 4, 32, 60)
 #interpose_puf = interpose_PUF()
 #data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)
 #general_model = general_model()
@@ -55,13 +56,13 @@ eval_s = [(X_train, y_train),(X_val, y_val)]
 
 ### Create XGBClassifier model ###
 xgboostModel = XGBClassifier(
-    learning_rate=0.01, 
-    n_estimators=500, 
+    learning_rate=0.05, 
+    n_estimators=400, 
     max_depth=2,
     tree_method='gpu_hist',
     min_child_weight=10, 
     objective='binary:logistic', 
-    gamma=0.6,
+    gamma=0.8,
     subsample=0.8,
     colsample_bytree=0.8,
     #early_stopping_rounds=100,

@@ -10,11 +10,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from numpy import array
 from LFSR_simulated import*
+from Puf_resilience import*
 from pypuf.simulation import XORFeedForwardArbiterPUF
 
 class feedforward_PUF:
     def __init__(self):
         self.LFSR_simulated = LFSR_simulated()
+        self.Puf_resilience = Puf_resilience()
     
     def total_delay_diff(self, challenge, puf):
         challenge = array([challenge])
@@ -30,22 +32,33 @@ class feedforward_PUF:
         stage_delay_diff = puf_delay.val(challenge[:, :target_stage])
 
         return stage_delay_diff
+    
+    def get_parity_vectors(self, C):
+        n=C.shape[1]
+        m=C.shape[0]
+        C[C==0]=-1
+        parityVec=np.zeros((m,n+1))
+        parityVec[:,0:1]=np.ones((m,1))
+        for i in range(2,n+2):
+            parityVec[:,i-1:i]=np.prod(C[:,0:i-1],axis=1).reshape((m,1))
+        return parityVec
 
-    def load_data(self, stages, data_num, xor_num, f1, d1, puf_seed1, puf_seed2, puf_seed3, puf_seed4, puf_seed5, puf_seed6, cus_seed):
-        '''puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=9)
-        puf2 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=122)
-        puf3 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=4)
-        puf4 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=61)
-        puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=121)
-        puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=887)
-        puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]'''
-        puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed1, noisiness=.1)
+    #def load_data(self, stages, data_num, xor_num, f1, d1, puf_seed1, puf_seed2, puf_seed3, puf_seed4, puf_seed5, puf_seed6, cus_seed):
+    def load_data(self, stages, data_num, xor_num, f1, d1):
+        puf1 = pypuf.simulation.ArbiterPUF(n=(stages), seed=9)
+        puf2 = pypuf.simulation.ArbiterPUF(n=(stages), seed=122)
+        puf3 = pypuf.simulation.ArbiterPUF(n=(stages), seed=4)
+        puf4 = pypuf.simulation.ArbiterPUF(n=(stages), seed=61)
+        puf5 = pypuf.simulation.ArbiterPUF(n=(stages), seed=121)
+        puf6 = pypuf.simulation.ArbiterPUF(n=(stages), seed=887)
+        puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]
+        '''puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed1, noisiness=.1)
         puf2 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed2, noisiness=.1)
         puf3 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed3, noisiness=.1)
         puf4 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed4, noisiness=.1)
         puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed5, noisiness=.1)
         puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed6, noisiness=.1)
-        puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]
+        puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]'''
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=123) # LFSR random challenges data
         final_delay_diff = 1
         train_data = []
@@ -63,10 +76,12 @@ class feedforward_PUF:
             challenge = test_crps[i]
             
             # obfuscate part
-            obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
-            obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
+            #obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
+            #obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
             
             for p in range(xor_num):
+                obfuscateChallenge = self.Puf_resilience.cyclic_shift(challenge, puf_list[p])
+                obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
                 stage_delay_diff = self.stage_delay_diff(obfuscateChallenge, puf_list[p], f1)
                 if stage_delay_diff > 0:
                     obfuscateChallenge[d1] == 1
@@ -95,6 +110,11 @@ class feedforward_PUF:
             data_label.append(data_r)
            
         data = np.array(data)
+        '''data = self.get_parity_vectors(data)
+        for d in range(len(data)):
+            for j in range(65):
+                if data[d][j] == -1:
+                    data[d][j] = 0'''
         qcut_label = pd.qcut(delay_diff, q=4, labels=["1", "2", "3", "4"])
         
         data_cut = []

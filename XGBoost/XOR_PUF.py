@@ -11,11 +11,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from numpy import array
 from LFSR_simulated import*
+from Puf_resilience import*
 from pypuf.simulation import XORArbiterPUF
 
 class XOR_PUF:
     def __init__(self):
         self.LFSR_simulated = LFSR_simulated()
+        self.Puf_resilience = Puf_resilience()
     
     def total_delay_diff(self, challenge, puf):
         challenge = array([challenge])
@@ -72,6 +74,8 @@ class XOR_PUF:
             obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
             
             for p in range(xor_num):
+                #obfuscateChallenge = self.Puf_resilience.cyclic_shift(challenge, puf_list[p])
+                #obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
                 final_delay_diffc = self.total_delay_diff(obfuscateChallenge, puf_list[p])
                 final_delay_diff = final_delay_diffc[0]*final_delay_diff
                 
@@ -94,11 +98,11 @@ class XOR_PUF:
             data_label.append(data_r)
            
         data = np.array(data)
-        data = self.get_parity_vectors(data)
+        '''data = self.get_parity_vectors(data)
         for d in range(len(data)):
             for j in range(65):
                 if data[d][j] == -1:
-                    data[d][j] = 0
+                    data[d][j] = 0'''
         qcut_label = pd.qcut(delay_diff, q=4, labels=["1", "2", "3", "4"])
         
         data_cut = []

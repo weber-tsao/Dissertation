@@ -11,10 +11,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from numpy import array
 from LFSR_simulated import*
+from Puf_resilience import*
 
 class arbiter_PUF:
     def __init__(self):
         self.LFSR_simulated = LFSR_simulated()
+        self.Puf_resilience = Puf_resilience()
     
     def total_delay_diff(self, challenge, puf):
         challenge = array([challenge])
@@ -35,7 +37,7 @@ class arbiter_PUF:
         return parityVec
 
     def load_data(self, stages, data_num, puf_seed, cus_seed):
-        puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed)
+        puf = pypuf.simulation.ArbiterPUF(n=(stages), seed=puf_seed)
         #puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=12, noisiness=.05)
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=123) # LFSR random challenges data
         train_data = []
@@ -52,7 +54,9 @@ class arbiter_PUF:
             challenge = test_crps[i]
             
             # obfuscate part
-            obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
+            #obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
+            #obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
+            obfuscateChallenge = self.Puf_resilience.cyclic_shift(challenge, puf)
             obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
             
             final_delay_diff = self.total_delay_diff(obfuscateChallenge, puf)
