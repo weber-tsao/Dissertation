@@ -41,12 +41,12 @@ start_time = datetime.now()
 #data, data_label = xor_puf.load_data(68, 32000, 6, 34)
 #lightweight_puf = lightweight_PUF()
 #data, data_label = lightweight_puf.load_data(68, 68000, 2, 123, 11)
-feedforward_puf = feedforward_PUF()
-data, data_label = feedforward_puf.load_data(64, 68000, 4, 32, 60)
+#feedforward_puf = feedforward_PUF()
+#data, data_label = feedforward_puf.load_data(68, 68000, 6, 32, 60)
 #interpose_puf = interpose_PUF()
 #data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)
-#general_model = general_model()
-#data, data_label = general_model.load_data(7, 7, 7, 7, 0)
+general_model = general_model()
+data, data_label = general_model.load_data(6, 6, 6, 0, 0)
 
 ### Split train, test data for the model ###
 X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
@@ -56,17 +56,10 @@ eval_s = [(X_train, y_train),(X_val, y_val)]
 
 ### Create XGBClassifier model ###
 xgboostModel = XGBClassifier(
-    learning_rate=0.05, 
-    n_estimators=400, 
-    max_depth=2,
-    tree_method='gpu_hist',
-    min_child_weight=10, 
-    objective='binary:logistic', 
-    gamma=0.8,
-    subsample=0.8,
-    colsample_bytree=0.8,
-    #early_stopping_rounds=100,
-    eval_metric='error'
+    booster='gbtree', colsample_bytree=1.0,
+              eval_metric='error', gamma=0.6,
+              learning_rate=0.3, max_depth=4,
+              min_child_weight=20, n_estimators=300, subsample=0.8, tree_method='gpu_hist'
     )
 
 xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, verbose = 0)
@@ -116,15 +109,15 @@ print("cross validation accuracy: %.2f%% (%.2f%%)" % (results.mean()*100, result
 ### Check overfitting ###
 data_train, data_test, train_label, test_label = train_test_split(data_reduct, data_label, test_size=.25, random_state=66)
 xgboostModel.fit(data_train, train_label)
-#testingacc = xgboostModel.predict(data_test)
+testingacc = xgboostModel.predict(data_test)
 training2 = xgboostModel.score(data_train, train_label)
 testing2 = xgboostModel.score(data_test, test_label)
 print('For unseen data')
 print('Training accuracy: {}%'.format(training2*100))
 print('Testing accuracy: {}%'.format(testing2*100))
 
-#cc = f1_score(test_label, testingacc)
-#print(cc)
+cc = f1_score(test_label, testingacc)
+print(cc)
 
 ### Calculate testing time ###
 test_end_time = datetime.now()
@@ -278,30 +271,45 @@ ax.set(xlim=[-0.05, 1.05], ylim=[-0.05, 1.05],
 ax.legend(loc="lower right")
 plt.show()'''
 
-'''### GridSearch ###
-testingModel=XGBClassifier(tree_method='gpu_hist',
+### GridSearch ###
+'''testingModel=XGBClassifier(tree_method='gpu_hist',
                            objective='binary:logistic', 
                            eval_metric='error'
-                           )
+                           )'''
+
+'''testingModel = XGBClassifier(
+    booster='gbtree', 
+    #colsample_bytree=1.0,
+    eval_metric='error', 
+    #gamma=0.6,
+    #learning_rate=0.2, 
+    #max_depth=7,
+    #min_child_weight=10, 
+    #n_estimators=200, 
+    #subsample=0.8, 
+    tree_method='gpu_hist'
+    )
 
 param_dist = {  
-    'max_depth':range(2,11,2),
-    'min_child_weight' :range(10,50,10),
-    'gamma': [0.1,0.4,0.6,0.8],
-    'subsample': [0.1,0.4,0.6,0.8],
-    'colsample_bytree': [0.1,0.4,0.6,0.8],
+    'max_depth':range(2,4,1),
+    'min_child_weight' :range(10,30,10),
+    'gamma': [0.1,0.4,0.6,0.8,1.0],
+    'subsample': [0.1,0.4,0.6,0.8,1.0],
+    'colsample_bytree': [0.1,0.4,0.6,0.8,1.0],
     'learning_rate': [0.01,0.05,0.1,0.2],
-    'n_estimators': [100,500,1000]
+    'n_estimators': range(100,500,100)
 }  
 
-grid = RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=100,n_jobs = -1,verbose = 2)
+grid = RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=150,n_jobs = -1,verbose = 2)
+#grid = GridSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_jobs = -1,verbose = 2)
 
 grid.fit(data_reduct, data_label)
 best_estimator = grid.best_estimator_
 print(best_estimator)
-print(grid.best_score_)
-print(grid.best_params)
+a = grid.best_score_
+print(a)
+c = grid.best_params
+print(c)
 
 #cv_result = pd.DataFrame.from_dict(grid.cv_results_)
-
 #cv_result.to_csv()'''

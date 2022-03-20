@@ -112,10 +112,10 @@ xgboostModel = XGBClassifier(
 With parity vector no delay diff
 ### Normal one with not too much max depth and have 87%
 xgboostModel = XGBClassifier(
-    booster='gbtree', colsample_bytree=0.6,
+    booster='gbtree', colsample_bytree=1.0,
               eval_metric='error', gamma=0.6,
-              learning_rate=0.1, max_depth=4,
-              min_child_weight=10, n_estimators=500, subsample=0.8, tree_method='gpu_hist'
+              learning_rate=0.3, max_depth=4,
+              min_child_weight=20, n_estimators=150, subsample=0.8, tree_method='gpu_hist'
     )
     
 ### The best result
