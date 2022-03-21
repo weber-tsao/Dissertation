@@ -35,8 +35,8 @@ start_time = datetime.now()
 ### Load data ###
 #puf = Puf()
 #data, data_label = puf.load_data()
-#arbiter_puf = arbiter_PUF()
-#data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
+arbiter_puf = arbiter_PUF()
+data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
 #xor_puf = XOR_PUF()
 #data, data_label = xor_puf.load_data(68, 32000, 6, 34)
 #lightweight_puf = lightweight_PUF()
@@ -45,8 +45,8 @@ start_time = datetime.now()
 #data, data_label = feedforward_puf.load_data(68, 68000, 6, 32, 60)
 #interpose_puf = interpose_PUF()
 #data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)
-general_model = general_model()
-data, data_label = general_model.load_data(6, 6, 6, 0, 0)
+#general_model = general_model()
+#data, data_label = general_model.load_data(6, 6, 6, 0, 0)
 
 ### Split train, test data for the model ###
 X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
@@ -56,10 +56,17 @@ eval_s = [(X_train, y_train),(X_val, y_val)]
 
 ### Create XGBClassifier model ###
 xgboostModel = XGBClassifier(
-    booster='gbtree', colsample_bytree=1.0,
-              eval_metric='error', gamma=0.6,
-              learning_rate=0.3, max_depth=4,
-              min_child_weight=20, n_estimators=300, subsample=0.8, tree_method='gpu_hist'
+    learning_rate=0.2, 
+    n_estimators=400, 
+    max_depth=4,
+    tree_method='gpu_hist',
+    min_child_weight=10, 
+    objective='binary:logistic', 
+    gamma=1.0,
+    subsample=1.0,
+    colsample_bytree=0.6,
+    #early_stopping_rounds=100,
+    eval_metric='error'
     )
 
 xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, verbose = 0)

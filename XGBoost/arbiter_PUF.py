@@ -37,7 +37,7 @@ class arbiter_PUF:
         return parityVec
 
     def load_data(self, stages, data_num, puf_seed, cus_seed):
-        puf = pypuf.simulation.ArbiterPUF(n=(stages), seed=puf_seed)
+        puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed)
         #puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=12, noisiness=.05)
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=123) # LFSR random challenges data
         train_data = []
@@ -54,14 +54,14 @@ class arbiter_PUF:
             challenge = test_crps[i]
             
             # obfuscate part
-            #obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
-            #obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
-            obfuscateChallenge = self.Puf_resilience.cyclic_shift(challenge, puf)
+            obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
             obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
+            #obfuscateChallenge = self.Puf_resilience.cyclic_shift(challenge, puf)
+            #obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
             
             final_delay_diff = self.total_delay_diff(obfuscateChallenge, puf)
             
-            #challenge = challenge[4:]
+            challenge = challenge[4:]
             challenge = [0 if c == -1 else c for c in challenge]       
                   
             response = self.LFSR_simulated.produceObfuscateResponse(puf, obfuscateChallenge)
@@ -77,11 +77,11 @@ class arbiter_PUF:
             data_label.append(data_r)
           
         data = np.array(data)
-        data = self.get_parity_vectors(data)
+        '''data = self.get_parity_vectors(data)
         for d in range(len(data)):
             for j in range(65):
                 if data[d][j] == -1:
-                    data[d][j] = 0
+                    data[d][j] = 0'''
         qcut_label = pd.qcut(delay_diff, q=4, labels=["1", "2", "3", "4"])
         
         data_cut = []
