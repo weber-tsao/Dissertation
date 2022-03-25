@@ -35,10 +35,10 @@ start_time = datetime.now()
 ### Load data ###
 #puf = Puf()
 #data, data_label = puf.load_data()
-arbiter_puf = arbiter_PUF()
-data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
-#xor_puf = XOR_PUF()
-#data, data_label = xor_puf.load_data(68, 68000, 3, 34)
+#arbiter_puf = arbiter_PUF()
+#data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
+xor_puf = XOR_PUF()
+data, data_label = xor_puf.load_data(68, 32000, 3, 34)
 #lightweight_puf = lightweight_PUF()
 #data, data_label = lightweight_puf.load_data(68, 68000, 2, 123, 11)
 #feedforward_puf = feedforward_PUF()
@@ -223,7 +223,7 @@ plt.xlabel('Base')
 plt.ylabel('Accuracy(%)')
 plt.show()'''
 
-### Plot estimator and depth graph
+'''### Plot estimator and depth graph
 depth_val = [2,3,4,5,6,7,8]
 n_estimators_val = [100,200,300,400,500,600,700,800,900,1000]
 for depth in depth_val:
@@ -245,17 +245,17 @@ plt.xlabel('Number of estimators')
 plt.ylabel('Accuarcy(%)')
 #plt.title('LFSR')
 plt.legend([2,3,4,5,6,7,8])
-plt.show()
+plt.show()'''
 
 ### Cross validation with plotting confidence graph ###
-'''tprs = []
+tprs = []
 aucs = []
 mean_fpr = np.linspace(0, 1, 100)
 
 fig, ax = plt.subplots()
-for i, (train, test) in enumerate(kfold.split(data_reduct, data_label)):
+for i, (train, test) in enumerate(ss.split(data_reduct, data_label)):
     xgboostModel.fit(data_reduct[train], data_label[train])
-    viz = plot_roc_curve(xgboostModel, data[test], data_label[test],
+    viz = plot_roc_curve(xgboostModel, data_reduct[test], data_label[test],
                          name='ROC fold {}'.format(i),
                          alpha=0.3, lw=1, ax=ax)
     interp_tpr = np.interp(mean_fpr, viz.fpr, viz.tpr)
@@ -283,7 +283,7 @@ ax.fill_between(mean_fpr, tprs_lower, tprs_upper, color='grey', alpha=.2,
 ax.set(xlim=[-0.05, 1.05], ylim=[-0.05, 1.05],
        title="Receiver operating characteristic example")
 ax.legend(loc="lower right")
-plt.show()'''
+plt.show()
 
 ### GridSearch ###
 '''testingModel=XGBClassifier(tree_method='gpu_hist',
