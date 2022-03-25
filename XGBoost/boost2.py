@@ -35,10 +35,10 @@ start_time = datetime.now()
 ### Load data ###
 #puf = Puf()
 #data, data_label = puf.load_data()
-#arbiter_puf = arbiter_PUF()
-#data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
-xor_puf = XOR_PUF()
-data, data_label = xor_puf.load_data(68, 32000, 3, 34)
+arbiter_puf = arbiter_PUF()
+data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
+#xor_puf = XOR_PUF()
+#data, data_label = xor_puf.load_data(68, 32000, 3, 34)
 #lightweight_puf = lightweight_PUF()
 #data, data_label = lightweight_puf.load_data(68, 68000, 2, 123, 11)
 #feedforward_puf = feedforward_PUF()
@@ -126,8 +126,34 @@ test_end_time = datetime.now()
 print('Testing time: {}'.format(test_end_time - test_start_time))
 
 
+depth_val = [2,3,4]
+n_estimators_val = [100,200,300,400,500,600,700,800,900,1000]
+clf_result = pd.DataFrame({'n_estimators' : [],
+                           'depth': [],
+                           'Accuracy' : [],
+                           #'F1' : []
+                           })
 
+for n_estimators in n_estimators_val:
+    for depth in depth_val:
+        xgboostModel = XGBClassifier(
+                                    booster='gbtree', colsample_bytree=1.0,
+                                    eval_metric='error', gamma=0.6,
+                                    learning_rate=0.3, max_depth=depth,
+                                    min_child_weight=20, n_estimators=n_estimators, subsample=0.8, tree_method='gpu_hist'
+                                    )
+        xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, verbose = 0)
+        results = cross_val_score(xgboostModel, data_reduct, data_label, cv=ss)
+        Accuracy = results.mean()
+        clf_result = clf_result.append({ #'delta_size': delta_size, 
+                                         'n_estimators': n_estimators, 
+                                         'depth':depth,
+                                         'Accuracy': Accuracy, 
+                                         #'F1': F1,
+                                         },  ignore_index=True)
+        
 
+clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\results.csv')
 
 '''print(xgboostModel.get_booster().get_score(importance_type="gain"))
 plot_importance(xgboostModel)
@@ -223,8 +249,8 @@ plt.xlabel('Base')
 plt.ylabel('Accuracy(%)')
 plt.show()'''
 
-'''### Plot estimator and depth graph
-depth_val = [2,3,4,5,6,7,8]
+### Plot estimator and depth graph
+depth_val = [2,3,4]
 n_estimators_val = [100,200,300,400,500,600,700,800,900,1000]
 for depth in depth_val:
     results = []
@@ -245,9 +271,9 @@ plt.xlabel('Number of estimators')
 plt.ylabel('Accuarcy(%)')
 #plt.title('LFSR')
 plt.legend([2,3,4,5,6,7,8])
-plt.show()'''
+plt.show()
 
-### Cross validation with plotting confidence graph ###
+'''### Cross validation with plotting confidence graph ###
 tprs = []
 aucs = []
 mean_fpr = np.linspace(0, 1, 100)
@@ -283,7 +309,7 @@ ax.fill_between(mean_fpr, tprs_lower, tprs_upper, color='grey', alpha=.2,
 ax.set(xlim=[-0.05, 1.05], ylim=[-0.05, 1.05],
        title="Receiver operating characteristic example")
 ax.legend(loc="lower right")
-plt.show()
+plt.show()'''
 
 ### GridSearch ###
 '''testingModel=XGBClassifier(tree_method='gpu_hist',

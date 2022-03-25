@@ -1,0 +1,4 @@
+APUF threshold estimator ==> depth 4
+APUF threshold depth ==> estimator = 400
+
+APUF estimator depth ==> threshold= 0.01
