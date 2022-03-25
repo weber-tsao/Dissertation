@@ -35,10 +35,10 @@ start_time = datetime.now()
 ### Load data ###
 #puf = Puf()
 #data, data_label = puf.load_data()
-#arbiter_puf = arbiter_PUF()
-#data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
-xor_puf = XOR_PUF()
-data, data_label = xor_puf.load_data(68, 68000, 3, 34)
+arbiter_puf = arbiter_PUF()
+data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
+#xor_puf = XOR_PUF()
+#data, data_label = xor_puf.load_data(68, 68000, 3, 34)
 #lightweight_puf = lightweight_PUF()
 #data, data_label = lightweight_puf.load_data(68, 68000, 2, 123, 11)
 #feedforward_puf = feedforward_PUF()
@@ -88,7 +88,7 @@ name_features = np.array(feature_names)[idx_features]
 print(name_features)
 print(data[64])'''
 
-selection = SelectFromModel(xgboostModel, threshold=0.00001, prefit=True)
+selection = SelectFromModel(xgboostModel, threshold=0.01, prefit=True)
 print(xgboostModel.feature_importances_)
 data_reduct = selection.transform(data)
 data_reduct, data_label = shuffle(data_reduct, data_label)
@@ -105,23 +105,29 @@ print('Training time: {}'.format(end_time - start_time))
 test_start_time = datetime.now()
 results = cross_val_score(xgboostModel, data_reduct, data_label, cv=ss)
 print("cross validation accuracy: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
+results_f1 = cross_val_score(xgboostModel, data_reduct, data_label, scoring="f1", cv=ss)
+print("cross validation F1 accuracy: %.2f%% (%.2f%%)" % (results_f1.mean()*100, results_f1.std()*100))
 
 ### Check overfitting ###
 data_train, data_test, train_label, test_label = train_test_split(data_reduct, data_label, test_size=.25, random_state=66)
 xgboostModel.fit(data_train, train_label)
-testingacc = xgboostModel.predict(data_test)
+#testingacc = xgboostModel.predict(data_test)
 training2 = xgboostModel.score(data_train, train_label)
 testing2 = xgboostModel.score(data_test, test_label)
 print('For unseen data')
 print('Training accuracy: {}%'.format(training2*100))
 print('Testing accuracy: {}%'.format(testing2*100))
 
-cc = f1_score(test_label, testingacc)
-print(cc)
+#cc = f1_score(test_label, testingacc)
+#print(cc)
 
 ### Calculate testing time ###
 test_end_time = datetime.now()
 print('Testing time: {}'.format(test_end_time - test_start_time))
+
+
+
+
 
 '''print(xgboostModel.get_booster().get_score(importance_type="gain"))
 plot_importance(xgboostModel)
@@ -151,49 +157,33 @@ print(importances)'''
 plt.show()'''
 
 '''# Logistic Regression
-lr_results = cross_val_score(LogisticRegression(C=1, 
-                                                class_weight='balanced', 
-                                                fit_intercept=False,
-                                                intercept_scaling=9,
-                                                max_iter=300, 
-                                                penalty='l1',
-                                                solver='liblinear', 
-                                                tol=1, 
-                                                warm_start=True), data_reduct, data_label, cv=ss)
+lr_results = cross_val_score(LogisticRegression(C=5, class_weight='dict', fit_intercept=False,
+                   intercept_scaling=8, max_iter=500, penalty='none',
+                   solver='saga', tol=1), data, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (lr_results.mean()*100, lr_results.std()*100))'''
 
 '''# Decision Tree
-decisionTree = DecisionTreeClassifier(max_depth=2, 
-                                      max_leaf_nodes=2
-                                      )
-dt_result = cross_val_score(decisionTree, data_reduct, data_label, cv=ss)
+decisionTree = DecisionTreeClassifier(class_weight='balanced', max_depth=96, max_features=1,
+                       min_impurity_decrease=0.791578947368421,
+                       min_samples_leaf=6, min_samples_split=12,
+                       min_weight_fraction_leaf=0, splitter='random')
+dt_result = cross_val_score(decisionTree, data, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (dt_result.mean()*100, dt_result.std()*100))'''
 
 '''dt_results = cross_val_score(DecisionTreeClassifier(), data_reduct, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (dt_results.mean()*100, dt_results.std()*100))'''
 
 '''# SVM
-SVM = svm.SVC(kernel='rbf',
-              C=1,
-              gamma='auto',
-              degree=0,
-              coef0=0,
-              shrinking=True,
-              probability=True,
-              tol=0.001,
-              cache_size=100,
-              class_weight='balanced',
-              decision_function_shape='ovo'
-              )
-svm_results = cross_val_score(SVM, data_reduct, data_label, cv=ss)
+SVM = svm.SVC(C=2, break_ties=True, cache_size=700, class_weight='balanced', coef0=10,
+    decision_function_shape='ovo', degree=15, gamma='auto', kernel='poly',
+    probability=True)
+svm_results = cross_val_score(SVM, data, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (svm_results.mean()*100, svm_results.std()*100))'''
 
 '''# KNeighbors
-knn = KNeighborsClassifier(algorithm='ball_tree', 
-                           leaf_size=2, 
-                           n_neighbors=9)
-knn_results = cross_val_score(knn, data_reduct, data_label, cv=ss)
-print("Accuracy: %.2f%% (%.2f%%)" % (knn_results.mean()*100, knn_results.std()*100))'''
+knn = KNeighborsClassifier(n_neighbors=9)
+knn_results = cross_val_score(knn, data, data_label, cv=ss)
+print("Knn Accuracy: %.2f%% (%.2f%%)" % (knn_results.mean()*100, knn_results.std()*100))'''
 
 '''# Naive Bayes
 gnb = GaussianNB(var_smoothing=3)
@@ -233,14 +223,38 @@ plt.xlabel('Base')
 plt.ylabel('Accuracy(%)')
 plt.show()'''
 
-'''### Cross validation with plotting confidence graph ###
-tprs = []
+### Plot estimator and depth graph
+depth_val = [2,3,4,5,6,7,8]
+n_estimators_val = [100,200,300,400,500,600,700,800,900,1000]
+for depth in depth_val:
+    results = []
+    for n_estimators in n_estimators_val:
+        xgboostModel = XGBClassifier(
+              booster='gbtree', colsample_bytree=1.0,
+              eval_metric='error', gamma=0.6,
+              learning_rate=0.3, max_depth=depth,
+              min_child_weight=20, n_estimators=n_estimators, subsample=0.8, tree_method='gpu_hist'
+              )
+        score = cross_val_score(xgboostModel, data_reduct, data_label, cv=ss)
+        results.append(score.mean()*100)
+    plt.plot(n_estimators_val, results, linestyle='solid', marker='o', linewidth = 1.5, markersize=5)
+
+plt.ylim(80,100)
+plt.xlim(100,1000)
+plt.xlabel('Number of estimators')
+plt.ylabel('Accuarcy(%)')
+#plt.title('LFSR')
+plt.legend([2,3,4,5,6,7,8])
+plt.show()
+
+### Cross validation with plotting confidence graph ###
+'''tprs = []
 aucs = []
 mean_fpr = np.linspace(0, 1, 100)
 
 fig, ax = plt.subplots()
-for i, (train, test) in enumerate(kfold.split(data, data_label)):
-    xgboostModel.fit(data[train], data_label[train])
+for i, (train, test) in enumerate(kfold.split(data_reduct, data_label)):
+    xgboostModel.fit(data_reduct[train], data_label[train])
     viz = plot_roc_curve(xgboostModel, data[test], data_label[test],
                          name='ROC fold {}'.format(i),
                          alpha=0.3, lw=1, ax=ax)
@@ -277,30 +291,24 @@ plt.show()'''
                            eval_metric='error'
                            )'''
 
-'''testingModel = XGBClassifier(
-    booster='gbtree', 
-    #colsample_bytree=1.0,
-    eval_metric='error', 
-    #gamma=0.6,
-    #learning_rate=0.2, 
-    #max_depth=7,
-    #min_child_weight=10, 
-    #n_estimators=200, 
-    #subsample=0.8, 
-    tree_method='gpu_hist'
-    )
+'''testingModel=svm.SVC()
 
-param_dist = {  
-    'max_depth':range(2,4,1),
-    'min_child_weight' :range(10,30,10),
-    'gamma': [0.1,0.4,0.6,0.8,1.0],
-    'subsample': [0.1,0.4,0.6,0.8,1.0],
-    'colsample_bytree': [0.1,0.4,0.6,0.8,1.0],
-    'learning_rate': [0.01,0.05,0.1,0.2],
-    'n_estimators': range(100,500,100)
-}  
+param_dist = {
+        'C':range(0,5,1), 
+        'kernel':['linear', 'poly', 'rbf', 'sigmoid'], 
+        'degree':range(0,20,5), 
+        'gamma':['scale', 'auto'], 
+        'coef0':range(0,20,5), 
+        'shrinking':[True, False], 
+        'probability':[True, False],
+        'tol':[1e-4, 1e-3, 1e-2, 1e-1, 1],
+        'cache_size':range(100,1000,200),
+        'class_weight':['dict', 'balanced'],
+        'decision_function_shape':['ovo', 'ovr'],
+        'break_ties':[True, False]
+        }
 
-grid = RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=150,n_jobs = -1,verbose = 2)
+grid = RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=10,n_jobs = -1,verbose = 2)
 #grid = GridSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_jobs = -1,verbose = 2)
 
 grid.fit(data_reduct, data_label)
