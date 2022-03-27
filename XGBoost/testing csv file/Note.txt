@@ -2,3 +2,7 @@ APUF threshold estimator ==> depth 4
 APUF threshold depth ==> estimator = 400
 
 APUF estimator depth ==> threshold= 0.01
+APUF estimator depth1 ==> threshold= 0.01, change challenge seed
+APUF estimator depth2 ==> threshold= 0.01, change puf seed
+APUF estimator depth3 ==> threshold= 0.01, change puf seed
+APUF estimator depth4 ==> threshold= 0.01, change puf seed, change challenge seed

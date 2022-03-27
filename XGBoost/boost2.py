@@ -36,7 +36,7 @@ start_time = datetime.now()
 #puf = Puf()
 #data, data_label = puf.load_data()
 arbiter_puf = arbiter_PUF()
-data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
+data, data_label = arbiter_puf.load_data(68, 6800, 14, 123)
 #xor_puf = XOR_PUF()
 #data, data_label = xor_puf.load_data(68, 32000, 3, 34)
 #lightweight_puf = lightweight_PUF()
@@ -249,7 +249,7 @@ plt.xlabel('Base')
 plt.ylabel('Accuracy(%)')
 plt.show()'''
 
-### Plot estimator and depth graph
+'''### Plot estimator and depth graph
 depth_val = [2,3,4]
 n_estimators_val = [100,200,300,400,500,600,700,800,900,1000]
 for depth in depth_val:
@@ -271,7 +271,7 @@ plt.xlabel('Number of estimators')
 plt.ylabel('Accuarcy(%)')
 #plt.title('LFSR')
 plt.legend([2,3,4,5,6,7,8])
-plt.show()
+plt.show()'''
 
 '''### Cross validation with plotting confidence graph ###
 tprs = []
