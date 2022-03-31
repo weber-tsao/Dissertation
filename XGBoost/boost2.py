@@ -38,15 +38,15 @@ start_time = datetime.now()
 arbiter_puf = arbiter_PUF()
 data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
 #xor_puf = XOR_PUF()
-#data, data_label = xor_puf.load_data(68, 68000, 4, 34)
+#data, data_label = xor_puf.load_data(68, 5000, 2, 34)
 #lightweight_puf = lightweight_PUF()
 #data, data_label = lightweight_puf.load_data(68, 68000, 2, 123, 11)
 #feedforward_puf = feedforward_PUF()
-#data, data_label = feedforward_puf.load_data(68, 68000, 6, 32, 60)
+#data, data_label = feedforward_puf.load_data(68, 5000, 2, 32, 60)
 #interpose_puf = interpose_PUF()
 #data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)
 #general_model = general_model()
-#data, data_label = general_model.load_data(6, 6, 6, 0, 0)
+#data, data_label = general_model.load_data(1, 1, 1, 0, 0)
 
 ### Split train, test data for the model ###
 X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
@@ -68,25 +68,12 @@ xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, v
 #print('Training accuracy: {}%'.format(training_acc*100))
 #print('Testing accuracy: {}%'.format(testing_acc*100))
 
-'''### plot loss graph ###
-results = xgboostModel.evals_result()
-plt.plot(results['validation_0']['logloss'], label='train')
-plt.plot(results['validation_1']['logloss'], label='test')
-# show the legend
-plt.legend()
-# show the plot
-plt.show()'''
+'''random_f = RandomForestClassifier(max_depth=2, random_state=0)
+random_f.fit(data, data_label)
+selection = SelectFromModel(random_f, threshold=0.01, prefit=True)
+data_reduct = selection.transform(data)
+data_reduct, data_label = shuffle(data_reduct, data_label)'''
 
-### Feature selction ###
-'''feature_names = [str(x) for x in range(65)]
-importance = xgboostModel.feature_importances_
-idx_third = importance.argsort()[-3]
-threshold = importance[idx_third]
-print(threshold)
-idx_features = (-importance).argsort()[:3]
-name_features = np.array(feature_names)[idx_features]
-print(name_features)
-print(data[64])'''
 
 selection = SelectFromModel(xgboostModel, threshold=0.01, prefit=True)
 print(xgboostModel.feature_importances_)
@@ -126,53 +113,6 @@ test_end_time = datetime.now()
 print('Testing time: {}'.format(test_end_time - test_start_time))
 
 
-depth_val = [2,3,4,5,6,7,8]
-n_estimators_val = [100,200,300,400,500,600,700,800,900,1000]
-thresholds_val = [0.1,0.5,0.01,0.05,0.001,0.005,0.0001,0.0005]
-challenge_seeds = [11,22,34,55,67,65,89,123,334,57]
-puf_seeds = [16,2,56,9,112,45,83,13,324,527]
-clf_result = pd.DataFrame({'challenge_seed': [],
-                           'puf_seed': [],
-                           'threshold' : [],
-                           'n_estimator': [],
-                           'Accuracy' : [],
-                           'F1' : []
-                           })
-
-for challenge_seed, puf_seed in zip(challenge_seeds, puf_seeds): 
-    for threshold in thresholds_val:
-        for n_estimator in n_estimators_val:
-            arbiter_puf = arbiter_PUF()
-            data, data_label = arbiter_puf.load_data(68, 6800, puf_seed, challenge_seed)
-            X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
-            X_test, X_val, y_test, y_val = train_test_split(X_testVal, y_testVal, test_size=.5, random_state=24)
-            evals_result ={}
-            eval_s = [(X_train, y_train),(X_val, y_val)]
-            xgboostModel = XGBClassifier(
-                                        booster='gbtree', colsample_bytree=1.0,
-                                        eval_metric='error', gamma=0.6,
-                                        learning_rate=0.3, max_depth=4,
-                                        min_child_weight=20, n_estimators=n_estimator, subsample=0.8, tree_method='gpu_hist'
-                                        )
-            xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, verbose = 0)
-            selection = SelectFromModel(xgboostModel, threshold=threshold, prefit=True)
-            data_t = selection.transform(data)
-            data_t, data_label = shuffle(data_t, data_label)
-            results = cross_val_score(xgboostModel, data_t, data_label, cv=ss)
-            results_f1 = cross_val_score(xgboostModel, data_t, data_label, scoring="f1", cv=ss)
-            Accuracy = results.mean()
-            F1 = results_f1.mean()
-            clf_result = clf_result.append({ 'challenge_seed': challenge_seed,
-                                             'puf_seed': puf_seed,
-                                             'threshold': threshold, 
-                                             'n_estimator':n_estimator,
-                                             'Accuracy': Accuracy, 
-                                             'F1': F1,
-                                             },  ignore_index=True)
-        
-
-clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\results.csv')
-
 '''print(xgboostModel.get_booster().get_score(importance_type="gain"))
 plot_importance(xgboostModel)
 plt.figure(figsize = (30, 30))
@@ -200,39 +140,55 @@ print(importances)'''
 '''plt.bar(range(len(xgboostModel.feature_importances_)), xgboostModel.feature_importances_)
 plt.show()'''
 
-'''# Logistic Regression
-lr_results = cross_val_score(LogisticRegression(C=5, class_weight='dict', fit_intercept=False,
-                   intercept_scaling=8, max_iter=500, penalty='none',
-                   solver='saga', tol=1), data, data_label, cv=ss)
-print("Accuracy: %.2f%% (%.2f%%)" % (lr_results.mean()*100, lr_results.std()*100))'''
+# Logistic Regression
+arbiter_puf = arbiter_PUF()
+data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
+LR = LogisticRegression(penalty='l2')
+selection = SelectFromModel(LR, threshold=0.0001, prefit=True)
+LR.fit(data, data_label)
+#print(LR.feature_importances_)
+data_r = selection.transform(data)
+data_r, data_label = shuffle(data_r, data_label)
+lr_results = cross_val_score(LR, data, data_label, cv=ss)
+print("Accuracy: %.2f%% (%.2f%%)" % (lr_results.mean()*100, lr_results.std()*100))
 
 '''# Decision Tree
-decisionTree = DecisionTreeClassifier(class_weight='balanced', max_depth=96, max_features=1,
-                       min_impurity_decrease=0.791578947368421,
-                       min_samples_leaf=6, min_samples_split=12,
-                       min_weight_fraction_leaf=0, splitter='random')
-dt_result = cross_val_score(decisionTree, data, data_label, cv=ss)
+decisionTree = DecisionTreeClassifier(criterion='entropy', max_depth=8)
+general_model = general_model()
+data, data_label = general_model.load_data(1, 1, 1, 0, 0)
+random_f = RandomForestClassifier(max_depth=2, random_state=0)
+random_f.fit(data, data_label)
+selection = SelectFromModel(random_f, threshold=0.01, prefit=True)
+data_r = selection.transform(data)
+data_r, data_label = shuffle(data_r, data_label)
+dt_result = cross_val_score(decisionTree, data_r, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (dt_result.mean()*100, dt_result.std()*100))'''
 
-'''dt_results = cross_val_score(DecisionTreeClassifier(), data_reduct, data_label, cv=ss)
-print("Accuracy: %.2f%% (%.2f%%)" % (dt_results.mean()*100, dt_results.std()*100))'''
-
-'''# SVM
-SVM = svm.SVC(C=2, break_ties=True, cache_size=700, class_weight='balanced', coef0=10,
-    decision_function_shape='ovo', degree=15, gamma='auto', kernel='poly',
-    probability=True)
+'''# SVM(use random forest alg) use same dataset without feature selection de;ay dfferent
+arbiter_puf = arbiter_PUF()
+data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
+SVM = svm.SVC(C=100, kernel='rbf')
+SVM.fit(data, data_label)
+selection = SelectFromModel(SVM, threshold=0.0001, prefit=True) # threshold is ok
+#print(SVM.feature_importances_)
+data_r = selection.transform(data)
+data_r, data_label = shuffle(data_r, data_label)
 svm_results = cross_val_score(SVM, data, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (svm_results.mean()*100, svm_results.std()*100))'''
 
 '''# KNeighbors
-knn = KNeighborsClassifier(n_neighbors=9)
+arbiter_puf = arbiter_PUF()
+data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
+knn = KNeighborsClassifier(n_neighbors=8)
+knn.fit(data, data_label)
+selection = SelectFromModel(knn, threshold=0.0001, prefit=True)
+#print(knn.feature_importances_)
+data_r = selection.transform(data)
+data_r, data_label = shuffle(data_r, data_label)
 knn_results = cross_val_score(knn, data, data_label, cv=ss)
 print("Knn Accuracy: %.2f%% (%.2f%%)" % (knn_results.mean()*100, knn_results.std()*100))'''
 
-'''# Naive Bayes
-gnb = GaussianNB(var_smoothing=3)
-gnb_results = cross_val_score(gnb, data_reduct, data_label, cv=kfold)
-print("Accuracy: %.2f%% (%.2f%%)" % (gnb_results.mean()*100, gnb_results.std()*100))'''
+# random forest
 
 '''### Plot relation graph ###
 

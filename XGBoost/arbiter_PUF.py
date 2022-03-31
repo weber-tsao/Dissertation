@@ -39,7 +39,7 @@ class arbiter_PUF:
     def load_data(self, stages, data_num, puf_seed, cus_seed):
         puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed)
         #puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=12, noisiness=.05)
-        lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
+        lfsrChallenges = random_inputs(n=stages, N=data_num, seed=123) # LFSR random challenges data
         train_data = []
         train_label = []
         data = []
