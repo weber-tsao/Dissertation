@@ -36,9 +36,9 @@ start_time = datetime.now()
 #puf = Puf()
 #data, data_label = puf.load_data()
 arbiter_puf = arbiter_PUF()
-data, data_label = arbiter_puf.load_data(68, 5000, 13, 4)
-#data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 13, 4)
-#data_unseen = np.c_[ data_unseen, np.ones(5000)*3 ]
+#data, data_label = arbiter_puf.load_data(68, 5000, 13, 4)
+data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 13, 4)
+data_unseen = np.c_[ data_unseen, np.ones(5000)*3 ]
 #xor_puf = XOR_PUF()
 #data, data_label = xor_puf.load_data(68, 5000, 2, 34)
 #lightweight_puf = lightweight_PUF()
@@ -47,8 +47,8 @@ data, data_label = arbiter_puf.load_data(68, 5000, 13, 4)
 #data, data_label = feedforward_puf.load_data(68, 5000, 2, 32, 60)
 #interpose_puf = interpose_PUF()
 #data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)
-#general_model = general_model()
-#data, data_label = general_model.load_data(1, 1, 1, 0, 0)
+general_model = general_model()
+data, data_label = general_model.load_data(1, 1, 1, 0, 0)
 
 ### Split train, test data for the model ###
 X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
@@ -82,7 +82,14 @@ selection = SelectFromModel(xgboostModel, threshold=0.01, prefit=True)
 print(xgboostModel.feature_importances_)
 data_reduct = selection.transform(data)
 data_reduct, data_label = shuffle(data_reduct, data_label)
-select_list = selection.get_support()                          
+#select_list = selection.get_support()  
+xgboostModel_test = XGBClassifier(
+    booster='gbtree', colsample_bytree=1.0,
+              eval_metric='error', gamma=0.6,
+              learning_rate=0.3, max_depth=4,
+              min_child_weight=20, n_estimators=300, subsample=0.8, tree_method='gpu_hist'
+    )
+xgboostModel_test.fit(data_reduct, data_label)                       
 
 ### Cross validation ###
 #ss = ShuffleSplit(n_splits=5, test_size=0.25, random_state=3)
@@ -94,10 +101,11 @@ print('Training time: {}'.format(end_time - start_time))
 
 ### Set testing start time ###
 test_start_time = datetime.now()
-results = cross_val_score(xgboostModel, data_reduct, data_label, cv=ss)
-print("cross validation accuracy: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
-results_f1 = cross_val_score(xgboostModel, data_reduct, data_label, scoring="f1", cv=ss)
-print("cross validation F1 accuracy: %.2f%% (%.2f%%)" % (results_f1.mean()*100, results_f1.std()*100))
+results = xgboostModel_test.score(data_reduct, data_label)
+#print("cross validation accuracy: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
+print('Training accuracy: {}%'.format(results*100))
+#results_f1 = xgboostModel.score(data_reduct, data_label)
+#print("cross validation F1 accuracy: %.2f%% (%.2f%%)" % (results_f1.mean()*100, results_f1.std()*100))
 
 '''### Check overfitting ###
 data_train, data_test, train_label, test_label = train_test_split(data_reduct, data_label, test_size=.25, random_state=66)
@@ -112,17 +120,17 @@ print('Testing accuracy: {}%'.format(testing2*100))'''
 #cc = f1_score(test_label, testingacc)
 #print(cc)
 ## See how general model work
-'''remove_list = []
-for i in range(len(select_list)):
-    if select_list[i] == False:
-        remove_list.append(i)
+#remove_list = []
+#for i in range(len(select_list)):
+#    if select_list[i] == False:
+#        remove_list.append(i)
         
-data_unseen = np.delete(data_unseen, remove_list, axis=1)
-#data_unseen_reduct = selection.transform(data_unseen)
-#data_unseen_reduct, data_label_unseen = shuffle(data_unseen_reduct, data_label_unseen)
-test_acc = xgboostModel.score(data_unseen, data_label_unseen)
+#data_unseen = np.delete(data_unseen, remove_list, axis=1)
+data_unseen_reduct = selection.transform(data_unseen)
+data_unseen_reduct, data_label_unseen = shuffle(data_unseen_reduct, data_label_unseen)
+test_acc = xgboostModel_test.score(data_unseen_reduct, data_label_unseen)
 print('For unseen data')
-print('Training accuracy: {}%'.format(test_acc*100))'''
+print('Testing accuracy: {}%'.format(test_acc*100))
 
 
 ### Calculate testing time ###
@@ -215,7 +223,7 @@ data_r, data_label = shuffle(data_r, data_label)
 svm_results = cross_val_score(SVM, data_r, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (svm_results.mean()*100, svm_results.std()*100))'''
 
-# KNeighbors
+'''# KNeighbors
 knn = KNeighborsClassifier(n_neighbors=8)
 general_model = general_model()
 data, data_label = general_model.load_data(1, 1, 1, 0, 0)
@@ -237,7 +245,7 @@ data_unseen_reduct, data_label_unseen = shuffle(data_unseen_reduct, data_label_u
 #knn.fit(data_train, train_label)
 training2 = knn.score(data_unseen_reduct, data_label_unseen)
 print('For unseen data')
-print('Training accuracy: {}%'.format(training2*100))
+print('Training accuracy: {}%'.format(training2*100))'''
 
 
 '''# random forest
