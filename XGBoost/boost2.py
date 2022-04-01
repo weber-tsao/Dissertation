@@ -46,7 +46,7 @@ data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
 #interpose_puf = interpose_PUF()
 #data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)
 #general_model = general_model()
-#data, data_label = general_model.load_data(1, 1, 1, 0, 0)
+#data, data_label = general_model.load_data(0, 4, 4, 0, 0)
 
 ### Split train, test data for the model ###
 X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
@@ -140,18 +140,18 @@ print(importances)'''
 '''plt.bar(range(len(xgboostModel.feature_importances_)), xgboostModel.feature_importances_)
 plt.show()'''
 
-# Logistic Regression
-arbiter_puf = arbiter_PUF()
-data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
+'''# Logistic Regression
 LR = LogisticRegression(penalty='l2')
-selection = SelectFromModel(LR, threshold=0.0001, prefit=True)
-LR.fit(data, data_label)
-#print(LR.feature_importances_)
+general_model = general_model()
+data, data_label = general_model.load_data(1, 1, 1, 0, 0)
+random_f = RandomForestClassifier(max_depth=2, random_state=0)
+random_f.fit(data, data_label)
+selection = SelectFromModel(random_f, threshold=0.01, prefit=True)
 data_r = selection.transform(data)
 data_r, data_label = shuffle(data_r, data_label)
-lr_results = cross_val_score(LR, data, data_label, cv=ss)
+lr_results = cross_val_score(LR, data_r, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (lr_results.mean()*100, lr_results.std()*100))
-
+'''
 '''# Decision Tree
 decisionTree = DecisionTreeClassifier(criterion='entropy', max_depth=8)
 general_model = general_model()
@@ -164,31 +164,41 @@ data_r, data_label = shuffle(data_r, data_label)
 dt_result = cross_val_score(decisionTree, data_r, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (dt_result.mean()*100, dt_result.std()*100))'''
 
-'''# SVM(use random forest alg) use same dataset without feature selection de;ay dfferent
-arbiter_puf = arbiter_PUF()
-data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
+'''# SVM
 SVM = svm.SVC(C=100, kernel='rbf')
-SVM.fit(data, data_label)
-selection = SelectFromModel(SVM, threshold=0.0001, prefit=True) # threshold is ok
-#print(SVM.feature_importances_)
+feedforward_puf = feedforward_PUF()
+data, data_label = feedforward_puf.load_data(68, 5000, 6, 32, 60)
+random_f = RandomForestClassifier(max_depth=2, random_state=0)
+random_f.fit(data, data_label)
+selection = SelectFromModel(random_f, threshold=0.01, prefit=True)
 data_r = selection.transform(data)
 data_r, data_label = shuffle(data_r, data_label)
-svm_results = cross_val_score(SVM, data, data_label, cv=ss)
+svm_results = cross_val_score(SVM, data_r, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (svm_results.mean()*100, svm_results.std()*100))'''
 
 '''# KNeighbors
-arbiter_puf = arbiter_PUF()
-data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
 knn = KNeighborsClassifier(n_neighbors=8)
-knn.fit(data, data_label)
-selection = SelectFromModel(knn, threshold=0.0001, prefit=True)
-#print(knn.feature_importances_)
+feedforward_puf = feedforward_PUF()
+data, data_label = feedforward_puf.load_data(68, 5000, 6, 32, 60)
+random_f = RandomForestClassifier(max_depth=2, random_state=0)
+random_f.fit(data, data_label)
+selection = SelectFromModel(random_f, threshold=0.01, prefit=True)
 data_r = selection.transform(data)
 data_r, data_label = shuffle(data_r, data_label)
 knn_results = cross_val_score(knn, data, data_label, cv=ss)
-print("Knn Accuracy: %.2f%% (%.2f%%)" % (knn_results.mean()*100, knn_results.std()*100))'''
-
-# random forest
+print("Knn Accuracy: %.2f%% (%.2f%%)" % (knn_results.mean()*100, knn_results.std()*100))
+'''
+'''# random forest
+RFC = RandomForestClassifier(max_depth=8, n_estimators=100, criterion='entropy')
+feedforward_puf = feedforward_PUF()
+data, data_label = feedforward_puf.load_data(68, 5000, 6, 32, 60)
+random_f = RandomForestClassifier(max_depth=2, random_state=0)
+random_f.fit(data, data_label)
+selection = SelectFromModel(random_f, threshold=0.01, prefit=True)
+data_r = selection.transform(data)
+data_r, data_label = shuffle(data_r, data_label)
+rfc_results = cross_val_score(RFC, data_r, data_label, cv=ss)
+print("RFC Accuracy: %.2f%% (%.2f%%)" % (rfc_results.mean()*100, rfc_results.std()*100))'''
 
 '''### Plot relation graph ###
 
