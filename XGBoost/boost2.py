@@ -36,7 +36,9 @@ start_time = datetime.now()
 #puf = Puf()
 #data, data_label = puf.load_data()
 arbiter_puf = arbiter_PUF()
-data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
+#data, data_label = arbiter_puf.load_data(68, 5000, 13, 4)
+data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 13, 4)
+data_unseen = np.c_[ data_unseen, np.ones(5000)*3 ]
 #xor_puf = XOR_PUF()
 #data, data_label = xor_puf.load_data(68, 5000, 2, 34)
 #lightweight_puf = lightweight_PUF()
@@ -45,8 +47,8 @@ data, data_label = arbiter_puf.load_data(68, 6800, 11, 123)
 #data, data_label = feedforward_puf.load_data(68, 5000, 2, 32, 60)
 #interpose_puf = interpose_PUF()
 #data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)
-#general_model = general_model()
-#data, data_label = general_model.load_data(0, 4, 4, 0, 0)
+general_model = general_model()
+data, data_label = general_model.load_data(1, 1, 1, 0, 0)
 
 ### Split train, test data for the model ###
 X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
@@ -95,7 +97,7 @@ print("cross validation accuracy: %.2f%% (%.2f%%)" % (results.mean()*100, result
 results_f1 = cross_val_score(xgboostModel, data_reduct, data_label, scoring="f1", cv=ss)
 print("cross validation F1 accuracy: %.2f%% (%.2f%%)" % (results_f1.mean()*100, results_f1.std()*100))
 
-### Check overfitting ###
+'''### Check overfitting ###
 data_train, data_test, train_label, test_label = train_test_split(data_reduct, data_label, test_size=.25, random_state=66)
 xgboostModel.fit(data_train, train_label)
 #testingacc = xgboostModel.predict(data_test)
@@ -103,10 +105,18 @@ training2 = xgboostModel.score(data_train, train_label)
 testing2 = xgboostModel.score(data_test, test_label)
 print('For unseen data')
 print('Training accuracy: {}%'.format(training2*100))
-print('Testing accuracy: {}%'.format(testing2*100))
+print('Testing accuracy: {}%'.format(testing2*100))'''
 
 #cc = f1_score(test_label, testingacc)
 #print(cc)
+
+## See how general model work
+data_unseen_reduct = selection.transform(data_unseen)
+data_unseen_reduct, data_label_unseen = shuffle(data_unseen_reduct, data_label_unseen)
+test_acc = xgboostModel.score(data_unseen_reduct, data_label_unseen)
+print('For unseen data')
+print('Training accuracy: {}%'.format(test_acc*100))
+
 
 ### Calculate testing time ###
 test_end_time = datetime.now()
@@ -140,7 +150,7 @@ print(importances)'''
 '''plt.bar(range(len(xgboostModel.feature_importances_)), xgboostModel.feature_importances_)
 plt.show()'''
 
-'''# Logistic Regression
+# Logistic Regression
 LR = LogisticRegression(penalty='l2')
 general_model = general_model()
 data, data_label = general_model.load_data(1, 1, 1, 0, 0)
@@ -151,7 +161,21 @@ data_r = selection.transform(data)
 data_r, data_label = shuffle(data_r, data_label)
 lr_results = cross_val_score(LR, data_r, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (lr_results.mean()*100, lr_results.std()*100))
-'''
+
+## Try unseen data
+arbiter_puf = arbiter_PUF()
+data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 13, 4)
+data_unseen = np.c_[ data_unseen, np.ones(5000)*2 ]
+data_unseen_reduct = selection.transform(data_unseen)
+data_unseen_reduct, data_label_unseen = shuffle(data_unseen_reduct, data_label_unseen)
+data_train, data_test, train_label, test_label = train_test_split(data_unseen_reduct, data_label_unseen, test_size=.25, random_state=32)
+LR.fit(data_train, train_label)
+training2 = LR.score(data_train, train_label)
+testing2 = LR.score(data_test, test_label)
+print('For unseen data')
+print('Training accuracy: {}%'.format(training2*100))
+print('Testing accuracy: {}%'.format(testing2*100))
+
 '''# Decision Tree
 decisionTree = DecisionTreeClassifier(criterion='entropy', max_depth=8)
 general_model = general_model()
@@ -178,8 +202,8 @@ print("Accuracy: %.2f%% (%.2f%%)" % (svm_results.mean()*100, svm_results.std()*1
 
 '''# KNeighbors
 knn = KNeighborsClassifier(n_neighbors=8)
-feedforward_puf = feedforward_PUF()
-data, data_label = feedforward_puf.load_data(68, 5000, 6, 32, 60)
+general_model = general_model()
+data, data_label = general_model.load_data(1, 1, 1, 0, 0)
 random_f = RandomForestClassifier(max_depth=2, random_state=0)
 random_f.fit(data, data_label)
 selection = SelectFromModel(random_f, threshold=0.01, prefit=True)
@@ -187,18 +211,47 @@ data_r = selection.transform(data)
 data_r, data_label = shuffle(data_r, data_label)
 knn_results = cross_val_score(knn, data, data_label, cv=ss)
 print("Knn Accuracy: %.2f%% (%.2f%%)" % (knn_results.mean()*100, knn_results.std()*100))
-'''
+
+## Try unseen data
+arbiter_puf = arbiter_PUF()
+data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 13, 4)
+data_unseen = np.c_[ data_unseen, np.ones(5000)*3 ]
+data_unseen_reduct = selection.transform(data_unseen)
+data_unseen_reduct, data_label_unseen = shuffle(data_unseen_reduct, data_label_unseen)
+data_train, data_test, train_label, test_label = train_test_split(data_unseen_reduct, data_label_unseen, test_size=.25, random_state=32)
+knn.fit(data_train, train_label)
+training2 = knn.score(data_train, train_label)
+testing2 = knn.score(data_test, test_label)
+print('For unseen data')
+print('Training accuracy: {}%'.format(training2*100))
+print('Testing accuracy: {}%'.format(testing2*100))'''
+
+
 '''# random forest
 RFC = RandomForestClassifier(max_depth=8, n_estimators=100, criterion='entropy')
-feedforward_puf = feedforward_PUF()
-data, data_label = feedforward_puf.load_data(68, 5000, 6, 32, 60)
+general_model = general_model()
+data, data_label = general_model.load_data(1, 1, 1, 0, 0)
 random_f = RandomForestClassifier(max_depth=2, random_state=0)
 random_f.fit(data, data_label)
 selection = SelectFromModel(random_f, threshold=0.01, prefit=True)
 data_r = selection.transform(data)
 data_r, data_label = shuffle(data_r, data_label)
 rfc_results = cross_val_score(RFC, data_r, data_label, cv=ss)
-print("RFC Accuracy: %.2f%% (%.2f%%)" % (rfc_results.mean()*100, rfc_results.std()*100))'''
+print("RFC Accuracy: %.2f%% (%.2f%%)" % (rfc_results.mean()*100, rfc_results.std()*100))
+
+## Try unseen data
+arbiter_puf = arbiter_PUF()
+data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 13, 4)
+data_unseen = np.c_[ data_unseen, np.ones(5000)*2 ]
+data_unseen_reduct = selection.transform(data_unseen)
+data_unseen_reduct, data_label_unseen = shuffle(data_unseen_reduct, data_label_unseen)
+data_train, data_test, train_label, test_label = train_test_split(data_unseen_reduct, data_label_unseen, test_size=.25, random_state=32)
+RFC.fit(data_train, train_label)
+training2 = RFC.score(data_train, train_label)
+testing2 = RFC.score(data_test, test_label)
+print('For unseen data')
+print('Training accuracy: {}%'.format(training2*100))
+print('Testing accuracy: {}%'.format(testing2*100))'''
 
 '''### Plot relation graph ###
 

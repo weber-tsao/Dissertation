@@ -29,7 +29,7 @@ class general_model:
         for a in range(arbiter_num):
             #random_num = random.randint(1,1000)
             #random_seed = random.randint(1,1000)
-            random_num = [11,23,34,56,7,88,99,534,222,345]
+            random_num = [123,123,123,123,123,123,123,123,123,123]
             random_seed = [13,256,22,77,89,90,367,123,555,987]
             arbiter_puf = arbiter_PUF()
             arbiter_data, arbiter_data_label = arbiter_puf.load_data(68, 5000, random_seed[a], random_num[a])

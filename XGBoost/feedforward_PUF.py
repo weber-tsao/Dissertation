@@ -43,22 +43,22 @@ class feedforward_PUF:
             parityVec[:,i-1:i]=np.prod(C[:,0:i-1],axis=1).reshape((m,1))
         return parityVec
 
-    #def load_data(self, stages, data_num, xor_num, f1, d1, puf_seed1, puf_seed2, puf_seed3, puf_seed4, puf_seed5, puf_seed6, cus_seed):
-    def load_data(self, stages, data_num, xor_num, f1, d1):
-        puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=9)
+    def load_data(self, stages, data_num, xor_num, f1, d1, puf_seed1, puf_seed2, puf_seed3, puf_seed4, puf_seed5, puf_seed6, cus_seed):
+    #def load_data(self, stages, data_num, xor_num, f1, d1):
+        '''puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=9)
         puf2 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=122)
         puf3 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=4)
         puf4 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=61)
         puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=121)
         puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=887)
-        puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]
-        '''puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed1)
+        puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]'''
+        puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed1)
         puf2 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed2)
         puf3 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed3)
         puf4 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed4)
         puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed5)
         puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed6)
-        puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]'''
+        puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=123) # LFSR random challenges data
         final_delay_diff = 1
         train_data = []
