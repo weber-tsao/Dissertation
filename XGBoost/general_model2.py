@@ -16,7 +16,7 @@ from lightweight_PUF import*
 from feedforward_PUF import*
 from interpose_PUF import*
 
-class general_model:
+class general_model2:
             
     def load_data(self, arbiter_num, xor_num, feedforward_num, lightweight_num, interpose_num):
         total_num = arbiter_num+xor_num+feedforward_num+lightweight_num+interpose_num
@@ -29,7 +29,7 @@ class general_model:
         for a in range(arbiter_num):
             #random_num = random.randint(1,1000)
             #random_seed = random.randint(1,1000)
-            random_num = [123,123,123,123,123,123,123,123,123,123]
+            random_num = [12,12,12,12,12,12,12,12,12,12]
             random_seed = [13,256,22,77,89,90,367,123,555,987]
             arbiter_puf = arbiter_PUF()
             arbiter_data, arbiter_data_label = arbiter_puf.load_data(68, 15000, random_seed[a], random_num[a])
@@ -43,7 +43,7 @@ class general_model:
             #random_num = random.randint(1,1000)
             random_xor_num = [4,4,4,4,4,4,4,4]#[6,5,4,3,2,6]
             #random_xor_num = random.randint(2,6)
-            random_num = [123,123,123,123,123,123,123,123,123,123]
+            random_num = [12,12,12,12,12,12,12,12,12,12]
             random_seed1 = [13,256,22,77,89,90,367,123,555,987]
             random_seed2 = [15,25,12,57,9,98,37,13,55,907]
             random_seed3 = [16,26,13,58,10,99,38,19,556,917]
@@ -75,7 +75,7 @@ class general_model:
             #random_xor_num = random.randint(2,6)
             #f1 = random.randint(1,63)
             #f2 = random.randint(1,63)
-            random_num = [123,123,123,123,123,123,123,123,123,123]
+            random_num = [12,12,12,12,12,12,12,12,12,12]
             random_seed1 = [13,256,22,77,89,90,367,123,555,987]
             random_seed2 = [15,25,12,57,9,98,37,13,55,907]
             random_seed3 = [16,26,13,58,10,99,38,19,556,917]
@@ -108,8 +108,8 @@ class general_model:
             random_seed = [13,256,22,77,89,90,367,123,555,987]
             random_num = [11,23,34,56,7,88,99,534,222,345]
             ls_puf = lightweight_PUF()
-            ls_data, ls_data_label = ls_puf.load_data(68, 2500, random_xor_num[l], random_seed[l], random_num[l])
-            puf_label = np.ones((2500, 1))*(total_num)
+            ls_data, ls_data_label = ls_puf.load_data(68, 5000, random_xor_num[l], random_seed[l], random_num[l])
+            puf_label = np.ones((5000, 1))*(total_num)
             total_num = total_num-1
             ls_data = np.concatenate((ls_data, puf_label), axis=1)
             total_data.append(ls_data)

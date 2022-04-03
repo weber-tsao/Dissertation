@@ -36,11 +36,11 @@ start_time = datetime.now()
 #puf = Puf()
 #data, data_label = puf.load_data()
 arbiter_puf = arbiter_PUF()
-data, data_label = arbiter_puf.load_data(68, 5000, 13, 4)
+data, data_label = arbiter_puf.load_data(68, 6800, 16, 123)
 #data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 13, 4)
 #data_unseen = np.c_[ data_unseen, np.ones(5000)*3 ]
 #xor_puf = XOR_PUF()
-#data, data_label = xor_puf.load_data(68, 5000, 2, 34)
+#data, data_label = xor_puf.load_data(68, 5000, 2, 91, 123, 43, 67, 90, 111, 123)
 #lightweight_puf = lightweight_PUF()
 #data, data_label = lightweight_puf.load_data(68, 68000, 2, 123, 11)
 #feedforward_puf = feedforward_PUF()
@@ -70,7 +70,7 @@ print(xgboostModel.feature_importances_)
 data_reduct = selection.transform(data)
 data_reduct, data_label = shuffle(data_reduct, data_label)
 
-RFC = DecisionTreeClassifier(criterion='entropy', max_depth=8)
+#RFC = DecisionTreeClassifier(criterion='entropy', max_depth=8)
 
 ss = StratifiedKFold(n_splits=5)
 
@@ -80,7 +80,7 @@ print('Training time: {}'.format(end_time - start_time))
 
 ### Set testing start time ###
 test_start_time = datetime.now()
-results = cross_val_score(RFC, data_reduct, data_label, cv=ss)
+results = cross_val_score(xgboostModel, data_reduct, data_label, cv=ss)
 print("cross validation accuracy: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
-results_f1 = cross_val_score(RFC, data_reduct, data_label, scoring="f1", cv=ss)
+results_f1 = cross_val_score(xgboostModel, data_reduct, data_label, scoring="f1", cv=ss)
 print("cross validation F1 accuracy: %.2f%% (%.2f%%)" % (results_f1.mean()*100, results_f1.std()*100))

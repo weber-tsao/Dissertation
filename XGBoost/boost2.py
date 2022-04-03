@@ -25,6 +25,7 @@ from LFSR_simulated import*
 from Puf_resilience import*
 from Puf_delay import*
 from general_model import*
+from general_model2 import*
 from datetime import datetime
 import warnings
 warnings.filterwarnings("ignore")
@@ -35,20 +36,24 @@ start_time = datetime.now()
 ### Load data ###
 #puf = Puf()
 #data, data_label = puf.load_data()
-arbiter_puf = arbiter_PUF()
-#data, data_label = arbiter_puf.load_data(68, 5000, 13, 4)
-data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 13, 4)
-data_unseen = np.c_[ data_unseen, np.ones(5000)*3 ]
+#arbiter_puf = arbiter_PUF()
+#data, data_label = arbiter_puf.load_data(68, 5000, 11, 123)
+#data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 11, 19)
 #xor_puf = XOR_PUF()
-#data, data_label = xor_puf.load_data(68, 5000, 2, 34)
+#data, data_label = xor_puf.load_data(68, 5000, 2, 13,256,22,77,89,90, 11)
+#data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 2, 13,256,22,77,89,90, 55)
 #lightweight_puf = lightweight_PUF()
 #data, data_label = lightweight_puf.load_data(68, 68000, 2, 123, 11)
 #feedforward_puf = feedforward_PUF()
-#data, data_label = feedforward_puf.load_data(68, 5000, 2, 32, 60)
+#data, data_label = feedforward_puf.load_data(68, 5000, 6, 32, 60, 256, 22, 77, 89, 90, 367, 23)
+#data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 6, 32, 60, 256, 22, 77, 89, 90, 367, 334)
 #interpose_puf = interpose_PUF()
-#data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)
+#data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)    
 general_model = general_model()
-data, data_label = general_model.load_data(1, 1, 1, 0, 0)
+data, data_label = general_model.load_data(4, 4, 4, 0, 0)
+
+general_model2 = general_model2()
+data_unseen, data_label_unseen = general_model2.load_data(4, 4, 4, 0, 0)
 
 ### Split train, test data for the model ###
 X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
@@ -102,8 +107,9 @@ print('Training time: {}'.format(end_time - start_time))
 ### Set testing start time ###
 test_start_time = datetime.now()
 results = xgboostModel_test.score(data_reduct, data_label)
-#print("cross validation accuracy: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
 print('Training accuracy: {}%'.format(results*100))
+cross_val = cross_val_score(xgboostModel, data_reduct, data_label,  cv=ss)
+print("cross validation accuracy: %.2f%% (%.2f%%)" % (cross_val.mean()*100, cross_val.std()*100))
 #results_f1 = xgboostModel.score(data_reduct, data_label)
 #print("cross validation F1 accuracy: %.2f%% (%.2f%%)" % (results_f1.mean()*100, results_f1.std()*100))
 
@@ -129,8 +135,16 @@ print('Testing accuracy: {}%'.format(testing2*100))'''
 data_unseen_reduct = selection.transform(data_unseen)
 data_unseen_reduct, data_label_unseen = shuffle(data_unseen_reduct, data_label_unseen)
 test_acc = xgboostModel_test.score(data_unseen_reduct, data_label_unseen)
+print("---------------------------------------")
 print('For unseen data')
 print('Testing accuracy: {}%'.format(test_acc*100))
+testingacc = xgboostModel_test.predict(data_unseen_reduct)
+cc = f1_score(data_label_unseen,testingacc)
+print(cc*100)
+cross_val = cross_val_score(xgboostModel_test, data_unseen_reduct, data_label_unseen,  cv=ss)
+print("cross validation accuracy: %.2f%% (%.2f%%)" % (cross_val.mean()*100, cross_val.std()*100))
+cross_val_f1 = cross_val_score(xgboostModel_test, data_unseen_reduct, data_label_unseen, scoring="f1", cv=ss)
+print("cross validation accuracy F1: %.2f%% (%.2f%%)" % (cross_val_f1.mean()*100, cross_val_f1.std()*100))
 
 
 ### Calculate testing time ###
@@ -167,11 +181,22 @@ plt.show()'''
 
 '''# Logistic Regression
 LR = LogisticRegression(penalty='l2')
-general_model = general_model()
-data, data_label = general_model.load_data(1, 1, 1, 0, 0)
-random_f = RandomForestClassifier(max_depth=2, random_state=0)
-random_f.fit(data, data_label)
-selection = SelectFromModel(random_f, threshold=0.01, prefit=True)
+#general_model = general_model()
+#data, data_label = general_model.load_data(1, 1, 1, 0, 0)
+arbiter_puf = arbiter_PUF()
+data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 13, 4)
+X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
+X_test, X_val, y_test, y_val = train_test_split(X_testVal, y_testVal, test_size=.5, random_state=24)
+evals_result ={}
+eval_s = [(X_train, y_train),(X_val, y_val)]
+xgboostModel = XGBClassifier(
+    booster='gbtree', colsample_bytree=1.0,
+              eval_metric='error', gamma=0.6,
+              learning_rate=0.3, max_depth=4,
+              min_child_weight=20, n_estimators=300, subsample=0.8, tree_method='gpu_hist'
+    )
+xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, verbose = 0)      
+selection = SelectFromModel(xgboostModel, threshold=0.01, prefit=True)
 data_r = selection.transform(data)
 data_r, data_label = shuffle(data_r, data_label)
 lr_results = cross_val_score(LR, data_r, data_label, cv=ss)
@@ -180,7 +205,7 @@ print("Accuracy: %.2f%% (%.2f%%)" % (lr_results.mean()*100, lr_results.std()*100
 ## Try unseen data
 arbiter_puf = arbiter_PUF()
 data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 13, 23)
-data_unseen = np.c_[ data_unseen, np.ones(5000)*3 ]
+#data_unseen = np.c_[ data_unseen, np.ones(5000)*3 ]
 data_unseen_reduct = selection.transform(data_unseen)
 data_unseen_reduct, data_label_unseen = shuffle(data_unseen_reduct, data_label_unseen)
 LR.fit(data_unseen_reduct, data_label_unseen)
@@ -188,28 +213,45 @@ training2 = LR.score(data_unseen_reduct, data_label_unseen)
 print('For unseen data')
 print('Training accuracy: {}%'.format(training2*100))'''
 
-'''# Decision Tree
+# Decision Tree
 decisionTree = DecisionTreeClassifier(criterion='entropy', max_depth=8)
-general_model = general_model()
-data, data_label = general_model.load_data(1, 1, 1, 0, 0)
-random_f = RandomForestClassifier(max_depth=2, random_state=0)
-random_f.fit(data, data_label)
-selection = SelectFromModel(random_f, threshold=0.01, prefit=True)
+arbiter_puf = arbiter_PUF()
+data, data_label = arbiter_puf.load_data(68, 5000, 11, 123)
+X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
+X_test, X_val, y_test, y_val = train_test_split(X_testVal, y_testVal, test_size=.5, random_state=24)
+evals_result ={}
+eval_s = [(X_train, y_train),(X_val, y_val)]
+xgboostModel = XGBClassifier(
+    booster='gbtree', colsample_bytree=1.0,
+              eval_metric='error', gamma=0.6,
+              learning_rate=0.3, max_depth=4,
+              min_child_weight=20, n_estimators=300, subsample=0.8, tree_method='gpu_hist'
+    )
+xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, verbose = 0)      
+selection = SelectFromModel(xgboostModel, threshold=0.01, prefit=True)
 data_r = selection.transform(data)
 data_r, data_label = shuffle(data_r, data_label)
+decisionTree.fit(data_r, data_label)
 dt_result = cross_val_score(decisionTree, data_r, data_label, cv=ss)
 print("Accuracy: %.2f%% (%.2f%%)" % (dt_result.mean()*100, dt_result.std()*100))
 
+
 ## Try unseen data
 arbiter_puf = arbiter_PUF()
-data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 13, 4)
-data_unseen = np.c_[ data_unseen, np.ones(5000)*3 ]
+data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 11, 19)
 data_unseen_reduct = selection.transform(data_unseen)
 data_unseen_reduct, data_label_unseen = shuffle(data_unseen_reduct, data_label_unseen)
-decisionTree.fit(data_unseen_reduct, data_label_unseen)
 training2 = decisionTree.score(data_unseen_reduct, data_label_unseen)
+print("-------------------------------")
 print('For unseen data')
-print('Training accuracy: {}%'.format(training2*100))'''
+print('Training accuracy: {}%'.format(training2*100))
+testingacc = decisionTree.predict(data_unseen_reduct)
+cc = f1_score(data_label_unseen,testingacc)
+print(cc*100)
+cross_val = cross_val_score(decisionTree, data_unseen_reduct, data_label_unseen,  cv=ss)
+print("cross validation accuracy: %.2f%% (%.2f%%)" % (cross_val.mean()*100, cross_val.std()*100))
+cross_val_f1 = cross_val_score(decisionTree, data_unseen_reduct, data_label_unseen, scoring="f1", cv=ss)
+print("cross validation accuracy F1: %.2f%% (%.2f%%)" % (cross_val_f1.mean()*100, cross_val_f1.std()*100))
 
 '''# SVM
 SVM = svm.SVC(C=100, kernel='rbf')

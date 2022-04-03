@@ -53,7 +53,7 @@ class XOR_PUF:
         puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed6)
         puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]
         #puf = XORArbiterPUF(n=(stages-4), k=xor_num, seed=21, noisiness=.05)
-        lfsrChallenges = random_inputs(n=stages, N=data_num, seed=123) # LFSR random challenges data
+        lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
         final_delay_diff = 1
         train_data = []
         train_label = []
@@ -98,11 +98,11 @@ class XOR_PUF:
             data_label.append(data_r)
            
         data = np.array(data)
-        data = self.get_parity_vectors(data)
+        '''data = self.get_parity_vectors(data)
         for d in range(len(data)):
             for j in range(65):
                 if data[d][j] == -1:
-                    data[d][j] = 0
+                    data[d][j] = 0'''
         qcut_label = pd.qcut(delay_diff, q=4, labels=["1", "2", "3", "4"])
         
         data_cut = []
