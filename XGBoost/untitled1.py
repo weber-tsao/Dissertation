@@ -33,7 +33,7 @@ warnings.filterwarnings("ignore")
 
 ss = StratifiedKFold(n_splits=5)
 # Decision Tree
-knn = LogisticRegression(penalty='l2')
+knn = svm.SVC(C=100, kernel='rbf')
 ##APUF
 #arbiter_puf = arbiter_PUF()
 #data, data_label = arbiter_puf.load_data(68, 5000, 11, 123)

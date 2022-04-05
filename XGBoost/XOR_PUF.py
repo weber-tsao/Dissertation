@@ -117,7 +117,7 @@ class XOR_PUF:
                 data_cut.append(np.concatenate((data[x],[0,0,0,1])))
         
         data_cut = np.array(data_cut)
-        train_data = data_cut
+        train_data = data
         train_label = np.array(data_label)
         
         return train_data, train_label
