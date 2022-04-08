@@ -51,12 +51,12 @@ start_time = datetime.now()
 #interpose_puf = interpose_PUF()
 #data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)    
 general_model = general_model()
-data, data_label = general_model.load_data(10, 0, 0, 0, 0)
-data, data_label = shuffle(data, data_label)
+data, data_label = general_model.load_data(0, 0, 1, 0, 0)
+#data, data_label = shuffle(data, data_label)
 
 general_model2 = general_model2()
-data_unseen, data_label_unseen = general_model2.load_data(10, 0, 0, 0, 0)
-data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
+data_unseen, data_label_unseen = general_model2.load_data(0, 0, 1, 0, 0)
+#data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
 
 ### Split train, test data for the model ###
 X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
