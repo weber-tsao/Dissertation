@@ -95,10 +95,13 @@ class feedforward_PUF:
                 response1 = puf_list[p].eval(np.array([obfuscateChallenge]))
                 if response1[0] == -1:
                     response1 = 0
+
                 else:
                     response1 = 1
+                
                 if p == 0: 
                     data_r = response1
+                    
                 else:
                     data_r = data_r^response1
                     
@@ -129,7 +132,7 @@ class feedforward_PUF:
                 data_cut.append(np.concatenate((data[x],[0,0,0,1])))
         
         data_cut = np.array(data_cut)
-        train_data = data
+        train_data = data_cut
         train_label = np.array(data_label)
         
         return train_data, train_label

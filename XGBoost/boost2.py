@@ -37,23 +37,26 @@ start_time = datetime.now()
 #puf = Puf()
 #data, data_label = puf.load_data()
 #arbiter_puf = arbiter_PUF()
-#data, data_label = arbiter_puf.load_data(68, 5000, 11, 123)
-#data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 11, 19)
+#data, data_label = arbiter_puf.load_data(68, 500, 11, 123)
+#data_unseen, data_label_unseen = arbiter_puf.load_data(68, 500, 11, 19)
 #xor_puf = XOR_PUF()
-#data, data_label = xor_puf.load_data(68, 5000, 2, 13,256,22,77,89,90, 11)
-#data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 2, 13,256,22,77,89,90, 55)
+#data, data_label = xor_puf.load_data(68, 300, 2, 13,256,22,77,89,90, 11)
+#data_unseen, data_label_unseen = xor_puf.load_data(68, 300, 2, 13,256,22,77,89,90, 55)
+#data_unseen = np.c_[ data_unseen, np.ones(300)*2 ] 
 #lightweight_puf = lightweight_PUF()
 #data, data_label = lightweight_puf.load_data(68, 68000, 2, 123, 11)
 #feedforward_puf = feedforward_PUF()
-#data, data_label = feedforward_puf.load_data(68, 5000, 6, 32, 60, 256, 22, 77, 89, 90, 367, 23)
-#data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 6, 32, 60, 256, 22, 77, 89, 90, 367, 334)
+#data, data_label = feedforward_puf.load_data(68, 300, 2, 32, 60, 256, 22, 77, 89, 90, 367, 23)
+#data_unseen, data_label_unseen = feedforward_puf.load_data(68, 300, 2, 32, 60, 256, 22, 77, 89, 90, 367, 334)
 #interpose_puf = interpose_PUF()
 #data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)    
 general_model = general_model()
-data, data_label = general_model.load_data(4, 4, 4, 0, 0)
+data, data_label = general_model.load_data(10, 0, 0, 0, 0)
+data, data_label = shuffle(data, data_label)
 
 general_model2 = general_model2()
-data_unseen, data_label_unseen = general_model2.load_data(4, 4, 4, 0, 0)
+data_unseen, data_label_unseen = general_model2.load_data(10, 0, 0, 0, 0)
+data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
 
 ### Split train, test data for the model ###
 X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
@@ -213,7 +216,7 @@ training2 = LR.score(data_unseen_reduct, data_label_unseen)
 print('For unseen data')
 print('Training accuracy: {}%'.format(training2*100))'''
 
-# Decision Tree
+'''# Decision Tree
 decisionTree = DecisionTreeClassifier(criterion='entropy', max_depth=8)
 arbiter_puf = arbiter_PUF()
 data, data_label = arbiter_puf.load_data(68, 5000, 11, 123)
@@ -251,7 +254,7 @@ print(cc*100)
 cross_val = cross_val_score(decisionTree, data_unseen_reduct, data_label_unseen,  cv=ss)
 print("cross validation accuracy: %.2f%% (%.2f%%)" % (cross_val.mean()*100, cross_val.std()*100))
 cross_val_f1 = cross_val_score(decisionTree, data_unseen_reduct, data_label_unseen, scoring="f1", cv=ss)
-print("cross validation accuracy F1: %.2f%% (%.2f%%)" % (cross_val_f1.mean()*100, cross_val_f1.std()*100))
+print("cross validation accuracy F1: %.2f%% (%.2f%%)" % (cross_val_f1.mean()*100, cross_val_f1.std()*100))'''
 
 '''# SVM
 SVM = svm.SVC(C=100, kernel='rbf')

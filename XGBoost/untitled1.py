@@ -27,65 +27,98 @@ from Puf_delay import*
 from general_model import*
 from general_model2 import*
 from datetime import datetime
+import random
 import warnings
 
 warnings.filterwarnings("ignore")
 
 ss = StratifiedKFold(n_splits=5)
-# Decision Tree
-knn = svm.SVC(C=100, kernel='rbf')
-##APUF
-#arbiter_puf = arbiter_PUF()
-#data, data_label = arbiter_puf.load_data(68, 5000, 11, 123)
-##XOR
-#xor_puf = XOR_PUF()
-#data, data_label = xor_puf.load_data(68, 5000, 6, 13,256,22,77,89,90, 11)
-##FF APUF
-#feedforward_puf = feedforward_PUF()
-#data, data_label = feedforward_puf.load_data(68, 5000, 6, 32, 60, 256, 22, 77, 89, 90, 367, 23)
-##Gneral Model
-general_model = general_model()
-data, data_label = general_model.load_data(1, 1, 1, 0, 0)
 
-'''X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
-X_test, X_val, y_test, y_val = train_test_split(X_testVal, y_testVal, test_size=.5, random_state=24)
-evals_result ={}
-eval_s = [(X_train, y_train),(X_val, y_val)]
-xgboostModel = XGBClassifier(
-    booster='gbtree', colsample_bytree=1.0,
-              eval_metric='error', gamma=0.6,
-              learning_rate=0.3, max_depth=4,
-              min_child_weight=20, n_estimators=300, subsample=0.8, tree_method='gpu_hist'
-    )
-xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, verbose = 0)      
-selection = SelectFromModel(xgboostModel, threshold=0.01, prefit=True)
-data_r = selection.transform(data)
-data_r, data_label = shuffle(data_r, data_label)'''
-knn.fit(data, data_label)
-dt_result = cross_val_score(knn, data, data_label, cv=ss)
-print("Accuracy: %.2f%% (%.2f%%)" % (dt_result.mean()*100, dt_result.std()*100))
+for i in range(1):
+    chal_seed = random.randint(2, 500)
+    puf_seed = random.randint(2, 500)
+    print("iteration",i)
+    print(chal_seed)
+    print(puf_seed)
+    print("----")
+    # Decision Tree
+    knn = LogisticRegression(C=71)
+    ##APUF
+    arbiter_puf = arbiter_PUF()
+    data, data_label = arbiter_puf.load_data(68, 5000, puf_seed, chal_seed)
+    ##XOR
+    #xor_puf = XOR_PUF()
+    #data, data_label = xor_puf.load_data(68, 5000, 6, 13,256,22,77,89,90, 11)
+    ##FF APUF
+    #feedforward_puf = feedforward_PUF()
+    #data, data_label = feedforward_puf.load_data(68, 5000, 6, 32, 60, 256, 22, 77, 89, 90, 367, 23)
+    ##Gneral Model
+    #general_model = general_model()
+    #data, data_label = general_model.load_data(1, 1, 1, 0, 0)
+    
+    '''X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
+    X_test, X_val, y_test, y_val = train_test_split(X_testVal, y_testVal, test_size=.5, random_state=24)
+    evals_result ={}
+    eval_s = [(X_train, y_train),(X_val, y_val)]
+    xgboostModel = XGBClassifier(
+        booster='gbtree', colsample_bytree=1.0,
+                  eval_metric='error', gamma=0.6,
+                  learning_rate=0.3, max_depth=4,
+                  min_child_weight=20, n_estimators=300, subsample=0.8, tree_method='gpu_hist'
+        )
+    xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, verbose = 0)      
+    selection = SelectFromModel(xgboostModel, threshold=0.01, prefit=True)
+    data_r = selection.transform(data)
+    data_r, data_label = shuffle(data_r, data_label)'''
+    knn.fit(data, data_label)
+    dt_result = cross_val_score(knn, data, data_label, cv=ss)
+    print("Accuracy: %.2f%% (%.2f%%)" % (dt_result.mean()*100, dt_result.std()*100))
+    
+    
+    chal_seed2 = random.randint(501, 1000)
+    puf_seed2 = random.randint(501, 1000)
+    print(chal_seed2)
+    print(puf_seed2)
+    ## Try unseen data
+    ##APUF
+    data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, puf_seed2, chal_seed2)
+    ##XOR
+    #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 6, 13,256,22,77,89,90, 55)
+    ##FF APUF
+    #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 6, 32, 60, 256, 22, 77, 89, 90, 367, 334)
+    ##General Model
+    #general_model2 = general_model2()
+    #data_unseen, data_label_unseen = general_model2.load_data(1, 1, 1, 0, 0)
+    '''data_unseen_reduct = selection.transform(data_unseen)
+    data_unseen_reduct, data_label_unseen = shuffle(data_unseen_reduct, data_label_unseen)'''
+    training2 = knn.score(data_unseen, data_label_unseen)
+    print("-------------------------------")
+    print('For unseen data')
+    print('Training accuracy: {}%'.format(training2*100))
+    testingacc = knn.predict(data_unseen)
+    cc = f1_score(data_label_unseen,testingacc)
+    print(cc*100)
+    cross_val = cross_val_score(knn, data_unseen, data_label_unseen,  cv=ss)
+    print("cross validation accuracy: %.2f%% (%.2f%%)" % (cross_val.mean()*100, cross_val.std()*100))
+    cross_val_f1 = cross_val_score(knn, data_unseen, data_label_unseen, scoring="f1", cv=ss)
+    print("cross validation accuracy F1: %.2f%% (%.2f%%)" % (cross_val_f1.mean()*100, cross_val_f1.std()*100))
+    
+'''testingModel=LogisticRegression()
 
+param_dist = {
+        'penalty':['l1', 'l2'], 
+        'C':range(1,100,10),
+        'max_iter':[100, 200,300,500,1000],
+        'multi_class':['auto', 'ovr']
+        }
 
-## Try unseen data
-##APUF
-#data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 11, 19)
-##XOR
-#data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 6, 13,256,22,77,89,90, 55)
-##FF APUF
-#data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 6, 32, 60, 256, 22, 77, 89, 90, 367, 334)
-##General Model
-general_model2 = general_model2()
-data_unseen, data_label_unseen = general_model2.load_data(1, 1, 1, 0, 0)
-'''data_unseen_reduct = selection.transform(data_unseen)
-data_unseen_reduct, data_label_unseen = shuffle(data_unseen_reduct, data_label_unseen)'''
-training2 = knn.score(data_unseen, data_label_unseen)
-print("-------------------------------")
-print('For unseen data')
-print('Training accuracy: {}%'.format(training2*100))
-testingacc = knn.predict(data_unseen)
-cc = f1_score(data_label_unseen,testingacc)
-print(cc*100)
-cross_val = cross_val_score(knn, data_unseen, data_label_unseen,  cv=ss)
-print("cross validation accuracy: %.2f%% (%.2f%%)" % (cross_val.mean()*100, cross_val.std()*100))
-cross_val_f1 = cross_val_score(knn, data_unseen, data_label_unseen, scoring="f1", cv=ss)
-print("cross validation accuracy F1: %.2f%% (%.2f%%)" % (cross_val_f1.mean()*100, cross_val_f1.std()*100))
+grid = GridSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc')
+
+grid.fit(data, data_label)
+best_estimator = grid.best_estimator_
+print(best_estimator)
+print(grid.best_score_)
+print(grid.best_params)
+y_predict = best_estimator.predict(data_unseen)
+best_cc = f1_score(data_label_unseen,y_predict)
+print(best_cc)'''
