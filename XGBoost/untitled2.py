@@ -64,7 +64,8 @@ clf_result = pd.DataFrame({'threshold' : [],
                            })
 
 #for (puf_seed, train_challenge_seed, test_challenge_seed) in zip(puf_seeds, train_challenge_seeds, test_challenge_seeds):
-for thresholds in threshold_val:
+#for thresholds in threshold_val:
+for depth in depth_val:
     for n_estimators in n_estimators_val:
         ### Set running start time ###
         start_time = datetime.now()
