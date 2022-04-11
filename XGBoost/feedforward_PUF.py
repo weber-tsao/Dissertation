@@ -43,7 +43,7 @@ class feedforward_PUF:
             parityVec[:,i-1:i]=np.prod(C[:,0:i-1],axis=1).reshape((m,1))
         return parityVec
 
-    def load_data(self, stages, data_num, xor_num, f1, d1, f2, d2, puf_seed1, puf_seed2, puf_seed3, puf_seed4, puf_seed5, puf_seed6, cus_seed):
+    def load_data(self, stages, data_num, xor_num, f1, d1, puf_seed1, puf_seed2, puf_seed3, puf_seed4, puf_seed5, puf_seed6, cus_seed):
     #def load_data(self, stages, data_num, xor_num, f1, d1):
         '''puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=9)
         puf2 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=122)
@@ -80,20 +80,22 @@ class feedforward_PUF:
             obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
             
             for p in range(xor_num):
+                stage_delay_diff = []
                 #obfuscateChallenge = self.Puf_resilience.cyclic_shift(challenge, puf_list[p])
                 #obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
-                stage_delay_diff = self.stage_delay_diff(obfuscateChallenge, puf_list[p], f1)
-                ##second loop
-                #stage_delay_diff2 = self.stage_delay_diff(obfuscateChallenge, puf_list[p], f2)
-                if stage_delay_diff > 0:
-                    obfuscateChallenge[d1] == 1
-                else:
-                    obfuscateChallenge[d1] == 0
-            
-                #if stage_delay_diff2 > 0:
-                #    obfuscateChallenge[d2] == 1
-                #else:
-                #    obfuscateChallenge[d2] == 0
+                stage_delay_diff.append(self.stage_delay_diff(obfuscateChallenge, puf_list[p], f1[0]))
+                stage_delay_diff.append(self.stage_delay_diff(obfuscateChallenge, puf_list[p], f1[1]))
+                stage_delay_diff.append(self.stage_delay_diff(obfuscateChallenge, puf_list[p], f1[2]))
+                stage_delay_diff.append(self.stage_delay_diff(obfuscateChallenge, puf_list[p], f1[3]))
+                stage_delay_diff.append(self.stage_delay_diff(obfuscateChallenge, puf_list[p], f1[4]))
+                stage_delay_diff.append(self.stage_delay_diff(obfuscateChallenge, puf_list[p], f1[5]))
+                stage_delay_diff.append(self.stage_delay_diff(obfuscateChallenge, puf_list[p], f1[6]))
+                stage_delay_diff.append( self.stage_delay_diff(obfuscateChallenge, puf_list[p], f1[7]))
+                for j in range(8):
+                    if stage_delay_diff[j] > 0:
+                        obfuscateChallenge[d1[j]] == 1
+                    else:
+                        obfuscateChallenge[d1[j]] == 0
                 
                 final_delay_diffc = self.total_delay_diff(obfuscateChallenge, puf_list[p])
                 final_delay_diff = final_delay_diffc[0]*final_delay_diff
