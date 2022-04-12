@@ -105,20 +105,20 @@ for depth in depth_val:
         xgboostModel = XGBClassifier(
             booster='gbtree', colsample_bytree=1.0,
                       eval_metric='error', gamma=0.6,
-                      learning_rate=0.3, max_depth=4,
+                      learning_rate=0.3, max_depth=depth,
                       min_child_weight=20, n_estimators=n_estimators, subsample=0.8, tree_method='gpu_hist'
             )
         
         xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, verbose = 0)
         
-        selection = SelectFromModel(xgboostModel, threshold=thresholds, prefit=True)
+        selection = SelectFromModel(xgboostModel, threshold=0.01, prefit=True)
         print(xgboostModel.feature_importances_)
         data_reduct = selection.transform(data)
         data_reduct, data_label = shuffle(data_reduct, data_label)
         xgboostModel_test = XGBClassifier(
             booster='gbtree', colsample_bytree=1.0,
                       eval_metric='error', gamma=0.6,
-                      learning_rate=0.3, max_depth=4,
+                      learning_rate=0.3, max_depth=depth,
                       min_child_weight=20, n_estimators=n_estimators, subsample=0.8, tree_method='gpu_hist'
             )
         xgboostModel_test.fit(data_reduct, data_label)                       
@@ -155,8 +155,8 @@ for depth in depth_val:
         test_end_time = datetime.now()
         print('Testing time: {}'.format(test_end_time - test_start_time))
         
-        clf_result = clf_result.append({ 'threshold' : thresholds,
-                                         'depth': 4,
+        clf_result = clf_result.append({ 'threshold' : 0.01,
+                                         'depth': depth,
                                          'n_estimators': n_estimators,
                                          'puf_seed' : 11,
                                          'train_challenge_seed': 123,
