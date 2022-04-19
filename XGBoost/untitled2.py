@@ -49,12 +49,14 @@ clf_result = pd.DataFrame({'puf_seed' : [],
 threshold_val = [0.1,0.01,0.05,0.001,0.005,0.0001,0.0005]
 depth_val = [2,3,4,5,6,7,8]
 n_estimators_val = [300,400,500,600,700]
-clf_result = pd.DataFrame({'threshold' : [],
-                           'depth': [],
-                           'n_estimators': [],
-                           'puf_seed' : [],
-                           'train_challenge_seed': [],
-                           'test_challenge_seed': [],
+crps = range(500,5000,500)
+clf_result = pd.DataFrame({#'threshold' : [],
+                           #'depth': [],
+                           #'n_estimators': [],
+                           #'puf_seed' : [],
+                           #'train_challenge_seed': [],
+                           #'test_challenge_seed': [],
+                           'CRPs number':[],
                            'Test split Accuracy' : [],
                            'Test split F1' : [],
                            'Cross_val Accuracy' : [],
@@ -65,8 +67,9 @@ clf_result = pd.DataFrame({'threshold' : [],
 
 #for (puf_seed, train_challenge_seed, test_challenge_seed) in zip(puf_seeds, train_challenge_seeds, test_challenge_seeds):
 #for thresholds in threshold_val:
-for depth in depth_val:
-    for n_estimators in n_estimators_val:
+#for depth in depth_val:
+    #for n_estimators in n_estimators_val:
+for crp in crps:
         ### Set running start time ###
         start_time = datetime.now()
         
@@ -74,11 +77,13 @@ for depth in depth_val:
         #puf = Puf()
         #data, data_label = puf.load_data()
         arbiter_puf = arbiter_PUF()
-        data, data_label = arbiter_puf.load_data(68, 5000, 11, 123)
-        data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 11, 19)
+        data, data_label = arbiter_puf.load_data(68, crp, 11, 123)
+        #data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
+        data_unseen, data_label_unseen = arbiter_puf.load_data(68, crp, 11, 19)
         #xor_puf = XOR_PUF()
-        #data, data_label = xor_puf.load_data(68, 300, 2, 13,256,22,77,89,90, 11)
-        #data_unseen, data_label_unseen = xor_puf.load_data(68, 300, 2, 13,256,22,77,89,90, 55)
+        #data, data_label = xor_puf.load_data(68, crp, 2, 13,256,22,77,89,90, 11)
+        #data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
+        #data_unseen, data_label_unseen = xor_puf.load_data(68, crp, 2, 13,256,22,77,89,90, 55)
         #data_unseen = np.c_[ data_unseen, np.ones(300)*2 ] 
         #lightweight_puf = lightweight_PUF()
         #data, data_label = lightweight_puf.load_data(68, 68000, 2, 123, 11)
@@ -105,8 +110,8 @@ for depth in depth_val:
         xgboostModel = XGBClassifier(
             booster='gbtree', colsample_bytree=1.0,
                       eval_metric='error', gamma=0.6,
-                      learning_rate=0.3, max_depth=depth,
-                      min_child_weight=20, n_estimators=n_estimators, subsample=0.8, tree_method='gpu_hist'
+                      learning_rate=0.3, max_depth=3,
+                      min_child_weight=20, n_estimators=100, subsample=0.8, tree_method='gpu_hist'
             )
         
         xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, verbose = 0)
@@ -118,8 +123,8 @@ for depth in depth_val:
         xgboostModel_test = XGBClassifier(
             booster='gbtree', colsample_bytree=1.0,
                       eval_metric='error', gamma=0.6,
-                      learning_rate=0.3, max_depth=depth,
-                      min_child_weight=20, n_estimators=n_estimators, subsample=0.8, tree_method='gpu_hist'
+                      learning_rate=0.3, max_depth=3,
+                      min_child_weight=20, n_estimators=100, subsample=0.8, tree_method='gpu_hist'
             )
         xgboostModel_test.fit(data_reduct, data_label)                       
         
@@ -155,12 +160,13 @@ for depth in depth_val:
         test_end_time = datetime.now()
         print('Testing time: {}'.format(test_end_time - test_start_time))
         
-        clf_result = clf_result.append({ 'threshold' : 0.01,
-                                         'depth': depth,
-                                         'n_estimators': n_estimators,
-                                         'puf_seed' : 11,
-                                         'train_challenge_seed': 123,
-                                         'test_challenge_seed': 19,
+        clf_result = clf_result.append({ #'threshold' : 0.01,
+                                         #'depth': depth,
+                                         #'n_estimators': n_estimators,
+                                         #'puf_seed' : 11,
+                                         #'train_challenge_seed': 123,
+                                         #'test_challenge_seed': 19,
+                                         'CRPs number':crp,
                                          'Test split Accuracy' : test_acc*100,
                                          'Test split F1' : cc*100,
                                          'Cross_val Accuracy' : cross_val.mean()*100,
@@ -170,4 +176,4 @@ for depth in depth_val:
                                          },  ignore_index=True)
         
         #clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\{}.csv'.format(puf_seed))
-clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\3Dplot_threshold_estimators.csv')
+clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\CRPs_number_test.csv')
