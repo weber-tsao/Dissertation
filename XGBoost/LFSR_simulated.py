@@ -27,9 +27,9 @@ class LFSR_simulated:
 
         return spited_challenge, obfuscate_bits
 
-    def createShiftCount(self, obfuscate_bits):     
+    def createShiftCount(self, obfuscate_bits, base_value):     
         # create random base number
-        base = 0
+        base = base_value
         
         # create count by looking at crp and splited crp bits
         binary_obfus = list(obfuscate_bits)
@@ -42,9 +42,9 @@ class LFSR_simulated:
         
         return shift_count
         
-    def createObfuscateChallenge(self, challenge):
+    def createObfuscateChallenge(self, challenge, base):
         spited_challenge, obfuscate_bits = self.splitCRPs(challenge)
-        shift_count = self.createShiftCount(obfuscate_bits)
+        shift_count = self.createShiftCount(obfuscate_bits, base)
         
         challenge_state = [0 if c == -1 else c for c in list(spited_challenge)]
 

@@ -37,7 +37,7 @@ class XOR_PUF:
             parityVec[:,i-1:i]=np.prod(C[:,0:i-1],axis=1).reshape((m,1))
         return parityVec
     
-    def load_data(self, stages, data_num, xor_num, puf_seed1, puf_seed2, puf_seed3, puf_seed4, puf_seed5, puf_seed6, cus_seed):
+    def load_data(self, stages, data_num, xor_num, puf_seed1, puf_seed2, puf_seed3, puf_seed4, puf_seed5, puf_seed6, cus_seed, base):
     #def load_data(self, stages, data_num, xor_num, cus_seed):
         '''puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=91)
         puf2 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=123)
@@ -52,7 +52,7 @@ class XOR_PUF:
         puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed5)
         puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed6)
         puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]
-        #puf = XORArbiterPUF(n=(stages-4), k=xor_num, seed=21, noisiness=.05)
+        #puf = XORArbiterPUF(n=(stages-4), k=xor_num, seed=21)
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
         final_delay_diff = 1
         train_data = []
@@ -70,9 +70,9 @@ class XOR_PUF:
             challenge = test_crps[i]
             
             # obfuscate part
-            obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
+            obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge, base)
             obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
-            
+            data_r = 0
             for p in range(xor_num):
                 #obfuscateChallenge = self.Puf_resilience.cyclic_shift(challenge, puf_list[p])
                 #obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
@@ -109,12 +109,16 @@ class XOR_PUF:
         for x in range(len(qcut_label)):
             if qcut_label[x] == "1":
                 data_cut.append(np.concatenate((data[x],[1,0,0,0])))
+                #data_cut.append([1,0,0,0])
             elif qcut_label[x] == "2":
                 data_cut.append(np.concatenate((data[x],[0,1,0,0])))
+                #data_cut.append([0,1,0,0])
             elif qcut_label[x] == "3":
                 data_cut.append(np.concatenate((data[x],[0,0,1,0])))
+                #data_cut.append([0,0,1,0])
             else:
                 data_cut.append(np.concatenate((data[x],[0,0,0,1])))
+                #data_cut.append([0,0,0,1])
         
         data_cut = np.array(data_cut)
         train_data = data_cut

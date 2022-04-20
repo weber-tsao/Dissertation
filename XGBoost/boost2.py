@@ -40,20 +40,23 @@ start_time = datetime.now()
 #data, data_label = arbiter_puf.load_data(68, 3000, 11, 123)
 #data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
 #data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 11, 19)
-xor_puf = XOR_PUF()
-data, data_label = xor_puf.load_data(68, 32000, 2, 13,256,22,77,89,90, 11)
-data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 2, 13,256,22,77,89,90, 55)
+#xor_puf = XOR_PUF()
+#data, data_label = xor_puf.load_data(68, 5000, 2, 13,256,22,77,89,90, 11,0)
+#data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 2, 13,256,22,77,89,90, 55,0)
 #data_unseen = np.c_[ data_unseen, np.ones(300)*2 ] 
 #lightweight_puf = lightweight_PUF()
 #data, data_label = lightweight_puf.load_data(68, 68000, 2, 123, 11)
+#f1 = [5,12,26,19,33,49,51,7]
+#d1 = [60,61,63,59,58,57,56,55]
 #feedforward_puf = feedforward_PUF()
-#data, data_label = feedforward_puf.load_data(68, 300, 2, 32, 60, 256, 22, 77, 89, 90, 367, 23)
-#data_unseen, data_label_unseen = feedforward_puf.load_data(68, 300, 2, 32, 60, 256, 22, 77, 89, 90, 367, 334)
+#data, data_label = feedforward_puf.load_data(68, 5000, 6, f1, d1, 256, 22, 77, 89, 90, 367, 23)
+#data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 6, f1, d1, 256, 22, 77, 89, 90, 367, 334)
 #interpose_puf = interpose_PUF()
 #data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)    
-#general_model = general_model()
-#data, data_label = general_model.load_data(1, 1, 1, 0, 0)
-#data, data_label = shuffle(data, data_label)
+general_model = general_model()
+data, data_label = general_model.load_data(10, 10, 10, 0, 0, 166)
+data, data_label = shuffle(data, data_label)
+data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20, random_state=66)
 
 #general_model2 = general_model2()
 #data_unseen, data_label_unseen = general_model2.load_data(1, 1, 1, 0, 0)
@@ -422,38 +425,38 @@ plt.show()'''
                            )
 '''
 
-testingModel = XGBClassifier(
-    booster='gbtree', 
-    colsample_bytree=1.0,
-    eval_metric='error', 
-    gamma=0.6,
-    learning_rate=0.2, 
-    #max_depth=7,
-    min_child_weight=10, 
-    #n_estimators=200, 
-    subsample=0.8, 
-    tree_method='gpu_hist'
-    )
+#testingModel = XGBClassifier(
+#    booster='gbtree', 
+#    colsample_bytree=1.0,
+#    eval_metric='error', 
+#    gamma=0.6,
+#    learning_rate=0.2, 
+#    #max_depth=7,
+#    min_child_weight=10, 
+#    #n_estimators=200, 
+#    subsample=0.8, 
+#    tree_method='gpu_hist'
+#    )
 
-param_dist = {  
-    'max_depth':range(2,6,1),
+#param_dist = {  
+#    'max_depth':range(2,6,1),
     #'min_child_weight' :range(10,30,10),
     #'gamma': [0.1,0.4,0.6,0.8,1.0],
     #'subsample': [0.1,0.4,0.6,0.8,1.0],
     #'colsample_bytree': [0.1,0.4,0.6,0.8,1.0],
     #'learning_rate': [0.01,0.05,0.1,0.2],
-    'n_estimators': range(100,800,100)
-}  
+#    'n_estimators': range(100,800,100)
+#}  
 
-grid =GridSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_jobs = -1,verbose = 2)
+#grid =GridSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_jobs = -1,verbose = 2)
 
-grid.fit(data_reduct, data_label)
-best_estimator = grid.best_estimator_
-print(best_estimator)
-a = grid.best_score_
-print(a)
+#grid.fit(data_reduct, data_label)
+#best_estimator = grid.best_estimator_
+#print(best_estimator)
+#a = grid.best_score_
+#print(a)
 #c = grid.best_params
 #print(c)
 
-cv_result = pd.DataFrame.from_dict(grid.cv_results_)
-cv_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\tune.csv')
+#cv_result = pd.DataFrame.from_dict(grid.cv_results_)
+#cv_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\tune.csv')

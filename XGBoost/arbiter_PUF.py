@@ -36,7 +36,7 @@ class arbiter_PUF:
             parityVec[:,i-1:i]=np.prod(C[:,0:i-1],axis=1).reshape((m,1))
         return parityVec
 
-    def load_data(self, stages, data_num, puf_seed, cus_seed):
+    def load_data(self, stages, data_num, puf_seed, cus_seed, base):
         puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed)
         #puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=12, noisiness=.05)
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
@@ -54,7 +54,7 @@ class arbiter_PUF:
             challenge = test_crps[i]
             
             # obfuscate part
-            obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
+            obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge, base)
             obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
             #obfuscateChallenge = self.Puf_resilience.cyclic_shift(challenge, puf)
             #obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]

@@ -43,7 +43,7 @@ class feedforward_PUF:
             parityVec[:,i-1:i]=np.prod(C[:,0:i-1],axis=1).reshape((m,1))
         return parityVec
 
-    def load_data(self, stages, data_num, xor_num, f1, d1, puf_seed1, puf_seed2, puf_seed3, puf_seed4, puf_seed5, puf_seed6, cus_seed):
+    def load_data(self, stages, data_num, xor_num, f1, d1, puf_seed1, puf_seed2, puf_seed3, puf_seed4, puf_seed5, puf_seed6, cus_seed, base):
     #def load_data(self, stages, data_num, xor_num, f1, d1):
         '''puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=9)
         puf2 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=122)
@@ -76,7 +76,7 @@ class feedforward_PUF:
             challenge = test_crps[i]
             
             # obfuscate part
-            obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge)
+            obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge, base)
             obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
             
             for p in range(xor_num):
@@ -133,12 +133,16 @@ class feedforward_PUF:
         for x in range(len(qcut_label)):
             if qcut_label[x] == "1":
                 data_cut.append(np.concatenate((data[x],[1,0,0,0])))
+                #data_cut.append([1,0,0,0])
             elif qcut_label[x] == "2":
                 data_cut.append(np.concatenate((data[x],[0,1,0,0])))
+                #data_cut.append([0,1,0,0])
             elif qcut_label[x] == "3":
                 data_cut.append(np.concatenate((data[x],[0,0,1,0])))
+                #data_cut.append([0,0,1,0])
             else:
                 data_cut.append(np.concatenate((data[x],[0,0,0,1])))
+                #data_cut.append([0,0,0,1])
         
         data_cut = np.array(data_cut)
         train_data = data_cut

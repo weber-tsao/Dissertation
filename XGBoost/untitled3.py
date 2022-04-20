@@ -30,75 +30,107 @@ from datetime import datetime
 import warnings
 warnings.filterwarnings("ignore")
 
-'''puf_seeds = [11, 67, 82, 95, 324, 56, 70, 12, 123, 39]
-train_challenge_seeds = [123, 21, 34, 54, 221, 345, 676, 54, 33, 15]
-test_challenge_seeds = [19, 44, 1, 77, 453, 657, 557, 23, 44, 84]
-clf_result = pd.DataFrame({'puf_seed' : [],
-                           'train_challenge_seed': [],
-                           'test_challenge_seed': [],
-                           'Test split Accuracy' : [],
-                           'Test split F1' : [],
-                           'Cross_val Accuracy' : [],
-                           'Cross_val sd' : [],
-                           'Cross_val split F1' : [],
-                           'Cross_val F1 sd' : [],
-                           'Training time' : [],
-                           'Testing time' : []
-                           })'''
-
-threshold_val = [0.1,0.01,0.05,0.001,0.005,0.0001,0.0005]
-depth_val = [2,3,4,5,6,7,8]
-n_estimators_val = [300,400,500,600,700]
-crps = range(500,5000,500)
+PUF_types = ['APUF','2 XOR-APUF','3 XOR-APUF','4 XOR-APUF','5 XOR-APUF','6 XOR-APUF','FF-2-XOR-APUF','FF-3-XOR-APUF',
+                 'FF-4-XOR-APUF','FF-5-XOR-APUF','FF-6-XOR-APUF'
+                 ,'Generic framework(1,1,1)','Generic framework(4,4,4)'
+                 ]
 clf_result = pd.DataFrame({#'threshold' : [],
                            #'depth': [],
                            #'n_estimators': [],
                            #'puf_seed' : [],
                            #'train_challenge_seed': [],
-                           #'test_challenge_seed': [],
+                           'PUF type': [],
                            'CRPs number':[],
                            'Test split Accuracy' : [],
                            'Test split F1' : [],
                            'Training time' : [],
-                           'Testing time' : []
+                           'Testing time' : [],
+                           #'Cross_val split F1' : [],
+                           #'Cross_val F1 sd' : [],
                            })
 
 #for (puf_seed, train_challenge_seed, test_challenge_seed) in zip(puf_seeds, train_challenge_seeds, test_challenge_seeds):
 #for thresholds in threshold_val:
 #for depth in depth_val:
     #for n_estimators in n_estimators_val:
-for crp in crps:
+for PUF_type in PUF_types:
         ### Set running start time ###
         start_time = datetime.now()
         
         ### Load data ###
-        #puf = Puf()
-        #data, data_label = puf.load_data()
-        arbiter_puf = arbiter_PUF()
-        data, data_label = arbiter_puf.load_data(68, crp, 11, 123, 0)
-        data_unseen, data_label_unseen = arbiter_puf.load_data(68, crp, 11, 19, 0)
-        #data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
-        #data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
-        #xor_puf = XOR_PUF()
-        #data, data_label = xor_puf.load_data(68, crp, 2, 13,256,22,77,89,90, 11)
-        #data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
-        #data_unseen, data_label_unseen = xor_puf.load_data(68, crp, 2, 13,256,22,77,89,90, 55)
-        #data_unseen = np.c_[ data_unseen, np.ones(300)*2 ] 
-        #lightweight_puf = lightweight_PUF()
-        #data, data_label = lightweight_puf.load_data(68, 68000, 2, 123, 11)
-        #feedforward_puf = feedforward_PUF()
-        #data, data_label = feedforward_puf.load_data(68, 300, 2, 32, 60, 256, 22, 77, 89, 90, 367, 23)
-        #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 300, 2, 32, 60, 256, 22, 77, 89, 90, 367, 334)
-        #interpose_puf = interpose_PUF()
-        #data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)    
-        #general_model = general_model()
-        #data, data_label = general_model.load_data(2, 0, 0, 0, 0)
-        #data, data_label = shuffle(data, data_label)
+        if PUF_type == 'APUF':
+            arbiter_puf = arbiter_PUF()
+            data, data_label = arbiter_puf.load_data(68, 5000, 11, 123, 0)
+            #data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 11, 19, 0)
+        elif PUF_type == '2 XOR-APUF':
+            xor_puf = XOR_PUF()
+            data, data_label = xor_puf.load_data(68, 5000, 2, 13,256,22,77,89,90, 11, 0)
+            #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 2, 13,256,22,77,89,90, 55, 0)
+        elif PUF_type == '3 XOR-APUF':
+            xor_puf = XOR_PUF()
+            data, data_label = xor_puf.load_data(68, 5000, 3, 13,256,22,77,89,90, 11, 0)
+            #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 3, 13,256,22,77,89,90, 55, 0)
+        elif PUF_type == '4 XOR-APUF':
+            xor_puf = XOR_PUF()
+            data, data_label = xor_puf.load_data(68, 5000, 4, 13,256,22,77,89,90, 11, 0)
+            #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 4, 13,256,22,77,89,90, 55, 0)
+        elif PUF_type == '5 XOR-APUF':
+            xor_puf = XOR_PUF()
+            data, data_label = xor_puf.load_data(68, 5000, 5, 13,256,22,77,89,90, 11, 0)
+            #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 5, 13,256,22,77,89,90, 55, 0)
+        elif PUF_type == '6 XOR-APUF':
+            xor_puf = XOR_PUF()
+            data, data_label = xor_puf.load_data(68, 5000, 6, 13,256,22,77,89,90, 11, 0)
+            #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 6, 13,256,22,77,89,90, 55, 0)
+        elif PUF_type == 'FF-2-XOR-APUF':
+            f1 = [5,12,26,19,33,49,51,7]
+            d1 = [60,61,63,59,58,57,56,55]
+            feedforward_puf = feedforward_PUF()
+            data, data_label = feedforward_puf.load_data(68, 5000, 2, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
+            #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 2, f1, d1, 256, 22, 77, 89, 90, 367, 334, 0)
+        elif PUF_type == 'FF-3-XOR-APUF':
+            f1 = [5,12,26,19,33,49,51,7]
+            d1 = [60,61,63,59,58,57,56,55]
+            feedforward_puf = feedforward_PUF()
+            data, data_label = feedforward_puf.load_data(68, 5000, 3, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
+            #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 3, f1, d1, 256, 22, 77, 89, 90, 367, 334, 0)
+        elif PUF_type == 'FF-4-XOR-APUF':
+            f1 = [5,12,26,19,33,49,51,7]
+            d1 = [60,61,63,59,58,57,56,55]
+            feedforward_puf = feedforward_PUF()
+            data, data_label = feedforward_puf.load_data(68, 5000, 4, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
+            #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 4, f1, d1, 256, 22, 77, 89, 90, 367, 334, 0)
+        elif PUF_type == 'FF-5-XOR-APUF':
+            f1 = [5,12,26,19,33,49,51,7]
+            d1 = [60,61,63,59,58,57,56,55]
+            feedforward_puf = feedforward_PUF()
+            data, data_label = feedforward_puf.load_data(68, 5000, 5, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
+            #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 5, f1, d1, 256, 22, 77, 89, 90, 367, 334, 0)
+        elif PUF_type == 'FF-6-XOR-APUF':
+            f1 = [5,12,26,19,33,49,51,7]
+            d1 = [60,61,63,59,58,57,56,55]
+            feedforward_puf = feedforward_PUF()
+            data, data_label = feedforward_puf.load_data(68, 5000, 6, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
+            #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 6, f1, d1, 256, 22, 77, 89, 90, 367, 334, 0)
+        elif PUF_type == 'Generic framework(1,1,1)':
+            general_model = general_model()
+            data, data_label = general_model.load_data(1, 1, 1, 0, 0, 5000)
+            data, data_label = shuffle(data, data_label)
+            
+            #general_model2 = general_model2()
+            #data_unseen, data_label_unseen = general_model2.load_data(1, 1, 1, 0, 0, 5000)
+            #data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
+        elif PUF_type == 'Generic framework(4,4,4)':
+            #g1 = general_model()
+            data, data_label = general_model.load_data(4, 4, 4, 0, 0, 1250)
+            data, data_label = shuffle(data, data_label)
+            
+            #g2 = general_model2()
+            #data_unseen, data_label_unseen = general_model2.load_data(4, 4, 4, 0, 0, 1250)
+            #data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
         
-        #general_model2 = general_model2()
-        #data_unseen, data_label_unseen = general_model2.load_data(2, 0, 0, 0, 0)
-        #data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
         
+        data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
         ### Split train, test data for the model ###
         X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
         X_test, X_val, y_test, y_val = train_test_split(X_testVal, y_testVal, test_size=.5, random_state=24)
@@ -116,7 +148,7 @@ for crp in crps:
         xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, verbose = 0)
         
         selection = SelectFromModel(xgboostModel, threshold=0.01, prefit=True)
-        print(xgboostModel.feature_importances_)
+        #print(xgboostModel.feature_importances_)
         data_reduct = selection.transform(data)
         data_reduct, data_label = shuffle(data_reduct, data_label)
         xgboostModel_test = XGBClassifier(
@@ -128,7 +160,7 @@ for crp in crps:
         xgboostModel_test.fit(data_reduct, data_label)                       
         
         ### Cross validation ###
-        ss = StratifiedKFold(n_splits=5)
+        #ss = StratifiedKFold(n_splits=5)
         
         ### Calculate training time ###
         end_time = datetime.now()
@@ -157,7 +189,7 @@ for crp in crps:
         
         ### Calculate testing time ###
         test_end_time = datetime.now()
-        print('Testing time: {}'.format(test_end_time - test_start_time))
+        #print('Testing time: {}'.format(test_end_time - test_start_time))
         
         clf_result = clf_result.append({ #'threshold' : 0.01,
                                          #'depth': depth,
@@ -165,7 +197,8 @@ for crp in crps:
                                          #'puf_seed' : 11,
                                          #'train_challenge_seed': 123,
                                          #'test_challenge_seed': 19,
-                                         'CRPs number':crp,
+                                         'PUF type':PUF_type,
+                                         'CRPs number':5000,
                                          'Test split Accuracy' : test_acc*100,
                                          'Test split F1' : cc*100,
                                          'Training time' : end_time - start_time,
@@ -173,4 +206,4 @@ for crp in crps:
                                          },  ignore_index=True)
         
         #clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\{}.csv'.format(puf_seed))
-clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\CRPs_number_test.csv')
+clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\XGBoost_all.csv')
