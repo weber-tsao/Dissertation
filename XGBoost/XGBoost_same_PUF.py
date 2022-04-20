@@ -36,7 +36,7 @@ clf_result = pd.DataFrame({#'threshold' : [],
                            #'n_estimators': [],
                            #'puf_seed' : [],
                            #'train_challenge_seed': [],
-                           'Number of FF-XOR-APUF': [],
+                           'Number of APUF': [],
                            'CRPs number':[],
                            'Test split Accuracy' : [],
                            'Test split F1' : [],
@@ -58,12 +58,13 @@ for NoP in Number_of_PUF:
         
         ### Load data ###
         g1 = general_model()
-        data, data_label = g1.load_data(0, 0, NoP, 0, 0, int(np.floor(5000/NoP)))
+        data, data_label = g1.load_data(NoP, 0, 0, 0, 0, int(np.floor(5000/NoP)))
         data, data_label = shuffle(data, data_label)
+        data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
         
-        g2 = general_model2()
-        data_unseen, data_label_unseen = g2.load_data(0, 0, NoP, 0, 0, int(np.floor(5000/NoP)))
-        data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
+        #g2 = general_model2()
+        #data_unseen, data_label_unseen = g2.load_data(0, 0, NoP, 0, 0, int(np.floor(5000/NoP)))
+        #data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
         
         ### Split train, test data for the model ###
         X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
@@ -74,9 +75,9 @@ for NoP in Number_of_PUF:
         ### Create XGBClassifier model ###
         xgboostModel = XGBClassifier(
             booster='gbtree', colsample_bytree=1.0,
-                      eval_metric='error', gamma=0.6,
-                      learning_rate=0.3, max_depth=3,
-                      min_child_weight=20, n_estimators=100, subsample=0.8, tree_method='gpu_hist'
+                      eval_metric='error', gamma=0.8,
+                      learning_rate=0.01, max_depth=5,
+                      min_child_weight=20, n_estimators=700, subsample=0.8, tree_method='gpu_hist'
             )
         
         xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, verbose = 0)
@@ -87,9 +88,9 @@ for NoP in Number_of_PUF:
         data_reduct, data_label = shuffle(data_reduct, data_label)
         xgboostModel_test = XGBClassifier(
             booster='gbtree', colsample_bytree=1.0,
-                      eval_metric='error', gamma=0.6,
-                      learning_rate=0.3, max_depth=3,
-                      min_child_weight=20, n_estimators=100, subsample=0.8, tree_method='gpu_hist'
+                      eval_metric='error', gamma=0.8,
+                      learning_rate=0.01, max_depth=5,
+                      min_child_weight=20, n_estimators=700, subsample=0.8, tree_method='gpu_hist'
             )
         xgboostModel_test.fit(data_reduct, data_label)                       
         
@@ -131,7 +132,7 @@ for NoP in Number_of_PUF:
                                          #'puf_seed' : 11,
                                          #'train_challenge_seed': 123,
                                          #'test_challenge_seed': 19,
-                                         'Number of FF-XOR-APUF': NoP,
+                                         'Number of APUF': NoP,
                                          'CRPs number': int(np.floor(5000/NoP)),
                                          'Test split Accuracy' : test_acc*100,
                                          'Test split F1' : cc*100,
@@ -140,4 +141,4 @@ for NoP in Number_of_PUF:
                                          },  ignore_index=True)
         
         #clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\{}.csv'.format(puf_seed))
-clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\XGBoost_multi_FF-XOR-APUF.csv')
+clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\XGBoost_multi_APUF.csv')

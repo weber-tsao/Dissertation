@@ -76,8 +76,8 @@ for crp in crps:
         #data, data_label = puf.load_data()
         arbiter_puf = arbiter_PUF()
         data, data_label = arbiter_puf.load_data(68, crp, 11, 123, 0)
-        data_unseen, data_label_unseen = arbiter_puf.load_data(68, crp, 11, 19, 0)
-        #data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
+        #data_unseen, data_label_unseen = arbiter_puf.load_data(68, crp, 11, 19, 0)
+        data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
         #data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
         #xor_puf = XOR_PUF()
         #data, data_label = xor_puf.load_data(68, crp, 2, 13,256,22,77,89,90, 11)
@@ -108,9 +108,9 @@ for crp in crps:
         ### Create XGBClassifier model ###
         xgboostModel = XGBClassifier(
             booster='gbtree', colsample_bytree=1.0,
-                      eval_metric='error', gamma=0.6,
-                      learning_rate=0.3, max_depth=3,
-                      min_child_weight=20, n_estimators=100, subsample=0.8, tree_method='gpu_hist'
+                      eval_metric='error', gamma=0.8,
+                      learning_rate=0.01, max_depth=5,
+                      min_child_weight=20, n_estimators=700, subsample=0.8, tree_method='gpu_hist'
             )
         
         xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, verbose = 0)
@@ -121,9 +121,9 @@ for crp in crps:
         data_reduct, data_label = shuffle(data_reduct, data_label)
         xgboostModel_test = XGBClassifier(
             booster='gbtree', colsample_bytree=1.0,
-                      eval_metric='error', gamma=0.6,
-                      learning_rate=0.3, max_depth=3,
-                      min_child_weight=20, n_estimators=100, subsample=0.8, tree_method='gpu_hist'
+                      eval_metric='error', gamma=0.8,
+                      learning_rate=0.01, max_depth=5,
+                      min_child_weight=20, n_estimators=700, subsample=0.8, tree_method='gpu_hist'
             )
         xgboostModel_test.fit(data_reduct, data_label)                       
         
