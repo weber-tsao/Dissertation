@@ -41,20 +41,22 @@ data, data_label = arbiter_puf.load_data(68, 5000, 11, 123,0)
 data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
 #data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 11, 19)
 #xor_puf = XOR_PUF()
-#data, data_label = xor_puf.load_data(68, 5000, 2, 13,256,22,77,89,90, 11,0)
-#data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 2, 13,256,22,77,89,90, 55,0)
+#data, data_label = xor_puf.load_data(68, 5000, 6, 13,256,22,77,89,90, 11,0)
+#data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
+#data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 3, 13,256,22,77,89,90, 55,0)
 #data_unseen = np.c_[ data_unseen, np.ones(300)*2 ] 
 #lightweight_puf = lightweight_PUF()
 #data, data_label = lightweight_puf.load_data(68, 68000, 2, 123, 11)
 #f1 = [5,12,26,19,33,49,51,7]
 #d1 = [60,61,63,59,58,57,56,55]
 #feedforward_puf = feedforward_PUF()
-#data, data_label = feedforward_puf.load_data(68, 5000, 6, f1, d1, 256, 22, 77, 89, 90, 367, 23)
+#data, data_label = feedforward_puf.load_data(68, 5000, 2, f1, d1, 256, 22, 77, 89, 90, 367, 23,0)
+#data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
 #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 6, f1, d1, 256, 22, 77, 89, 90, 367, 334)
 #interpose_puf = interpose_PUF()
 #data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)    
 #general_model = general_model()
-#data, data_label = general_model.load_data(10, 10, 10, 0, 0, 166)
+#data, data_label = general_model.load_data(1, 1, 1, 0, 0, 5000)
 #data, data_label = shuffle(data, data_label)
 #data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20, random_state=66)
 
@@ -63,7 +65,7 @@ data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_l
 #data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
 
 ### Split train, test data for the model ###
-X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
+'''X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
 X_test, X_val, y_test, y_val = train_test_split(X_testVal, y_testVal, test_size=.5, random_state=24)
 evals_result ={}
 eval_s = [(X_train, y_train),(X_val, y_val)]
@@ -77,7 +79,7 @@ xgboostModel = XGBClassifier(
     )
 
 xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, verbose = 0
-                 )
+                 )'''
 #training_acc = xgboostModel.score(X_train,y_train)
 #testing_acc = xgboostModel.score(X_test,y_test)
 #print('Training accuracy: {}%'.format(training_acc*100))
@@ -90,18 +92,18 @@ data_reduct = selection.transform(data)
 data_reduct, data_label = shuffle(data_reduct, data_label)'''
 
 
-selection = SelectFromModel(xgboostModel, threshold=0.01, prefit=True)
+'''selection = SelectFromModel(xgboostModel, threshold=0.01, prefit=True)
 print(xgboostModel.feature_importances_)
 data_reduct = selection.transform(data)
 data_reduct, data_label = shuffle(data_reduct, data_label)
-#select_list = selection.get_support()  
+#select_list = selection.get_support()  '''
 xgboostModel_test = XGBClassifier(
     booster='gbtree', colsample_bytree=1.0,
               eval_metric='error', gamma=0.8,
-              learning_rate=0.01, max_depth=5,
-              min_child_weight=20, n_estimators=700, subsample=0.8, tree_method='gpu_hist'
+              learning_rate=0.01, max_depth=4,
+              min_child_weight=10, n_estimators=200, subsample=0.8, tree_method='gpu_hist'
     )
-xgboostModel_test.fit(data_reduct, data_label)                       
+xgboostModel_test.fit(data, data_label)                       
 
 ### Cross validation ###
 #ss = ShuffleSplit(n_splits=5, test_size=0.25, random_state=3)
@@ -113,9 +115,9 @@ print('Training time: {}'.format(end_time - start_time))
 
 ### Set testing start time ###
 test_start_time = datetime.now()
-results = xgboostModel_test.score(data_reduct, data_label)
+results = xgboostModel_test.score(data, data_label)
 print('Training accuracy: {}%'.format(results*100))
-cross_val = cross_val_score(xgboostModel, data_reduct, data_label,  cv=ss)
+cross_val = cross_val_score(xgboostModel_test, data, data_label,  cv=ss)
 print("cross validation accuracy: %.2f%% (%.2f%%)" % (cross_val.mean()*100, cross_val.std()*100))
 #results_f1 = xgboostModel.score(data_reduct, data_label)
 #print("cross validation F1 accuracy: %.2f%% (%.2f%%)" % (results_f1.mean()*100, results_f1.std()*100))
@@ -139,8 +141,8 @@ print('Testing accuracy: {}%'.format(testing2*100))'''
 #        remove_list.append(i)
         
 #data_unseen = np.delete(data_unseen, remove_list, axis=1)
-data_unseen_reduct = selection.transform(data_unseen)
-data_unseen_reduct, data_label_unseen = shuffle(data_unseen_reduct, data_label_unseen)
+#data_unseen_reduct = selection.transform(data_unseen)
+data_unseen_reduct, data_label_unseen = shuffle(data_unseen, data_label_unseen)
 test_acc = xgboostModel_test.score(data_unseen_reduct, data_label_unseen)
 print("---------------------------------------")
 print('For unseen data')
@@ -427,13 +429,13 @@ plt.show()'''
 
 #testingModel = XGBClassifier(
 #    booster='gbtree', 
-#    colsample_bytree=1.0,
+#    colsample_bytree=0.8,
 #    eval_metric='error', 
-#    gamma=0.8,
+#    gamma=0.1,
 #    learning_rate=0.01, 
-    #max_depth=7,3
-#    min_child_weight=20, 
-#    #n_estimators=200, 300
+#    #max_depth=5
+#    min_child_weight=10, 
+#    #n_estimators=200
 #    subsample=0.8, 
 #    tree_method='gpu_hist'
 #    )
@@ -448,9 +450,8 @@ plt.show()'''
 #}  
 
 #grid =GridSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_jobs = -1,verbose = 2)
-#grid =RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=100,n_jobs = -1,verbose = 2)
-
-#grid.fit(data_reduct, data_label)
+#grid =RandomizedSearchCV(testingModel,param_dist,cv = 5,scoring = 'roc_auc',n_iter=50,n_jobs = -1,verbose = 2)
+#grid.fit(data, data_label)
 #best_estimator = grid.best_estimator_
 #print(best_estimator)
 #a = grid.best_score_

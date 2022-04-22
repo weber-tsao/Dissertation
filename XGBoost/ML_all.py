@@ -135,7 +135,7 @@ for PUF_type in PUF_types:
         elif PUF_type == 'Generic framework(1,1,1)':
             general_model = general_model()
             data, data_label = general_model.load_data(1, 1, 1, 0, 0, 5000)
-            data, data_label = shuffle(data, data_label)
+            #data, data_label = shuffle(data, data_label)
             
             #general_model2 = general_model2()
             #data_unseen, data_label_unseen = general_model2.load_data(1, 1, 1, 0, 0, 5000)
@@ -143,7 +143,7 @@ for PUF_type in PUF_types:
         elif PUF_type == 'Generic framework(4,4,4)':
             #g1 = general_model()
             data, data_label = general_model.load_data(4, 4, 4, 0, 0, 1250)
-            data, data_label = shuffle(data, data_label)
+            #data, data_label = shuffle(data, data_label)
             
             #g2 = general_model2()
             #data_unseen, data_label_unseen = general_model2.load_data(4, 4, 4, 0, 0, 1250)

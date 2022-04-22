@@ -21,8 +21,8 @@ class feedforward_PUF:
     def total_delay_diff(self, challenge, puf):
         challenge = array([challenge])
         last_stage_ind = len(challenge[0])-1
-        puf_delay = pypuf.simulation.LTFArray(weight_array=puf.weight_array[:, :last_stage_ind], bias=None, transform=puf.transform)
-        stage_delay_diff = puf_delay.val(challenge[:, :last_stage_ind])
+        puf_delay = pypuf.simulation.LTFArray(weight_array=puf.weight_array[:, :64], bias=None, transform=puf.transform)
+        stage_delay_diff = puf_delay.val(challenge[:, :64])
 
         return stage_delay_diff
     
@@ -98,6 +98,7 @@ class feedforward_PUF:
                         obfuscateChallenge[d1[j]] == 0
                 
                 final_delay_diffc = self.total_delay_diff(obfuscateChallenge, puf_list[p])
+                #final_delay_diffc = puf_list[p].val(np.array([obfuscateChallenge]))
                 final_delay_diff = final_delay_diffc[0]*final_delay_diff
                 
                 ### label ###

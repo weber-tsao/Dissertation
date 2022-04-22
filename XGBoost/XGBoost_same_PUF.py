@@ -36,7 +36,7 @@ clf_result = pd.DataFrame({#'threshold' : [],
                            #'n_estimators': [],
                            #'puf_seed' : [],
                            #'train_challenge_seed': [],
-                           'Number of APUF': [],
+                           'Number of FF-XOR-APUF': [],
                            'CRPs number':[],
                            'Test split Accuracy' : [],
                            'Test split F1' : [],
@@ -58,8 +58,8 @@ for NoP in Number_of_PUF:
         
         ### Load data ###
         g1 = general_model()
-        data, data_label = g1.load_data(NoP, 0, 0, 0, 0, int(np.floor(5000/NoP)))
-        data, data_label = shuffle(data, data_label)
+        data, data_label = g1.load_data(0, 0, NoP, 0, 0, int(np.floor(5000/NoP)))
+        #data, data_label = shuffle(data, data_label)
         data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
         
         #g2 = general_model2()
@@ -67,7 +67,7 @@ for NoP in Number_of_PUF:
         #data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
         
         ### Split train, test data for the model ###
-        X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
+        '''X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
         X_test, X_val, y_test, y_val = train_test_split(X_testVal, y_testVal, test_size=.5, random_state=24)
         evals_result ={}
         eval_s = [(X_train, y_train),(X_val, y_val)]
@@ -85,14 +85,14 @@ for NoP in Number_of_PUF:
         selection = SelectFromModel(xgboostModel, threshold=0.01, prefit=True)
         #print(xgboostModel.feature_importances_)
         data_reduct = selection.transform(data)
-        data_reduct, data_label = shuffle(data_reduct, data_label)
+        data_reduct, data_label = shuffle(data_reduct, data_label)'''
         xgboostModel_test = XGBClassifier(
-            booster='gbtree', colsample_bytree=1.0,
-                      eval_metric='error', gamma=0.8,
-                      learning_rate=0.01, max_depth=5,
-                      min_child_weight=20, n_estimators=700, subsample=0.8, tree_method='gpu_hist'
+            booster='gbtree', colsample_bytree=0.8,
+                      eval_metric='error', gamma=0.1,
+                      learning_rate=0.01, max_depth=2,
+                      min_child_weight=10, n_estimators=200, subsample=0.8, tree_method='gpu_hist'
             )
-        xgboostModel_test.fit(data_reduct, data_label)                       
+        xgboostModel_test.fit(data, data_label)                       
         
         ### Cross validation ###
         #ss = StratifiedKFold(n_splits=5)
@@ -103,13 +103,13 @@ for NoP in Number_of_PUF:
         
         ### Set testing start time ###
         test_start_time = datetime.now()
-        results = xgboostModel_test.score(data_reduct, data_label)
+        results = xgboostModel_test.score(data, data_label)
         print('Training accuracy: {}%'.format(results*100))
         #cross_val = cross_val_score(xgboostModel, data_reduct, data_label,  cv=ss)
         #print("cross validation accuracy: %.2f%% (%.2f%%)" % (cross_val.mean()*100, cross_val.std()*100))
         
-        data_unseen_reduct = selection.transform(data_unseen)
-        data_unseen_reduct, data_label_unseen = shuffle(data_unseen_reduct, data_label_unseen)
+        #data_unseen_reduct = selection.transform(data_unseen)
+        data_unseen_reduct, data_label_unseen = shuffle(data_unseen, data_label_unseen)
         test_acc = xgboostModel_test.score(data_unseen_reduct, data_label_unseen)
         print("---------------------------------------")
         print('For unseen data')
@@ -132,7 +132,7 @@ for NoP in Number_of_PUF:
                                          #'puf_seed' : 11,
                                          #'train_challenge_seed': 123,
                                          #'test_challenge_seed': 19,
-                                         'Number of APUF': NoP,
+                                         'Number of FF-XOR-APUF': NoP,
                                          'CRPs number': int(np.floor(5000/NoP)),
                                          'Test split Accuracy' : test_acc*100,
                                          'Test split F1' : cc*100,
@@ -141,4 +141,4 @@ for NoP in Number_of_PUF:
                                          },  ignore_index=True)
         
         #clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\{}.csv'.format(puf_seed))
-clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\XGBoost_multi_APUF.csv')
+clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\XGBoost_multi_FF-XOR-APUF.csv')

@@ -60,62 +60,62 @@ for PUF_type in PUF_types:
         ### Load data ###
         if PUF_type == 'APUF':
             arbiter_puf = arbiter_PUF()
-            data, data_label = arbiter_puf.load_data(64, 5000, 11, 123, 0)
+            data, data_label = arbiter_puf.load_data(68, 5000, 11, 123, 0)
             #data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 11, 19, 0)
         elif PUF_type == '2 XOR-APUF':
             xor_puf = XOR_PUF()
-            data, data_label = xor_puf.load_data(64, 5000, 2, 13,256,22,77,89,90, 11, 0)
+            data, data_label = xor_puf.load_data(68, 5000, 2, 13,256,22,77,89,90, 11, 0)
             #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 2, 13,256,22,77,89,90, 55, 0)
         elif PUF_type == '3 XOR-APUF':
             xor_puf = XOR_PUF()
-            data, data_label = xor_puf.load_data(64, 5000, 3, 13,256,22,77,89,90, 11, 0)
+            data, data_label = xor_puf.load_data(68, 5000, 3, 13,256,22,77,89,90, 11, 0)
             #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 3, 13,256,22,77,89,90, 55, 0)
         elif PUF_type == '4 XOR-APUF':
             xor_puf = XOR_PUF()
-            data, data_label = xor_puf.load_data(64, 5000, 4, 13,256,22,77,89,90, 11, 0)
+            data, data_label = xor_puf.load_data(68, 5000, 4, 13,256,22,77,89,90, 11, 0)
             #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 4, 13,256,22,77,89,90, 55, 0)
         elif PUF_type == '5 XOR-APUF':
             xor_puf = XOR_PUF()
-            data, data_label = xor_puf.load_data(64, 5000, 5, 13,256,22,77,89,90, 11, 0)
+            data, data_label = xor_puf.load_data(68, 5000, 5, 13,256,22,77,89,90, 11, 0)
             #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 5, 13,256,22,77,89,90, 55, 0)
         elif PUF_type == '6 XOR-APUF':
             xor_puf = XOR_PUF()
-            data, data_label = xor_puf.load_data(64, 5000, 6, 13,256,22,77,89,90, 11, 0)
+            data, data_label = xor_puf.load_data(68, 5000, 6, 13,256,22,77,89,90, 11, 0)
             #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 6, 13,256,22,77,89,90, 55, 0)
         elif PUF_type == 'FF-2-XOR-APUF':
             f1 = [5,12,26,19,33,49,51,7]
             d1 = [60,61,63,59,58,57,56,55]
             feedforward_puf = feedforward_PUF()
-            data, data_label = feedforward_puf.load_data(64, 5000, 2, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
+            data, data_label = feedforward_puf.load_data(68, 5000, 2, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
             #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 2, f1, d1, 256, 22, 77, 89, 90, 367, 334, 0)
         elif PUF_type == 'FF-3-XOR-APUF':
             f1 = [5,12,26,19,33,49,51,7]
             d1 = [60,61,63,59,58,57,56,55]
             feedforward_puf = feedforward_PUF()
-            data, data_label = feedforward_puf.load_data(64, 5000, 3, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
+            data, data_label = feedforward_puf.load_data(68, 5000, 3, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
             #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 3, f1, d1, 256, 22, 77, 89, 90, 367, 334, 0)
         elif PUF_type == 'FF-4-XOR-APUF':
             f1 = [5,12,26,19,33,49,51,7]
             d1 = [60,61,63,59,58,57,56,55]
             feedforward_puf = feedforward_PUF()
-            data, data_label = feedforward_puf.load_data(64, 5000, 4, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
+            data, data_label = feedforward_puf.load_data(68, 5000, 4, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
             #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 4, f1, d1, 256, 22, 77, 89, 90, 367, 334, 0)
         elif PUF_type == 'FF-5-XOR-APUF':
             f1 = [5,12,26,19,33,49,51,7]
             d1 = [60,61,63,59,58,57,56,55]
             feedforward_puf = feedforward_PUF()
-            data, data_label = feedforward_puf.load_data(64, 5000, 5, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
+            data, data_label = feedforward_puf.load_data(68, 5000, 5, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
             #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 5, f1, d1, 256, 22, 77, 89, 90, 367, 334, 0)
         elif PUF_type == 'FF-6-XOR-APUF':
             f1 = [5,12,26,19,33,49,51,7]
             d1 = [60,61,63,59,58,57,56,55]
             feedforward_puf = feedforward_PUF()
-            data, data_label = feedforward_puf.load_data(64, 5000, 6, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
+            data, data_label = feedforward_puf.load_data(68, 5000, 6, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
             #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 6, f1, d1, 256, 22, 77, 89, 90, 367, 334, 0)
         elif PUF_type == 'Generic framework(1,1,1)':
             general_model = general_model()
             data, data_label = general_model.load_data(1, 1, 1, 0, 0, 5000)
-            data, data_label = shuffle(data, data_label)
+            #data, data_label = shuffle(data, data_label)
             
             #general_model2 = general_model2()
             #data_unseen, data_label_unseen = general_model2.load_data(1, 1, 1, 0, 0, 5000)
@@ -123,7 +123,7 @@ for PUF_type in PUF_types:
         elif PUF_type == 'Generic framework(4,4,4)':
             #g1 = general_model()
             data, data_label = general_model.load_data(4, 4, 4, 0, 0, 1250)
-            data, data_label = shuffle(data, data_label)
+            #data, data_label = shuffle(data, data_label)
             
             #g2 = general_model2()
             #data_unseen, data_label_unseen = general_model2.load_data(4, 4, 4, 0, 0, 1250)
@@ -132,7 +132,7 @@ for PUF_type in PUF_types:
         
         data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
         ### Split train, test data for the model ###
-        X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
+        '''X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
         X_test, X_val, y_test, y_val = train_test_split(X_testVal, y_testVal, test_size=.5, random_state=24)
         evals_result ={}
         eval_s = [(X_train, y_train),(X_val, y_val)]
@@ -150,14 +150,14 @@ for PUF_type in PUF_types:
         selection = SelectFromModel(xgboostModel, threshold=0.01, prefit=True)
         #print(xgboostModel.feature_importances_)
         data_reduct = selection.transform(data)
-        data_reduct, data_label = shuffle(data_reduct, data_label)
+        data_reduct, data_label = shuffle(data_reduct, data_label)'''
         xgboostModel_test = XGBClassifier(
-            booster='gbtree', colsample_bytree=1.0,
-                      eval_metric='error', gamma=0.8,
-                      learning_rate=0.01, max_depth=5,
-                      min_child_weight=20, n_estimators=700, subsample=0.8, tree_method='gpu_hist'
+            booster='gbtree', colsample_bytree=0.8,
+                      eval_metric='error', gamma=0.1,
+                      learning_rate=0.01, max_depth=2,
+                      min_child_weight=10, n_estimators=200, subsample=0.8, tree_method='gpu_hist'
             )
-        xgboostModel_test.fit(data_reduct, data_label)                       
+        xgboostModel_test.fit(data, data_label)                       
         
         ### Cross validation ###
         #ss = StratifiedKFold(n_splits=5)
@@ -168,13 +168,13 @@ for PUF_type in PUF_types:
         
         ### Set testing start time ###
         test_start_time = datetime.now()
-        results = xgboostModel_test.score(data_reduct, data_label)
+        results = xgboostModel_test.score(data, data_label)
         print('Training accuracy: {}%'.format(results*100))
         #cross_val = cross_val_score(xgboostModel, data_reduct, data_label,  cv=ss)
         #print("cross validation accuracy: %.2f%% (%.2f%%)" % (cross_val.mean()*100, cross_val.std()*100))
         
-        data_unseen_reduct = selection.transform(data_unseen)
-        data_unseen_reduct, data_label_unseen = shuffle(data_unseen_reduct, data_label_unseen)
+        #data_unseen_reduct = selection.transform(data_unseen)
+        data_unseen_reduct, data_label_unseen = shuffle(data_unseen, data_label_unseen)
         test_acc = xgboostModel_test.score(data_unseen_reduct, data_label_unseen)
         print("---------------------------------------")
         print('For unseen data')

@@ -21,8 +21,8 @@ class arbiter_PUF:
     def total_delay_diff(self, challenge, puf):
         challenge = array([challenge])
         last_stage_ind = len(challenge[0])-1
-        puf_delay = pypuf.simulation.LTFArray(weight_array=puf.weight_array[:, :last_stage_ind], bias=None, transform=puf.transform)
-        stage_delay_diff = puf_delay.val(challenge[:, :last_stage_ind])
+        puf_delay = pypuf.simulation.LTFArray(weight_array=puf.weight_array[:, :64], bias=None, transform=puf.transform)
+        stage_delay_diff = puf_delay.val(challenge[:, :64])
 
         return stage_delay_diff
     
@@ -59,6 +59,7 @@ class arbiter_PUF:
             #obfuscateChallenge = self.Puf_resilience.cyclic_shift(challenge, puf)
             #obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
             
+            #final_delay_diff = puf.val(np.array([obfuscateChallenge]))
             final_delay_diff = self.total_delay_diff(obfuscateChallenge, puf)
             
             challenge = challenge[4:]
