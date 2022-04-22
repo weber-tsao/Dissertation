@@ -30,13 +30,13 @@ from datetime import datetime
 import warnings
 warnings.filterwarnings("ignore")
 
-Number_of_PUF = [2,3,4,5,6,7,8,9,10]
+Number_of_PUF = [2,3,4,5,6,7,8,9,10,20]
 clf_result = pd.DataFrame({#'threshold' : [],
                            #'depth': [],
                            #'n_estimators': [],
                            #'puf_seed' : [],
                            #'train_challenge_seed': [],
-                           'Number of FF-XOR-APUF': [],
+                           'Number of APUF': [],
                            'CRPs number':[],
                            'Test split Accuracy' : [],
                            'Test split F1' : [],
@@ -58,7 +58,7 @@ for NoP in Number_of_PUF:
         
         ### Load data ###
         g1 = general_model()
-        data, data_label = g1.load_data(0, 0, NoP, 0, 0, int(np.floor(5000/NoP)))
+        data, data_label = g1.load_data(NoP, 0, 0, 0, 0, int(np.floor(5000/NoP)))
         #data, data_label = shuffle(data, data_label)
         data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
         
@@ -132,7 +132,7 @@ for NoP in Number_of_PUF:
                                          #'puf_seed' : 11,
                                          #'train_challenge_seed': 123,
                                          #'test_challenge_seed': 19,
-                                         'Number of FF-XOR-APUF': NoP,
+                                         'Number of APUF': NoP,
                                          'CRPs number': int(np.floor(5000/NoP)),
                                          'Test split Accuracy' : test_acc*100,
                                          'Test split F1' : cc*100,
@@ -141,4 +141,4 @@ for NoP in Number_of_PUF:
                                          },  ignore_index=True)
         
         #clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\{}.csv'.format(puf_seed))
-clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\XGBoost_multi_FF-XOR-APUF.csv')
+clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\XGBoost_multi_APUF.csv')

@@ -27,12 +27,12 @@ class general_model:
         train_label = []
         
         for a in range(arbiter_num):
-            #random_num = random.randint(1,1000)
-            #random_seed = random.randint(1,1000)
-            random_num = [123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123]
-            random_seed = [13,256,22,77,89,90,367,123,555,987,   5,34,12,99,88,66,44,3,98,23]
+            random_num = random.randint(1,1000)
+            random_seed = random.randint(1,1000)
+            #random_num = [123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123]
+            #random_seed = [13,256,22,77,89,90,367,123,555,987,   5,34,12,99,88,66,44,3,98,23]
             arbiter_puf = arbiter_PUF()
-            arbiter_data, arbiter_data_label = arbiter_puf.load_data(68, NoC, random_seed[a], random_num[a], 0)
+            arbiter_data, arbiter_data_label = arbiter_puf.load_data(68, NoC, random_seed, random_num, 0)
             puf_label = np.ones((NoC, 1))*(total_num)
             total_num = total_num-1
             arbiter_data = np.concatenate((arbiter_data, puf_label), axis=1)
@@ -40,10 +40,10 @@ class general_model:
             total_label.append(arbiter_data_label)
             
         for x in range(xor_num):
-            #random_num = random.randint(1,1000)
+            random_num = random.randint(1,1000)
             #random_xor_num = [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4]#[6,5,4,3,2,6]
             #random_xor_num = random.randint(2,6)
-            random_num = [123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123]
+            #random_num = [123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123]
             random_seed1 = [13,256,22,77,89,90,367,123,555,987,   5,34,12,99,88,66,44,3,98,23]
             random_seed2 = [15,25,12,57,9,98,37,13,55,907,  6,35,13,100,89,67,45,4,99,24]
             random_seed3 = [16,26,13,58,10,99,38,19,556,917,  7,36,14,101,90,68,46,5,100,25]
@@ -62,7 +62,7 @@ class general_model:
             xor_puf = XOR_PUF()
             xor_data, xor_data_label = xor_puf.load_data(68, NoC, 4, random_seed1[x], random_seed2[x], 
                                                          random_seed3[x], random_seed4[x], random_seed5[x], 
-                                                         random_seed6[x], random_num[x], 0)
+                                                         random_seed6[x], random_num, 0)
             puf_label = np.ones((NoC, 1))*(total_num)
             total_num = total_num-1
             xor_data = np.concatenate((xor_data, puf_label), axis=1)
@@ -70,14 +70,14 @@ class general_model:
             total_label.append(xor_data_label)
         
         for f in range(feedforward_num):
-            #random_num = random.randint(1,1000)
+            random_num = random.randint(1,1000)
             #random_xor_num = [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4]
             #random_xor_num = random.randint(2,6)
             #f1 = random.randint(1,63)
             #f2 = random.randint(1,63)
             f1 = [5,12,26,19,33,49,51,7]
             d1 = [60,61,63,59,58,57,56,55]
-            random_num = [123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123]
+            #random_num = [123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123]
             random_seed1 = [13,256,22,77,89,90,367,123,555,987,   5,34,12,99,88,66,44,3,98,23]
             random_seed2 = [15,25,12,57,9,98,37,13,55,907,  6,35,13,100,89,67,45,4,99,24]
             random_seed3 = [16,26,13,58,10,99,38,19,556,917,  7,36,14,101,90,68,46,5,100,25]
@@ -96,7 +96,7 @@ class general_model:
             ff_puf = feedforward_PUF()
             ff_data, ff_data_label = ff_puf.load_data(68, NoC, 4, f1, d1, random_seed1[f], random_seed2[f], 
                                                          random_seed3[f], random_seed4[f], random_seed5[f], 
-                                                         random_seed6[f], random_num[f], 0)
+                                                         random_seed6[f], random_num, 0)
             puf_label = np.ones((NoC, 1))*(total_num)
             total_num = total_num-1
             ff_data = np.concatenate((ff_data, puf_label), axis=1)
