@@ -1,0 +1,68 @@
+elif PUF_type == 'Generic framework(2,0,0)':
+            general_model = general_model()
+            data, data_label = general_model.load_data(2, 0, 0, 0, 0, int(np.floor(15000/2)))
+        elif PUF_type == 'Generic framework(3,0,0)':
+            data, data_label = general_model.load_data(3, 0, 0, 0, 0, int(np.floor(15000/3)))
+        elif PUF_type == 'Generic framework(4,0,0)':
+            data, data_label = general_model.load_data(4, 0, 0, 0, 0, int(np.floor(15000/4)))
+        elif PUF_type == 'Generic framework(5,0,0)':
+            data, data_label = general_model.load_data(5, 0, 0, 0, 0, int(np.floor(15000/5)))
+        elif PUF_type == 'Generic framework(6,0,0)':
+            data, data_label = general_model.load_data(6, 0, 0, 0, 0, int(np.floor(15000/6)))
+        elif PUF_type == 'Generic framework(7,0,0)':
+            data, data_label = general_model.load_data(7, 0, 0, 0, 0, int(np.floor(15000/7)))
+        elif PUF_type == 'Generic framework(8,0,0)':
+            data, data_label = general_model.load_data(8, 0, 0, 0, 0, int(np.floor(15000/8)))
+        elif PUF_type == 'Generic framework(9,0,0)':
+            data, data_label = general_model.load_data(9, 0, 0, 0, 0, int(np.floor(15000/9)))
+        elif PUF_type == 'Generic framework(10,0,0)':
+            data, data_label = general_model.load_data(10, 0, 0, 0, 0, int(np.floor(15000/10)))
+        elif PUF_type == 'Generic framework(20,0,0)':
+            data, data_label = general_model.load_data(20, 0, 0, 0, 0, int(np.floor(15000/20)))
+
+
+
+elif PUF_type == 'Generic framework(0,2,0)':
+            general_model = general_model()
+            data, data_label = general_model.load_data(0, 2, 0, 0, 0, int(np.floor(15000/2)))
+        elif PUF_type == 'Generic framework(0,3,0)':
+            data, data_label = general_model.load_data(0, 3, 0, 0, 0, int(np.floor(15000/3)))
+        elif PUF_type == 'Generic framework(0,4,0)':
+            data, data_label = general_model.load_data(0, 4, 0, 0, 0, int(np.floor(15000/4)))
+        elif PUF_type == 'Generic framework(0,5,0)':
+            data, data_label = general_model.load_data(0, 5, 0, 0, 0, int(np.floor(15000/5)))
+        elif PUF_type == 'Generic framework(0,6,0)':
+            data, data_label = general_model.load_data(0, 6, 0, 0, 0, int(np.floor(15000/6)))
+        elif PUF_type == 'Generic framework(0,7,0)':
+            data, data_label = general_model.load_data(0, 7, 0, 0, 0, int(np.floor(15000/7)))
+        elif PUF_type == 'Generic framework(0,8,0)':
+            data, data_label = general_model.load_data(0, 8, 0, 0, 0, int(np.floor(15000/8)))
+        elif PUF_type == 'Generic framework(0,9,0)':
+            data, data_label = general_model.load_data(0, 9, 0, 0, 0, int(np.floor(15000/9)))
+        elif PUF_type == 'Generic framework(0,10,0)':
+            data, data_label = general_model.load_data(0, 10, 0, 0, 0, int(np.floor(15000/10)))
+        elif PUF_type == 'Generic framework(0,20,0)':
+            data, data_label = general_model.load_data(0, 20, 0, 0, 0, int(np.floor(15000/20)))
+
+
+elif PUF_type == 'Generic framework(0,0,2)':
+            general_model = general_model()
+            data, data_label = general_model.load_data(0, 0, 2, 0, 0, int(np.floor(15000/2)))
+        elif PUF_type == 'Generic framework(0,0,3)':
+            data, data_label = general_model.load_data(0, 0, 3, 0, 0, int(np.floor(15000/3)))
+        elif PUF_type == 'Generic framework(0,0,4)':
+            data, data_label = general_model.load_data(0, 0, 4, 0, 0, int(np.floor(15000/4)))
+        elif PUF_type == 'Generic framework(0,0,5)':
+            data, data_label = general_model.load_data(0, 0, 5, 0, 0, int(np.floor(15000/5)))
+        elif PUF_type == 'Generic framework(0,0,6)':
+            data, data_label = general_model.load_data(0, 0, 6, 0, 0, int(np.floor(15000/6)))
+        elif PUF_type == 'Generic framework(0,0,7)':
+            data, data_label = general_model.load_data(0, 0, 7, 0, 0, int(np.floor(15000/7)))
+        elif PUF_type == 'Generic framework(0,0,8)':
+            data, data_label = general_model.load_data(0, 0, 8, 0, 0, int(np.floor(15000/8)))
+        elif PUF_type == 'Generic framework(0,0,9)':
+            data, data_label = general_model.load_data(0, 0, 9, 0, 0, int(np.floor(15000/9)))
+        elif PUF_type == 'Generic framework(0,0,10)':
+            data, data_label = general_model.load_data(0, 0, 10, 0, 0, int(np.floor(15000/10)))
+        elif PUF_type == 'Generic framework(0,0,20)':
+            data, data_label = general_model.load_data(0, 0, 20, 0, 0, int(np.floor(15000/20)))

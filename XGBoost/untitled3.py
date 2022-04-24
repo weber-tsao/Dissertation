@@ -30,9 +30,10 @@ from datetime import datetime
 import warnings
 warnings.filterwarnings("ignore")
 
-PUF_types = ['APUF','2 XOR-APUF','3 XOR-APUF','4 XOR-APUF','5 XOR-APUF','6 XOR-APUF','FF-2-XOR-APUF','FF-3-XOR-APUF',
-                 'FF-4-XOR-APUF','FF-5-XOR-APUF','FF-6-XOR-APUF'
-                 ,'Generic framework(1,1,1)','Generic framework(4,4,4)'
+PUF_types = [#'APUF','2 XOR-APUF','3 XOR-APUF','4 XOR-APUF','5 XOR-APUF','6 XOR-APUF','FF-2-XOR-APUF','FF-3-XOR-APUF',
+             #    'FF-4-XOR-APUF','FF-5-XOR-APUF','FF-6-XOR-APUF'
+                 'Generic framework(1,1,1)','Generic framework(2,2,2)','Generic framework(3,3,3)',
+                 'Generic framework(4,4,4)','Generic framework(5,5,5)','Generic framework(6,6,6)'
                  ]
 clf_result = pd.DataFrame({#'threshold' : [],
                            #'depth': [],
@@ -114,11 +115,27 @@ for PUF_type in PUF_types:
             #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 6, f1, d1, 256, 22, 77, 89, 90, 367, 334, 0)
         elif PUF_type == 'Generic framework(1,1,1)':
             general_model = general_model()
-            data, data_label = general_model.load_data(1, 1, 1, 0, 0, 5000)
+            data, data_label = general_model.load_data(1, 1, 1, 0, 0, int(np.floor(5000/1)))
             #data, data_label = shuffle(data, data_label)
             
             #general_model2 = general_model2()
             #data_unseen, data_label_unseen = general_model2.load_data(1, 1, 1, 0, 0, 5000)
+            #data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
+        elif PUF_type == 'Generic framework(2,2,2)':
+            #g1 = general_model()
+            data, data_label = general_model.load_data(2, 2, 2, 0, 0, int(np.floor(5000/2)))
+            #data, data_label = shuffle(data, data_label)
+            
+            #g2 = general_model2()
+            #data_unseen, data_label_unseen = general_model2.load_data(4, 4, 4, 0, 0, 1250)
+            #data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
+        elif PUF_type == 'Generic framework(3,3,3)':
+            #g1 = general_model()
+            data, data_label = general_model.load_data(3, 3, 3, 0, 0, int(np.floor(5000/3)))
+            #data, data_label = shuffle(data, data_label)
+            
+            #g2 = general_model2()
+            #data_unseen, data_label_unseen = general_model2.load_data(4, 4, 4, 0, 0, 1250)
             #data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
         elif PUF_type == 'Generic framework(4,4,4)':
             #g1 = general_model()
@@ -128,6 +145,14 @@ for PUF_type in PUF_types:
             #g2 = general_model2()
             #data_unseen, data_label_unseen = general_model2.load_data(4, 4, 4, 0, 0, 1250)
             #data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
+        elif PUF_type == 'Generic framework(5,5,5)':
+            #g1 = general_model()
+            data, data_label = general_model.load_data(5, 5, 5, 0, 0, int(np.floor(5000/5)))
+            #data, data_label = shuffle(data, data_label)
+        elif PUF_type == 'Generic framework(6,6,6)':
+            #g1 = general_model()
+            data, data_label = general_model.load_data(6, 6, 6, 0, 0, int(np.floor(5000/6)))
+            #data, data_label = shuffle(data, data_label)
         
         
         data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
@@ -174,12 +199,12 @@ for PUF_type in PUF_types:
         #print("cross validation accuracy: %.2f%% (%.2f%%)" % (cross_val.mean()*100, cross_val.std()*100))
         
         #data_unseen_reduct = selection.transform(data_unseen)
-        data_unseen_reduct, data_label_unseen = shuffle(data_unseen, data_label_unseen)
-        test_acc = xgboostModel_test.score(data_unseen_reduct, data_label_unseen)
+        data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
+        test_acc = xgboostModel_test.score(data_unseen, data_label_unseen)
         print("---------------------------------------")
         print('For unseen data')
         print('Testing accuracy: {}%'.format(test_acc*100))
-        testingacc = xgboostModel_test.predict(data_unseen_reduct)
+        testingacc = xgboostModel_test.predict(data_unseen)
         cc = f1_score(data_label_unseen,testingacc)
         print(cc*100)
         #cross_val = cross_val_score(xgboostModel_test, data_unseen_reduct, data_label_unseen,  cv=ss)
@@ -206,4 +231,4 @@ for PUF_type in PUF_types:
                                          },  ignore_index=True)
         
         #clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\{}.csv'.format(puf_seed))
-clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\XGBoost_resilience.csv')
+clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\XGBoost_Only_DD.csv')

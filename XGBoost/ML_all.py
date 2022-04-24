@@ -46,10 +46,20 @@ clf_result = pd.DataFrame({'puf_seed' : [],
                            'Testing time' : []
                            })'''
 
-PUF_types = [    'APUF','2 XOR-APUF','3 XOR-APUF','4 XOR-APUF','5 XOR-APUF','6 XOR-APUF','FF-2-XOR-APUF','FF-3-XOR-APUF',
-                 'FF-4-XOR-APUF','FF-5-XOR-APUF','FF-6-XOR-APUF',
-                 'Generic framework(1,1,1)',
-                 'Generic framework(4,4,4)'
+PUF_types = [    #'APUF','2 XOR-APUF','3 XOR-APUF','4 XOR-APUF','5 XOR-APUF','6 XOR-APUF','FF-2-XOR-APUF','FF-3-XOR-APUF',
+                 #'FF-4-XOR-APUF','FF-5-XOR-APUF','FF-6-XOR-APUF',
+                 #'Generic framework(1,1,1)','Generic framework(2,2,2)','Generic framework(3,3,3)',
+                 #'Generic framework(4,4,4)','Generic framework(5,5,5)','Generic framework(6,6,6)','Generic framework(10,10,10)'
+                 #,'Generic framework(20,20,20)'
+                 'Generic framework(2,0,0)','Generic framework(3,0,0)','Generic framework(4,0,0)','Generic framework(5,0,0)',
+                 'Generic framework(6,0,0)','Generic framework(7,0,0)','Generic framework(8,0,0)','Generic framework(9,0,0)',
+                 'Generic framework(10,0,0)','Generic framework(20,0,0)',
+                 'Generic framework(0,2,0)','Generic framework(0,3,0)','Generic framework(0,4,0)','Generic framework(0,5,0)',
+                 'Generic framework(0,6,0)','Generic framework(0,7,0)','Generic framework(0,8,0)','Generic framework(0,9,0)',
+                 'Generic framework(0,10,0)','Generic framework(0,20,0)',
+                 'Generic framework(0,0,2)','Generic framework(0,0,3)','Generic framework(0,0,4)','Generic framework(0,0,5)',
+                 'Generic framework(0,0,6)','Generic framework(0,0,7)','Generic framework(0,0,8)','Generic framework(0,0,9)',
+                 'Generic framework(0,0,10)','Generic framework(0,0,20)'
                  ]
 clf_result = pd.DataFrame({#'threshold' : [],
                            #'depth': [],
@@ -133,21 +143,125 @@ for PUF_type in PUF_types:
             data, data_label = feedforward_puf.load_data(68, 5000, 6, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
             #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 6, f1, d1, 256, 22, 77, 89, 90, 367, 334, 0)
         elif PUF_type == 'Generic framework(1,1,1)':
-            general_model = general_model()
-            data, data_label = general_model.load_data(1, 1, 1, 0, 0, 5000)
+            #general_model = general_model()
+            data, data_label = general_model.load_data(1, 1, 1, 0, 0, int(np.floor(5000/1)))
             #data, data_label = shuffle(data, data_label)
             
             #general_model2 = general_model2()
             #data_unseen, data_label_unseen = general_model2.load_data(1, 1, 1, 0, 0, 5000)
             #data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
-        elif PUF_type == 'Generic framework(4,4,4)':
+        elif PUF_type == 'Generic framework(2,2,2)':
             #g1 = general_model()
-            data, data_label = general_model.load_data(4, 4, 4, 0, 0, 1250)
+            data, data_label = general_model.load_data(2, 2, 2, 0, 0, int(np.floor(5000/2)))
             #data, data_label = shuffle(data, data_label)
             
             #g2 = general_model2()
             #data_unseen, data_label_unseen = general_model2.load_data(4, 4, 4, 0, 0, 1250)
             #data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
+        elif PUF_type == 'Generic framework(3,3,3)':
+            #g1 = general_model()
+            data, data_label = general_model.load_data(3, 3, 3, 0, 0, int(np.floor(5000/3)))
+            #data, data_label = shuffle(data, data_label)
+            
+            #g2 = general_model2()
+            #data_unseen, data_label_unseen = general_model2.load_data(4, 4, 4, 0, 0, 1250)
+            #data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
+        elif PUF_type == 'Generic framework(4,4,4)':
+            #g1 = general_model()
+            data, data_label = general_model.load_data(4, 4, 4, 0, 0, int(np.floor(5000/4)))
+            #data, data_label = shuffle(data, data_label)
+            
+            #g2 = general_model2()
+            #data_unseen, data_label_unseen = general_model2.load_data(4, 4, 4, 0, 0, 1250)
+            #data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
+        elif PUF_type == 'Generic framework(5,5,5)':
+            #g1 = general_model()
+            data, data_label = general_model.load_data(5, 5, 5, 0, 0, int(np.floor(5000/5)))
+            #data, data_label = shuffle(data, data_label)
+        elif PUF_type == 'Generic framework(6,6,6)':
+            #g1 = general_model()
+            data, data_label = general_model.load_data(6, 6, 6, 0, 0, int(np.floor(5000/6)))
+            #data, data_label = shuffle(data, data_label)
+        elif PUF_type == 'Generic framework(10,10,10)':
+            #g1 = general_model()
+            data, data_label = general_model.load_data(10, 10, 10, 0, 0, int(np.floor(5000/10)))
+            #data, data_label = shuffle(data, data_label)
+        elif PUF_type == 'Generic framework(20,20,20)':
+            #g1 = general_model()
+            data, data_label = general_model.load_data(20, 20, 20, 0, 0, int(np.floor(5000/20)))
+            #data, data_label = shuffle(data, data_label)
+            
+            #g2 = general_model2()
+            #data_unseen, data_label_unseen = general_model2.load_data(4, 4, 4, 0, 0, 1250)
+            #data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
+        elif PUF_type == 'Generic framework(2,0,0)':
+            general_model = general_model()
+            data, data_label = general_model.load_data(2, 0, 0, 0, 0, int(np.floor(15000/2)))
+        elif PUF_type == 'Generic framework(3,0,0)':
+            data, data_label = general_model.load_data(3, 0, 0, 0, 0, int(np.floor(15000/3)))
+        elif PUF_type == 'Generic framework(4,0,0)':
+            data, data_label = general_model.load_data(4, 0, 0, 0, 0, int(np.floor(15000/4)))
+        elif PUF_type == 'Generic framework(5,0,0)':
+            data, data_label = general_model.load_data(5, 0, 0, 0, 0, int(np.floor(15000/5)))
+        elif PUF_type == 'Generic framework(6,0,0)':
+            data, data_label = general_model.load_data(6, 0, 0, 0, 0, int(np.floor(15000/6)))
+        elif PUF_type == 'Generic framework(7,0,0)':
+            data, data_label = general_model.load_data(7, 0, 0, 0, 0, int(np.floor(15000/7)))
+        elif PUF_type == 'Generic framework(8,0,0)':
+            data, data_label = general_model.load_data(8, 0, 0, 0, 0, int(np.floor(15000/8)))
+        elif PUF_type == 'Generic framework(9,0,0)':
+            data, data_label = general_model.load_data(9, 0, 0, 0, 0, int(np.floor(15000/9)))
+        elif PUF_type == 'Generic framework(10,0,0)':
+            data, data_label = general_model.load_data(10, 0, 0, 0, 0, int(np.floor(15000/10)))
+        elif PUF_type == 'Generic framework(20,0,0)':
+            data, data_label = general_model.load_data(20, 0, 0, 0, 0, int(np.floor(15000/20)))
+
+        elif PUF_type == 'Generic framework(0,2,0)':
+            #general_model = general_model()
+            data, data_label = general_model.load_data(0, 2, 0, 0, 0, int(np.floor(15000/2)))
+        elif PUF_type == 'Generic framework(0,3,0)':
+            data, data_label = general_model.load_data(0, 3, 0, 0, 0, int(np.floor(15000/3)))
+        elif PUF_type == 'Generic framework(0,4,0)':
+            data, data_label = general_model.load_data(0, 4, 0, 0, 0, int(np.floor(15000/4)))
+        elif PUF_type == 'Generic framework(0,5,0)':
+            data, data_label = general_model.load_data(0, 5, 0, 0, 0, int(np.floor(15000/5)))
+        elif PUF_type == 'Generic framework(0,6,0)':
+            data, data_label = general_model.load_data(0, 6, 0, 0, 0, int(np.floor(15000/6)))
+        elif PUF_type == 'Generic framework(0,7,0)':
+            data, data_label = general_model.load_data(0, 7, 0, 0, 0, int(np.floor(15000/7)))
+        elif PUF_type == 'Generic framework(0,8,0)':
+            data, data_label = general_model.load_data(0, 8, 0, 0, 0, int(np.floor(15000/8)))
+        elif PUF_type == 'Generic framework(0,9,0)':
+            data, data_label = general_model.load_data(0, 9, 0, 0, 0, int(np.floor(15000/9)))
+        elif PUF_type == 'Generic framework(0,10,0)':
+            data, data_label = general_model.load_data(0, 10, 0, 0, 0, int(np.floor(15000/10)))
+        elif PUF_type == 'Generic framework(0,20,0)':
+            data, data_label = general_model.load_data(0, 20, 0, 0, 0, int(np.floor(15000/20)))
+
+
+        elif PUF_type == 'Generic framework(0,0,2)':
+            #general_model = general_model()
+            data, data_label = general_model.load_data(0, 0, 2, 0, 0, int(np.floor(15000/2)))
+        elif PUF_type == 'Generic framework(0,0,3)':
+            data, data_label = general_model.load_data(0, 0, 3, 0, 0, int(np.floor(15000/3)))
+        elif PUF_type == 'Generic framework(0,0,4)':
+            data, data_label = general_model.load_data(0, 0, 4, 0, 0, int(np.floor(15000/4)))
+        elif PUF_type == 'Generic framework(0,0,5)':
+            data, data_label = general_model.load_data(0, 0, 5, 0, 0, int(np.floor(15000/5)))
+        elif PUF_type == 'Generic framework(0,0,6)':
+            data, data_label = general_model.load_data(0, 0, 6, 0, 0, int(np.floor(15000/6)))
+        elif PUF_type == 'Generic framework(0,0,7)':
+            data, data_label = general_model.load_data(0, 0, 7, 0, 0, int(np.floor(15000/7)))
+        elif PUF_type == 'Generic framework(0,0,8)':
+            data, data_label = general_model.load_data(0, 0, 8, 0, 0, int(np.floor(15000/8)))
+        elif PUF_type == 'Generic framework(0,0,9)':
+            data, data_label = general_model.load_data(0, 0, 9, 0, 0, int(np.floor(15000/9)))
+        elif PUF_type == 'Generic framework(0,0,10)':
+            data, data_label = general_model.load_data(0, 0, 10, 0, 0, int(np.floor(15000/10)))
+        elif PUF_type == 'Generic framework(0,0,20)':
+            data, data_label = general_model.load_data(0, 0, 20, 0, 0, int(np.floor(15000/20)))
+
+
         
         
         data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
@@ -156,8 +270,8 @@ for PUF_type in PUF_types:
         #ML = LogisticRegression()
         #ML = DecisionTreeClassifier(criterion='entropy', max_depth=8)
         #ML = KNeighborsClassifier(n_neighbors=8)
-        #ML = svm.SVC(C=100, kernel='rbf')
-        ML = RandomForestClassifier(max_depth=8, n_estimators=100, criterion='entropy')
+        ML = svm.SVC(C=100, kernel='rbf')
+        #ML = RandomForestClassifier(max_depth=8, n_estimators=100, criterion='entropy')
         ML.fit(data, data_label)
         
         ### Calculate training time ###
@@ -207,4 +321,4 @@ for PUF_type in PUF_types:
                                          },  ignore_index=True)
         
         #clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\{}.csv'.format(puf_seed))
-clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\RF_all.csv')
+clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\SVM_all_PUF.csv')

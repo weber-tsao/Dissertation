@@ -58,7 +58,7 @@ for NoP in Number_of_PUF:
         
         ### Load data ###
         g1 = general_model()
-        data, data_label = g1.load_data(NoP, 0, 0, 0, 0, int(np.floor(5000/NoP)))
+        data, data_label = g1.load_data(NoP, 0, 0, 0, 0, int(np.floor(15000/NoP)))
         #data, data_label = shuffle(data, data_label)
         data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
         
@@ -109,12 +109,12 @@ for NoP in Number_of_PUF:
         #print("cross validation accuracy: %.2f%% (%.2f%%)" % (cross_val.mean()*100, cross_val.std()*100))
         
         #data_unseen_reduct = selection.transform(data_unseen)
-        data_unseen_reduct, data_label_unseen = shuffle(data_unseen, data_label_unseen)
-        test_acc = xgboostModel_test.score(data_unseen_reduct, data_label_unseen)
+        #data_unseen_reduct, data_label_unseen = shuffle(data_unseen, data_label_unseen)
+        test_acc = xgboostModel_test.score(data_unseen, data_label_unseen)
         print("---------------------------------------")
         print('For unseen data')
         print('Testing accuracy: {}%'.format(test_acc*100))
-        testingacc = xgboostModel_test.predict(data_unseen_reduct)
+        testingacc = xgboostModel_test.predict(data_unseen)
         cc = f1_score(data_label_unseen,testingacc)
         print(cc*100)
         #cross_val = cross_val_score(xgboostModel_test, data_unseen_reduct, data_label_unseen,  cv=ss)
@@ -133,7 +133,7 @@ for NoP in Number_of_PUF:
                                          #'train_challenge_seed': 123,
                                          #'test_challenge_seed': 19,
                                          'Number of APUF': NoP,
-                                         'CRPs number': int(np.floor(5000/NoP)),
+                                         'CRPs number': int(np.floor(15000/NoP)),
                                          'Test split Accuracy' : test_acc*100,
                                          'Test split F1' : cc*100,
                                          'Training time' : end_time - start_time,
