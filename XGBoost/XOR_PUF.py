@@ -113,17 +113,17 @@ class XOR_PUF:
         data_cut = []
         for x in range(len(qcut_label)):
             if qcut_label[x] == "1":
-                #data_cut.append(np.concatenate((data[x],[1,0,0,0])))
-                data_cut.append([1,0,0,0])
+                data_cut.append(np.concatenate((data[x],[1,0,0,0])))
+                #data_cut.append([1,0,0,0])
             elif qcut_label[x] == "2":
-                #data_cut.append(np.concatenate((data[x],[0,1,0,0])))
-                data_cut.append([0,1,0,0])
+                data_cut.append(np.concatenate((data[x],[0,1,0,0])))
+                #data_cut.append([0,1,0,0])
             elif qcut_label[x] == "3":
-                #data_cut.append(np.concatenate((data[x],[0,0,1,0])))
-                data_cut.append([0,0,1,0])
+                data_cut.append(np.concatenate((data[x],[0,0,1,0])))
+                #data_cut.append([0,0,1,0])
             else:
-                #data_cut.append(np.concatenate((data[x],[0,0,0,1])))
-                data_cut.append([0,0,0,1])
+                data_cut.append(np.concatenate((data[x],[0,0,0,1])))
+                #data_cut.append([0,0,0,1])
         
         data_cut = np.array(data_cut)
         train_data = data_cut
