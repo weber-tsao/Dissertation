@@ -50,13 +50,15 @@ class LFSR_simulated:
 
         #fpoly = [64,63,61,60]
         #fpoly = [16,15,13,4]
-        #L = LFSR(fpoly=fpoly, initstate=challenge_state, verbose=False)
-        #L.runKCycle(shift_count)
+        fpoly = [4,3]
+        L = LFSR(fpoly=fpoly, initstate=challenge_state, verbose=False)
+        L.runKCycle(shift_count)
         #print(L.state)
         #L.info()
         #result  = L.test_properties(verbose=2)
         
-        return challenge_state
+        #return challenge_state
+        return L.state
     
     def produceObfuscateResponse(self, puf, obfuscate_Challenge):
         response = puf.eval(np.array([obfuscate_Challenge]))
