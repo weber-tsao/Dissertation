@@ -30,8 +30,8 @@ from datetime import datetime
 import warnings
 warnings.filterwarnings("ignore")
 
-PUF_types = [#'APUF','2 XOR-APUF','3 XOR-APUF','4 XOR-APUF','5 XOR-APUF','6 XOR-APUF','FF-2-XOR-APUF','FF-3-XOR-APUF',
-             #    'FF-4-XOR-APUF','FF-5-XOR-APUF','FF-6-XOR-APUF'
+PUF_types = ['APUF','2 XOR-APUF','3 XOR-APUF','4 XOR-APUF','5 XOR-APUF','6 XOR-APUF','FF-2-XOR-APUF','FF-3-XOR-APUF',
+                 'FF-4-XOR-APUF','FF-5-XOR-APUF','FF-6-XOR-APUF',
                  'Generic framework(1,1,1)','Generic framework(2,2,2)','Generic framework(3,3,3)',
                  'Generic framework(4,4,4)','Generic framework(5,5,5)','Generic framework(6,6,6)'
                  ]
@@ -199,7 +199,7 @@ for PUF_type in PUF_types:
         #print("cross validation accuracy: %.2f%% (%.2f%%)" % (cross_val.mean()*100, cross_val.std()*100))
         
         #data_unseen_reduct = selection.transform(data_unseen)
-        data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
+        #data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
         test_acc = xgboostModel_test.score(data_unseen, data_label_unseen)
         print("---------------------------------------")
         print('For unseen data')
@@ -231,4 +231,4 @@ for PUF_type in PUF_types:
                                          },  ignore_index=True)
         
         #clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\{}.csv'.format(puf_seed))
-clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\XGBoost_Only_DD.csv')
+clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\XGBoost_noise1v2_only_DD.csv')

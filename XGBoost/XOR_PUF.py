@@ -45,12 +45,12 @@ class XOR_PUF:
         puf4 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=67)
         puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=90)
         puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=111)'''
-        puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed1)
-        puf2 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed2)
-        puf3 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed3)
-        puf4 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed4)
-        puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed5)
-        puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed6)
+        puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed1, noisiness=.1)
+        puf2 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed2, noisiness=.1)
+        puf3 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed3, noisiness=.1)
+        puf4 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed4, noisiness=.1)
+        puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed5, noisiness=.1)
+        puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed6, noisiness=.1)
         puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]
         #puf = XORArbiterPUF(n=(stages-4), k=xor_num, seed=21)
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
