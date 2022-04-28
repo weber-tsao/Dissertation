@@ -36,22 +36,22 @@ start_time = datetime.now()
 ### Load data ###
 #puf = Puf()
 #data, data_label = puf.load_data()
-arbiter_puf = arbiter_PUF()
-data, data_label = arbiter_puf.load_data(68, 5000, 11, 123,0)
-data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
-#data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 11, 19)
+#arbiter_puf = arbiter_PUF()
+#data, data_label = arbiter_puf.load_data(68, 5000, 11, 123,0)
+#data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
+#data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 11, 19, 0)
 #xor_puf = XOR_PUF()
-#data, data_label = xor_puf.load_data(68, 5000, 6, 13,256,22,77,89,90, 11,0)
+#data, data_label = xor_puf.load_data(64, 5000, 6, 13,256,22,77,89,90, 11,0)
 #data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
 #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 3, 13,256,22,77,89,90, 55,0)
 #data_unseen = np.c_[ data_unseen, np.ones(300)*2 ] 
 #lightweight_puf = lightweight_PUF()
 #data, data_label = lightweight_puf.load_data(68, 68000, 2, 123, 11)
-#f1 = [5,12,26,19,33,49,51,7]
-#d1 = [60,61,63,59,58,57,56,55]
-#feedforward_puf = feedforward_PUF()
-#data, data_label = feedforward_puf.load_data(68, 5000, 2, f1, d1, 256, 22, 77, 89, 90, 367, 23,0)
-#data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
+f1 = [5,12,26,19,33,49,51,7]
+d1 = [60,61,63,59,58,57,56,55]
+feedforward_puf = feedforward_PUF()
+data, data_label = feedforward_puf.load_data(64, 5000, 6, f1, d1, 256, 22, 77, 89, 90, 367, 23,0)
+data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
 #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 6, f1, d1, 256, 22, 77, 89, 90, 367, 334)
 #interpose_puf = interpose_PUF()
 #data, data_label = interpose_puf.load_data(68, 24000, 3, 3, 12)    

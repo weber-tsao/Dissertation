@@ -23,12 +23,12 @@ class Puf_resilience:
         response = puf.eval(eval_challenge)
         challenge = list(challenge)
         challenge = [0 if c == -1 else c for c in challenge]
-        if response[0] == -1:
+        '''if response[0] == -1:
             for i in range(int(chal_len/2)):
                 challenge[2*i] = challenge[2*i]^1
         else:
             for i in range(int(chal_len/2)):
-                challenge[(2*i+1)] = challenge[(2*i+1)]^1
+                challenge[(2*i+1)] = challenge[(2*i+1)]^1'''
         return challenge
     
     def dec_to_bin(self, x):
@@ -45,16 +45,6 @@ class Puf_resilience:
         secondhalf_challenge.append(challenge[half_chal_len:])
         switch_challenge = np.concatenate((secondhalf_challenge, firsthalf_challenge),axis=None)
         
-        
-        '''binary_obfus = list(switch_challenge)
-        binary_obfus = [0 if c == -1 else c for c in binary_obfus]
-        binary_obfus_str = ''.join(str(x) for x in binary_obfus)
-        decimal = int(binary_obfus_str, 2)
-        complement_decimal = ~decimal
-        print(complement_decimal)
-        #complement_challenge = self.dec_to_bin(complement_decimal)
-        complement_challenge= "{0:b}".format(complement_decimal)'''
-        
         binary_obfus = list(switch_challenge)
         binary_obfus = [0 if c == -1 else c for c in binary_obfus]
         
@@ -70,14 +60,16 @@ class Puf_resilience:
 
     def cyclic_shift(self, challenge, puf):   
         ##LFSR
-        self.LFSR_simulated = LFSR_simulated()
-        alterChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge, 1)
-        alterChallenge = [-1 if c == 0 else c for c in alterChallenge]
-        
-        ##Another idea
-        #alterChallenge = self.switch_complement(challenge)
+        #self.LFSR_simulated = LFSR_simulated()
+        #alterChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge, 1)
         #alterChallenge = [-1 if c == 0 else c for c in alterChallenge]
         
+        ##Another idea
+        alterChallenge = self.switch_complement(challenge)
+        alterChallenge = [-1 if c == 0 else c for c in alterChallenge]
+        
+        
+        #obfuscate_Challenge = self.self_feedback(challenge, puf)
         obfuscate_Challenge = self.self_feedback(alterChallenge, puf)
         obchal_len = len(obfuscate_Challenge)
         l = int (np.log2(obchal_len))
@@ -88,7 +80,7 @@ class Puf_resilience:
         
         return obfuscate_Challenge
     
-'''if __name__ == "__main__":
+if __name__ == "__main__":
     puf_resilience_object = Puf_resilience()
     puf = pypuf.simulation.ArbiterPUF(n=4, seed=21)
     x = puf_resilience_object.cyclic_shift([1,-1,-1,-1,1,1,1,1], puf)
@@ -96,5 +88,5 @@ class Puf_resilience:
     
     #y = puf_resilience_object.switch_complement([-1,-1,-1,-1,1,1,1,1])
     #print(y)
-    '''
+    
     

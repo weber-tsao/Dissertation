@@ -48,9 +48,9 @@ class LFSR_simulated:
         
         challenge_state = [0 if c == -1 else c for c in list(spited_challenge)]
 
-        #fpoly = [64,63,61,60]
+        fpoly = [64,63,61,60]
         #fpoly = [16,15,13,4]
-        fpoly = [4,3]
+        #fpoly = [4,3]
         L = LFSR(fpoly=fpoly, initstate=challenge_state, verbose=False)
         L.runKCycle(shift_count)
         #print(L.state)
