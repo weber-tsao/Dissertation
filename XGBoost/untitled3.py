@@ -231,5 +231,5 @@ for PUF_type in PUF_types:
                                          },  ignore_index=True)
         
         #clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\{}.csv'.format(puf_seed))
-clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\XGBoost_resilience_only_complement.csv')
+clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\XGBoost_resilience_only_LFSR.csv')
 #clf_result.to_csv(r'C:\Users\Asus\Desktop\Dissertation_sheffield\Dissertation\XGBoost\XGBoost_resilience_only_feedback.csv')
