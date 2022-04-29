@@ -37,7 +37,7 @@ class arbiter_PUF:
         return parityVec
 
     def load_data(self, stages, data_num, puf_seed, cus_seed, base):
-        puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed)
+        puf = pypuf.simulation.ArbiterPUF(n=(stages), seed=puf_seed)
         #puf = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=12, noisiness=.05)
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
         train_data = []
@@ -62,7 +62,7 @@ class arbiter_PUF:
             #final_delay_diff = puf.val(np.array([obfuscateChallenge]))
             #final_delay_diff = self.total_delay_diff(challenge[4:], puf)
             
-            challenge = challenge[4:]
+            #challenge = challenge[4:]
             final_delay_diff = self.total_delay_diff(challenge, puf)
             challenge = [0 if c == -1 else c for c in challenge]       
                   

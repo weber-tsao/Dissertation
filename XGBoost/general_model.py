@@ -32,7 +32,7 @@ class general_model:
             #random_num = [123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123]
             #random_seed = [13,256,22,77,89,90,367,123,555,987,   5,34,12,99,88,66,44,3,98,23]
             arbiter_puf = arbiter_PUF()
-            arbiter_data, arbiter_data_label = arbiter_puf.load_data(68, NoC, random_seed, random_num, 0)
+            arbiter_data, arbiter_data_label = arbiter_puf.load_data(64, NoC, random_seed, random_num, 0)
             puf_label = np.ones((NoC, 1))*(total_num)
             total_num = total_num-1
             arbiter_data = np.concatenate((arbiter_data, puf_label), axis=1)
@@ -60,7 +60,7 @@ class general_model:
             #print(random_xor_num)
             #print("xx")
             xor_puf = XOR_PUF()
-            xor_data, xor_data_label = xor_puf.load_data(68, NoC, 4, random_seed1[x], random_seed2[x], 
+            xor_data, xor_data_label = xor_puf.load_data(64, NoC, 4, random_seed1[x], random_seed2[x], 
                                                          random_seed3[x], random_seed4[x], random_seed5[x], 
                                                          random_seed6[x], random_num, 0)
             puf_label = np.ones((NoC, 1))*(total_num)
@@ -94,7 +94,7 @@ class general_model:
             #print(random_xor_num)
             #print("ff")
             ff_puf = feedforward_PUF()
-            ff_data, ff_data_label = ff_puf.load_data(68, NoC, 4, f1, d1, random_seed1[f], random_seed2[f], 
+            ff_data, ff_data_label = ff_puf.load_data(64, NoC, 4, f1, d1, random_seed1[f], random_seed2[f], 
                                                          random_seed3[f], random_seed4[f], random_seed5[f], 
                                                          random_seed6[f], random_num, 0)
             puf_label = np.ones((NoC, 1))*(total_num)

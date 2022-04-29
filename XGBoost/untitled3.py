@@ -61,57 +61,57 @@ for PUF_type in PUF_types:
         ### Load data ###
         if PUF_type == 'APUF':
             arbiter_puf = arbiter_PUF()
-            data, data_label = arbiter_puf.load_data(68, 5000, 11, 123, 0)
+            data, data_label = arbiter_puf.load_data(64, 5000, 11, 123, 0)
             #data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 11, 19, 0)
         elif PUF_type == '2 XOR-APUF':
             xor_puf = XOR_PUF()
-            data, data_label = xor_puf.load_data(68, 5000, 2, 13,256,22,77,89,90, 11, 0)
+            data, data_label = xor_puf.load_data(64, 5000, 2, 13,256,22,77,89,90, 11, 0)
             #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 2, 13,256,22,77,89,90, 55, 0)
         elif PUF_type == '3 XOR-APUF':
             xor_puf = XOR_PUF()
-            data, data_label = xor_puf.load_data(68, 5000, 3, 13,256,22,77,89,90, 11, 0)
+            data, data_label = xor_puf.load_data(64, 5000, 3, 13,256,22,77,89,90, 11, 0)
             #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 3, 13,256,22,77,89,90, 55, 0)
         elif PUF_type == '4 XOR-APUF':
             xor_puf = XOR_PUF()
-            data, data_label = xor_puf.load_data(68, 5000, 4, 13,256,22,77,89,90, 11, 0)
+            data, data_label = xor_puf.load_data(64, 5000, 4, 13,256,22,77,89,90, 11, 0)
             #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 4, 13,256,22,77,89,90, 55, 0)
         elif PUF_type == '5 XOR-APUF':
             xor_puf = XOR_PUF()
-            data, data_label = xor_puf.load_data(68, 5000, 5, 13,256,22,77,89,90, 11, 0)
+            data, data_label = xor_puf.load_data(64, 5000, 5, 13,256,22,77,89,90, 11, 0)
             #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 5, 13,256,22,77,89,90, 55, 0)
         elif PUF_type == '6 XOR-APUF':
             xor_puf = XOR_PUF()
-            data, data_label = xor_puf.load_data(68, 5000, 6, 13,256,22,77,89,90, 11, 0)
+            data, data_label = xor_puf.load_data(64, 5000, 6, 13,256,22,77,89,90, 11, 0)
             #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 6, 13,256,22,77,89,90, 55, 0)
         elif PUF_type == 'FF-2-XOR-APUF':
             f1 = [5,12,26,19,33,49,51,7]
             d1 = [60,61,63,59,58,57,56,55]
             feedforward_puf = feedforward_PUF()
-            data, data_label = feedforward_puf.load_data(68, 5000, 2, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
+            data, data_label = feedforward_puf.load_data(64, 5000, 2, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
             #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 2, f1, d1, 256, 22, 77, 89, 90, 367, 334, 0)
         elif PUF_type == 'FF-3-XOR-APUF':
             f1 = [5,12,26,19,33,49,51,7]
             d1 = [60,61,63,59,58,57,56,55]
             feedforward_puf = feedforward_PUF()
-            data, data_label = feedforward_puf.load_data(68, 5000, 3, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
+            data, data_label = feedforward_puf.load_data(64, 5000, 3, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
             #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 3, f1, d1, 256, 22, 77, 89, 90, 367, 334, 0)
         elif PUF_type == 'FF-4-XOR-APUF':
             f1 = [5,12,26,19,33,49,51,7]
             d1 = [60,61,63,59,58,57,56,55]
             feedforward_puf = feedforward_PUF()
-            data, data_label = feedforward_puf.load_data(68, 5000, 4, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
+            data, data_label = feedforward_puf.load_data(64, 5000, 4, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
             #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 4, f1, d1, 256, 22, 77, 89, 90, 367, 334, 0)
         elif PUF_type == 'FF-5-XOR-APUF':
             f1 = [5,12,26,19,33,49,51,7]
             d1 = [60,61,63,59,58,57,56,55]
             feedforward_puf = feedforward_PUF()
-            data, data_label = feedforward_puf.load_data(68, 5000, 5, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
+            data, data_label = feedforward_puf.load_data(64, 5000, 5, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
             #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 5, f1, d1, 256, 22, 77, 89, 90, 367, 334, 0)
         elif PUF_type == 'FF-6-XOR-APUF':
             f1 = [5,12,26,19,33,49,51,7]
             d1 = [60,61,63,59,58,57,56,55]
             feedforward_puf = feedforward_PUF()
-            data, data_label = feedforward_puf.load_data(68, 5000, 6, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
+            data, data_label = feedforward_puf.load_data(64, 5000, 6, f1, d1, 256, 22, 77, 89, 90, 367, 23, 0)
             #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 6, f1, d1, 256, 22, 77, 89, 90, 367, 334, 0)
         elif PUF_type == 'Generic framework(1,1,1)':
             general_model = general_model()
@@ -231,5 +231,5 @@ for PUF_type in PUF_types:
                                          },  ignore_index=True)
         
         #clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\{}.csv'.format(puf_seed))
-#clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\XGBoost_LFSR_resilience.csv')
-clf_result.to_csv(r'C:\Users\Asus\Desktop\Dissertation_sheffield\Dissertation\XGBoost\XGBoost_both_resilience.csv')
+clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\XGBoost_resilience_only_complement.csv')
+#clf_result.to_csv(r'C:\Users\Asus\Desktop\Dissertation_sheffield\Dissertation\XGBoost\XGBoost_resilience_only_feedback.csv')

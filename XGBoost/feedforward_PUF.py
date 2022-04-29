@@ -52,12 +52,12 @@ class feedforward_PUF:
         puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=121)
         puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=887)
         puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]'''
-        puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed1)
-        puf2 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed2)
-        puf3 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed3)
-        puf4 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed4)
-        puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed5)
-        puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed6)
+        puf1 = pypuf.simulation.ArbiterPUF(n=(stages), seed=puf_seed1)
+        puf2 = pypuf.simulation.ArbiterPUF(n=(stages), seed=puf_seed2)
+        puf3 = pypuf.simulation.ArbiterPUF(n=(stages), seed=puf_seed3)
+        puf4 = pypuf.simulation.ArbiterPUF(n=(stages), seed=puf_seed4)
+        puf5 = pypuf.simulation.ArbiterPUF(n=(stages), seed=puf_seed5)
+        puf6 = pypuf.simulation.ArbiterPUF(n=(stages), seed=puf_seed6)
         puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
         final_delay_diff = 1
@@ -100,7 +100,7 @@ class feedforward_PUF:
                     else:
                         obfuscateChallenge[d1[j]] == 0
                 
-                final_delay_diffc = self.total_delay_diff(challenge[4:], puf_list[p])
+                final_delay_diffc = self.total_delay_diff(challenge, puf_list[p])
                 #final_delay_diffc = puf_list[p].val(np.array([obfuscateChallenge]))
                 final_delay_diff = final_delay_diffc[0]*final_delay_diff
                 
@@ -118,7 +118,7 @@ class feedforward_PUF:
                 else:
                     data_r = data_r^response1
                     
-            challenge = challenge[4:]
+            #challenge = challenge[4:]
             challenge = [0 if c == -1 else c for c in challenge]
                                                     
             data.append(challenge)

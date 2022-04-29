@@ -65,24 +65,24 @@ class Puf_resilience:
         #alterChallenge = [-1 if c == 0 else c for c in alterChallenge]
         
         ##Another idea
-        #alterChallenge = self.switch_complement(challenge)
-        #alterChallenge = [-1 if c == 0 else c for c in alterChallenge]
+        alterChallenge = self.switch_complement(challenge)
+        alterChallenge = [-1 if c == 0 else c for c in alterChallenge]
         
         ##Combined idea
-        self.LFSR_simulated = LFSR_simulated()
-        alterChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge, 1)
-        alterChallenge = self.switch_complement(alterChallenge)
-        alterChallenge = [-1 if c == 0 else c for c in alterChallenge]
+        #self.LFSR_simulated = LFSR_simulated()
+        #alterChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge, 1)
+        #alterChallenge = self.switch_complement(alterChallenge)
+        #alterChallenge = [-1 if c == 0 else c for c in alterChallenge]
         
         #obfuscate_Challenge = self.self_feedback(challenge, puf)
         #obfuscate_Challenge = self.self_feedback(alterChallenge, puf)
         obfuscate_Challenge = [0 if c == -1 else c for c in alterChallenge]
-        obchal_len = len(obfuscate_Challenge)
-        l = int (np.log2(obchal_len))
-        m = 0
-        for i in range(l):
-            m = m + obfuscate_Challenge[i]*np.power(2,i)
-        obfuscate_Challenge = np.roll(obfuscate_Challenge,m)
+        #obchal_len = len(obfuscate_Challenge)
+        #l = int (np.log2(obchal_len))
+        #m = 0
+        #for i in range(l):
+        #    m = m + obfuscate_Challenge[i]*np.power(2,i)
+        #obfuscate_Challenge = np.roll(obfuscate_Challenge,m)
         
         return obfuscate_Challenge
     
