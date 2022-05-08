@@ -86,13 +86,13 @@ class Puf_resilience:
         
         return obfuscate_Challenge
     
-if __name__ == "__main__":
+'''if __name__ == "__main__":
     puf_resilience_object = Puf_resilience()
     puf = pypuf.simulation.ArbiterPUF(n=4, seed=21)
     x = puf_resilience_object.cyclic_shift([1,-1,-1,-1,1,1,1,1], puf)
     print(x)
     
     #y = puf_resilience_object.switch_complement([-1,-1,-1,-1,1,1,1,1])
-    #print(y)
+    #print(y)'''
     
     

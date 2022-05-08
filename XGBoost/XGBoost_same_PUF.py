@@ -66,26 +66,6 @@ for NoP in Number_of_PUF:
         #data_unseen, data_label_unseen = g2.load_data(0, 0, NoP, 0, 0, int(np.floor(5000/NoP)))
         #data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
         
-        ### Split train, test data for the model ###
-        '''X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
-        X_test, X_val, y_test, y_val = train_test_split(X_testVal, y_testVal, test_size=.5, random_state=24)
-        evals_result ={}
-        eval_s = [(X_train, y_train),(X_val, y_val)]
-        
-        ### Create XGBClassifier model ###
-        xgboostModel = XGBClassifier(
-            booster='gbtree', colsample_bytree=1.0,
-                      eval_metric='error', gamma=0.8,
-                      learning_rate=0.01, max_depth=5,
-                      min_child_weight=20, n_estimators=700, subsample=0.8, tree_method='gpu_hist'
-            )
-        
-        xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, verbose = 0)
-        
-        selection = SelectFromModel(xgboostModel, threshold=0.01, prefit=True)
-        #print(xgboostModel.feature_importances_)
-        data_reduct = selection.transform(data)
-        data_reduct, data_label = shuffle(data_reduct, data_label)'''
         xgboostModel_test = XGBClassifier(
             booster='gbtree', colsample_bytree=0.8,
                       eval_metric='error', gamma=0.1,

@@ -30,22 +30,6 @@ from datetime import datetime
 import warnings
 warnings.filterwarnings("ignore")
 
-'''puf_seeds = [11, 67, 82, 95, 324, 56, 70, 12, 123, 39]
-train_challenge_seeds = [123, 21, 34, 54, 221, 345, 676, 54, 33, 15]
-test_challenge_seeds = [19, 44, 1, 77, 453, 657, 557, 23, 44, 84]
-clf_result = pd.DataFrame({'puf_seed' : [],
-                           'train_challenge_seed': [],
-                           'test_challenge_seed': [],
-                           'Test split Accuracy' : [],
-                           'Test split F1' : [],
-                           'Cross_val Accuracy' : [],
-                           'Cross_val sd' : [],
-                           'Cross_val split F1' : [],
-                           'Cross_val F1 sd' : [],
-                           'Training time' : [],
-                           'Testing time' : []
-                           })'''
-
 threshold_val = [0.1,0.01,0.05,0.001,0.005,0.0001,0.0005]
 depth_val = [2,3,4,5,6,7,8]
 n_estimators_val = [300,400,500,600,700]
@@ -63,10 +47,6 @@ clf_result = pd.DataFrame({#'threshold' : [],
                            'Testing time' : []
                            })
 
-#for (puf_seed, train_challenge_seed, test_challenge_seed) in zip(puf_seeds, train_challenge_seeds, test_challenge_seeds):
-#for thresholds in threshold_val:
-#for depth in depth_val:
-    #for n_estimators in n_estimators_val:
 for crp in crps:
         ### Set running start time ###
         start_time = datetime.now()
@@ -95,30 +75,6 @@ for crp in crps:
         #data, data_label = general_model.load_data(2, 0, 0, 0, 0)
         #data, data_label = shuffle(data, data_label)
         
-        #general_model2 = general_model2()
-        #data_unseen, data_label_unseen = general_model2.load_data(2, 0, 0, 0, 0)
-        #data_unseen, data_label_unseen = shuffle(data_unseen, data_label_unseen)
-        
-        ### Split train, test data for the model ###
-        '''X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
-        X_test, X_val, y_test, y_val = train_test_split(X_testVal, y_testVal, test_size=.5, random_state=24)
-        evals_result ={}
-        eval_s = [(X_train, y_train),(X_val, y_val)]
-        
-        ### Create XGBClassifier model ###
-        xgboostModel = XGBClassifier(
-            booster='gbtree', colsample_bytree=1.0,
-                      eval_metric='error', gamma=0.8,
-                      learning_rate=0.01, max_depth=5,
-                      min_child_weight=20, n_estimators=700, subsample=0.8, tree_method='gpu_hist'
-            )
-        
-        xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, verbose = 0)
-        
-        selection = SelectFromModel(xgboostModel, threshold=0.01, prefit=True)
-        print(xgboostModel.feature_importances_)
-        data_reduct = selection.transform(data)
-        data_reduct, data_label = shuffle(data_reduct, data_label)'''
         xgboostModel_test = XGBClassifier(
             booster='gbtree', colsample_bytree=1.0,
                       eval_metric='error', gamma=0.8,

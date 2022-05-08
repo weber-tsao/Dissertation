@@ -56,24 +56,9 @@ for i in range(1):
     #general_model = general_model()
     #data, data_label = general_model.load_data(1, 1, 1, 0, 0)
     
-    '''X_train, X_testVal, y_train, y_testVal = train_test_split(data, data_label, test_size=.25, random_state=66)
-    X_test, X_val, y_test, y_val = train_test_split(X_testVal, y_testVal, test_size=.5, random_state=24)
-    evals_result ={}
-    eval_s = [(X_train, y_train),(X_val, y_val)]
-    xgboostModel = XGBClassifier(
-        booster='gbtree', colsample_bytree=1.0,
-                  eval_metric='error', gamma=0.6,
-                  learning_rate=0.3, max_depth=4,
-                  min_child_weight=20, n_estimators=300, subsample=0.8, tree_method='gpu_hist'
-        )
-    xgboostModel.fit(X_train, y_train, eval_set=eval_s, early_stopping_rounds=100, verbose = 0)      
-    selection = SelectFromModel(xgboostModel, threshold=0.01, prefit=True)
-    data_r = selection.transform(data)
-    data_r, data_label = shuffle(data_r, data_label)'''
     knn.fit(data, data_label)
     dt_result = cross_val_score(knn, data, data_label, cv=ss)
     print("Accuracy: %.2f%% (%.2f%%)" % (dt_result.mean()*100, dt_result.std()*100))
-    
     
     chal_seed2 = random.randint(501, 1000)
     puf_seed2 = random.randint(501, 1000)
