@@ -32,7 +32,7 @@ class general_model:
             #random_num = [123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123]
             #random_seed = [13,256,22,77,89,90,367,123,555,987,   5,34,12,99,88,66,44,3,98,23]
             arbiter_puf = arbiter_PUF()
-            arbiter_data, arbiter_data_label = arbiter_puf.load_data(64, NoC, random_seed, random_num, 0)
+            arbiter_data, arbiter_data_label = arbiter_puf.load_data(68, NoC, random_seed, random_num, 0)
             puf_label = np.ones((NoC, 1))*(total_num)
             total_num = total_num-1
             arbiter_data = np.concatenate((arbiter_data, puf_label), axis=1)

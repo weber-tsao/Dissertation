@@ -27,16 +27,6 @@ class XOR_PUF:
 
         return stage_delay_diff
     
-    def get_parity_vectors(self, C):
-        n=C.shape[1]
-        m=C.shape[0]
-        C[C==0]=-1
-        parityVec=np.zeros((m,n+1))
-        parityVec[:,0:1]=np.ones((m,1))
-        for i in range(2,n+2):
-            parityVec[:,i-1:i]=np.prod(C[:,0:i-1],axis=1).reshape((m,1))
-        return parityVec
-    
     def load_data(self, stages, data_num, xor_num, puf_seed1, puf_seed2, puf_seed3, puf_seed4, puf_seed5, puf_seed6, cus_seed, base):
     #def load_data(self, stages, data_num, xor_num, cus_seed):
         '''puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=91)

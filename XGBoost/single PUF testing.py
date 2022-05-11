@@ -18,14 +18,10 @@ from xgboost import plot_importance
 from xgboost import plot_tree
 from arbiter_PUF import*
 from XOR_PUF import*
-from lightweight_PUF import*
 from feedforward_PUF import*
-from interpose_PUF import*
 from LFSR_simulated import*
 from Puf_resilience import*
-from Puf_delay import*
 from general_model import*
-from general_model2 import*
 from datetime import datetime
 import warnings
 warnings.filterwarnings("ignore")
@@ -36,13 +32,13 @@ start_time = datetime.now()
 ### Load data ###
 #puf = Puf()
 #data, data_label = puf.load_data()
-#arbiter_puf = arbiter_PUF()
-#data, data_label = arbiter_puf.load_data(68, 5000, 11, 123,0)
-#data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
-#data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 11, 19, 0)
-xor_puf = XOR_PUF()
-data, data_label = xor_puf.load_data(68, 5000, 6, 13,256,22,77,89,90, 11,0)
+arbiter_puf = arbiter_PUF()
+data, data_label = arbiter_puf.load_data(68, 5000, 11, 123,0)
 data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
+#data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 11, 19, 0)
+#xor_puf = XOR_PUF()
+#data, data_label = xor_puf.load_data(68, 5000, 6, 13,256,22,77,89,90, 11,0)
+#data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
 #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 3, 13,256,22,77,89,90, 55,0)
 #data_unseen = np.c_[ data_unseen, np.ones(300)*2 ] 
 #lightweight_puf = lightweight_PUF()

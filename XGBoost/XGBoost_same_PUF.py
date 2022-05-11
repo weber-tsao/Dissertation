@@ -23,9 +23,7 @@ from feedforward_PUF import*
 from interpose_PUF import*
 from LFSR_simulated import*
 from Puf_resilience import*
-from Puf_delay import*
 from general_model import*
-from general_model2 import*
 from datetime import datetime
 import warnings
 warnings.filterwarnings("ignore")
