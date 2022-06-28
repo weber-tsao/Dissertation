@@ -44,20 +44,20 @@ clf_result = pd.DataFrame({'puf_seed' : [],
                            'Testing time' : []
                            })'''
 
-PUF_types = [    #'APUF','2 XOR-APUF','3 XOR-APUF','4 XOR-APUF','5 XOR-APUF','6 XOR-APUF','FF-2-XOR-APUF','FF-3-XOR-APUF',
+PUF_types = [    'APUF' #'APUF','2 XOR-APUF','3 XOR-APUF','4 XOR-APUF','5 XOR-APUF','6 XOR-APUF','FF-2-XOR-APUF','FF-3-XOR-APUF',
                  #'FF-4-XOR-APUF','FF-5-XOR-APUF','FF-6-XOR-APUF',
                  #'Generic framework(1,1,1)','Generic framework(2,2,2)','Generic framework(3,3,3)',
                  #'Generic framework(4,4,4)','Generic framework(5,5,5)','Generic framework(6,6,6)','Generic framework(10,10,10)'
                  #,'Generic framework(20,20,20)'
-                 'Generic framework(2,0,0)','Generic framework(3,0,0)','Generic framework(4,0,0)','Generic framework(5,0,0)',
-                 'Generic framework(6,0,0)','Generic framework(7,0,0)','Generic framework(8,0,0)','Generic framework(9,0,0)',
-                 'Generic framework(10,0,0)','Generic framework(20,0,0)',
-                 'Generic framework(0,2,0)','Generic framework(0,3,0)','Generic framework(0,4,0)','Generic framework(0,5,0)',
-                 'Generic framework(0,6,0)','Generic framework(0,7,0)','Generic framework(0,8,0)','Generic framework(0,9,0)',
-                 'Generic framework(0,10,0)','Generic framework(0,20,0)',
-                 'Generic framework(0,0,2)','Generic framework(0,0,3)','Generic framework(0,0,4)','Generic framework(0,0,5)',
-                 'Generic framework(0,0,6)','Generic framework(0,0,7)','Generic framework(0,0,8)','Generic framework(0,0,9)',
-                 'Generic framework(0,0,10)','Generic framework(0,0,20)'
+                 #'Generic framework(2,0,0)','Generic framework(3,0,0)','Generic framework(4,0,0)','Generic framework(5,0,0)',
+                 #'Generic framework(6,0,0)','Generic framework(7,0,0)','Generic framework(8,0,0)','Generic framework(9,0,0)',
+                 #'Generic framework(10,0,0)','Generic framework(20,0,0)',
+                 #'Generic framework(0,2,0)','Generic framework(0,3,0)','Generic framework(0,4,0)','Generic framework(0,5,0)',
+                # 'Generic framework(0,6,0)','Generic framework(0,7,0)','Generic framework(0,8,0)','Generic framework(0,9,0)',
+                # 'Generic framework(0,10,0)','Generic framework(0,20,0)',
+                 #'Generic framework(0,0,2)','Generic framework(0,0,3)','Generic framework(0,0,4)','Generic framework(0,0,5)',
+                # 'Generic framework(0,0,6)','Generic framework(0,0,7)','Generic framework(0,0,8)','Generic framework(0,0,9)',
+                # 'Generic framework(0,0,10)','Generic framework(0,0,20)'
                  ]
 clf_result = pd.DataFrame({#'threshold' : [],
                            #'depth': [],
@@ -89,7 +89,7 @@ for PUF_type in PUF_types:
         if PUF_type == 'APUF':
             arbiter_puf = arbiter_PUF()
             data, data_label = arbiter_puf.load_data(68, 5000, 11, 123, 0)
-            #data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 11, 19, 0)
+            data_unseen, data_label_unseen = arbiter_puf.load_data(68, 5000, 11, 19, 0)
         elif PUF_type == '2 XOR-APUF':
             xor_puf = XOR_PUF()
             data, data_label = xor_puf.load_data(68, 5000, 2, 13,256,22,77,89,90, 11, 0)
@@ -319,4 +319,4 @@ for PUF_type in PUF_types:
                                          },  ignore_index=True)
         
         #clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\{}.csv'.format(puf_seed))
-clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\SVM_all_PUF.csv')
+clf_result.to_csv(r'C:/Users/vindr/OneDrive/Dissertation/Dissertation/XGBoost\SVM_all_PUF.csv')

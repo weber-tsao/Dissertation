@@ -30,6 +30,7 @@ threshold_val = [0.1,0.01,0.05,0.001,0.005,0.0001,0.0005]
 depth_val = [2,3,4,5,6,7,8]
 n_estimators_val = [300,400,500,600,700]
 crps = range(100,5000,200)
+
 clf_result = pd.DataFrame({#'threshold' : [],
                            #'depth': [],
                            #'n_estimators': [],
@@ -125,4 +126,4 @@ for crp in crps:
                                          },  ignore_index=True)
         
         #clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\{}.csv'.format(puf_seed))
-clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\CRPs_number_test.csv')
+clf_result.to_csv(r'C:/Users/vindr/OneDrive/Dissertation/Dissertation/XGBoost\CRPs_number_test.csv')
