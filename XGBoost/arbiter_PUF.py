@@ -54,13 +54,13 @@ class arbiter_PUF:
             
             challenge = challenge[4:]
             final_delay_diff = self.total_delay_diff(challenge, puf)
-            challenge = [0 if c == -1 else c for c in challenge]       
+            #challenge = [0 if c == -1 else c for c in challenge]       
                   
             response = self.LFSR_simulated.produceObfuscateResponse(puf, obfuscateChallenge)
             response = np.array(response)
-            data_r = 0
+            data_r = -1
             if response == -1:
-                data_r = 0
+                data_r = -1
             else:
                 data_r = 1
             #print("dd")
@@ -87,7 +87,7 @@ class arbiter_PUF:
                data_cut.append(np.concatenate((data[x],[0,0,0,1])))
                #data_cut.append([0,0,0,1])
         
-        data_cut = np.array(data_cut)
+        data_cut = np.array(data)
         train_data = data_cut
         train_label = np.array(data_label)
         
