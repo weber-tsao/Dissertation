@@ -23,7 +23,7 @@ class arbiter_PUF:
         last_stage_ind = len(challenge[0])-1
         puf_delay = pypuf.simulation.LTFArray(weight_array=puf.weight_array[:, :64], bias=None, transform=puf.transform)
         stage_delay_diff = puf_delay.val(challenge[:, :64])
-
+        #print(stage_delay_diff)
         return stage_delay_diff
 
     def load_data(self, stages, data_num, puf_seed, cus_seed, base):
