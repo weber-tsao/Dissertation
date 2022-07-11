@@ -162,12 +162,12 @@ class LRAttack2021(OfflineAttack):
         ##### Testing #######
         #final_output = model.get_layer("activation_3").output
         #print(final_output)
-        print(labels[0:5])
-        print(model.predict(features)[0:5])
+        #print(labels[0:5])
+        #print(model.predict(features)[0:5])
         
-        #intermediate_layer_model = tf.keras.Model(inputs=model.input,
-        #                               outputs=model.layers[-4].output)
-        #test_answer = intermediate_layer_model(features)
+        intermediate_layer_model = tf.keras.Model(inputs=model.input,
+                                       outputs=model.layers[-1].output)
+        test_answer = intermediate_layer_model(features)
         #print(test_answer)
         
     
@@ -177,7 +177,7 @@ class LRAttack2021(OfflineAttack):
         
         
 
-        return self.model
+        return self.model, test_answer
 
     def keras_to_pypuf(self, keras_model: tf.keras.Model) -> LTFArray:
         """

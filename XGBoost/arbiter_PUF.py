@@ -23,7 +23,7 @@ class arbiter_PUF:
         last_stage_ind = len(challenge[0])-1
         puf_delay = pypuf.simulation.LTFArray(weight_array=puf.weight_array[:, :64], bias=None, transform=puf.transform)
         stage_delay_diff = puf_delay.val(challenge[:, :64])
-        #print(stage_delay_diff)
+        #print("additive delay",stage_delay_diff)
         return stage_delay_diff
 
     def load_data(self, stages, data_num, puf_seed, cus_seed, base):
@@ -68,6 +68,7 @@ class arbiter_PUF:
             data.append(challenge)
             delay_diff.append(final_delay_diff[0])
             data_label.append(data_r)
+            #print("data label", data_r)
           
         data = np.array(data)
         qcut_label = pd.qcut(delay_diff, q=4, labels=["1", "2", "3", "4"])
@@ -87,9 +88,12 @@ class arbiter_PUF:
                data_cut.append(np.concatenate((data[x],[0,0,0,1])))
                #data_cut.append([0,0,0,1])
         
-        data_cut = np.array(data)
+        data_cut = np.array(data_cut)
         train_data = data_cut
         train_label = np.array(data_label)
         
-        return train_data, train_label
+        # for pypuf lr2021 attack
+        attack_info = np.array(data)
+        
+        return train_data, train_label, attack_info
         
