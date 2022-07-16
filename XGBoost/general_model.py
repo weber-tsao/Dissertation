@@ -15,6 +15,7 @@ from XOR_PUF import*
 from lightweight_PUF import*
 from feedforward_PUF import*
 from interpose_PUF import*
+from attack import LRAttack2021
 
 class general_model:
             
@@ -32,7 +33,26 @@ class general_model:
             #random_num = [123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123]
             #random_seed = [13,256,22,77,89,90,367,123,555,987,   5,34,12,99,88,66,44,3,98,23]
             arbiter_puf = arbiter_PUF()
-            arbiter_data, arbiter_data_label = arbiter_puf.load_data(68, NoC, random_seed, random_num, 0)
+            arbiter_data, arbiter_data_label, attack_data = arbiter_puf.load_data(68, NoC, random_seed, random_num, 0)
+            
+            ########### For lr2021.py
+            arbiter_data_label = arbiter_data_label.astype(np.float)
+
+            # create CRPs using custom module...
+            crp = pypuf.io.ChallengeResponseSet(attack_data, arbiter_data_label)
+
+            attack = LRAttack2021(crp, seed=3, k=1, bs=1000, lr=.001, epochs=100)
+            model, layer_output = attack.fit()
+            array = layer_output.numpy()
+            print("Array = ",array)
+
+            #load data again with new delay difference
+
+            # Arbiter PUF
+            arbiter_data, arbiter_data_label, new_attack_data= arbiter_puf.load_data_2021(68, NoC, random_seed, 
+                                                                                          random_num, 0, array)
+            ##############
+            
             puf_label = np.ones((NoC, 1))*(total_num)
             total_num = total_num-1
             arbiter_data = np.concatenate((arbiter_data, puf_label), axis=1)

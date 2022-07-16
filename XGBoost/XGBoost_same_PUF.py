@@ -119,4 +119,4 @@ for NoP in Number_of_PUF:
                                          },  ignore_index=True)
         
         #clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\{}.csv'.format(puf_seed))
-clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\SVM_all_PUF.csv')
+clf_result.to_csv(r'C:\Users\Asus\Desktop\Uni Year3\Dissertation\XGBoost\Generic_same_PUF.csv')
