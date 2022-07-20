@@ -34,16 +34,16 @@ class Try_attack:
         #data, data_label, attack_data = arbiter_puf.load_data(68, 5000, 11, 123,0)
         
         xor_puf = XOR_PUF()
-        data, data_label, attack_data = xor_puf.load_data(68, 5000, 2, 3,6,2,7,8,9, 1, 0)
+        data, data_label, attack_data = xor_puf.load_data(68, 30000, 5, 3,6,2,7,8,9, 1, 0)
         
         data = data.astype(np.float)
         data_label = data_label.astype(np.float)
         
-        # create CRPs using custom module...
+        # create CRPs using custom module... 
         crp = pypuf.io.ChallengeResponseSet(attack_data, data_label)
         
         # attack
-        attack = LRAttack2021(crp, seed=3, k=2, bs=1000, lr=.001, epochs=100)
+        attack = LRAttack2021(crp, seed=3, k=5, bs=1000, lr=.001, epochs=100)
         model, layer_output = attack.fit()
         array = layer_output.numpy()
         print("Layer output = ",array[0:5])

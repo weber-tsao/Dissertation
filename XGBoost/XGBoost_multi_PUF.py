@@ -58,7 +58,7 @@ for NoP in Number_of_PUF:
         
         ### Load data ###
         g1 = general_model()
-        data, data_label = g1.load_data(NoP, NoP, NoP, 0, 0, int(np.floor(5000/NoP)))
+        data, data_label = g1.load_data(NoP, NoP, 0, 0, 0, int(np.floor(5000/NoP)))
         #data, data_label = shuffle(data, data_label)
         data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
         

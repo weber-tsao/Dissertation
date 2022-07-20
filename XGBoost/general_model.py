@@ -80,9 +80,28 @@ class general_model:
             #print(random_xor_num)
             #print("xx")
             xor_puf = XOR_PUF()
-            xor_data, xor_data_label = xor_puf.load_data(64, NoC, 4, random_seed1[x], random_seed2[x], 
+            xor_data, xor_data_label, attack_data = xor_puf.load_data(68, NoC, 6, random_seed1[x], random_seed2[x], 
                                                          random_seed3[x], random_seed4[x], random_seed5[x], 
                                                          random_seed6[x], random_num, 0)
+            
+            ########### For lr2021.py
+            xor_data_label = xor_data_label.astype(np.float)
+
+            # create CRPs using custom module...
+            crp = pypuf.io.ChallengeResponseSet(attack_data, xor_data_label)
+
+            attack = LRAttack2021(crp, seed=3, k=6, bs=1000, lr=.001, epochs=100)
+            model, layer_output = attack.fit()
+            array = layer_output.numpy()
+            #print("Array = ",array)
+
+            #load data again with new delay difference
+
+            # XOR Arbiter PUF
+            xor_data, xor_data_label, new_attack_data= xor_puf.load_data_2021(68, NoC, 6, random_seed1[x], random_seed2[x], 
+                                                         random_seed3[x], random_seed4[x], random_seed5[x], 
+                                                         random_seed6[x], random_num, 0, array)
+            
             puf_label = np.ones((NoC, 1))*(total_num)
             total_num = total_num-1
             xor_data = np.concatenate((xor_data, puf_label), axis=1)

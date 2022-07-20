@@ -34,7 +34,7 @@ clf_result = pd.DataFrame({#'threshold' : [],
                            #'n_estimators': [],
                            #'puf_seed' : [],
                            #'train_challenge_seed': [],
-                           'Number of APUF': [],
+                           'Number of XORPUF': [],
                            'CRPs number':[],
                            'Test split Accuracy' : [],
                            'Test split F1' : [],
@@ -56,7 +56,7 @@ for NoP in Number_of_PUF:
         
         ### Load data ###
         g1 = general_model()
-        data, data_label = g1.load_data(NoP, 0, 0, 0, 0, int(np.floor(15000/NoP)))
+        data, data_label = g1.load_data(NoP, NoP, 0, 0, 0, int(np.floor(15000/NoP)))
         #data, data_label = shuffle(data, data_label)
         data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
         
@@ -110,7 +110,7 @@ for NoP in Number_of_PUF:
                                          #'puf_seed' : 11,
                                          #'train_challenge_seed': 123,
                                          #'test_challenge_seed': 19,
-                                         'Number of APUF': NoP,
+                                         'Number of XORPUF': NoP,
                                          'CRPs number': int(np.floor(15000/NoP)),
                                          'Test split Accuracy' : test_acc*100,
                                          'Test split F1' : cc*100,
@@ -119,4 +119,4 @@ for NoP in Number_of_PUF:
                                          },  ignore_index=True)
         
         #clf_result.to_csv(r'C:\Users\weber\OneDrive\Desktop\Dissertation\XGBoost\{}.csv'.format(puf_seed))
-clf_result.to_csv(r'C:\Users\Asus\Desktop\Uni Year3\Dissertation\XGBoost\Generic_same_PUF.csv')
+clf_result.to_csv(r'C:\Users\Asus\Desktop\Uni Year3\Dissertation\XGBoost\Generic_multiple.csv')

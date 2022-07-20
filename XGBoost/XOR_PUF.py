@@ -35,14 +35,14 @@ class XOR_PUF:
         puf4 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=67)
         puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=90)
         puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=111)'''
-        puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed1)
+        '''puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed1)
         puf2 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed2)
         puf3 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed3)
         puf4 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed4)
         puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed5)
-        puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed6)
-        puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]
-        #puf = XORArbiterPUF(n=(stages-4), k=xor_num, seed=21)
+        puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed6)'''
+        #puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]
+        puf = XORArbiterPUF(n=(stages-4), k=xor_num, seed=puf_seed1)
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
         final_delay_diff = 1
         train_data = []
@@ -56,7 +56,7 @@ class XOR_PUF:
         
         for i in range(data_num):
             ### data ###
-            final_delay_diff = 1
+            '''final_delay_diff = 1
             challenge = test_crps[i]
             
             # obfuscate part
@@ -83,14 +83,42 @@ class XOR_PUF:
                     
                 else:
                     
-                    data_r = data_r^response1
+                    data_r = data_r^response1'''
                     
+            challenge = test_crps[i]
+            
+            # obfuscate part
+            obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge, base)
+            obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
+            #obfuscateChallenge = self.Puf_resilience.cyclic_shift(challenge, puf)
+            #obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
+            
+            #final_delay_diff = puf.val(np.array([obfuscateChallenge]))
+            #final_delay_diff = self.total_delay_diff(challenge[4:], puf)
+            
             challenge = challenge[4:]
+            final_delay_diff = self.total_delay_diff(challenge, puf)
+            #challenge = [0 if c == -1 else c for c in challenge]       
+                  
+            response = self.LFSR_simulated.produceObfuscateResponse(puf, obfuscateChallenge)
+            response = np.array(response)
+            data_r = -1
+            if response == -1:
+                data_r = -1
+            else:
+                data_r = 1
+            #print("dd")
+            #print(challenge)
+            data.append(challenge)
+            delay_diff.append(final_delay_diff[0])
+            data_label.append(data_r)
+                    
+            '''challenge = challenge[4:]
             challenge = [0 if c == -1 else c for c in challenge]
                                                     
             data.append(challenge)
             delay_diff.append(final_delay_diff)
-            data_label.append(data_r)
+            data_label.append(data_r)'''
            
         data = np.array(data)
         qcut_label = pd.qcut(delay_diff, q=4, labels=["1", "2", "3", "4"])
@@ -128,14 +156,14 @@ class XOR_PUF:
         puf4 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=67)
         puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=90)
         puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=111)'''
-        puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed1)
+        '''puf1 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed1)
         puf2 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed2)
         puf3 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed3)
         puf4 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed4)
         puf5 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed5)
         puf6 = pypuf.simulation.ArbiterPUF(n=(stages-4), seed=puf_seed6)
-        puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]
-        #puf = XORArbiterPUF(n=(stages-4), k=xor_num, seed=21)
+        puf_list = [puf1, puf2, puf3, puf4, puf5, puf6]'''
+        puf = XORArbiterPUF(n=(stages-4), k=xor_num, seed=puf_seed1)
         lfsrChallenges = random_inputs(n=stages, N=data_num, seed=cus_seed) # LFSR random challenges data
         final_delay_diff = 1
         train_data = []
@@ -156,7 +184,7 @@ class XOR_PUF:
             obfuscateChallenge = self.LFSR_simulated.createObfuscateChallenge(challenge, base)
             obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
             data_r = 0
-            for p in range(xor_num):
+            '''for p in range(xor_num):
                 #obfuscateChallenge = self.Puf_resilience.cyclic_shift(challenge, puf_list[p])
                 #obfuscateChallenge = [-1 if c == 0 else c for c in obfuscateChallenge]
                 #final_delay_diffc = self.total_delay_diff(challenge[4:], puf_list[p])
@@ -176,7 +204,14 @@ class XOR_PUF:
                     
                 else:
                     
-                    data_r = data_r^response1
+                    data_r = data_r^response1'''
+            
+            response = self.LFSR_simulated.produceObfuscateResponse(puf, obfuscateChallenge)
+            response = np.array(response)
+            if response == -1:
+                data_r = -1
+            else:
+                data_r = 1
                     
             challenge = challenge[4:]
             final_delay_diff = layer_ouput[i]
