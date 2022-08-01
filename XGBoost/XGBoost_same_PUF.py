@@ -56,7 +56,7 @@ for NoP in Number_of_PUF:
         
         ### Load data ###
         g1 = general_model()
-        data, data_label = g1.load_data(NoP, NoP, 0, 0, 0, int(np.floor(15000/NoP)))
+        data, data_label = g1.load_data(0, NoP, 0, 0, 0, int(np.floor(500000/NoP)))
         #data, data_label = shuffle(data, data_label)
         data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
         
@@ -111,7 +111,7 @@ for NoP in Number_of_PUF:
                                          #'train_challenge_seed': 123,
                                          #'test_challenge_seed': 19,
                                          'Number of XORPUF': NoP,
-                                         'CRPs number': int(np.floor(15000/NoP)),
+                                         'CRPs number': int(np.floor(500000/NoP)),
                                          'Test split Accuracy' : test_acc*100,
                                          'Test split F1' : cc*100,
                                          'Training time' : end_time - start_time,

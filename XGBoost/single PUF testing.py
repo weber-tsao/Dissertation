@@ -35,8 +35,8 @@ start_time = datetime.now()
 
 # Arbiter PUF
 
-#arbiter_puf = arbiter_PUF()
-#data, data_label, attack_data= arbiter_puf.load_data(68, 30000, 11, 123,0)
+arbiter_puf = arbiter_PUF()
+data, data_label, attack_data= arbiter_puf.load_data(68, 5000, 11, 123,0)
 
 # for lr2021
 #attack_data, no_use, no_use2, no_use3 = train_test_split(attack_data, data_label, test_size=.20, 
@@ -47,8 +47,8 @@ start_time = datetime.now()
 #                                                                    random_state=22)
 
 # XOR Arbiter PUF
-xor_puf = XOR_PUF()
-data, data_label, attack_data = xor_puf.load_data(68, 15000, 6, 13,256,22,77,89,90, 11, 0)
+#xor_puf = XOR_PUF()
+#data, data_label, attack_data = xor_puf.load_data(68, 15000, 6, 13,256,22,77,89,90, 11, 0)
 #new_data, data_unseen, new_data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
 #data_unseen, data_label_unseen = xor_puf.load_data(68, 5000, 3, 13,256,22,77,89,90, 55,0)
 #data_unseen = np.c_[ data_unseen, np.ones(300)*2 ]
@@ -56,8 +56,8 @@ data, data_label, attack_data = xor_puf.load_data(68, 15000, 6, 13,256,22,77,89,
 # Feedforward XOR PUF
 #f1 = [5,12,26,19,33,49,51,7]
 #d1 = [60,61,63,59,58,57,56,55]
-feedforward_puf = feedforward_PUF()
-data, data_label = feedforward_puf.load_data(68, 15000, 6, 32, 61, 256, 22, 77, 89, 90, 367, 23,0)
+#feedforward_puf = feedforward_PUF()
+#data, data_label = feedforward_puf.load_data(68, 15000, 6, 32, 61, 256, 22, 77, 89, 90, 367, 23,0)
 #data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
 #data_unseen, data_label_unseen = feedforward_puf.load_data(68, 5000, 6, f1, d1, 256, 22, 77, 89, 90, 367, 334) 
 
@@ -81,7 +81,7 @@ crp = pypuf.io.ChallengeResponseSet(attack_data, data_label)
 
 #print(crp.responses)
 
-attack = LRAttack2021(crp, seed=3, k=6, bs=1000, lr=.001, epochs=100)
+attack = LRAttack2021(crp, seed=3, k=1, bs=1000, lr=.001, epochs=100)
 model, layer_output = attack.fit()
 array = layer_output.numpy()
 print("Array = ",array)
@@ -89,8 +89,8 @@ print("Array = ",array)
 #load data again with new delay difference
 
 # Arbiter PUF
-#new_data, new_data_label, new_attack_data= arbiter_puf.load_data_2021(68, 30000, 11, 123, 0, array)
-#data, data_unseen, data_label, data_label_unseen = train_test_split(new_data, new_data_label, test_size=.20)
+new_data, new_data_label, new_attack_data= arbiter_puf.load_data_2021(68, 5000, 11, 123, 0, array)
+data, data_unseen, data_label, data_label_unseen = train_test_split(new_data, new_data_label, test_size=.20)
 
 # XOR Arbiter PUF
 #new_data, new_data_label, new_attack_data= xor_puf.load_data_2021(68, 15000, 6, 13,256,22,77,89,90, 11, 
@@ -98,9 +98,9 @@ print("Array = ",array)
 #data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
 
 # FeedForward XOR Arbiter PUF
-new_data, new_data_label, new_attack_data= feedforward_puf.load_data_2021(68, 15000, 6, 13,256,22,77,89,90, 11, 
-                                                                  0, array)
-data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
+#new_data, new_data_label, new_attack_data= feedforward_puf.load_data_2021(68, 15000, 6, 13,256,22,77,89,90, 11, 
+#                                                                  0, array)
+#data, data_unseen, data_label, data_label_unseen = train_test_split(data, data_label, test_size=.20)
 
 ###########
 
