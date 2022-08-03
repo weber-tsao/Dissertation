@@ -24,8 +24,10 @@ class general_model:
         total_num_label = arbiter_num+xor_num+feedforward_num+lightweight_num+interpose_num
         total_data = []
         total_label = []
+        total_label2 = []
         train_data = []
         train_label = []
+        train_label2 = []
         
         for a in range(arbiter_num):
             random_num = random.randint(1,1000)
@@ -58,6 +60,7 @@ class general_model:
             arbiter_data = np.concatenate((arbiter_data, puf_label), axis=1)
             total_data.append(arbiter_data)
             total_label.append(arbiter_data_label)
+            total_label2.append(array)
             
         for x in range(xor_num):
             random_num = random.randint(1,1000)
@@ -107,6 +110,7 @@ class general_model:
             xor_data = np.concatenate((xor_data, puf_label), axis=1)
             total_data.append(xor_data)
             total_label.append(xor_data_label)
+            total_label2.append(array)
         
         for f in range(feedforward_num):
             random_num = random.randint(1,1000)
@@ -160,8 +164,10 @@ class general_model:
             if p == 0:
                 train_data = total_data[p]
                 train_label = total_label[p]
+                train_label2 = total_label2[p]
             else:
                 train_data = np.concatenate((train_data, total_data[p]))
                 train_label = np.concatenate((train_label, total_label[p]))
+                train_label2 = np.concatenate((train_label2, total_label2[p]))
         
-        return train_data, train_label
+        return train_data, train_label, train_label2

@@ -43,11 +43,11 @@ class Try_attack:
         #model = attack.model
         
         # init PUF instance
-        #arbiter_puf = arbiter_PUF()
-        #data, data_label, attack_data = arbiter_puf.load_data(68, 5000, 11, 123,0)
+        arbiter_puf = arbiter_PUF()
+        data, data_label, attack_data = arbiter_puf.load_data(68, 5000, 11, 123,0)
         
-        xor_puf = XOR_PUF()
-        data, data_label, attack_data = xor_puf.load_data(68, 5000, 4, 3,6,2,7,8,9, 1, 0)
+        #xor_puf = XOR_PUF()
+        #data, data_label, attack_data = xor_puf.load_data(68, 5000, 6, 3,6,2,7,8,9, 1, 0)
         
         
         data = data.astype(np.float)
@@ -57,7 +57,7 @@ class Try_attack:
         crp = pypuf.io.ChallengeResponseSet(attack_data, data_label)
         
         # attack
-        attack = LRAttack2021(crp, seed=3, k=4, bs=1000, lr=.001, epochs=100)
+        attack = LRAttack2021(crp, seed=3, k=1, bs=1000, lr=.001, epochs=100)
         model, layer_output = attack.fit()
         array = layer_output.numpy()
         #print("Layer output = ",array[0:5])
@@ -77,10 +77,10 @@ class Try_attack:
         feature_size = 68
         shared_layer_size = 64
         tower_h1 = 32
-        tower_h2 = 16
+        tower_h2 = 64
         output_size = 1
         LR = 0.001
-        epoch = 50
+        epoch = 100
         mb_size = 100
         cost1tr = []
         cost2tr = []
@@ -205,24 +205,47 @@ class Try_attack:
                 cost2D.append(l2D)
                 costD.append((l1D+l2D)/2)
                 print('Iter-{}; Total loss: {:.4}'.format(it, loss.item()))
+         
             
+        with torch.no_grad():
         #plt.plot(np.squeeze(costtr), '-r',np.squeeze(costD), '-b')
-        plt.plot(costtr, '-r',costD, '-b')
-        plt.ylabel('total cost')
-        plt.xlabel('iterations (per tens)')
-        plt.show() 
         
-        #plt.plot(np.squeeze(cost1tr), '-r', np.squeeze(cost1D), '-b')
-        plt.plot(cost1tr, '-r', cost1D, '-b')
-        plt.ylabel('task 1 cost')
-        plt.xlabel('iterations (per tens)')
-        plt.show() 
+            plt.plot(costtr, '-r',costD, '-b')
+            plt.ylabel('total cost')
+            plt.xlabel('iterations (per tens)')
+            plt.show() 
+            
+            #plt.plot(np.squeeze(cost1tr), '-r', np.squeeze(cost1D), '-b')
+            plt.plot(cost1tr, '-r', cost1D, '-b')
+            plt.ylabel('task 1 cost')
+            plt.xlabel('iterations (per tens)')
+            plt.show() 
+            
+            #plt.plot(np.squeeze(cost2tr),'-r', np.squeeze(cost2D),'-b')
+            plt.plot(cost2tr,'-r', cost2D,'-b')
+            plt.ylabel('task 2 cost')
+            plt.xlabel('iterations (per tens)')
+            plt.show()
+            
+            running_accuracy = 0 
+            total = 0 
+            
+            
+            #data_test, data_test_label, no_use = xor_puf.load_data(68, 5000, 6, 1,8,2,19,98,34, 1, 0)
+            data_test, data_test_label, no_use = arbiter_puf.load_data(68, 5000, 13, 12,0)
+            for d, label1 in zip(data_test, data_test_label):
+                data_tensor = torch.from_numpy(d)
+                
+                predicted_res, predicted_delay= MTL(data_tensor.float()) 
+                #print(predicted_res.round().numpy()[0])
+                #print("label:", type(label1))
+                #print(predicted_res.round().numpy()[0] == label1)
+                #_, predicted = torch.max(predicted_res, 1) 
+                total += 1
+                running_accuracy += (predicted_res.round().numpy()[0] == label1)
+     
+            print('inputs is: %d %%' % (100 * running_accuracy / total))    
         
-        #plt.plot(np.squeeze(cost2tr),'-r', np.squeeze(cost2D),'-b')
-        plt.plot(cost2tr,'-r', cost2D,'-b')
-        plt.ylabel('task 2 cost')
-        plt.xlabel('iterations (per tens)')
-        plt.show()
         
 if __name__ == "__main__":
     try_attack_object = Try_attack()
