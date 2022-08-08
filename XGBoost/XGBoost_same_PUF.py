@@ -34,7 +34,7 @@ import torch.nn as nn
 import math
 warnings.filterwarnings("ignore")
 
-Number_of_PUF = [5]
+Number_of_PUF = [1]
 clf_result = pd.DataFrame({#'threshold' : [],
                            #'depth': [],
                            #'n_estimators': [],
@@ -73,18 +73,18 @@ for NoP in Number_of_PUF:
         
         ### MTL learning 
         
-        N = 5000
+        N = 5000 #Test larger number of CRPs(800000)
         M = 100
         c = 0.5
         p = 0.9
         k = np.random.randn(M)
         input_size = 4000
-        feature_size = 69
+        feature_size = 65
         shared_layer_size = 65
-        tower_h1 = 32
-        tower_h2 = 64
+        tower_h1 = 16
+        tower_h2 = 16
         output_size = 1
-        LR = 0.001
+        LR = 0.001   #Test: 0.01
         epoch = 100
         mb_size = 100
         cost1tr = []
@@ -113,7 +113,8 @@ for NoP in Number_of_PUF:
                     nn.Linear(tower_h1, tower_h2),
                     nn.ReLU(),
                     nn.Dropout(),
-                    nn.Linear(tower_h2, output_size)
+                    nn.Linear(tower_h2, output_size), # Maybe add dense layer
+                    #nn.Sigmoid()
                 )
                 self.tower2 = nn.Sequential(
                     nn.Linear(shared_layer_size, tower_h1),
@@ -122,13 +123,15 @@ for NoP in Number_of_PUF:
                     nn.Linear(tower_h1, tower_h2),
                     nn.ReLU(),
                     nn.Dropout(),
-                    nn.Linear(tower_h2, output_size)
+                    #nn.Sigmoid()
+                    nn.Linear(tower_h2, output_size) #Change the output size
                 )        
         
             def forward(self, x):
                 h_shared = self.sharedlayer(x)
                 out1 = self.tower1(h_shared)
                 out2 = self.tower2(h_shared)
+                
                 return out1, out2
         
         def random_mini_batches(XE, R1E, R2E, mini_batch_size = 10, seed = 42): 
@@ -159,9 +162,9 @@ for NoP in Number_of_PUF:
             return mini_batches
         
         MTL = MTLnet()
-        optimizer = torch.optim.Adam(MTL.parameters(), lr=LR)
+        optimizer = torch.optim.Adam(MTL.parameters(), lr=LR, weight_decay=1e-5) #L2 regularation
         loss_func = nn.MSELoss()
-        
+        loss_func2 = nn.CrossEntropyLoss()
         
         for it in range(epoch):
             epoch_cost = 0
@@ -182,7 +185,8 @@ for NoP in Number_of_PUF:
                 Yhat1, Yhat2 = MTL(XE)
                 
                 l1 = loss_func(Yhat1, YE1.view(-1,1))    
-                l2 = loss_func(Yhat2, YE2.view(-1,1))
+                #l2 = loss_func(Yhat2, YE2.view(-1,1))
+                l2 = loss_func2(Yhat2, YE2.view(-1,1))
                 loss =  (l1 + l2)/2
                 
                 optimizer.zero_grad()
@@ -236,18 +240,33 @@ for NoP in Number_of_PUF:
             total = 0 
             
             
-            data_test, data_test_label, no_use = g1.load_data(NoP, 0, 0, 0, 0, 5000)
+            #data_test, data_test_label, no_use = g1.load_data(NoP, 0, 0, 0, 0, 5000)
             
-            for d, label1 in zip(data_test, data_test_label):
+            #for d, label1 in zip(data_test, data_test_label):
+            for d, label1 in zip(data_unseen, data_label_unseen):
                 data_tensor = torch.from_numpy(d)
                 
-                predicted_res, predicted_delay= MTL(data_tensor.float()) 
+                predicted_res, predicted_delay= MTL(data_tensor.float())
+                print(predicted_res)
+                print(predicted_res.numpy()[0]>0.5)
+                print(predicted_res.round().numpy()[0])
+                print("label1: ", label1)
+                print(predicted_res.round().numpy()[0] == label1)
+                #print("Delay predicted: ", predicted_delay)
+                
+                # Print out the model shape
                 #print(predicted_res.round().numpy()[0])
                 #print("label:", type(label1))
                 #print(predicted_res.round().numpy()[0] == label1)
                 #_, predicted = torch.max(predicted_res, 1) 
                 total += 1
-                running_accuracy += (predicted_res.round().numpy()[0] == label1)
+                predicted_round_res = 0.0
+                if(predicted_res.numpy()[0] >= 0.5):
+                    predicted_round_res = 1.0
+                else:
+                    predicted_round_res = -1.0
+                    
+                running_accuracy += (predicted_round_res == label1)
      
             print('inputs is: %d %%' % (100 * running_accuracy / total))    
         '''xgboostModel_test = XGBClassifier(

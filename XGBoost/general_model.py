@@ -46,7 +46,7 @@ class general_model:
             attack = LRAttack2021(crp, seed=3, k=1, bs=1000, lr=.001, epochs=100)
             model, layer_output = attack.fit()
             array = layer_output.numpy()
-            print("Array = ",array)
+            #print("Array = ",array)
 
             #load data again with new delay difference
 
@@ -57,7 +57,8 @@ class general_model:
             
             puf_label = np.ones((NoC, 1))*(total_num)
             total_num = total_num-1
-            arbiter_data = np.concatenate((arbiter_data, puf_label), axis=1)
+            #arbiter_data = np.concatenate((arbiter_data, puf_label), axis=1) #Challenge with delay difference
+            arbiter_data = np.concatenate((new_attack_data, puf_label), axis=1) #Only Challenge
             total_data.append(arbiter_data)
             total_label.append(arbiter_data_label)
             total_label2.append(array)
