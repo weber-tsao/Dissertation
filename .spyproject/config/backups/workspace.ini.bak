@@ -1,0 +1,12 @@
+[workspace]
+restore_data_on_startup = True
+save_data_on_exit = True
+save_history = True
+save_non_project_files = False
+project_type = 'empty-project-type'
+recent_files = ['XGBoost/Obfuscation_tests_k16.py', 'XGBoost/Obfuscation_tests_k32.py', 'XGBoost/obfuscation_scheme_ML_k32_results.csv', 'XGBoost/obfuscation_scheme_ML_k16_results.csv']
+
+[main]
+version = 0.2.0
+recent_files = []
+
